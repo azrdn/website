@@ -10,7 +10,7 @@ document.documentElement.style.setProperty('--vh', `${vh}px`);
     <picture>
       <source type="image/avif" srcset="../assets/images/me.avif"/>
       <source type="image/png" srcset="../assets/images/me.png"/>
-      <img src="../assets/me.png" decoding="async" loading="lazy" alt="My picture"/>
+      <img src="../assets/images/me.png" decoding="async" loading="lazy" alt="My picture"/>
     </picture>
     <div class="intro">
       <h1 class="greet">Hi There. 👋</h1>
