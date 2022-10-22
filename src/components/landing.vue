@@ -10,7 +10,7 @@ document.documentElement.style.setProperty('--vh', `${vh}px`);
     <picture>
       <source type="image/avif" srcset="../assets/images/me.avif"/>
       <source type="image/png" srcset="../assets/images/me.png"/>
-      <img src="../assets/images/me.png" decoding="async" loading="lazy" alt="My picture"/>
+      <img src="../assets/images/me.png" decoding="async" alt="My picture"/>
     </picture>
     <div class="intro">
       <h1 class="greet">Hi There. 👋</h1>
@@ -45,7 +45,8 @@ main
     font-weight: 700
     letter-spacing: -0.04em
   p
-    color: $inactive-dark
+    font-weight: 200
+    color: $text-dark
     margin: 1rem 0 1.75rem
 
 img
@@ -70,4 +71,5 @@ img
       font-size: 3.5rem
   img
     height: 17.5rem
+    width: auto
 </style>
