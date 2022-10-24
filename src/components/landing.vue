@@ -51,8 +51,8 @@ main
 
 img
   background-color: #101010 //temporary
-  height: 12.5rem
-  width: auto
+  height: auto
+  width: 12.5rem
   border-radius: 9999px
   filter: saturate(0%)
 
@@ -63,13 +63,13 @@ img
 @media screen and (min-width: 768px)
   main
     flex-direction: row-reverse
-    justify-content: space-evenly
+    justify-content: space-around
     padding: 0 5rem
     gap: 3rem
   .intro
     h1
       font-size: 3.5rem
   img
-    height: 17.5rem
-    width: auto
+    height: auto
+    width: 17.5rem
 </style>

@@ -11,6 +11,7 @@ import Landing from './components/landing.vue'
 
 <style lang="sass">
 @use './assets/styles/css-reset' as *
+@use './assets/styles/font' as *
 
 :root
   font-family: 'Inter', sans-serif
