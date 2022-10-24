@@ -1,6 +1,6 @@
 <script setup>
 import WipLabel from './components/wip.vue'
-import Landing from './components/landing.vue'
+import Landing from './landing.vue'
 // TODO : Use Vue Router
 </script>
 

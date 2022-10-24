@@ -1,5 +1,5 @@
 <script setup>
-import Button from './button.vue'
+import Button from './components/button.vue'
 
 let vh = window.innerHeight
 document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -8,9 +8,9 @@ document.documentElement.style.setProperty('--vh', `${vh}px`);
 <template>
   <main>
     <picture>
-      <source type="image/avif" srcset="../assets/images/me.avif"/>
-      <source type="image/png" srcset="../assets/images/me.png"/>
-      <img src="../assets/images/me.png" decoding="async" alt="My picture"/>
+      <source type="image/avif" srcset="./assets/images/me.avif"/>
+      <source type="image/png" srcset="./assets/images/me.png"/>
+      <img src="../assets/images/me.png" decoding="async" width="500" height="500" alt="My picture"/>
     </picture>
     <div class="intro">
       <h1 class="greet">Hi There. 👋</h1>
@@ -22,7 +22,7 @@ document.documentElement.style.setProperty('--vh', `${vh}px`);
 </template>
 
 <style scoped lang="sass">
-@use '../assets/styles/colors' as *
+@use './assets/styles/colors' as *
 
 main
   display: flex
