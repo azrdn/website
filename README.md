@@ -1,6 +1,7 @@
 # My-Website
 
 A simple website made using Vue
+"de Finibus Bonorum et Malorum" (Sisi Ekstrim dari Kebaikan dan Kejahatan) karya Cicero
 
 ### Project Setup
 
