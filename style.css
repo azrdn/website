@@ -1,0 +1,83 @@
+:root {
+  color-scheme: light dark;
+  --primary: light-dark(#111111, #f0f0f0);
+  --secondary: light-dark(#2c2c2c, #cecece);
+  --bg: light-dark(#f1f1f1, #1f1f1f);
+  --link: light-dark(#1990ff, #ffdd20);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  background-color: var(--bg);
+  color: var(--primary);
+  font-family: 'JetBrains Mono', 'JetBrainsMono Nerd Font', 'Cascadia Mono', 'Source Code Pro', Menlo, Consolas, 'Roboto Mono', 'DejaVu Sans Mono', monospace;
+  line-height: 1.5;
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+  padding: 1rem 0;
+  line-height: 1.2;
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.csr {
+  opacity: 0;
+  user-select: none;
+  animation: blink 1s step-end infinite;
+
+  @media (prefers-reduced-motion) {
+    animation: none;
+  }
+}
+
+main {
+  margin: auto;
+  padding: 2rem;
+  text-wrap: balance;
+
+  p {
+    color: var(--secondary);
+  }
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding: 1rem 0;
+  font-weight: 700;
+
+  a {
+    color: inherit;
+    &:hover {
+      color: var(--link);
+    }
+  }
+}
+
+@media (any-hover: hover) {
+  .tt {
+    text-decoration: underline dotted;
+    cursor: help;
+  }
+}
+
+@media (scripting: none) {
+  main::before {
+    content: "There's no js here lmao.";
+  }
+}
