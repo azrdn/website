@@ -11,15 +11,18 @@
 }
 
 body {
-  display: flex;
+  color: var(--secondary);
   background-color: var(--bg);
-  color: var(--primary);
   font-family: 'JetBrains Mono', 'JetBrainsMono Nerd Font', 'Cascadia Mono', 'Source Code Pro', Menlo, Consolas, 'Roboto Mono', 'DejaVu Sans Mono', monospace;
   line-height: 1.5;
-  margin: 0;
+  margin: 0 auto;
+  padding: 2rem;
+  max-width: 50rem;
+  text-wrap: balance;
 }
 
-h1 {
+h1, h2 {
+  color: var(--primary);
   margin: 0;
   padding: 1rem 0;
   line-height: 1.2;
@@ -44,29 +47,22 @@ h1 {
   }
 }
 
-main {
-  margin: auto;
-  padding: 2rem;
-  text-wrap: balance;
+.linkbox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
 
-  p {
-    color: var(--secondary);
+a {
+  color: var(--primary);
+  &:hover {
+    color: var(--link);
   }
 }
 
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-  padding: 1rem 0;
-  font-weight: 700;
-
-  a {
-    color: inherit;
-    &:hover {
-      color: var(--link);
-    }
-  }
+hr {
+  margin: 1.5rem 0;
 }
 
 @media (any-hover: hover) {
