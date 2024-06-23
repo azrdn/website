@@ -18,7 +18,6 @@ body {
   margin: 0 auto;
   padding: 2rem;
   max-width: 50rem;
-  text-wrap: balance;
 }
 
 h1, h2 {
@@ -26,6 +25,10 @@ h1, h2 {
   margin: 0;
   padding: 1rem 0;
   line-height: 1.2;
+}
+
+p {
+  text-wrap: balance;
 }
 
 @keyframes blink {
