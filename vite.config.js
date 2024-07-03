@@ -8,7 +8,7 @@ export default defineConfig({
     css: {
         transformer: 'lightningcss',
         lightningcss: {
-            exclude: Features.Selectors
+            exclude: Features.Selectors | Features.VendorPrefixes
         }
     }
 })
