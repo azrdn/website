@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite'
-import { Features } from 'lightningcss'
 import minifyHTML from './plugin/minifyHtml'
 
 export default defineConfig({
@@ -8,7 +7,7 @@ export default defineConfig({
 	css: {
 		transformer: 'lightningcss',
 		lightningcss: {
-			exclude: Features.Selectors | Features.VendorPrefixes
+			targets: {}
 		}
 	}
 })
