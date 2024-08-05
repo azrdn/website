@@ -29,6 +29,13 @@
 			transition: all 0.5s ease;
 		}
 
+		header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 2rem;
+		}
+
 		h1, h2 {
 			color: var(--primary);
 			margin: 0;
@@ -39,13 +46,32 @@
 		p { text-wrap: balance }
 
 		@keyframes blink {
-			from, to {
-				opacity: 0;
-			}
-			50% {
-				opacity: 1;
+			from, to { opacity: 0 }
+			50% { opacity: 1 }
+		}
+
+		fieldset {
+			all: unset;
+			display: flex;
+
+			label {
+				cursor: pointer;
+				user-select: none;
+				padding: .5em;
+				border-radius: .5rem;
+
+				input { display: none };
+				svg { display: block };
+
+				&:has(input:checked) {
+					background-color: var(--secondary);
+					color: var(--bg);
+				}
 			}
 		}
+
+		:root:has(#light:checked) { color-scheme: light }
+		:root:has(#dark:checked) { color-scheme: dark }
 
 		.csr {
 			opacity: 0;
@@ -90,6 +116,8 @@
 		@media (scripting: none) {
 			main::before {
 				content: "There's no js here lmao.";
+				display: block;
+				margin: 1em 0;
 			}
 		}
 	</style>
@@ -98,8 +126,20 @@
 </head>
 
 <body>
+	<header>
+	<h1>hi, i'm azis<span class="csr">_</span></h1>
+	<fieldset>
+		<label>
+			<input type="radio" id="dark" name="ltdk">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+		</label>
+		<label>
+			<input type="radio" id="light" name="ltdk">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+		</label>
+	</fieldset>
+	</header>
 	<main>
-		<h1>hi, i'm azis<span class="csr">_</span></h1>
 		<p>I don't have the <span class="tt" title="too lazy">time</span> and ideas to make <span class="tt" title="its hard to be original">cool</span> websites like everyone else, so here we are, very simple right? (maybe a bit too simple for your taste).</p>
 	</main>
 	<section>
