@@ -75,10 +75,6 @@
 			opacity: 0;
 			user-select: none;
 			animation: blink 1s step-end infinite;
-
-			@media (prefers-reduced-motion) {
-				animation: none
-			}
 		}
 
 		.linkbox {
@@ -100,6 +96,13 @@
 		hr {
 			border-style: solid;
 			margin: 1.5rem 0
+		}
+
+		@media (prefers-reduced-motion) {
+			*, *::before, *::after {
+				animation: none !important;
+				transition: none !important;
+			}
 		}
 
 		@media (any-hover: hover) {
