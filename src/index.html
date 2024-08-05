@@ -43,8 +43,6 @@
 			line-height: 1.2;
 		}
 
-		p { text-wrap: balance }
-
 		@keyframes blink {
 			from, to { opacity: 0 }
 			50% { opacity: 1 }
@@ -99,7 +97,10 @@
 			}
 		}
 
-		hr { margin: 1.5rem 0 }
+		hr {
+			border-style: solid;
+			margin: 1.5rem 0
+		}
 
 		@media (any-hover: hover) {
 			.tt {
