@@ -1,0 +1,131 @@
+:root {
+	color-scheme: light dark;
+	--primary: light-dark(#3d3d3d, #dadada);
+	--secondary: light-dark(#4e4e4e, #a5a5a5);
+	--bg: light-dark(#f3f3f3, #2b2b2b);
+	--link: light-dark(#1990ff, #ffdd20);
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'JetBrains Mono';
+	font-style: normal;
+	font-weight: 400;
+	src: url('./jetbrainsmono-regular.woff2') format('woff2');
+}
+@font-face {
+	font-display: swap;
+	font-family: 'JetBrains Mono';
+	font-style: normal;
+	font-weight: 700;
+	src: url('./jetbrainsmono-bold.woff2') format('woff2');
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+body {
+	color: var(--secondary);
+	background-color: var(--bg);
+	font-family: 'JetBrains Mono', monospace;
+	line-height: 1.5;
+	margin: 0 auto;
+	padding: 2rem;
+	max-width: 60rem;
+	transition: all 0.5s ease;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2rem;
+}
+
+h1, h2 {
+	color: var(--primary);
+	margin: 0;
+	padding: 1rem 0;
+	line-height: 1.2;
+}
+
+@keyframes blink {
+	from, to { opacity: 0 }
+	50% { opacity: 1 }
+}
+
+fieldset {
+	all: unset;
+	display: flex;
+
+	label {
+		padding: .5em;
+		border-radius: .5rem;
+
+		input { display: none };
+		svg { display: block };
+
+		&:has(input:checked) {
+			background-color: var(--secondary);
+			color: var(--bg);
+		}
+	}
+}
+
+:root:has(#light:checked) { color-scheme: light }
+:root:has(#dark:checked) { color-scheme: dark }
+
+.csr {
+	opacity: 0;
+	user-select: none;
+	animation: blink 1s step-end infinite;
+}
+
+.linkbox {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	margin: 1.5rem 0
+}
+
+a {
+	color: var(--primary);
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: var(--link);
+	}
+}
+
+hr {
+	border-style: solid;
+	margin: 1.5rem 0
+}
+
+@media (prefers-reduced-motion) {
+	*, *::before, *::after {
+		animation: none !important;
+		transition: none !important;
+	}
+}
+
+@media (any-hover: hover) {
+	.tt {
+		text-decoration: underline dotted;
+		cursor: help;
+
+		&:hover {
+			color: var(--link);
+			transition: color 0.6s ease;
+		}
+	}
+}
+
+@media (scripting: none) {
+	main::before {
+		content: "There's no js here lmao.";
+		display: block;
+		margin: 1em 0;
+	}
+}

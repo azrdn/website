@@ -5,125 +5,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<meta name="description" content="azis's personal webpage">
-	<style>
-		:root {
-			color-scheme: light dark;
-			--primary: light-dark(#3d3d3d, #dadada);
-			--secondary: light-dark(#4e4e4e, #a5a5a5);
-			--bg: light-dark(#f3f3f3, #2b2b2b);
-			--link: light-dark(#1990ff, #ffdd20);
-		}
-
-		*, *::before, *::after {
-			box-sizing: border-box;
-		}
-
-		body {
-			color: var(--secondary);
-			background-color: var(--bg);
-			font-family: 'Zed Mono Expanded', 'Iosevka Expanded', 'JetBrains Mono', 'JetBrainsMono Nerd Font', 'Fira Code', 'Cascadia Mono', 'Source Code Pro', Menlo, Consolas, 'Roboto Mono', 'DejaVu Sans Mono', ui-monospace, monospace;
-			line-height: 1.5;
-			margin: 0 auto;
-			padding: 2rem;
-			max-width: 50rem;
-			transition: all 0.5s ease;
-		}
-
-		header {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 2rem;
-		}
-
-		h1, h2 {
-			color: var(--primary);
-			margin: 0;
-			padding: 1rem 0;
-			line-height: 1.2;
-		}
-
-		@keyframes blink {
-			from, to { opacity: 0 }
-			50% { opacity: 1 }
-		}
-
-		fieldset {
-			all: unset;
-			display: flex;
-
-			label {
-				padding: .5em;
-				border-radius: .5rem;
-
-				input { display: none };
-				svg { display: block };
-
-				&:has(input:checked) {
-					background-color: var(--secondary);
-					color: var(--bg);
-				}
-			}
-		}
-
-		:root:has(#light:checked) { color-scheme: light }
-		:root:has(#dark:checked) { color-scheme: dark }
-
-		.csr {
-			opacity: 0;
-			user-select: none;
-			animation: blink 1s step-end infinite;
-		}
-
-		.linkbox {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 1.5rem;
-			margin: 1.5rem 0
-		}
-
-		a {
-			color: var(--primary);
-			transition: color 0.3s ease;
-
-			&:hover {
-				color: var(--link);
-			}
-		}
-
-		hr {
-			border-style: solid;
-			margin: 1.5rem 0
-		}
-
-		@media (prefers-reduced-motion) {
-			*, *::before, *::after {
-				animation: none !important;
-				transition: none !important;
-			}
-		}
-
-		@media (any-hover: hover) {
-			.tt {
-				text-decoration: underline dotted;
-				cursor: help;
-
-				&:hover {
-					color: var(--link);
-					transition: color 0.6s ease;
-				}
-			}
-		}
-
-		@media (scripting: none) {
-			main::before {
-				content: "There's no js here lmao.";
-				display: block;
-				margin: 1em 0;
-			}
-		}
-	</style>
-	<link rel="icon" href="icon.svg" type="image/svg+xml">
+	<link rel="preload" href="./assets/style.css" as="style">
+	<link rel="preload" as="font" href="./assets/jetbrainsmono-regular.woff2" crossorigin>
+	<link rel="preload" as="font" href="./assets/jetbrainsmono-bold.woff2" crossorigin>
+	<link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+	<link rel="stylesheet" href="./assets/style.css">
 	<title>azis</title>
 </head>
 
@@ -147,7 +33,7 @@
 	<section>
 		<h2>about me</h2>
 		<p>A <span class="tt" title="might be a nerd, weeb, or... idk, you decide">normie</span> who likes to play video games and doomscroll on social media, currently interested in web programming and art. My other hobbies are listening to music and watching anime. I use Fedora Linux btw.</p>
-		<p>Here are some links if you want to know more about me :</p>
+		<p>Here are some links if you want to know more about me:</p>
 		<div class="linkbox">
 			<a href="https://github.com/azrdn" rel="external noreferrer nofollow">github</a>
 			<a href="https://facebook.com/neovim" rel="external noreferrer nofollow">facebook</a>
