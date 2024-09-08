@@ -3,13 +3,13 @@
 	"version": "1.0.0",
 	"devDependencies": {
 		"@minify-html/node": "^0.15.0",
-		"@types/bun": "^1.1.6"
+		"@types/bun": "^1.1.8"
 	},
 	"private": true,
 	"scripts": {
-		"dev": "bun ./plugin/devServer.ts src",
-		"build": "todo",
-		"preview": "todo"
+		"dev": "bun ./tools/devServer.ts src",
+		"build": "bun ./tools/build.ts src",
+		"preview": "bun ./tools/devServer.ts dist"
 	},
 	"type": "module"
 }
