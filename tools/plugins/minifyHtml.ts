@@ -7,9 +7,8 @@ function minifyPlugin(file: File): Buffer {
             minify_css: false,
             minify_js: false
         })
-    } else {
-        return file.buf
     }
+    return file.buf
 }
 
 export { minifyPlugin }

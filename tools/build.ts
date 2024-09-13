@@ -1,9 +1,10 @@
-import { readdir } from "fs/promises";
-import p from "path";
+import { readdir } from "node:fs/promises";
+import p from "node:path";
 import { minifyPlugin } from "./plugins/minifyHtml";
 
-import type { Dirent } from "fs"
-export type File = {
+import type { Dirent } from "node:fs"
+type Plugin = (file: File) => Buffer
+type File = {
     buf: Buffer,
     ext: string,
 }
@@ -11,7 +12,7 @@ export type File = {
 const inputDir = process.argv[2] ?? "."
 const outputDir = process.argv[3] ?? './dist'
 
-async function build(files: Dirent[], plugins?: Function[]) {
+async function build(files: Dirent[], plugins?: Plugin[]) {
     for (const entry of files) {
         if (entry.isDirectory()) continue
 
@@ -19,7 +20,7 @@ async function build(files: Dirent[], plugins?: Function[]) {
         const blob = Bun.file(fullInPath)
         // console.log("mime :", blob.type)
 
-        let file: File = {
+        const file: File = {
             ext: p.extname(entry.name),
             buf: Buffer.from(await blob.arrayBuffer())
         }
@@ -42,3 +43,5 @@ const files = await readdir(inputDir, {
 await build(files, [
     minifyPlugin
 ])
+
+export type { File, Plugin }
