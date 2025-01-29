@@ -3,12 +3,27 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+		<link rel="preload" as="style" href="./assets/style.css">
 		<link rel="stylesheet" href="/assets/style.css">
+		<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
 		<title>Not found</title>
 	</head>
 <body>
-	<h1>there is nothing here...</h1>
-	<p>maybe it doesn't exist anymore</p>
+	<div class="decoration"></div>
+	<div id="page">
+		<header>
+			<nav>
+				<a href="/">~/</a>
+				<a href="/projects">/projects</a>
+				<a href="/blog">/blog</a>
+			</nav>
+		</header>
+		<main>
+			<h1>404 - Not Found</h1>
+			<p>Page not found, might be work in progress, or it doesn't really exist at all.</p>
+			<p><a href="/">Go Back</a></p>
+		</main>
+	</div>
+	<div class="decoration"></div>
 </body>
 </html>
