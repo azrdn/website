@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css'
 import Navbar from '../components/navbar.astro'
+import TopographyImage from '../components/topography.astro'
 ---
 
 <!DOCTYPE html>
@@ -21,11 +22,8 @@ import Navbar from '../components/navbar.astro'
 
 <body>
 	<div id="page">
-		<header>
-			<Navbar />
-		</header>
-		<img class="graphics" src="/assets/topography.svg" alt="topography decoration image" width="750" height="500">
-		<!-- image by freepik -->
+		<header><Navbar /></header>
+		<TopographyImage />
 		<main>
 			<h1>hi, i'm azis</h1>
 			<p>Jack of few trades, master of none.</p>
@@ -44,20 +42,3 @@ import Navbar from '../components/navbar.astro'
 	</div>
 </body>
 </html>
-
-<style>
-	.graphics {
-		border: 2px solid var(--secondary);
-		object-fit: cover;
-		max-height: 8rem;
-		width: 100%;
-	}
-
-	@media (scripting: none) {
-		main::after {
-			content: "There's no js here lmao.";
-			display: block;
-			margin: 1em 0;
-		}
-	}
-</style>

@@ -114,3 +114,11 @@ hr {
 	border-style: solid;
 	margin: 2ch 0
 }
+
+@media (scripting: none) {
+	main::after {
+		content: "There's no js here lmao.";
+		display: block;
+		margin: 1em 0;
+	}
+}
