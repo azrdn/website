@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import Navbar from '../components/navbar.astro'
 ---
 
 <!DOCTYPE html>
@@ -21,12 +22,10 @@ import '../styles/global.css'
 <body>
 	<div id="page">
 		<header>
-			<nav>
-				<span>~/</span>
-				<a href="/projects">/projects</a>
-				<a href="/blog">/blog</a>
-			</nav>
+			<Navbar />
 		</header>
+		<img class="graphics" src="/assets/topography.svg" alt="topography decoration image" width="750" height="500">
+		<!-- image by freepik -->
 		<main>
 			<h1>hi, i'm azis</h1>
 			<p>Jack of few trades, master of none.</p>
@@ -44,5 +43,21 @@ import '../styles/global.css'
 		</footer>
 	</div>
 </body>
-
 </html>
+
+<style>
+	.graphics {
+		border: 2px solid var(--secondary);
+		object-fit: cover;
+		max-height: 8rem;
+		width: 100%;
+	}
+
+	@media (scripting: none) {
+		main::after {
+			content: "There's no js here lmao.";
+			display: block;
+			margin: 1em 0;
+		}
+	}
+</style>

@@ -1,9 +1,12 @@
 @font-face {
 	font-display: swap;
-	font-family: 'JBM Subset';
+	font-family: 'Gitlab Mono';
 	font-style: normal;
-	font-weight: 400;
-	src: url('/assets/jetbrainsmono-regular.woff2') format('woff2');
+	font-weight: 100 800;
+	src:
+		local('JetBrains Mono'),
+		local('JetBrainsMono'),
+		url('/assets/gitlab-mono.woff2') format('woff2');
 }
 
 @view-transition {
@@ -16,7 +19,6 @@
 	--secondary: light-dark(#4e4e4e, #949494);
 	--bg: light-dark(#f3f3f3, #1d1d1d);
 	--bg-secondary: light-dark(#cacaca, #424242);
-	--shadow-color: light-dark(rgba(70, 70, 70, 0.5), rgba(0, 0, 0, 0.75));
 }
 
 *, *::before, *::after {
@@ -33,11 +35,12 @@ html {
 }
 
 body {
+	font-family: 'Gitlab Mono', monospace;
+	overflow-y: scroll;
 	display: flex;
 	justify-content: center;
 	margin: 0;
 	color: var(--secondary);
-	filter: drop-shadow(0 0px 8px var(--shadow-color));
 }
 
 @media (width >= 900px) {
@@ -49,7 +52,7 @@ body {
 	body::before, body::after {
 		display: block;
 		content: '';
-		width: 3em;
+		width: 3.5em;
 		background-color: var(--bg);
 		background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' fill='none' stroke='%234e4e4e' stroke-width='1' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3C/svg%3E");
 		background-size: contain;
@@ -66,7 +69,6 @@ body {
 
 #page {
 	background-color: var(--bg);
-	font-family: 'JetBrains Mono', 'JBM Subset', monospace;
 	line-height: 1.5;
 	padding: 3ch;
 	width: 100%;
@@ -76,15 +78,14 @@ body {
 }
 
 header {
-	border: solid 2px var(--secondary);
-	margin-bottom: 1em;
+	border-bottom: 2px solid var(--secondary);
+	margin-bottom: 2em;
+	background-color: var(--bg);
 }
 
-nav {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 4ch;
-	padding: 1rlh 2ch;
+img, picture, video, canvas, svg {
+	display: block;
+	max-width: 100%;
 }
 
 h1, h2 {
@@ -112,12 +113,4 @@ a:hover {
 hr {
 	border-style: solid;
 	margin: 2ch 0
-}
-
-@media (scripting: none) {
-	main::after {
-		content: "There's no js here lmao.";
-		display: block;
-		margin: 1em 0;
-	}
 }

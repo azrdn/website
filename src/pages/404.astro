@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import Navbar from '../components/navbar.astro'
 ---
 
 <!DOCTYPE html>
@@ -13,11 +14,7 @@ import '../styles/global.css'
 <body>
 	<div id="page">
 		<header>
-			<nav>
-				<a href="/">~/</a>
-				<a href="/projects">/projects</a>
-				<a href="/blog">/blog</a>
-			</nav>
+			<Navbar />
 		</header>
 		<main>
 			<h1>404 - Not Found</h1>
