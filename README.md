@@ -1,13 +1,14 @@
 # my website
 
-html css\
-much wow\
-so simple
+ssg, works without client javascript enabled
 
 ## develop
-just edit the files, simple as that\
-you may also want to use your own http/s server
+the usual `npm run dev` then go wild
 
 ## deploy
-its just html and css, you can deploy it everywhere\
+`npm run build`\
+results in a static files in `dist` folder, because its just html and css, you can deploy it everywhere
+
 go figure it out
+
+also read: ["embrace the platform"](https://css-tricks.com/embrace-the-platform/)
