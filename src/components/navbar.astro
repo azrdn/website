@@ -1,14 +1,23 @@
-<nav>
-	<a href="/">~/</a>
-	<a href="/projects">/projects</a>
-	<a href="/blog">/blog</a>
-</nav>
+<header>
+	<nav>
+		<a href="/">~/</a>
+		<a href="/projects">/projects</a>
+		<a href="/blog">/blog</a>
+	</nav>
+</header>
 
 <style>
+	header {
+		position: sticky;
+		top: 0;
+		border-bottom: 2px solid var(--secondary);
+		margin-bottom: 2em;
+		background-color: var(--bg);
+	}
 	nav {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 4ch;
-		padding-bottom: 1lh;
+		padding: 1lh 0;
 	}
 </style>

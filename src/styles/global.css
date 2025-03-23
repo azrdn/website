@@ -70,17 +70,11 @@ body {
 #page {
 	background-color: var(--bg);
 	line-height: 1.5;
-	padding: 3ch;
+	padding: 0 3ch 2lh;
 	width: 100%;
 	max-width: 80ch;
 	min-height: 100svh;
 	text-wrap: balance;
-}
-
-header {
-	border-bottom: 2px solid var(--secondary);
-	margin-bottom: 2em;
-	background-color: var(--bg);
 }
 
 img, picture, video, canvas, svg {
