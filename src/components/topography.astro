@@ -1,8 +1,5 @@
-{/*
-	style is set to global and using a id to not pollute every element with astro arbitary attributes.
-	e.g <el astro-cid-a1b2c3></el>
-*/}
 <style is:global>
+	/* style is set to global because astro scoped css pollutes EVERY element with an unnecesary attribute */
 	#topography {
 		width: calc(100% - 1px);
 		border: 2px solid var(--secondary);

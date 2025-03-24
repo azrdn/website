@@ -1,6 +1,5 @@
 ---
 // filename reference https://www.youtube.com/watch?v=Iq3EZtD0QDE
-import "../styles/global.css";
 const { title } = Astro.props
 ---
 
@@ -25,3 +24,120 @@ const { title } = Astro.props
 		</div>
 	</body>
 </html>
+
+<style is:global>
+	@font-face {
+		font-display: swap;
+		font-family: 'Gitlab Mono';
+		font-style: normal;
+		font-weight: 100 800;
+		src:
+			local('JetBrains Mono'),
+			local('JetBrainsMono'),
+			url('/assets/gitlab-mono.woff2') format('woff2');
+	}
+
+	@view-transition {
+		navigation: auto;
+	}
+
+	:root {
+		color-scheme: light dark;
+		--primary: light-dark(#3d3d3d, #dadada);
+		--secondary: light-dark(#4e4e4e, #949494);
+		--bg: light-dark(#f3f3f3, #1d1d1d);
+		--bg-secondary: light-dark(#cacaca, #424242);
+	}
+
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
+
+	::selection {
+		color: var(--bg);
+		background-color: var(--primary);
+	}
+
+	html {
+		background-color: var(--bg-secondary);
+	}
+
+	body {
+		font-family: 'Gitlab Mono', monospace;
+		overflow-y: scroll;
+		display: flex;
+		justify-content: center;
+		margin: 0;
+		color: var(--secondary);
+	}
+
+	@media (width >= 900px) {
+		#page {
+			border: 1px var(--secondary);
+			border-style: none dashed;
+		}
+
+		body::before, body::after {
+			display: block;
+			content: '';
+			width: 3.5em;
+			background-color: var(--bg);
+			background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' fill='none' stroke='%234e4e4e' stroke-width='1' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3C/svg%3E");
+			background-size: contain;
+			background-repeat: repeat-y;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			/* background images wont auto change colors even if its svg */
+			body::before, body::after {
+				background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' fill='none' stroke='%23949494' stroke-width='1' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3C/svg%3E");
+			}
+		}
+	}
+
+	#page {
+		background-color: var(--bg);
+		line-height: 1.5;
+		padding: 0 3ch 2lh;
+		width: 100%;
+		max-width: 80ch;
+		min-height: 100svh;
+		text-wrap: balance;
+	}
+
+	img, picture, video, canvas, svg {
+		display: block;
+		max-width: 100%;
+	}
+
+	h1, h2 {
+		font-size: unset;
+		color: var(--primary);
+		margin: 2em 0;
+		padding: 0;
+	}
+
+	a {
+		color: var(--primary);
+		text-underline-offset: 0.3em;
+	}
+
+	a:hover {
+		color: var(--bg);
+		background-color: var(--primary);
+		text-decoration: none;
+	}
+
+	hr {
+		border-style: solid;
+		margin: 2ch 0
+	}
+
+	@media (scripting: none) {
+		main::after {
+			content: "There's no js here lmao.";
+			display: block;
+			margin: 1em 0;
+		}
+	}
+</style>
