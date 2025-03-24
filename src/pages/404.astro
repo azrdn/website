@@ -1,24 +1,15 @@
 ---
-import '../styles/global.css'
+import Layout from '../layouts/posinega.astro'
 import Navbar from '../components/navbar.astro'
+import Footer from '../components/footer.astro'
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-		<title>Not found</title>
-	</head>
-<body>
-	<div id="page">
-		<Navbar />
-		<main>
-			<h1>404 - Not Found</h1>
-			<p>Page not found, might be work in progress, or it doesn't really exist at all.</p>
-			<p><a href="/">Go Back</a></p>
-		</main>
-	</div>
-</body>
-</html>
+<Layout title="Not found">
+	<Navbar />
+	<main>
+		<h1>404 - Not Found</h1>
+		<p>Page not found, might be work in progress, or it doesn't really exist at all.</p>
+		<p><a href="/">Go Back</a></p>
+	</main>
+	<Footer></Footer>
+</Layout>

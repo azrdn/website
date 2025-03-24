@@ -1,44 +1,22 @@
 ---
 import '../styles/global.css'
+import Layout from '../layouts/posinega.astro'
 import Navbar from '../components/navbar.astro'
 import TopographyImage from '../components/topography.astro'
+import Footer from '../components/footer.astro'
 ---
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<meta name="description" content="My personal webpage">
-	<meta property="og:title" content="azrd">
-	<meta property="og:description" content="My personal webpage">
-	<meta property="og:type" content="website">
-	<meta property="og:image" content="./assets/og.jpg">
-	<meta property="og:image:type" content="image/jpeg">
-	<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-	<title>azrd</title>
-</head>
-
-<body>
-	<div id="page">
-		<Navbar />
-		<TopographyImage />
-		<main>
-			<h1>hi, i'm azis</h1>
-			<p>Jack of few trades, master of none.</p>
-			<p>Sometimes experimenting with new things, and often found eating fast foods from the local cafeteria.</p>
-		</main>
-		<section>
-			<h1>about me</h1>
-			<p>Just a <em>normie</em> who likes to play video games and doomscroll through social media, My other hobbies include watching anime and listening to music.</p>
-			<p>Here's my SNS links if you want to know more about me: <a target="_blank" href="https://bento.me/azrd" rel="external noreferrer nofollow">Bento</a></p>
-		</section>
-		<footer>
-			<hr>
-			<p>© 2024 Muhammad Azis Ramadhan under the <a target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html" rel="external noreferrer nofollow">GPLv3 License</a>.</p>
-			<p>100% human-made.</span></p>
-		</footer>
-	</div>
-</body>
-</html>
+<Layout title="azrd">
+	<Navbar />
+	<TopographyImage />
+	<main>
+		<h1>hi, i'm azis</h1>
+		<p>Jack of few trades, master of none.</p>
+		<p>Sometimes experimenting with new things, and often found eating fast foods from the local cafeteria.</p>
+	</main>
+	<section>
+		<h1>about me</h1>
+		<p>Just a <em>normie</em> who likes to play video games and doomscroll through social media, My other hobbies include watching anime and listening to music.</p>
+		<p>Here's my SNS links if you want to know more about me: <a target="_blank" href="https://bento.me/azrd" rel="external noreferrer nofollow">Bento</a></p>
+	</section>
+	<Footer />
+</Layout>

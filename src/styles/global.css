@@ -89,10 +89,6 @@ h1, h2 {
 	padding: 0;
 }
 
-footer {
-	padding-top: 2ch;
-}
-
 a {
 	color: var(--primary);
 	text-underline-offset: 0.3em;
