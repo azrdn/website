@@ -25,11 +25,6 @@
 	box-sizing: border-box;
 }
 
-::selection {
-	color: var(--bg);
-	background-color: var(--primary);
-}
-
 html {
 	background-color: var(--bg-secondary);
 }
@@ -70,7 +65,7 @@ body {
 #page {
 	background-color: var(--bg);
 	line-height: 1.5;
-	padding: 0 3ch 2lh;
+	padding: 0 3ch 2em;
 	width: 100%;
 	max-width: 80ch;
 	min-height: 100svh;
@@ -83,7 +78,7 @@ img, picture, video, canvas, svg {
 	max-width: 100%;
 }
 
-h1, h2 {
+h1, h2, h3, h4, h5, h6 {
 	font-size: unset;
 	color: var(--primary);
 	margin: 2rem 0;
@@ -99,6 +94,36 @@ a:hover {
 	color: var(--bg);
 	background-color: var(--primary);
 	text-decoration: none;
+}
+
+blockquote {
+	margin: 0;
+	padding: 0 0 0 2ch;
+	border-left: 1ch solid var(--bg-secondary)
+}
+
+pre, code {
+	font-family: inherit;
+}
+
+pre:has(code) {
+	padding: 1em 2ch;
+}
+
+code:not(pre code) {
+	color: var(--primary);
+	background-color: var(--bg-secondary);
+	padding: 0 0.3em;
+}
+
+table, table th, table td {
+	border: 2px solid var(--secondary);
+	border-collapse: collapse;
+	padding: 1em 1ch;
+}
+
+thead, tbody {
+	vertical-align: top;
 }
 
 hr {
