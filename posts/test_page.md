@@ -20,19 +20,6 @@ ___
 ***
 
 
-## Typographic replacements
-
-Enable typographer option to see result.
-
-(c) (C) (r) (R) (tm) (TM) (p) (P) +-
-
-test.. test... test..... test?..... test!....
-
-!!!!!! ???? ,,  -- ---
-
-"Smartypants, double quotes" and 'single quotes'
-
-
 ## Emphasis
 
 **This is bold text**
@@ -126,6 +113,13 @@ Right aligned columns
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
 
+Long table
+
+| Option | Description | Another | Unnecessary | Columns |
+| ------ | ----------- | ------- | ----------- | ------- |
+| data   | path to data files to supply the data that will be passed into templates. | a | a | a |
+| engine | engine to be used for processing templates. Handlebars is the default. | a | a | a |
+| ext    | extension to be used for dest files. | a | a | a |
 
 ## Links
 

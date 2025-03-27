@@ -40,6 +40,7 @@ h1, h2, h3, h4, h5, h6 {
 a {
 	color: var(--primary);
 	text-underline-offset: 0.3em;
+	word-break: break-all;
 }
 
 a:hover {
@@ -68,13 +69,15 @@ code:not(pre code) {
 	padding: 0 0.3em;
 }
 
-table, table th, table td {
-	border: 2px solid var(--secondary);
+table {
+	display: block;
+	overflow-y: auto;
 	border-collapse: collapse;
-	padding: 1em 1ch;
 }
 
-thead, tbody {
+th, td {
+	border: 2px solid var(--secondary);
+	padding: 1em 1ch;
 	vertical-align: top;
 }
 
