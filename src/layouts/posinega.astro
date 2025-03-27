@@ -20,8 +20,75 @@ const { title = 'azrd' } = Astro.props
 	</head>
 
 	<body>
+		{/*
+			NOTE: the reason for this overly complex layout is because i dont want
+			the navbar to have transparent gaps, so when scrolling the page
+			anything that overflows will be covered by the navbar background
+		*/}
 		<div id="page">
-			<slot />
+			<slot name="header" />
+			<div id="content">
+				<slot />
+			</div>
 		</div>
 	</body>
 </html>
+
+<style is:global>
+	html {
+		background-color: var(--bg-secondary);
+	}
+
+	body {
+		font-family: 'Gitlab Mono', monospace;
+		overflow-y: scroll;
+		display: flex;
+		justify-content: center;
+		margin: 0;
+		color: var(--secondary);
+	}
+
+	#page {
+		background-color: var(--bg);
+		line-height: 1.5;
+		width: 100%;
+		max-width: 80ch;
+		min-height: 100svh;
+		text-wrap: pretty;
+		hyphens: auto;
+	}
+
+	#content {
+			padding: 0 3ch;
+	}
+
+	@media (width >= 900px) {
+
+		body::before, body::after {
+			z-index: 1;
+			content: '';
+			width: 3.5em;
+			background-color: var(--bg);
+			background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' fill='none' stroke='%234e4e4e' stroke-width='1' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3C/svg%3E");
+			background-size: contain;
+			background-repeat: repeat-y;
+		}
+
+		body::before {
+			border-right: 1px var(--secondary);
+			border-right-style: dashed;
+		}
+
+		body::after {
+			border-left: 1px var(--secondary);
+			border-left-style: dashed;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			/* background images wont auto change colors even if its svg */
+			body::before, body::after {
+				background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' fill='none' stroke='%23949494' stroke-width='1' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3C/svg%3E");
+			}
+		}
+	}
+</style>
