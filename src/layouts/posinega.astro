@@ -54,16 +54,17 @@ const { title = 'azrd' } = Astro.props
 		width: 100%;
 		max-width: 80ch;
 		min-height: 100svh;
+		/* firefox and safari doesnt support pretty */
+		text-wrap: balance;
 		text-wrap: pretty;
 		hyphens: auto;
 	}
 
 	#content {
-			padding: 0 3ch;
+		padding: 0 3ch;
 	}
 
 	@media (width >= 900px) {
-
 		body::before, body::after {
 			z-index: 1;
 			content: '';
