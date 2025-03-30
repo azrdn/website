@@ -1,0 +1,14 @@
+<button {...Astro.props}>
+	<slot></slot>
+</button>
+
+<style>
+	button {
+		all: unset;
+		cursor: pointer;
+
+		&:hover {
+			color: var(--primary);
+		}
+	}
+</style>

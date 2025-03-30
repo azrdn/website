@@ -1,24 +1,100 @@
+---
+import Button from "./button.astro"
+---
+
 <header>
-	<nav>
-		<a href="/">~/</a>
-		<a href="/projects">/projects</a>
-		<a href="/blog">/blog</a>
+	<section>
+		<a href="/">azrd.dev</a>
+		<Button popovertarget="navbar">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-menu-icon lucide-menu">
+				<line x1="4" x2="20" y1="12" y2="12"/>
+				<line x1="4" x2="20" y1="6" y2="6"/>
+				<line x1="4" x2="20" y1="18" y2="18"/>
+			</svg>
+		</Button>
+	</section>
+
+	<nav popover id="navbar">
+		<div class="desc">
+			<p>things i made</p>
+			<p>i write too</p>
+			<p>bookmarks and etc</p>
+		</div>
+		<div class="links">
+			<a href="/projects">/projects</a>
+			<a href="/blog">/blog</a>
+			<a href="/reading">/reading</a>
+		</div>
 	</nav>
 </header>
 
 <style>
 	header {
+		background-color: var(--bg);
 		position: sticky;
 		top: 0;
-		margin-bottom: 2em;
-		background-color: var(--bg);
 	}
-	nav {
+
+	nav p {
+		margin: 0;
+	}
+
+	section {
 		display: flex;
+		justify-content: space-between;
 		border-bottom: 2px solid var(--secondary);
-		flex-wrap: wrap;
-		gap: 4ch;
-		margin: 0 3ch;
-		padding: 1lh 0;
+		margin: 0 3ch 2em;
+		padding: 1em 0;
+	}
+
+	.links, .desc {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+	}
+
+	.desc {
+		display: none;
+	}
+
+	#navbar[popover] {
+		transition: opacity 0.2s, transform 0.2s, display 0.2s allow-discrete;
+		transform: translateY(-1rem);
+		opacity: 0;
+
+		top: 3.5em;
+		color: var(--secondary);
+		background-color: var(--bg);
+		justify-content: space-between;
+		border: none;
+		width: 100%;
+		max-width: 80ch;
+		margin: 0 auto;
+		padding: 1em 3ch 2em;
+	}
+
+	#navbar:popover-open {
+		display: flex;
+		border-bottom: 2px solid var(--bg-secondary);
+
+		opacity: 1;
+		transform: none;
+
+		@starting-style {
+			& {
+				opacity: 0;
+				transform: translateY(-1rem);
+			}
+		}
+	}
+
+	@media (width >= 425px) {
+		.desc {
+			display: flex;
+		}
+
+		.links {
+			text-align: right;
+		}
 	}
 </style>
