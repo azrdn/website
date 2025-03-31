@@ -9,5 +9,8 @@ export default defineConfig({
 		shikiConfig: {
 			theme: 'github-dark-dimmed'
 		}
+	},
+	experimental: {
+		contentIntellisense: true,
 	}
 });

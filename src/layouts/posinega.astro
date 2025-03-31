@@ -37,11 +37,13 @@ const { title = 'azrd' } = Astro.props
 <style is:global>
 	html {
 		background-color: var(--bg-secondary);
+		scrollbar-width: thin;
+		scrollbar-color: var(--secondary) var(--bg-secondary);
+		overflow-y: scroll;
 	}
 
 	body {
 		font-family: 'Gitlab Mono', monospace;
-		overflow-y: scroll;
 		display: flex;
 		justify-content: center;
 		margin: 0;
