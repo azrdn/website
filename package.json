@@ -3,12 +3,12 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "bun -b astro dev",
+    "build": "bun -b astro build",
+    "preview": "bun -b astro preview"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.3.0",
     "astro": "^5.5.4"
   }
 }

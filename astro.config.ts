@@ -1,7 +1,10 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+	site: process.env.SITE, // astro/issues/3897
+	integrations: [sitemap()],
 	server: {
 		host: true,
 	},
