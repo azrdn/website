@@ -109,11 +109,3 @@ ol p {
 	vertical-align: top;
 	margin: 0;
 }
-
-@media (scripting: none) {
-	footer::after {
-		content: "There's no js here lmao.";
-		display: block;
-		margin: 1em 0;
-	}
-}

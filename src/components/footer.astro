@@ -11,9 +11,8 @@ import SystemIcon from "@lucide/astro/icons/eclipse"
 
 	for (const btn of radio_buttons) {
 		btn.addEventListener("change", () => {
-			const theme = btn.value
-			html?.setAttribute("theme", theme)
-			localStorage.setItem("theme", theme)
+			html?.setAttribute("theme", btn.value)
+			localStorage.setItem("theme", btn.value)
 		})
 	}
 </script>
@@ -23,7 +22,7 @@ import SystemIcon from "@lucide/astro/icons/eclipse"
 		<p>© {new Date().getFullYear()} under the <a target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html" rel="external noreferrer nofollow">GPLv3 License</a>.</p>
 		<p>100% human-made.</p>
 	</div>
-	<div class="right">
+	<div class="right js">
 		<span>
 			<input type="radio" name="theme" value="light" id="light">
 			<label for="light"><LightIcon /></label>
@@ -64,6 +63,7 @@ import SystemIcon from "@lucide/astro/icons/eclipse"
 
 	.right {
 		display: flex;
+		margin: 1em 0;
 		gap: 0 1ch;
 	}
 
@@ -71,7 +71,17 @@ import SystemIcon from "@lucide/astro/icons/eclipse"
 		footer {
 			flex-direction: row;
 			justify-content: space-between;
-			align-items: center;
+			align-items: start;
+		}
+	}
+
+	@media (scripting: none) {
+		.left::after {
+			content: "JS is not required btw :)";
+		}
+
+		.js {
+			display: none;
 		}
 	}
 </style>
