@@ -1,14 +1,13 @@
 ---
-import Button from "./button.astro"
 import Menu from "@lucide/astro/icons/menu"
 ---
 
 <header>
 	<section>
 		<a href="/">{Astro.site?.hostname}</a>
-		<Button popovertarget="navbar" title="menu">
+		<button popovertarget="navbar" title="menu">
 			<Menu />
-		</Button>
+		</button>
 	</section>
 
 	<nav popover id="navbar">
@@ -30,6 +29,15 @@ import Menu from "@lucide/astro/icons/menu"
 		background-color: var(--bg);
 		position: sticky;
 		top: 0;
+	}
+
+	button {
+		all: unset;
+		cursor: pointer;
+
+		&:hover {
+			color: var(--primary);
+		}
 	}
 
 	nav p {
