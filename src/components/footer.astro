@@ -6,12 +6,12 @@ import SystemIcon from "@lucide/astro/icons/eclipse"
 ---
 
 <script>
-	const html = document.querySelector("html")
+	const html = document.documentElement
 	const radio_buttons = document.querySelectorAll<HTMLInputElement>("input[name='theme']")
 
 	for (const btn of radio_buttons) {
 		btn.addEventListener("change", () => {
-			html?.setAttribute("theme", btn.value)
+			html.setAttribute("theme", btn.value)
 			localStorage.setItem("theme", btn.value)
 		})
 	}

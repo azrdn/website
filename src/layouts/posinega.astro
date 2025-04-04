@@ -19,10 +19,10 @@ const { title = 'azrd' } = Astro.props
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<script is:inline>
 			const theme = localStorage.getItem("theme") || "system";
-			document.querySelector("html").setAttribute("theme", theme);
+			document.documentElement.setAttribute("theme", theme);
 
 			document.addEventListener("DOMContentLoaded", () => {
-				const activeThemeInput = document.querySelector(`input[value='${theme}']`)
+				const activeThemeInput = document.querySelector(`input[value='${theme}']`);
 				if (activeThemeInput) activeThemeInput.checked = true;
 			})
 		</script>
