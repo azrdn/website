@@ -1,11 +1,77 @@
-<style>
-	footer {
-		padding: 1em 0;
+---
+// why individual instead of named import?: lucide-astro/issues/28
+import LightIcon from "@lucide/astro/icons/sun"
+import DarkIcon from "@lucide/astro/icons/moon"
+import SystemIcon from "@lucide/astro/icons/eclipse"
+---
+
+<script>
+	const html = document.querySelector("html")
+	const radio_buttons = document.querySelectorAll<HTMLInputElement>("input[name='theme']")
+
+	for (const btn of radio_buttons) {
+		btn.addEventListener("change", () => {
+			const theme = btn.value
+			html?.setAttribute("theme", theme)
+			localStorage.setItem("theme", theme)
+		})
 	}
-</style>
+</script>
 
 <footer>
-	<hr>
-	<p>© {new Date().getFullYear()} under the <a target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html" rel="external noreferrer nofollow">GPLv3 License</a>.</p>
-	<p>100% human-made.</p>
+	<div class="left">
+		<p>© {new Date().getFullYear()} under the <a target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html" rel="external noreferrer nofollow">GPLv3 License</a>.</p>
+		<p>100% human-made.</p>
+	</div>
+	<div class="right">
+		<span>
+			<input type="radio" name="theme" value="light" id="light">
+			<label for="light"><LightIcon /></label>
+		</span>
+		<span>
+			<input type="radio" name="theme" value="system" id="system">
+			<label for="system"><SystemIcon /></label>
+		</span>
+		<span>
+			<input type="radio" name="theme" value="dark" id="dark">
+			<label for="dark"><DarkIcon /></label>
+		</span>
+	</div>
 </footer>
+
+<style>
+	footer {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		margin: 3em 0;
+		border-top: 2px solid var(--secondary);
+	}
+
+	input {
+		display: none;
+	}
+
+	label {
+		cursor: pointer;
+		color: var(--primary);
+		opacity: 0.3;
+	}
+
+	input[type="radio"]:checked+label {
+		opacity: 1;
+	}
+
+	.right {
+		display: flex;
+		gap: 0 1ch;
+	}
+
+	@media (width >= 768px) {
+		footer {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
+</style>

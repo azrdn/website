@@ -17,6 +17,15 @@ const { title = 'azrd' } = Astro.props
 		<meta property="og:image:type" content="image/jpeg" />
 		<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
+		<script is:inline>
+			const theme = localStorage.getItem("theme") || "system";
+			document.querySelector("html").setAttribute("theme", theme);
+
+			document.addEventListener("DOMContentLoaded", () => {
+				const activeThemeInput = document.querySelector(`input[value='${theme}']`)
+				if (activeThemeInput) activeThemeInput.checked = true;
+			})
+		</script>
 		<title>{title}</title>
 	</head>
 
@@ -73,7 +82,7 @@ const { title = 'azrd' } = Astro.props
 			content: '';
 			width: 3.5em;
 			background-color: var(--bg);
-			background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' fill='none' stroke='%234e4e4e' stroke-width='1' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3C/svg%3E");
+			background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' fill='none' stroke='%23696969' stroke-width='1' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3C/svg%3E");
 			background-size: contain;
 			background-repeat: repeat-y;
 		}
@@ -88,11 +97,10 @@ const { title = 'azrd' } = Astro.props
 			border-left-style: dashed;
 		}
 
-		@media (prefers-color-scheme: dark) {
-			/* background images wont auto change colors even if its svg */
+		/* @media (prefers-color-scheme: dark) {
 			body::before, body::after {
 				background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' fill='none' stroke='%23949494' stroke-width='1' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3C/svg%3E");
 			}
-		}
+		} */
 	}
 </style>
