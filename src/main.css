@@ -21,6 +21,14 @@
 	--bg-secondary: light-dark(#cacaca, #424242);
 }
 
+[theme="dark"] {
+	color-scheme: dark;
+}
+
+[theme="light"] {
+	color-scheme: light;
+}
+
 *, *::before, *::after {
 	box-sizing: border-box;
 }

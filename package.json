@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.3.0",
+    "@lucide/astro": "^0.487.0",
     "astro": "^5.5.4"
   }
 }
