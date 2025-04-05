@@ -80,11 +80,10 @@ const { title = 'azrd' } = Astro.props
 		body::before, body::after {
 			z-index: 1;
 			content: '';
-			width: 3.5em;
+			width: 3em;
 			background-color: var(--bg);
-			background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' fill='none' stroke='%23696969' stroke-width='1' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3C/svg%3E");
-			background-size: contain;
-			background-repeat: repeat-y;
+			mask-image: url("../components/decoration.svg");
+			mask-size: contain;
 		}
 
 		body::before {
@@ -96,11 +95,5 @@ const { title = 'azrd' } = Astro.props
 			border-left: 1px var(--secondary);
 			border-left-style: dashed;
 		}
-
-		/* @media (prefers-color-scheme: dark) {
-			body::before, body::after {
-				background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' fill='none' stroke='%23949494' stroke-width='1' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3C/svg%3E");
-			}
-		} */
 	}
 </style>
