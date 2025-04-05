@@ -49,12 +49,12 @@ a {
 	color: var(--primary);
 	text-underline-offset: 0.3em;
 	overflow-wrap: break-word;
-}
 
-a:hover {
-	color: var(--bg);
-	background-color: var(--primary);
-	text-decoration: none;
+	&:hover {
+		color: var(--bg);
+		background-color: var(--primary);
+		text-decoration: none;
+	}
 }
 
 blockquote {
