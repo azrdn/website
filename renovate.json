@@ -1,6 +1,13 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": [
-		"config:recommended"
-	]
+	"extends": ["config:base"],
+	"rangeStrategy": "bump",
+	"packageRules": [
+		{
+			"matchUpdateTypes": "patch",
+			"automerge": true
+		}
+	],
+	"rebaseWhen": "behind-base-branch",
+	"dependencyDashboard": true
 }
