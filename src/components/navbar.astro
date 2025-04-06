@@ -3,12 +3,10 @@ import Menu from "@lucide/astro/icons/menu"
 ---
 
 <header>
-	<section>
-		<a href="/">{Astro.site?.hostname}</a>
-		<button popovertarget="navbar" title="menu">
-			<Menu />
-		</button>
-	</section>
+	<a href="/">{Astro.site?.hostname}</a>
+	<button popovertarget="navbar" title="Menu">
+		<Menu />
+	</button>
 
 	<nav popover id="navbar">
 		<div class="desc">
@@ -26,6 +24,11 @@ import Menu from "@lucide/astro/icons/menu"
 
 <style>
 	header {
+		display: flex;
+		justify-content: space-between;
+		border-bottom: 1px solid var(--bg-secondary);
+		margin: 0 0 2em;
+		padding: 1em 3ch;
 		background-color: var(--bg);
 		position: sticky;
 		top: 0;
@@ -42,14 +45,6 @@ import Menu from "@lucide/astro/icons/menu"
 
 	nav p {
 		margin: 0;
-	}
-
-	section {
-		display: flex;
-		justify-content: space-between;
-		border-bottom: 2px solid var(--secondary);
-		margin: 0 3ch 2em;
-		padding: 1em 0;
 	}
 
 	.links, .desc {
@@ -70,6 +65,7 @@ import Menu from "@lucide/astro/icons/menu"
 		top: 3.5em;
 		color: var(--secondary);
 		background-color: var(--bg);
+		box-shadow: 0 0.5em 1em -1em rgba(0, 0, 0, 0.5);
 		justify-content: space-between;
 		border: none;
 		width: 100%;
@@ -80,7 +76,7 @@ import Menu from "@lucide/astro/icons/menu"
 
 	#navbar:popover-open {
 		display: flex;
-		border-bottom: 2px solid var(--bg-secondary);
+		border-bottom: 1px solid var(--bg-secondary);
 
 		opacity: 1;
 		transform: none;
