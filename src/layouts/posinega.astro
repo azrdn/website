@@ -75,27 +75,29 @@ const { title = 'azrd' } = Astro.props
 	}
 
 	#content {
-		padding: 0 3ch;
+		padding: 0 2ch;
 	}
 
 	@media (width >= 900px) {
-		body::before, body::after {
-			z-index: 1;
-			content: '';
-			width: 3.25em;
-			background-color: var(--bg);
-			mask-image: url("../components/decoration.svg");
-			mask-size: contain;
-		}
+		body {
+			&::before {
+				border-right: 1px var(--bg-secondary);
+				border-right-style: dashed;
+			}
 
-		body::before {
-			border-right: 1px var(--bg-secondary);
-			border-right-style: dashed;
-		}
+			&::after {
+				border-left: 1px var(--bg-secondary);
+				border-left-style: dashed;
+			}
 
-		body::after {
-			border-left: 1px var(--bg-secondary);
-			border-left-style: dashed;
+			&::before, &::after {
+				z-index: 1;
+				content: '';
+				width: 3.25em;
+				background-color: var(--bg);
+				mask-image: url("../components/decoration.svg");
+				mask-size: contain;
+			}
 		}
 	}
 </style>

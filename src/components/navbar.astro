@@ -27,8 +27,8 @@ import Menu from "@lucide/astro/icons/menu"
 		display: flex;
 		justify-content: space-between;
 		border-bottom: 1px solid var(--bg-secondary);
-		margin: 0 0 2em;
-		padding: 1em 3ch;
+		margin: 0 0 1.5em;
+		padding: 1em 2ch;
 		background-color: var(--bg);
 		position: sticky;
 		top: 0;
@@ -53,8 +53,8 @@ import Menu from "@lucide/astro/icons/menu"
 		gap: 1em;
 	}
 
-	.desc {
-		display: none;
+	.links {
+		text-align: right;
 	}
 
 	#navbar[popover] {
@@ -71,7 +71,7 @@ import Menu from "@lucide/astro/icons/menu"
 		width: 100%;
 		max-width: 80ch;
 		margin: 0 auto;
-		padding: 1em 3ch 2em;
+		padding: 1em 2ch 2em;
 	}
 
 	#navbar:popover-open {
@@ -86,16 +86,6 @@ import Menu from "@lucide/astro/icons/menu"
 				opacity: 0;
 				transform: translateY(-1rem);
 			}
-		}
-	}
-
-	@media (width >= 425px) {
-		.desc {
-			display: flex;
-		}
-
-		.links {
-			text-align: right;
 		}
 	}
 </style>
