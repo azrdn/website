@@ -1,24 +1,29 @@
 ---
-import Menu from "@lucide/astro/icons/menu"
+import Menu from "@lucide/astro/icons/menu";
+
+const links = [
+	{ href: "/projects", desc: "things i made" },
+	{ href: "/blog", desc: "i write too" },
+	{ href: "/read", desc: "bookmarks and etc" },
+];
 ---
 
 <header>
-	<a href="/">{Astro.site?.hostname}</a>
-	<button popovertarget="navbar" title="Menu">
+	<a id="self" href="/">{Astro.site?.hostname}</a>
+	<button popovertarget="navbar-s" title="Menu">
 		<Menu />
 	</button>
 
-	<nav popover id="navbar">
+	<nav popover id="navbar-s">
 		<div class="desc">
-			<p>things i made</p>
-			<p>i write too</p>
-			<p>bookmarks and etc</p>
+			{links.map((link) => <p>{link.desc}</p>)}
 		</div>
 		<div class="links">
-			<a href="/projects">/projects</a>
-			<a href="/blog">/blog</a>
-			<a href="/reading">/reading</a>
+			{links.map((link) => <a href={link.href}>{link.href}</a>)}
 		</div>
+	</nav>
+	<nav id="navbar-l">
+		{links.map((link) => <a href={link.href}>{link.href}</a>)}
 	</nav>
 </header>
 
@@ -32,6 +37,10 @@ import Menu from "@lucide/astro/icons/menu"
 		background-color: var(--bg);
 		position: sticky;
 		top: 0;
+	}
+
+	#self {
+		text-decoration: none;
 	}
 
 	button {
@@ -57,7 +66,7 @@ import Menu from "@lucide/astro/icons/menu"
 		text-align: right;
 	}
 
-	#navbar[popover] {
+	#navbar-s[popover] {
 		transition: opacity 0.2s, transform 0.2s, display 0.2s allow-discrete;
 		transform: translateY(-1rem);
 		opacity: 0;
@@ -74,7 +83,7 @@ import Menu from "@lucide/astro/icons/menu"
 		padding: 1em 2ch 2em;
 	}
 
-	#navbar:popover-open {
+	#navbar-s:popover-open {
 		display: flex;
 		border-bottom: 1px solid var(--bg-secondary);
 
@@ -86,6 +95,21 @@ import Menu from "@lucide/astro/icons/menu"
 				opacity: 0;
 				transform: translateY(-1rem);
 			}
+		}
+	}
+
+	#navbar-l {
+		display: none;
+	}
+
+	@media (width >= 768px) {
+		button[popovertarget="navbar-s"] {
+			display: none;
+		}
+
+		#navbar-l {
+			display: flex;
+			gap: 3ch;
 		}
 	}
 </style>
