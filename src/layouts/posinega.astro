@@ -21,11 +21,6 @@ const { title = 'azrd' } = Astro.props
 		<script is:inline>
 			const theme = localStorage.getItem("theme") || "system";
 			document.documentElement.setAttribute("theme", theme);
-
-			document.addEventListener("DOMContentLoaded", () => {
-				const activeThemeInput = document.querySelector(`input[value='${theme}']`);
-				if (activeThemeInput) activeThemeInput.checked = true;
-			})
 		</script>
 		<title>{title}</title>
 	</head>
@@ -42,6 +37,10 @@ const { title = 'azrd' } = Astro.props
 				<slot />
 			</div>
 		</div>
+		<script is:inline>
+			const theme_btn = document.querySelector(`input[value='${theme}']`);
+			if (theme_btn) theme_btn.checked = true;
+		</script>
 	</body>
 </html>
 
