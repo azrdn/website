@@ -9,7 +9,7 @@ export const GET: APIRoute = async ({ site }) => {
 		ascii.text(),
 		robots.text(),
 	]);
-	const sitemap = new URL("sitemap-index.html", site);
+	const sitemap = new URL("sitemap-index.xml", site);
 
 	return new Response(
 		`${asciiText}\n` +
