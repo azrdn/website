@@ -3,9 +3,9 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "bun -b astro dev",
-    "build": "bun -b astro build",
-    "preview": "bun -b astro preview"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.3.0",

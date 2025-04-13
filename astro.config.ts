@@ -1,9 +1,11 @@
+import { loadEnv } from "vite";
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
-// https://astro.build/config
+const env = loadEnv('production', process.cwd(), "");
+
 export default defineConfig({
-	site: process.env.SITE, // astro/issues/3897
+	site: env.SITE,
 	integrations: [sitemap()],
 	server: {
 		host: true,
@@ -12,8 +14,5 @@ export default defineConfig({
 		shikiConfig: {
 			theme: 'github-dark-dimmed'
 		}
-	},
-	experimental: {
-		contentIntellisense: true,
 	}
 });
