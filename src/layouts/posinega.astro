@@ -1,6 +1,7 @@
 ---
 // filename reference https://www.youtube.com/watch?v=Iq3EZtD0QDE
-import '../main.css'
+import '../styles/main.css'
+import { Font } from 'astro:assets'
 const { title = 'azrd' } = Astro.props
 ---
 
@@ -15,7 +16,8 @@ const { title = 'azrd' } = Astro.props
 		<meta property="og:type" content="website" />
 		<meta property="og:image" content="./assets/og.jpg" />
 		<meta property="og:image:type" content="image/jpeg" />
-		<link rel="preload" href="/assets/gitlab-mono.woff2" as="font" type="font/woff2" crossorigin />
+		<!-- <link rel="preload" href="/assets/gitlab-mono.woff2" as="font" type="font/woff2" crossorigin /> -->
+		<Font cssVariable="--font-subset" preload />
 		<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<script is:inline>
@@ -54,7 +56,7 @@ const { title = 'azrd' } = Astro.props
 
 	body {
 		background-color: var(--bg-secondary);
-		font-family: 'Gitlab Mono', monospace;
+		font-family: var(--font-subset);
 		display: flex;
 		justify-content: center;
 		margin: 0;

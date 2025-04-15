@@ -14,5 +14,19 @@ export default defineConfig({
 		shikiConfig: {
 			theme: 'github-dark-dimmed'
 		}
+	},
+	experimental: {
+		fonts: [{
+			provider: "local",
+			name: "Gitlab Mono Subset",
+			variants: [{
+				weight: "100 800",
+				style: "normal",
+				src: ["./src/styles/gitlab-mono.woff2"], // causes tech(undefined) which makes the font wont load
+				// src: [{ url:"./src/styles/gitlab-mono.woff2", tech: "variations" }], // this loads correctly
+			}],
+			cssVariable: "--font-subset",
+			optimizedFallbacks: false,
+		}]
 	}
 });
