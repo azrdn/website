@@ -22,11 +22,10 @@ export default defineConfig({
 			variants: [{
 				weight: "100 800",
 				style: "normal",
-				src: ["./src/styles/gitlab-mono.woff2"], // causes tech(undefined) which makes the font wont load
-				// src: [{ url:"./src/styles/gitlab-mono.woff2", tech: "variations" }], // this loads correctly
+				src: ["./src/styles/gitlab-mono.woff2"],
 			}],
+			fallbacks: ["monospace"],
 			cssVariable: "--font-subset",
-			optimizedFallbacks: false,
 		}]
 	}
 });
