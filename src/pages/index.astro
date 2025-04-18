@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/posinega.astro'
 import Navbar from '../components/navbar.astro'
-import TopographyImage from '../components/topography.astro'
+import Topography from '../components/topography.svg'
 import Footer from '../components/footer.astro'
 ---
+
 <Layout title="azrd">
 	<Navbar slot="header"/>
-	<TopographyImage />
+	<!-- image by freepik -->
+	<picture id="hero"><Topography/></picture>
 	<main>
 		<h1>hi, i'm azis</h1>
 		<p>Jack of few trades, master of none.</p>
@@ -19,3 +21,11 @@ import Footer from '../components/footer.astro'
 	</section>
 	<Footer />
 </Layout>
+
+<style is:global>
+	#hero {
+		border: 2px solid var(--secondary);
+		overflow: hidden;
+		max-height: 8rem;
+	}
+</style>
