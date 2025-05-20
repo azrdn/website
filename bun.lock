@@ -4,7 +4,7 @@
     "": {
       "dependencies": {
         "@astrojs/sitemap": "^3.3.1",
-        "@lucide/astro": "^0.501.0",
+        "@lucide/astro": "^0.511.0",
         "astro": "^5.7.12",
       },
     },
@@ -124,7 +124,7 @@
 
     "@jridgewell/sourcemap-codec": ["@jridgewell/sourcemap-codec@1.5.0", "", {}, "sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ=="],
 
-    "@lucide/astro": ["@lucide/astro@0.501.0", "", { "peerDependencies": { "astro": "^4 || ^5" } }, "sha512-U2tgHWtYYcq4unq78M083Uv5L3xPTEPGkGNUuJfUtJ50ZqY9Blbngy0NHrMeDwhut2oZpt1qgZk8+DDDXyBgAg=="],
+    "@lucide/astro": ["@lucide/astro@0.511.0", "", { "peerDependencies": { "astro": "^4 || ^5" } }, "sha512-Qq3WAQVyL+mMSl8UYJJdfIbhfO/tskRRDWilZcwxazhd+e99KfSbxS1q0xjrCIUN4VFD8W/BCcNasChJqQv/8A=="],
 
     "@oslojs/encoding": ["@oslojs/encoding@1.1.0", "", {}, "sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ=="],
 
