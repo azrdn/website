@@ -1,6 +1,9 @@
 ---
 import { getCollection, render } from "astro:content";
-import BlogLayout from "../../layouts/blog_page.astro";
+import { Font } from "astro:assets";
+import Layout from "../../layouts/posinega.astro";
+import Navbar from "../../components/navbar.astro";
+import Footer from "../../components/footer.astro";
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
@@ -14,6 +17,26 @@ const { post } = Astro.props
 const { Content } = await render(post);
 ---
 
-<BlogLayout title=`${post.data.title}`>
+<Layout title={post.data.title}>
+	<Font slot="head" cssVariable="--font-subset-ital" preload />
+	<Navbar slot="header" />
+	<h1>{post.data.title}</h1>
 	<Content />
-</BlogLayout>
+	<Footer />
+</Layout>
+
+<style>
+	h1 {
+		font-size: 2rem;
+	}
+</style>
+
+<style is:inline>
+	/* 
+		https://css-tricks.com/attribute-selectors/#aa-attribute-contains-certain-value-somewhere
+		used for styling shiki
+	*/
+	i, em, [style*="font-style:italic"] {
+		font-family: var(--font-subset-ital);
+	}
+</style>

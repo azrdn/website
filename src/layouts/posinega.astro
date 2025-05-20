@@ -1,31 +1,13 @@
 ---
 // filename reference https://www.youtube.com/watch?v=Iq3EZtD0QDE
+import Head from '../components/head.astro'
 import '../styles/main.css'
-import { Font } from 'astro:assets'
 const { title = 'azrd' } = Astro.props
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<meta name="description" content="My personal webpage" />
-		<meta property="og:title" content="azrd" />
-		<meta property="og:description" content="My personal webpage" />
-		<meta property="og:type" content="website" />
-		<meta property="og:image" content="./assets/og.jpg" />
-		<meta property="og:image:type" content="image/jpeg" />
-		<Font cssVariable="--font-subset" preload />
-		<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<script is:inline>
-			const theme = localStorage.getItem("theme") || "system";
-			document.documentElement.setAttribute("theme", theme);
-		</script>
-		<title>{title}</title>
-	</head>
-
+	<Head title={title}><slot name="head" /></Head>
 	<body>
 		{/*
 			NOTE: the reason for this overly complex layout is because i dont want
@@ -93,7 +75,7 @@ const { title = 'azrd' } = Astro.props
 			&::before, &::after {
 				z-index: 1;
 				content: '';
-				width: 3.25em;
+				width: 3em;
 				background-color: var(--bg);
 				mask-image: url("../components/decoration.svg");
 				mask-size: contain;
