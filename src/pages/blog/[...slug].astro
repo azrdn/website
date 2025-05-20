@@ -18,7 +18,7 @@ const { Content } = await render(post);
 ---
 
 <Layout title={post.data.title}>
-	<Font slot="head" cssVariable="--font-subset-ital" />
+	<Font slot="head" cssVariable="--font-subset-ital" preload />
 	<Navbar slot="header" />
 	<h1>{post.data.title}</h1>
 	<Content />
