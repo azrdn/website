@@ -1,13 +1,31 @@
 ---
 // filename reference https://www.youtube.com/watch?v=Iq3EZtD0QDE
-import Head from '../components/head.astro'
 import '../styles/main.css'
+import { Font } from 'astro:assets'
 const { title = 'azrd' } = Astro.props
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-	<Head title={title}><slot name="head" /></Head>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta name="description" content="My personal webpage" />
+		<meta property="og:title" content="azrd" />
+		<meta property="og:description" content="My personal webpage" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="./assets/og.jpg" />
+		<meta property="og:image:type" content="image/jpeg" />
+		<Font cssVariable="--font-subset" preload />
+		<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<script is:inline>
+			const theme = localStorage.getItem("theme") || "system";
+			document.documentElement.setAttribute("theme", theme);
+		</script>
+		<title>{title}</title>
+		<slot name="head"></slot>
+	</head>
 	<body>
 		{/*
 			NOTE: the reason for this overly complex layout is because i dont want
@@ -21,8 +39,8 @@ const { title = 'azrd' } = Astro.props
 			</div>
 		</div>
 		<script is:inline>
-			const theme_btn = document.querySelector(`input[value='${theme}']`);
-			if (theme_btn) theme_btn.checked = true;
+			const dropdown = document.querySelector("#theme-select")
+			if (dropdown) dropdown.value = theme
 		</script>
 	</body>
 </html>

@@ -1,20 +1,9 @@
----
-// why individual instead of named import?: lucide-astro/issues/28
-import LightIcon from "@lucide/astro/icons/sun"
-import DarkIcon from "@lucide/astro/icons/moon"
-import SystemIcon from "@lucide/astro/icons/eclipse"
----
-
 <script>
-	const html = document.documentElement
-	const radio_buttons = document.querySelectorAll<HTMLInputElement>("input[name='theme']")
-
-	for (const btn of radio_buttons) {
-		btn.addEventListener("change", () => {
-			html.setAttribute("theme", btn.value)
-			localStorage.setItem("theme", btn.value)
-		})
-	}
+	const select = document.querySelector<HTMLSelectElement>("#theme-select")
+	if (select) select.addEventListener("change", () => {
+		document.documentElement.setAttribute("theme", select.value)
+		localStorage.setItem("theme", select.value)
+	})
 </script>
 
 <footer>
@@ -23,18 +12,13 @@ import SystemIcon from "@lucide/astro/icons/eclipse"
 		<p>100% human-made.</p>
 	</div>
 	<div class="right js">
-		<span>
-			<input type="radio" name="theme" value="light" id="light">
-			<label for="light" title="Light Theme"><LightIcon /></label>
-		</span>
-		<span>
-			<input type="radio" name="theme" value="system" id="system">
-			<label for="system" title="System Theme"><SystemIcon /></label>
-		</span>
-		<span>
-			<input type="radio" name="theme" value="dark" id="dark">
-			<label for="dark" title="Dark Theme"><DarkIcon /></label>
-		</span>
+		[
+		<select name="theme" id="theme-select">
+			<option value="system">System</option>
+			<option value="light">Light</option>
+			<option value="dark">Dark</option>
+		</select>
+		]
 	</div>
 </footer>
 
@@ -47,28 +31,22 @@ import SystemIcon from "@lucide/astro/icons/eclipse"
 		border-top: 2px solid var(--secondary);
 	}
 
-	input {
-		display: none;
+	select {
+		all: unset;
+		appearance: auto;
+		user-select: none;
+		font-family: inherit;
+		max-width: 10ch;
+		text-overflow: ellipsis;
 	}
 
-	label {
-		cursor: pointer;
-		color: var(--primary);
-		opacity: 0.3;
-
-		&:hover {
-			opacity: 0.75;
-		}
-	}
-
-	input[type="radio"]:checked+label {
-		opacity: 1;
+	option {
+		background-color: var(--bg);
 	}
 
 	.right {
 		display: flex;
 		margin: 1em 0;
-		gap: 0 1ch;
 	}
 
 	@media (width >= 768px) {
