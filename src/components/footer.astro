@@ -32,18 +32,41 @@
 	}
 
 	select {
-		all: unset;
-		appearance: auto;
-		user-select: none;
+		/* TODO: rework after customizable select lands in FF */
+		appearance: base-select;
 		cursor: pointer;
+		padding: 0;
+		border: none;
+		background: none;
 		color: var(--primary);
 		font-family: inherit;
-		max-width: 10ch;
+		font-size: inherit;
 		text-overflow: ellipsis;
+
+		&::picker(select) {
+			appearance: base-select;
+			color: var(--primary);
+			cursor: initial;
+			border: 2px solid var(--secondary);
+		}
+
+		&:open::picker-icon {
+			rotate: 180deg;
+		}
 	}
 
 	option {
 		background-color: var(--bg);
+		padding: 0.5em 1ch;
+		
+		&:hover {
+			background-color: var(--bg-secondary);
+		}
+
+		&::checkmark {
+			order: 1;
+			margin-left: auto;
+		}
 	}
 
 	.right {
