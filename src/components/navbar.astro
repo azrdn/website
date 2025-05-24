@@ -6,6 +6,9 @@ const links = [
 	{ href: "/blog", desc: "i write too" },
 	{ href: "/read", desc: "bookmarks and etc" },
 ];
+
+const is_homepage = Astro.url.pathname === "/"
+const parent_dir = Astro.url.pathname.split("/").slice(0, -1).join("/") || "/"
 ---
 
 <header>
@@ -24,7 +27,7 @@ const links = [
 	</nav>
 	<nav id="navbar-l">
 		{links.map((link) => <a href={link.href}>{link.href}</a>)}
-		<button class="js" onclick="history.back()">../</button>
+		<a href={is_homepage ? null : parent_dir}>../</a>
 	</nav>
 </header>
 
