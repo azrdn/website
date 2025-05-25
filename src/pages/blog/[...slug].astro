@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
+const pub_date = post.data.date.toISOString().slice(0, 10);
 const { Content } = await render(post);
 ---
 
@@ -21,6 +22,8 @@ const { Content } = await render(post);
 	<Font slot="head" cssVariable="--font-subset-ital" preload />
 	<Navbar slot="header" />
 	<h1>{post.data.title}</h1>
+	<p>Published: {pub_date}</p>
+	<hr>
 	<Content />
 	<Footer slot="footer" />
 </Layout>
@@ -28,6 +31,7 @@ const { Content } = await render(post);
 <style>
 	h1 {
 		font-size: 2rem;
+		line-height: 1.4;
 	}
 </style>
 
