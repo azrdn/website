@@ -7,6 +7,7 @@ const env = loadEnv('production', process.cwd(), "");
 export default defineConfig({
 	site: env.SITE,
 	integrations: [sitemap()],
+	trailingSlash: 'always',
 	server: {
 		host: true,
 	},
