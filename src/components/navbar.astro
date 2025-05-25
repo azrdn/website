@@ -19,7 +19,7 @@ const parent_dir = Astro.url.pathname.split("/").slice(0, -1).join("/") || "/"
 
 	<nav popover id="navbar-s">
 		<div class="desc">
-			{links.map((link) => <p>{link.desc}</p>)}
+			{links.map((link) => <span>{link.desc}</span>)}
 		</div>
 		<div class="links">
 			{links.map((link) => <a href={link.href}>{link.href}</a>)}
@@ -27,7 +27,7 @@ const parent_dir = Astro.url.pathname.split("/").slice(0, -1).join("/") || "/"
 	</nav>
 	<nav id="navbar-l">
 		{links.map((link) => <a href={link.href}>{link.href}</a>)}
-		<a href={is_homepage ? null : parent_dir}>../</a>
+		{is_homepage ? (<span>../</span>) : <a href={parent_dir}>../</a>}
 	</nav>
 </header>
 
@@ -41,10 +41,10 @@ const parent_dir = Astro.url.pathname.split("/").slice(0, -1).join("/") || "/"
 		background-color: var(--bg);
 		position: sticky;
 		top: 0;
-	}
 
-	#self {
-		text-decoration: none;
+		#self {
+			text-decoration: none;
+		}
 	}
 
 	button {
@@ -54,10 +54,6 @@ const parent_dir = Astro.url.pathname.split("/").slice(0, -1).join("/") || "/"
 		&:hover {
 			color: var(--primary);
 		}
-	}
-
-	nav p {
-		margin: 0;
 	}
 
 	.links, .desc {

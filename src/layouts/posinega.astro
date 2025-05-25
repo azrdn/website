@@ -34,9 +34,10 @@ const { title = 'azrd' } = Astro.props
 		*/}
 		<div id="page">
 			<slot name="header" />
-			<div id="content">
+			<main>
 				<slot />
-			</div>
+			</main>
+			<slot name="footer" />
 		</div>
 		<script is:inline>
 			const dropdown = document.querySelector("#theme-select")
@@ -74,7 +75,7 @@ const { title = 'azrd' } = Astro.props
 		hyphens: auto;
 	}
 
-	#content {
+	main {
 		padding: 0 2ch;
 	}
 
