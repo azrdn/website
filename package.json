@@ -6,10 +6,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro build && astro preview",
-	"cf:preview": "astro build && wrangler pages dev dist"
+    "cf:preview": "astro build && wrangler pages dev dist"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.4.0",
-    "astro": "^5.8.0"
+    "astro": "^5.8.0",
+    "rehype-autolink-headings": "^7.1.0"
   }
 }

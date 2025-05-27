@@ -21,7 +21,7 @@ const { Content } = await render(post);
 <Layout title={post.data.title}>
 	<Font slot="head" cssVariable="--font-subset-ital" preload />
 	<Navbar slot="header" />
-	<h1>{post.data.title}</h1>
+	<h1 id="title">{post.data.title}</h1>
 	<p>Published: {pub_date}</p>
 	<hr>
 	<Content />
@@ -29,18 +29,39 @@ const { Content } = await render(post);
 </Layout>
 
 <style>
-	h1 {
+	@media (prefers-reduced-motion: no-preference) {
+		:root {
+			scroll-behavior: smooth;
+		}
+	}
+
+	#title {
 		font-size: 2rem;
 		line-height: 1.4;
 	}
 </style>
 
 <style is:inline>
-	/* 
-		https://css-tricks.com/attribute-selectors/#aa-attribute-contains-certain-value-somewhere
-		used for styling shiki
-	*/
 	i, em, [style*="font-style:italic"] {
 		font-family: var(--font-subset-ital);
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		scroll-margin-top: calc(4em + 1lh);
+
+		a[href^="#"] {
+			visibility: hidden;
+			margin: 0 1ch;
+		}
+
+		&:hover {
+			a[href^="#"] {
+				visibility: visible;
+			}
+		}
+	}
+
+	a {
+		scroll-margin-top: calc(4em + 1lh);
 	}
 </style>

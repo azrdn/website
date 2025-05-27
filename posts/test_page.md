@@ -97,6 +97,22 @@ var foo = function (bar) {
 console.log(foo(5));
 ```
 
+## [Footnotes](https://github.com/markdown-it/markdown-it-footnote)
+
+Footnotes always appear on last
+
+Footnote 1 link[^first].
+
+Footnote 2 link[^second].
+
+Duplicated footnote reference[^second].
+
+[^first]: Footnote **can have markup**
+
+    and multiple paragraphs.
+
+[^second]: Footnote text.
+
 ## Tables
 
 | Option | Description |
@@ -142,19 +158,3 @@ Like links, Images also have a footnote style syntax
 With a reference later in the document defining the URL location:
 
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
-
-### [Footnotes](https://github.com/markdown-it/markdown-it-footnote)
-
-Footnotes always appear on last
-
-Footnote 1 link[^first].
-
-Footnote 2 link[^second].
-
-Duplicated footnote reference[^second].
-
-[^first]: Footnote **can have markup**
-
-    and multiple paragraphs.
-
-[^second]: Footnote text.

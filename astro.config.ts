@@ -1,5 +1,8 @@
 import { loadEnv } from "vite";
 import { defineConfig } from "astro/config";
+import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+
+import heading_links from 'rehype-autolink-headings'
 import sitemap from "@astrojs/sitemap";
 
 const env = loadEnv('production', process.cwd(), "");
@@ -12,6 +15,14 @@ export default defineConfig({
 		host: true,
 	},
 	markdown: {
+		rehypePlugins: [
+			rehypeHeadingIds,
+			[heading_links, {
+				behavior: "append",
+				content: { type: "text", value: "#" },
+				properties: { tabIndex: -1 }
+			}]
+		],
 		shikiConfig: {
 			theme: 'catppuccin-macchiato'
 		}
