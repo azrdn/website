@@ -93,7 +93,15 @@ Syntax highlighting
 var foo = function (bar) {
   return bar++;
 };
+```
 
+```ts
+const long_ass_arrow_function_that_does_nothing = (extending, to, edge) => {
+  return "line"
+}
+```
+
+```
 console.log(foo(5));
 ```
 
