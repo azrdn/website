@@ -14,8 +14,9 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
+const { Content: RenderedMarkdown } = await render(post);
+
 const pub_date = post.data.date.toISOString().slice(0, 10);
-const { Content } = await render(post);
 ---
 
 <Layout title={post.data.title}>
@@ -23,8 +24,9 @@ const { Content } = await render(post);
 	<Navbar slot="header" />
 	<h1 id="title">{post.data.title}</h1>
 	<p>Published: {pub_date}</p>
+	<a href=`../${post.id}.md`>Markdown</a>
 	<hr>
-	<Content />
+	<RenderedMarkdown />
 	<Footer slot="footer" />
 </Layout>
 
