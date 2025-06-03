@@ -13,5 +13,3 @@ export const GET: APIRoute = async ({ params }) => {
 	if (!md) return new Response("Not Found");
 	return new Response(md.body);
 }
-
-//TODO: Favicon for non-HTML files
