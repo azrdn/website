@@ -28,13 +28,22 @@ const posts = await getCollection("blog");
 		flex-direction: column;
 		border: 2px solid var(--bg-secondary);
 		padding: 1em 2ch;
-		margin: 1em 0;
-		gap: 1em
-	}
+		margin: 1rlh 0;
+		gap: 1em;
 
-	a {
-		width: 100%;
-		text-decoration: none;
+		&:hover {
+			background-color: var(--bg-secondary);
+		}
+
+		a {
+			text-decoration: none;
+
+			&:hover {
+				background-color: unset;
+				color: var(--primary);
+				text-decoration: underline;
+			}
+		}
 	}
 
 	@media (width >= 768px) {
