@@ -23,7 +23,11 @@ export default defineConfig({
 			}]
 		],
 		shikiConfig: {
-			theme: 'catppuccin-macchiato'
+			defaultColor: false,
+			themes: {
+				dark: "catppuccin-macchiato",
+				light: 'github-light',
+			}
 		}
 	},
 	experimental: {

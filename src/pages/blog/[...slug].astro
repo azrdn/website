@@ -67,3 +67,11 @@ const pub_date = post.data.date.toISOString().slice(0, 10);
 		scroll-margin-top: calc(4em + 1lh);
 	}
 </style>
+
+<style is:global>
+	.astro-code, .astro-code span {
+		color: light-dark(var(--shiki-light), var(--shiki-dark));
+		background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
+	}
+</style>
+	

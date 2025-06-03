@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 }
 
 export const GET: APIRoute = async ({ params }) => {
-	const md = await getEntry("blog", params.slug as string);
+	const md = await getEntry("blog", params.slug!);
 	if (!md) return new Response("Not Found");
 	return new Response(md.body);
 }
