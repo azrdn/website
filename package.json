@@ -9,8 +9,8 @@
     "cf:preview": "astro build && wrangler pages dev dist"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.4.0",
-    "astro": "^5.8.1",
+    "@astrojs/sitemap": "^3.4.1",
+    "astro": "^5.8.2",
     "rehype-autolink-headings": "^7.1.0"
   }
 }
