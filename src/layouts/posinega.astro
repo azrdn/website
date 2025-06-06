@@ -20,10 +20,7 @@ const { title = 'azrd' } = Astro.props
 		<link rel="icon" href="favicon.ico" sizes="48x48" />
 		<link rel="icon" href="/assets/favicon.svg" sizes="any" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
-		<script is:inline>
-			const theme = localStorage.getItem("theme") || "system";
-			document.documentElement.setAttribute("theme", theme);
-		</script>
+		<script is:inline>document.documentElement.setAttribute("theme",localStorage.getItem("theme")||"system")</script>
 		<title>{title}</title>
 		<slot name="head"></slot>
 	</head>
@@ -40,10 +37,6 @@ const { title = 'azrd' } = Astro.props
 			</main>
 			<slot name="footer" />
 		</div>
-		<script is:inline>
-			const dropdown = document.querySelector("#theme-select")
-			if (dropdown) dropdown.value = theme
-		</script>
 	</body>
 </html>
 

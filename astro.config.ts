@@ -35,24 +35,20 @@ export default defineConfig({
 			{
 				provider: "local",
 				name: "gitlabmono",
-				variants: [{
-					weight: "100 800",
-					style: "normal",
-					src: ["./src/styles/GitLabMono.woff2"],
-				}],
+				variants: [
+					{
+						weight: "100 800",
+						style: "normal",
+						src: ["./src/styles/GitLabMono.woff2"],
+					},
+					{
+						weight: "100 800",
+						style: "italic",
+						src: ["./src/styles/GitLabMono-Italic.woff2"],
+					}
+				],
 				fallbacks: ["monospace"],
 				cssVariable: "--font-subset",
-			},
-			{
-				provider: "local",
-				name: "gitlabmono-ital",
-				variants: [{
-					weight: "100 800",
-					style: "italic",
-					src: ["./src/styles/GitLabMono-Italic.woff2"]
-				}],
-				fallbacks: ["monospace"],
-				cssVariable: "--font-subset-ital"
 			}
 		]
 	}

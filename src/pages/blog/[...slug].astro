@@ -20,31 +20,22 @@ const pub_date = post.data.date.toISOString().slice(0, 10);
 ---
 
 <Layout title={post.data.title}>
-	<Font slot="head" cssVariable="--font-subset-ital" preload />
 	<Navbar slot="header" />
 	<h1 id="title">{post.data.title}</h1>
 	<p>Published: {pub_date}</p>
-	<a href=`../${post.id}.md`>Markdown</a>
+	<a href={`/blog/${post.id}.md`}>Markdown</a>
 	<hr>
 	<RenderedMarkdown />
 	<Footer slot="footer" />
 </Layout>
 
-<style>
-	@media (prefers-reduced-motion: no-preference) {
-		:root {
-			scroll-behavior: smooth;
-		}
-	}
-
+<style is:inline>
 	#title {
 		font-size: 2rem;
 		line-height: 1.4;
 	}
-</style>
 
-<style is:inline>
-	i, em, [style*="font-style:italic"] {
+	i, em {
 		font-family: var(--font-subset-ital);
 	}
 
@@ -67,11 +58,3 @@ const pub_date = post.data.date.toISOString().slice(0, 10);
 		scroll-margin-top: calc(4em + 1lh);
 	}
 </style>
-
-<style is:global>
-	.astro-code, .astro-code span {
-		color: light-dark(var(--shiki-light), var(--shiki-dark));
-		background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
-	}
-</style>
-	
