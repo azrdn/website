@@ -73,13 +73,13 @@ img, picture, video, canvas, svg {
 h1, h2, h3, h4, h5, h6 {
 	font-size: unset;
 	color: var(--primary);
-	margin: 2rem 0;
+	margin: 2em 0;
 	padding: 0;
 }
 
 a {
 	color: var(--primary);
-	text-underline-offset: 0.3em;
+	text-underline-offset: 0.2rlh;
 	overflow-wrap: break-word;
 
 	&:hover {
@@ -96,19 +96,20 @@ blockquote {
 }
 
 pre, code {
+	border-radius: 4px;
 	font-family: inherit;
 	scrollbar-color: var(--primary) transparent;
 	line-height: 1.5;
 }
 
 pre:has(code) {
-	padding: 1em 2ch;
+	padding: 1rlh 2ch;
 }
 
 code:not(pre code) {
 	color: var(--primary);
 	background-color: var(--bg-secondary);
-	padding: 0 1ch;
+	padding: 0.1em 0.25em;
 }
 
 table {
@@ -119,14 +120,14 @@ table {
 
 th, td {
 	border: 2px solid var(--secondary);
-	padding: 1em 1ch;
+	padding: 0.5em 1ch;
 	vertical-align: top;
 }
 
 hr {
 	color: var(--bg-secondary);
 	border-style: solid;
-	margin: 2em 0
+	margin: 2rlh 0
 }
 
 ul {

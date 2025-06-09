@@ -27,7 +27,7 @@ const parent_dir = new URL("../", Astro.url).pathname;
 	</nav>
 	<nav id="navbar-l">
 		{links.map((link) => <a href={link.href}>{link.text}</a>)}
-		{is_homepage ? (<span>../</span>) : <a href={parent_dir}>../</a>}
+		{is_homepage ? (<span>../</span>) : (<a href={parent_dir}>../</a>)}
 	</nav>
 </header>
 
@@ -36,8 +36,7 @@ const parent_dir = new URL("../", Astro.url).pathname;
 		display: flex;
 		justify-content: space-between;
 		border-bottom: 1px solid var(--bg-secondary);
-		margin: 0 0 1.5em;
-		padding: 1em 2ch;
+		padding: 1rlh 2ch;
 		background-color: var(--bg);
 		position: sticky;
 		top: 0;
@@ -59,7 +58,7 @@ const parent_dir = new URL("../", Astro.url).pathname;
 	.links, .desc {
 		display: flex;
 		flex-direction: column;
-		gap: 1em;
+		gap: 1rlh;
 	}
 
 	.links {
@@ -67,11 +66,10 @@ const parent_dir = new URL("../", Astro.url).pathname;
 	}
 
 	#navbar-s[popover] {
-		transition: opacity 0.2s, transform 0.2s, display 0.2s allow-discrete;
-		transform: translateY(-1rem);
+		transition: opacity 0.2s, display 0.2s allow-discrete;
 		opacity: 0;
 
-		top: 3.5em;
+		top: calc(2rlh + 1lh);
 		color: var(--secondary);
 		background-color: var(--bg);
 		box-shadow: 0 0.5em 1em -1em rgba(0, 0, 0, 0.5);
@@ -80,20 +78,17 @@ const parent_dir = new URL("../", Astro.url).pathname;
 		width: 100%;
 		max-width: 80ch;
 		margin: 0 auto;
-		padding: 1em 2ch 2em;
+		padding: 0 2ch 1rlh;
 	}
 
 	#navbar-s:popover-open {
 		display: flex;
 		border-bottom: 1px solid var(--bg-secondary);
-
 		opacity: 1;
-		transform: none;
 
 		@starting-style {
 			& {
 				opacity: 0;
-				transform: translateY(-1rem);
 			}
 		}
 	}

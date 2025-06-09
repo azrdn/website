@@ -21,7 +21,7 @@ const pub_date = post.data.date.toISOString().slice(0, 10);
 
 <Layout title={post.data.title}>
 	<Navbar slot="header" />
-	<h1 id="title">{post.data.title}</h1>
+	<h1>{post.data.title}</h1>
 	<p>Published: {pub_date}</p>
 	<a href={`/blog/${post.id}.md`}>Markdown</a>
 	<hr>
@@ -30,17 +30,12 @@ const pub_date = post.data.date.toISOString().slice(0, 10);
 </Layout>
 
 <style is:inline>
-	#title {
-		font-size: 2rem;
-		line-height: 1.4;
-	}
-
 	i, em {
 		font-family: var(--font-subset-ital);
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		scroll-margin-top: calc(4em + 1lh);
+		scroll-margin-top: calc(2rlh + 1lh + 2em);
 
 		a[href^="#"] {
 			visibility: hidden;
@@ -55,6 +50,6 @@ const pub_date = post.data.date.toISOString().slice(0, 10);
 	}
 
 	a {
-		scroll-margin-top: calc(4em + 1lh);
+		scroll-margin-top: calc(2rlh + 1lh + 2em);
 	}
 </style>

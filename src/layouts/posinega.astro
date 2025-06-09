@@ -22,14 +22,8 @@ const { title = 'azrd' } = Astro.props
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<script is:inline>document.documentElement.setAttribute("theme",localStorage.getItem("theme")||"system")</script>
 		<title>{title}</title>
-		<slot name="head"></slot>
 	</head>
 	<body>
-		{/*
-			NOTE: the reason for this overly complex layout is because i dont want
-			the navbar to have transparent gaps, so when scrolling the page
-			anything that overflows will be covered by the navbar background
-		*/}
 		<div id="page">
 			<slot name="header" />
 			<main>
@@ -57,8 +51,10 @@ const { title = 'azrd' } = Astro.props
 	}
 
 	#page {
+		display: flex;
+		flex-direction: column;
 		background-color: var(--bg);
-		line-height: 1.75;
+		line-height: 1.65;
 		width: 100%;
 		max-width: 80ch;
 		min-height: 100svh;
@@ -85,7 +81,7 @@ const { title = 'azrd' } = Astro.props
 			&::before, &::after {
 				z-index: 1;
 				content: '';
-				width: 3em;
+				width: 5ch;
 				background-color: var(--bg);
 				mask-image: url("../components/decoration.svg");
 				mask-size: contain;
