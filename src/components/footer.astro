@@ -12,13 +12,13 @@
 <footer>
 	<div class="left">
 		<p>© {new Date().getFullYear()} under the <a target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html" rel="external nofollow">GPLv3 License</a>.</p>
-		<form class="js">
+		<p class="js">
 			<label for="theme-select">Theme:&nbsp;</label>[<select name="theme" id="theme-select">
 				<option value="system">System</option>
 				<option value="light">Light</option>
 				<option value="dark">Dark</option>
 			</select>]
-		</form>
+		</p>
 	</div>
 	<div class="right">
 		<p>100% human-made.</p>
@@ -30,9 +30,10 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		margin: 2rlh 0;
-		padding: 0 2ch;
-		border-top: 1px solid var(--bg-secondary);
+		margin: auto 0 0;
+		padding: 1rlh 2ch;
+		border: 1px solid var(--bg-secondary);
+		border-style: solid none;
 	}
 
 	select {

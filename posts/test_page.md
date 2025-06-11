@@ -68,6 +68,10 @@ Start numbering with offset:
 57. foo
 1. bar
 
+## Subscript and Superscript
+
+<sub>123</sub>
+<sup>123</sup>
 
 ## Code
 

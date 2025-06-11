@@ -7,12 +7,14 @@ const links = [
 	{ text: "/read", href: "/read/", desc: "bookmarks and etc" },
 ];
 
-const is_homepage = Astro.url.pathname === "/"
+const { breadcrumb = Astro.site.hostname } = Astro.props;
+const is_homepage = Astro.url.pathname === "/";
 const parent_dir = new URL("../", Astro.url).pathname;
 ---
 
 <header>
-	<a id="self" href="/">{Astro.site?.hostname}</a>
+	<a id="breadcrumb-s" href="/">{Astro.site.hostname}</a>
+	<span id="breadcrumb-l">{breadcrumb}</span>
 	<button popovertarget="navbar-s" title="Menu">
 		<Menu />
 	</button>
@@ -26,14 +28,16 @@ const parent_dir = new URL("../", Astro.url).pathname;
 		</div>
 	</nav>
 	<nav id="navbar-l">
-		{links.map((link) => <a href={link.href}>{link.text}</a>)}
-		{is_homepage ? (<span>../</span>) : (<a href={parent_dir}>../</a>)}
+		{ is_homepage ? (<span>~/</span>) : (<a href="/">~/</a>) }
+		{ links.map((link) => <a href={link.href}>{link.text}</a>) }
+		{ is_homepage ? (<span>../</span>) : (<a href={parent_dir}>../</a>) }
 	</nav>
 </header>
 
 <style>
 	header {
 		display: flex;
+		view-transition-name: navbar;
 		justify-content: space-between;
 		border-bottom: 1px solid var(--bg-secondary);
 		padding: 1rlh 2ch;
@@ -41,8 +45,13 @@ const parent_dir = new URL("../", Astro.url).pathname;
 		position: sticky;
 		top: 0;
 
-		#self {
+		#breadcrumb-s {
 			text-decoration: none;
+		}
+
+		#breadcrumb-l {
+			display: none;
+			color: var(--primary);
 		}
 	}
 
@@ -65,14 +74,17 @@ const parent_dir = new URL("../", Astro.url).pathname;
 		text-align: right;
 	}
 
-	#navbar-s[popover] {
-		transition: opacity 0.2s, display 0.2s allow-discrete;
-		opacity: 0;
+	@media (prefers-reduced-motion: no-preference) {
+		#navbar-s[popover] {
+			transition: opacity 0.2s, display 0.2s allow-discrete;
+		}
+	}
 
+	#navbar-s[popover] {
+		opacity: 0;
 		top: calc(2rlh + 1lh);
 		color: var(--secondary);
 		background-color: var(--bg);
-		box-shadow: 0 0.5em 1em -1em rgba(0, 0, 0, 0.5);
 		justify-content: space-between;
 		border: none;
 		width: 100%;
@@ -105,6 +117,14 @@ const parent_dir = new URL("../", Astro.url).pathname;
 		#navbar-l {
 			display: flex;
 			gap: 3ch;
+		}
+
+		header #breadcrumb-s {
+			display: none;
+		}
+
+		header #breadcrumb-l {
+			display: block;
 		}
 	}
 </style>

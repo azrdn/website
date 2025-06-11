@@ -20,7 +20,7 @@ const pub_date = post.data.date.toISOString().slice(0, 10);
 ---
 
 <Layout title={post.data.title}>
-	<Navbar slot="header" />
+	<Navbar slot="header" breadcrumb="Blog Post"/>
 	<h1>{post.data.title}</h1>
 	<p>Published: {pub_date}</p>
 	<a href={`/blog/${post.id}.md`}>Markdown</a>
@@ -50,6 +50,6 @@ const pub_date = post.data.date.toISOString().slice(0, 10);
 	}
 
 	a {
-		scroll-margin-top: calc(2rlh + 1lh + 2em);
+		scroll-margin-top: calc(2rlh + 1lh + 1em);
 	}
 </style>

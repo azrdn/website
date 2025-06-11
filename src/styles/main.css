@@ -1,5 +1,23 @@
-@view-transition {
-	navigation: auto;
+@media (prefers-reduced-motion: no-preference) {
+	@view-transition { navigation: auto }
+}
+
+@keyframes move-out {
+  from { transform: translateY(0%); }
+  to { transform: translateY(-100%); }
+}
+
+@keyframes move-in {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0%); }
+}
+
+::view-transition-old(root) {
+  animation: 0.5s ease-out both move-out;
+}
+
+::view-transition-new(root) {
+  animation: 0.5s ease-out both move-in;
 }
 
 :root {
@@ -143,4 +161,26 @@ ol p {
 	display: inline;
 	vertical-align: top;
 	margin: 0;
+}
+
+sub, sup {
+	&:has(a) {
+		font-size: 1rem;
+
+		::before {
+			content: "[";
+		}
+
+		::after {
+			content: "]";
+		}
+	}
+}
+
+sub {
+	vertical-align: bottom;
+}
+
+sup {
+	vertical-align: top;
 }
