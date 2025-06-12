@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection, getEntry } from "astro:content";
+import { readFile } from "node:fs/promises"
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
@@ -10,6 +11,8 @@ export async function getStaticPaths() {
 
 export const GET: APIRoute = async ({ params }) => {
 	const md = await getEntry("blog", params.slug!);
-	if (!md) return new Response("Not Found");
-	return new Response(md.body);
+	if (!md) return new Response(null, { status: 500 });
+
+	const file = await readFile(md.filePath!, "utf-8");
+	return new Response(file);
 }
