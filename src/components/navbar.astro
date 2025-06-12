@@ -7,14 +7,13 @@ const links = [
 	{ text: "/read", href: "/read/", desc: "bookmarks and etc" },
 ];
 
-const { breadcrumb = Astro.site.hostname } = Astro.props;
+const { label = Astro.site?.hostname } = Astro.props;
 const is_homepage = Astro.url.pathname === "/";
 const parent_dir = new URL("../", Astro.url).pathname;
 ---
 
 <header>
-	<a id="breadcrumb-s" href="/">{Astro.site.hostname}</a>
-	<span id="breadcrumb-l">{breadcrumb}</span>
+	<span id="label">{label}</span>
 	<button popovertarget="navbar-s" title="Menu">
 		<Menu />
 	</button>
@@ -28,7 +27,6 @@ const parent_dir = new URL("../", Astro.url).pathname;
 		</div>
 	</nav>
 	<nav id="navbar-l">
-		{ is_homepage ? (<span>~/</span>) : (<a href="/">~/</a>) }
 		{ links.map((link) => <a href={link.href}>{link.text}</a>) }
 		{ is_homepage ? (<span>../</span>) : (<a href={parent_dir}>../</a>) }
 	</nav>
@@ -45,12 +43,7 @@ const parent_dir = new URL("../", Astro.url).pathname;
 		position: sticky;
 		top: 0;
 
-		#breadcrumb-s {
-			text-decoration: none;
-		}
-
-		#breadcrumb-l {
-			display: none;
+		#label {
 			color: var(--primary);
 		}
 	}
@@ -74,14 +67,7 @@ const parent_dir = new URL("../", Astro.url).pathname;
 		text-align: right;
 	}
 
-	@media (prefers-reduced-motion: no-preference) {
-		#navbar-s[popover] {
-			transition: opacity 0.2s, display 0.2s allow-discrete;
-		}
-	}
-
 	#navbar-s[popover] {
-		opacity: 0;
 		top: calc(2rlh + 1lh);
 		color: var(--secondary);
 		background-color: var(--bg);
@@ -96,13 +82,6 @@ const parent_dir = new URL("../", Astro.url).pathname;
 	#navbar-s:popover-open {
 		display: flex;
 		border-bottom: 1px solid var(--bg-secondary);
-		opacity: 1;
-
-		@starting-style {
-			& {
-				opacity: 0;
-			}
-		}
 	}
 
 	#navbar-l {
@@ -117,14 +96,6 @@ const parent_dir = new URL("../", Astro.url).pathname;
 		#navbar-l {
 			display: flex;
 			gap: 3ch;
-		}
-
-		header #breadcrumb-s {
-			display: none;
-		}
-
-		header #breadcrumb-l {
-			display: block;
 		}
 	}
 </style>

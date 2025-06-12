@@ -20,7 +20,7 @@ const pub_date = post.data.date.toISOString().slice(0, 10);
 ---
 
 <Layout title={post.data.title}>
-	<Navbar slot="header" breadcrumb="Blog Post"/>
+	<Navbar slot="header" label="Blog Post"/>
 	<h1>{post.data.title}</h1>
 	<p>Published: {pub_date}</p>
 	<a href={`/blog/${post.id}.md`}>Markdown</a>
