@@ -1,13 +1,14 @@
-name: Deploy to Cloudflare
+name: Preview Deployment
 
 on:
   push:
     branches-ignore:
       - main
+      - renovate/*
 
 jobs:
   deploy:
-    name: Build and deploy
+    name: Build and deploy preview
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
