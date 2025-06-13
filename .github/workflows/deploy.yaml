@@ -1,22 +1,28 @@
-name: Deploy to cloudflare
+name: Deploy to Cloudflare
 
 on:
   push
 
 jobs:
   deploy:
+    name: Build and deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      
-      - run: bun install && bun run build
 
-      - name: Deploy to workers
+      - name: Install dependencies and build
+        run: |
+          echo "${{ secrets.DOTENV }}" > .env
+          bun install --production --frozen-lockfile
+          bun -b run build
+
+      - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
           wranglerVersion: "latest"
