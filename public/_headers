@@ -3,3 +3,7 @@
 	Cross-Origin-Opener-Policy: same-origin
 	Referrer-Policy: no-referrer
 	X-Robots-Tag: noarchive
+
+# Workaround for missing charset
+/*.txt
+	Content-Type: text/plain; charset=utf-8
