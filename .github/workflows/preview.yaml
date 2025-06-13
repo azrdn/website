@@ -2,7 +2,7 @@ name: Deploy to Cloudflare
 
 on:
   push:
-    branches:
+    branches-ignore:
       - main
 
 jobs:
@@ -30,3 +30,4 @@ jobs:
           wranglerVersion: "latest"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: versions upload
