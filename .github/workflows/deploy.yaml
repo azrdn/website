@@ -1,0 +1,24 @@
+name: Deploy to cloudflare
+
+on:
+  push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      
+      - run: bun install && bun run build
+
+      - name: Deploy to workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          wranglerVersion: "latest"
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
