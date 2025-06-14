@@ -4,6 +4,15 @@
 	Referrer-Policy: no-referrer
 	X-Robots-Tag: noarchive
 
+/*.css
+	Cache-Control: public, max-age=86400, must-revalidate
+
+/*.woff2
+	Cache-Control: public, max-age=2592000, must-revalidate
+
 # Workaround for missing charset
 /*.txt
 	Content-Type: text/plain; charset=utf-8
+
+/*.md
+	Content-Type: text/markdown; charset=utf-8
