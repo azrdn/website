@@ -6,10 +6,9 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
 	site: "https://azrd.dev",
-	integrations: [sitemap()],
-	server: {
-		host: true,
-	},
+	integrations: [ sitemap() ],
+	server: { host: true },
+	build: { format: "preserve" },
 	markdown: {
 		rehypePlugins: [
 			rehypeHeadingIds,

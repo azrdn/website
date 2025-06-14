@@ -14,7 +14,7 @@ const posts = await getCollection("blog");
 	{
 		posts.map((post) => (
 			<article>
-				<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+				<a href={`/blog/${post.id}`}>{post.data.title}</a>
 				<span>{post.data.createdAt.toISOString().slice(0, 10)}</span>
 			</article>
 		))
