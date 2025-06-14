@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro build && astro preview",
+	"preview:cf": "astro build && wrangler dev",
 	"lint": "oxlint",
 	"format": "oxlint --fix"
   },

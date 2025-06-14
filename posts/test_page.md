@@ -1,6 +1,7 @@
 ---
 title: test page
-date: 1970-01-01
+createdAt: 1970-01-01
+updatedAt: 2025-06-14
 ---
 
 # h1 Heading 8-)

@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getCollection, getEntry } from "astro:content";
 import { readFile } from "node:fs/promises"
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
 	const posts = await getCollection("blog");
 	return posts.map((post) => ({
 		params: { slug: post.id }
