@@ -6,9 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro build && astro preview",
-	"preview:cf": "astro build && wrangler dev",
-	"lint": "oxlint",
-	"format": "oxlint --fix"
+    "preview:cf": "astro build && wrangler dev",
+    "lint": "oxlint",
+    "format": "oxlint --fix"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.4.1",
