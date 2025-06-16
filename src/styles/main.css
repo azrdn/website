@@ -90,15 +90,28 @@ img, picture, video, canvas, svg {
 
 h1, h2, h3, h4, h5, h6 {
 	font-size: unset;
+	scroll-margin-top: calc(2rlh + 1lh + 2em);
 	color: var(--primary);
 	margin: 2em 0;
 	padding: 0;
+
+	a[href^="#"] {
+		visibility: hidden;
+		margin: 0 1ch;
+	}
+
+	&:hover {
+		a[href^="#"] {
+			visibility: visible;
+		}
+	}
 }
 
 a {
 	color: var(--primary);
-	text-underline-offset: 0.2rlh;
+	text-underline-offset: 0.25rlh;
 	overflow-wrap: break-word;
+	scroll-margin-top: calc(2rlh + 1lh + 1em);
 
 	&:hover {
 		color: var(--bg);

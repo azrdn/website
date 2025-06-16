@@ -9,11 +9,11 @@ export const getStaticPaths = async () => {
 	const posts = await getCollection("blog");
 	return posts.map((post) => ({
 		params: { slug: post.id },
-		props: { post },
+		props: { post, fm: post.data },
 	}));
 };
 
-const { post, post: { data: fm } } = Astro.props;
+const { post, fm } = Astro.props;
 const { Content } = await render(post);
 ---
 
@@ -31,23 +31,3 @@ const { Content } = await render(post);
 	<Footer slot="footer" />
 </Layout>
 
-<style is:inline>
-	h1, h2, h3, h4, h5, h6 {
-		scroll-margin-top: calc(2rlh + 1lh + 2em);
-
-		a[href^="#"] {
-			visibility: hidden;
-			margin: 0 1ch;
-		}
-
-		&:hover {
-			a[href^="#"] {
-				visibility: visible;
-			}
-		}
-	}
-
-	a {
-		scroll-margin-top: calc(2rlh + 1lh + 1em);
-	}
-</style>

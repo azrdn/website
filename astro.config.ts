@@ -8,7 +8,7 @@ export default defineConfig({
 	site: "https://azrd.dev",
 	integrations: [ sitemap() ],
 	server: { host: true },
-	build: { format: "preserve" },
+	build: { format: "preserve", assets: "static" },
 	markdown: {
 		rehypePlugins: [
 			rehypeHeadingIds,

@@ -12,7 +12,7 @@ const is_homepage = Astro.url.pathname === "/";
 ---
 
 <header>
-	<span id="label">{label}</span>
+	<span id="label">{ is_homepage ? "~/" : (<a href="/">~/</a>) } {label}</span>
 	<button popovertarget="navbar-s" title="Menu">
 		<Menu />
 	</button>
@@ -27,7 +27,6 @@ const is_homepage = Astro.url.pathname === "/";
 	</nav>
 	<nav id="navbar-l">
 		{ links.map((link) => <a href={link.href}>{link.text}</a>) }
-		{ is_homepage ? (<span>~/</span>) : (<a href="/">~/</a>) }
 	</nav>
 </header>
 
@@ -44,6 +43,10 @@ const is_homepage = Astro.url.pathname === "/";
 
 		#label {
 			color: var(--primary);
+			a {
+				text-decoration-color: var(--bg-secondary);
+				text-decoration-style: dotted;
+			}
 		}
 	}
 
