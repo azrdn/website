@@ -4,7 +4,11 @@ import Layout from "../layouts/posinega.astro";
 import Navbar from "../components/navbar.astro";
 import Footer from "../components/footer.astro";
 
-const posts = await getCollection("blog");
+const posts = await getCollection("blog").then(
+	(posts) => posts.sort((a, b) => {
+		return b.data.createdAt.getTime() - a.data.createdAt.getTime();
+	})
+);
 ---
 
 <Layout title="Blog">
