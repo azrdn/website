@@ -3,10 +3,11 @@ import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 
 import heading_links from 'rehype-autolink-headings'
 import sitemap from "@astrojs/sitemap";
+import mdx from "@astrojs/mdx";
 
 export default defineConfig({
 	site: "https://azrd.dev",
-	integrations: [ sitemap() ],
+	integrations: [ sitemap(), mdx() ],
 	server: { host: true },
 	build: { format: "preserve", assets: "static" },
 	markdown: {

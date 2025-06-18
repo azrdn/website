@@ -28,6 +28,11 @@
 	--bg-secondary: light-dark(#cacaca, #424242);
 }
 
+::selection {
+	background-color: var(--primary);
+	color: var(--bg);
+}
+
 @media (prefers-reduced-motion: no-preference) {
 	:root {
 		scroll-behavior: smooth;

@@ -6,14 +6,18 @@ import Footer from "../../components/footer.astro";
 
 const iso_date = (date: Date) => date.toISOString().slice(0, 10)
 export const getStaticPaths = async () => {
-	const posts = await getCollection("blog");
-	return posts.map((post) => ({
+	const posts = await Promise.all([
+		getCollection("blog"),
+		getCollection("blog_mdx")
+	]);
+
+	return posts.flat().map((post) => ({
 		params: { slug: post.id },
-		props: { post, fm: post.data },
+		props: { post, fm: post.data, is_mdx: post.data._mdx },
 	}));
 };
 
-const { post, fm } = Astro.props;
+const { post, fm, is_mdx } = Astro.props;
 const { Content } = await render(post);
 ---
 
@@ -25,7 +29,9 @@ const { Content } = await render(post);
 		<br>
 		{ fm.updatedAt ? `Updated : ${iso_date(fm.updatedAt)}` : null }
 	</p>
-	<a href={`/blog/${post.id}.md`}>Markdown</a>
+	<a href={`/blog/${post.id}.${is_mdx ? "mdx" : "md"}`}>
+		{is_mdx ? "MDX" : "Markdown"}
+	</a>
 	<hr>
 	<Content />
 	<Footer slot="footer" />
