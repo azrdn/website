@@ -7,7 +7,7 @@
 /static/*
 	Cache-Control: public, max-age=31556952, immutable
 
-/favicon.ico
+/favicon.*
 	Cache-Control: public, max-age=604800, must-revalidate
 
 # Workaround for missing charset
@@ -16,3 +16,6 @@
 
 /*.md
 	Content-Type: text/markdown; charset=utf-8
+
+/*.mdx
+	Content-Type: text/mdx; charset=utf-8
