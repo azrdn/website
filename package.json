@@ -17,6 +17,6 @@
     "rehype-autolink-headings": "^7.1.0"
   },
   "devDependencies": {
-    "oxlint": "^1.1.0"
+    "oxlint": "^1.2.0"
   }
 }
