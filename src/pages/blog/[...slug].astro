@@ -1,23 +1,31 @@
 ---
+import type { GetStaticPaths } from "astro";
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/posinega.astro";
 import Navbar from "../../components/navbar.astro";
 import Footer from "../../components/footer.astro";
 
 const iso_date = (date: Date) => date.toISOString().slice(0, 10)
-export const getStaticPaths = async () => {
-	const posts = await Promise.all([
+
+export const getStaticPaths = (async () => {
+	const [md_collection, mdx_collection] = await Promise.all([
 		getCollection("blog"),
 		getCollection("blog_mdx")
 	]);
-
-	return posts.flat().map((post) => ({
-		params: { slug: post.id },
-		props: { post, fm: post.data, is_mdx: post.data._mdx },
+	const md_posts = md_collection.map((post) => ({
+		...post, mdx: false,
 	}));
-};
+	const mdx_posts = mdx_collection.map((post) => ({
+		...post, mdx: true,
+	}));
 
-const { post, fm, is_mdx } = Astro.props;
+	return [...md_posts, ...mdx_posts].map((post) => ({
+		params: { slug: post.id },
+		props: { post, fm: post.data },
+	}));
+}) satisfies GetStaticPaths;
+
+const { post, fm } = Astro.props;
 const { Content } = await render(post);
 ---
 
@@ -29,8 +37,8 @@ const { Content } = await render(post);
 		<br>
 		{ fm.updatedAt ? `Updated : ${iso_date(fm.updatedAt)}` : null }
 	</p>
-	<a href={`/blog/${post.id}.${is_mdx ? "mdx" : "md"}`}>
-		{is_mdx ? "MDX" : "Markdown"}
+	<a href={`/blog/${post.id}.${post.mdx ? "mdx" : "md"}`}>
+		{post.mdx ? "MDX" : "Markdown"}
 	</a>
 	<hr>
 	<Content />
