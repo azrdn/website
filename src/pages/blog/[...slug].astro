@@ -27,6 +27,8 @@ export const getStaticPaths = (async () => {
 
 const { post, fm } = Astro.props;
 const { Content } = await render(post);
+
+import "../../styles/blog.css"
 ---
 
 <Layout title={fm.title}>
