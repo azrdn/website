@@ -1,23 +1,23 @@
-@media (prefers-reduced-motion: no-preference) {
-	@view-transition { navigation: auto }
-}
-
 @keyframes move-out {
-  from { transform: translateY(0%); }
-  to { transform: translateY(-100%); }
+	from { transform: translateY(0%); }
+	to { transform: translateY(-100%); }
 }
 
 @keyframes move-in {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0%); }
+	from { transform: translateY(100%); }
+	to { transform: translateY(0%); }
 }
 
-::view-transition-old(root) {
-  animation: 0.4s ease-in-out both move-out;
-}
+@media (prefers-reduced-motion: no-preference) {
+	@view-transition { navigation: auto }
 
-::view-transition-new(root) {
-  animation: 0.4s ease-in-out both move-in;
+	::view-transition-old(root) {
+		animation: 0.4s ease-in-out both move-out;
+	}
+
+	::view-transition-new(root) {
+		animation: 0.4s ease-in-out both move-in;
+	}
 }
 
 :root {
@@ -109,5 +109,11 @@ details {
 		color: var(--primary);
 		content: "> ";
 		font-weight: 700;
+	}
+}
+
+@media (scripting: none) {
+	.js {
+		display: none !important;
 	}
 }
