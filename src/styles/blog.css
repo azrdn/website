@@ -1,0 +1,120 @@
+[theme="system"] {
+	.astro-code, .astro-code span {
+		color: light-dark(var(--shiki-light), var(--shiki-dark));
+		background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.astro-code, .astro-code span {
+		font-style: var(--shiki-dark-font-style);
+		font-weight: var(--shiki-dark-font-weight);
+		text-decoration: var(--shiki-dark-text-decoration);
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	.astro-code, .astro-code span {
+		font-style: var(--shiki-light-font-style);
+		font-weight: var(--shiki-light-font-weight);
+		text-decoration: var(--shiki-light-text-decoration);
+	}
+}
+
+[theme="dark"] {
+	.astro-code, .astro-code span {
+		color: var(--shiki-dark);
+		background-color: var(--shiki-dark-bg);
+		font-style: var(--shiki-dark-font-style);
+		font-weight: var(--shiki-dark-font-weight);
+		text-decoration: var(--shiki-dark-text-decoration);
+	}
+}
+
+[theme="light"] {
+	.astro-code, .astro-code span {
+		color: var(--shiki-light);
+		background-color: var(--shiki-light-bg);
+		font-style: var(--shiki-light-font-style);
+		font-weight: var(--shiki-light-font-weight);
+		text-decoration: var(--shiki-light-text-decoration);
+	}
+}
+
+blockquote {
+	margin: 0;
+	padding: 0 0 0 2ch;
+	border-left: 1ch solid var(--bg-secondary)
+}
+
+pre, code {
+	border-radius: 4px;
+	font-family: inherit;
+	scrollbar-color: var(--primary) transparent;
+	line-height: 1.5;
+}
+
+pre:has(code) {
+	padding: 1rlh 2ch;
+}
+
+code:not(pre code) {
+	color: var(--primary);
+	background-color: var(--bg-secondary);
+	padding: 0.1em 0.25em;
+}
+
+table {
+	display: block;
+	overflow-y: auto;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 2px solid var(--secondary);
+	padding: 0.5em 1ch;
+	vertical-align: top;
+}
+
+hr {
+	color: var(--bg-secondary);
+	border-style: solid;
+	margin: 1.5rlh 0
+}
+
+ul {
+	padding-inline-start: 2ch;
+}
+
+ol {
+	padding: 0;
+	list-style-position: inside;
+}
+
+ol p {
+	display: inline;
+	vertical-align: top;
+	margin: 0;
+}
+
+sub, sup {
+	&:has(a) {
+		font-size: 1rem;
+
+		::before {
+			content: "[";
+		}
+
+		::after {
+			content: "]";
+		}
+	}
+}
+
+sub {
+	vertical-align: bottom;
+}
+
+sup {
+	vertical-align: top;
+}

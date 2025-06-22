@@ -19,50 +19,62 @@ const { title = 'azrd' } = Astro.props
 		<title>{title}</title>
 	</head>
 	<body>
-		<div id="page">
-			<slot name="header" />
-			<main>
-				<slot />
-			</main>
-			<slot name="footer" />
-		</div>
+		<slot name="header" />
+		<main>
+			<div id="page"><slot /></div>
+		</main>
+		<div id="bg"><div/></div>
+		<slot name="footer" />
 	</body>
 </html>
 
-<style is:global>
+<style>
 	html {
-		background-color: var(--bg); /* mobile nav button bg */
+		font-family: "JetBrains Mono", var(--font-subset);
 		scrollbar-color: var(--primary) var(--bg-secondary);
 		overflow-y: scroll;
 	}
 
 	body {
 		background-color: var(--bg-secondary);
-		font-family: var(--font-subset);
-		display: flex;
-		justify-content: center;
-		margin: 0;
 		color: var(--secondary);
+		display: flex;
+		flex-direction: column;
+		hyphens: auto;
+		line-height: 1.65;
+		margin: 0 auto;
+		max-width: 90ch;
+		min-height: 100svh;
+		text-wrap: pretty;
+		position: relative;
 	}
 
 	#page {
-		display: flex;
-		flex-direction: column;
-		background-color: var(--bg);
-		line-height: 1.65;
+		min-width: 0;
 		width: 100%;
-		max-width: 80ch;
-		min-height: 100svh;
-		text-wrap: pretty;
-		hyphens: auto;
-	}
-
-	main {
 		padding: 0 2ch 1rlh;
 	}
 
+	main {
+		display: flex;
+		flex-grow: 1;
+		z-index: 1;
+	}
+
+	#bg {
+		display: flex;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+
+		div {
+			width: 100%;
+			background-color: var(--bg);
+		}
+	}
+
 	@media (width >= 900px) {
-		body {
+		#bg {
 			&::before {
 				border-right: 1px var(--bg-secondary);
 				border-right-style: dashed;
@@ -74,7 +86,7 @@ const { title = 'azrd' } = Astro.props
 			}
 
 			&::before, &::after {
-				z-index: 1;
+				flex-shrink: 0;
 				content: '';
 				width: 5ch;
 				background-color: var(--bg);
@@ -82,11 +94,13 @@ const { title = 'azrd' } = Astro.props
 				mask-size: contain;
 			}
 		}
-	}
 
-	@media (scripting: none) {
-		.js {
-			display: none !important;
+		main {
+			&::before, &::after {
+				flex-shrink: 0;
+				content: '';
+				width: 5ch;
+			}
 		}
 	}
 </style>

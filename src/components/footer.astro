@@ -1,12 +1,24 @@
 <script>
 	const select = document.querySelector<HTMLSelectElement>("#theme-select");
-	if (select) {
-		select.value = localStorage.getItem("theme") || "system";
-		select.addEventListener("change", () => {
-			document.documentElement.setAttribute("theme", select.value);
-			localStorage.setItem("theme", select.value);
-		});
+	const motion_ok = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+	let root_styles = document.documentElement.style
+
+	const set_theme = (theme: string) => {
+		document.documentElement.setAttribute("theme", theme);
+		localStorage.setItem("theme", theme);
 	}
+
+	if (!select) throw new Error("Theme selector missing")
+	select.value = localStorage.getItem("theme") || "system";
+	select.addEventListener("change", async () => {
+		if (!document.startViewTransition || !motion_ok) {
+			set_theme(select.value); return
+		}
+
+		root_styles.viewTransitionName = "reset"
+		await document.startViewTransition(() => set_theme(select.value)).finished
+		root_styles.removeProperty("view-transition-name")
+	});
 </script>
 
 <footer>
@@ -30,7 +42,6 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		margin: auto 0 0;
 		padding: 0 2ch;
 		background-color: var(--bg);
 		border-top: 1px solid var(--bg-secondary);

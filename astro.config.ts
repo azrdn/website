@@ -28,6 +28,7 @@ export default defineConfig({
 		}
 	},
 	experimental: {
+		contentIntellisense: true,
 		fonts: [
 			{
 				provider: "local",
