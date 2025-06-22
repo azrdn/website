@@ -23,7 +23,7 @@ jobs:
         run: |
           echo "${{ secrets.DOTENV }}" > .env
           bun install --production --frozen-lockfile
-          bun -b run build
+          NODE_ENV=development bun -b run build
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
