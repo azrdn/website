@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     name: Build and deploy preview
+    environment: dev
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
