@@ -1,8 +1,6 @@
-[theme="system"] {
-	.astro-code, .astro-code span {
-		color: light-dark(var(--shiki-light), var(--shiki-dark));
-		background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
-	}
+.astro-code, .astro-code span {
+	color: light-dark(var(--shiki-light), var(--shiki-dark));
+	background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
 }
 
 @media (prefers-color-scheme: dark) {
