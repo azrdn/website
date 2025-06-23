@@ -73,8 +73,9 @@ Start numbering with offset:
 
 ## Subscript and Superscript
 
-<sub>123</sub>
-<sup>123</sup>
+<sub>123456789123456789123456</sub>\
+123456789123456789123456\
+<sup>123456789123456789123456</sup>
 
 ## Code
 

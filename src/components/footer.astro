@@ -1,7 +1,6 @@
 <script>
 	const select = document.querySelector<HTMLSelectElement>("#theme-select");
 	const motion_ok = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
-	let root_styles = document.documentElement.style
 
 	const set_theme = (theme: string) => {
 		document.documentElement.setAttribute("theme", theme);
@@ -14,10 +13,10 @@
 		if (!document.startViewTransition || !motion_ok) {
 			set_theme(select.value); return
 		}
-
-		root_styles.viewTransitionName = "reset"
-		await document.startViewTransition(() => set_theme(select.value)).finished
-		root_styles.removeProperty("view-transition-name")
+		document.startViewTransition({
+			update: () => set_theme(select.value),
+			types: ['theme']
+		})
 	});
 </script>
 
@@ -45,7 +44,6 @@
 		padding: 0 2ch;
 		background-color: var(--bg);
 		border-top: 1px solid var(--bg-secondary);
-		view-transition-name: footer;
 	}
 
 	select {

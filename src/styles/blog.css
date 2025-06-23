@@ -98,16 +98,11 @@ ol p {
 }
 
 sub, sup {
-	&:has(a) {
-		font-size: 1rem;
-
-		::before {
-			content: "[";
-		}
-
-		::after {
-			content: "]";
-		}
+	font-size: 0.75em;
+	letter-spacing: 0.335ch;
+	a {
+		text-decoration: none;
+		scroll-margin-top: calc(2rlh + 1lh + 2.5em);
 	}
 }
 
