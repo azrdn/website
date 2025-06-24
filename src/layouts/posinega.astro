@@ -30,13 +30,17 @@ const { title = 'azrd' } = Astro.props
 
 <style>
 	html {
+		background-color: var(--bg);
 		font-family: "JetBrains Mono", var(--font-subset);
 		scrollbar-color: var(--primary) var(--bg-secondary);
 		overflow-y: scroll;
+
+		@media (width >= 768px) {
+			background-color: var(--bg-secondary);
+		}
 	}
 
 	body {
-		background-color: var(--bg-secondary);
 		color: var(--secondary);
 		display: flex;
 		flex-direction: column;
