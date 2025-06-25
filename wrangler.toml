@@ -1,5 +1,7 @@
 name = "web"
 compatibility_date = "2025-06-12"
+placement.mode = "smart"
+dev.port = 4321
 
 [assets]
 directory = "./dist"
