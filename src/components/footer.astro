@@ -1,23 +1,18 @@
 <script>
 	const select = document.querySelector<HTMLSelectElement>("#theme-select");
-	const motion_ok = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+	const mq = window.matchMedia('(prefers-reduced-motion: no-preference)')
 
-	const set_theme = (theme: string) => {
+	if (!select) throw new Error("Theme selector missing");
+	select.value = localStorage.getItem("theme") || "system";
+	const set_theme = (theme: string = select.value) => {
 		document.documentElement.setAttribute("theme", theme);
 		localStorage.setItem("theme", theme);
 	}
 
-	if (!select) throw new Error("Theme selector missing")
-	select.value = localStorage.getItem("theme") || "system";
-	select.addEventListener("change", async () => {
-		if (!document.startViewTransition || !motion_ok) {
-			set_theme(select.value); return
-		}
-		document.startViewTransition({
-			update: () => set_theme(select.value),
-			types: ['theme']
-		})
-	});
+	select.onchange = () => {
+		if (!document.startViewTransition || !mq.matches) set_theme();
+		else document.startViewTransition(set_theme);
+	}
 </script>
 
 <footer>

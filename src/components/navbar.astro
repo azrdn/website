@@ -12,8 +12,8 @@ const is_homepage = Astro.url.pathname === "/";
 ---
 
 <script>
-	const popover = document.querySelector<HTMLElement>("[popover]")
 	window.onpagehide = () => {
+		const popover = document.querySelector<HTMLElement>(":popover-open")
 		if (popover) popover.hidePopover()
 	}
 </script>
