@@ -14,6 +14,7 @@
 	:active-view-transition-type(scroll) {
 		header { view-transition-name: static-1 }
 		footer { view-transition-name: static-2 }
+		#navbar-s { view-transition-name: static-3 }
 
 		&::view-transition-old(root) {
 			animation: 0.4s ease-in-out both move-out;
