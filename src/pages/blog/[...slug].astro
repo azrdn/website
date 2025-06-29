@@ -1,23 +1,23 @@
 ---
-import type { GetStaticPaths } from "astro";
 import { getCollection, render } from "astro:content";
-import Layout from "../../layouts/posinega.astro";
-import Navbar from "../../components/navbar.astro";
+import type { GetStaticPaths } from "astro";
 import Footer from "../../components/footer.astro";
+import Navbar from "../../components/navbar.astro";
+import Layout from "../../layouts/posinega.astro";
 
-const iso_date = (date: Date) => date.toISOString().slice(0, 10)
+const iso_date = (date: Date) => date.toISOString().slice(0, 10);
 
 export const getStaticPaths = (async () => {
 	const [md_collection, mdx_collection] = await Promise.all([
 		getCollection("blog"),
-		getCollection("blog_mdx")
+		getCollection("blog_mdx"),
 	]);
-    const all_posts = [
-        ...md_collection.map(post => ({ ...post, mdx: false })),
-        ...mdx_collection.map(post => ({ ...post, mdx: true }))
-    ];
+	const all_posts = [
+		...md_collection.map(post => ({ ...post, mdx: false })),
+		...mdx_collection.map(post => ({ ...post, mdx: true })),
+	];
 
-	return all_posts.map((post) => ({
+	return all_posts.map(post => ({
 		params: { slug: post.id },
 		props: { post, fm: post.data },
 	}));
@@ -26,22 +26,21 @@ export const getStaticPaths = (async () => {
 const { post, fm } = Astro.props;
 const { Content, headings } = await render(post);
 
-import "../../styles/blog.css"
+import "../../styles/blog.css";
 ---
 
 <Layout title={fm.title}>
-	<Navbar slot="header" label="Blog Post"/>
+	<Navbar slot="header" label="Blog Post" />
 	<h1>{fm.title}</h1>
 	<p>
 		Published: {iso_date(fm.createdAt)}
-		<br>
-		{ fm.updatedAt ? `Updated: ${iso_date(fm.updatedAt)}` : null }
+		<br />
+		{fm.updatedAt ? `Updated: ${iso_date(fm.updatedAt)}` : null}
 	</p>
 	<a href={`/blog/${post.id}.${post.mdx ? "mdx" : "md"}`}>
 		{post.mdx ? "MDX" : "Markdown"}
 	</a>
-	<hr>
+	<hr />
 	<Content />
 	<Footer slot="footer" />
 </Layout>
-

@@ -1,0 +1,46 @@
+---
+import Footer from "../components/footer.astro";
+import Navbar from "../components/navbar.astro";
+import Layout from "../layouts/posinega.astro";
+---
+
+<Layout title="About azrd">
+	<Navbar slot="header" label="About" />
+	<section>
+		<h1>Who am I</h1>
+		<p>
+			Just a <em>normie</em> who likes to play video games, doomscroll through
+			social media, and searching for his true passion, nothing special.
+		</p>
+		<p>
+			Sometimes i experiment with new things, either tech or not, and often
+			found eating fast foods from the local stores and cafeteria.
+		</p>
+		<p>
+			In real life, they call me Azis, here's my <a
+				href="https://example.com">CV</a
+			> if you would like to know more
+		</p>
+	</section>
+	<details>
+		<summary>Interests</summary>
+		<ul>
+			<li>Videogames</li>
+			<li>Linux</li>
+			<li>Web</li>
+			<li>Orchestration</li>
+			<li>Scalability</li>
+			<li><em>Simplicity</em></li>
+		</ul>
+	</details>
+	<details>
+		<summary>My Gear</summary>
+		<ul>
+			<li>Computer: Acer Aspire 5 A514-54G</li>
+			<li>Monitor: Viewsonic VX2479-HD-PRO</li>
+			<li>Keyboard: Ajazz AK832</li>
+			<li>Mouse: Pressplay Iris</li>
+		</ul>
+	</details>
+	<Footer slot="footer" />
+</Layout>

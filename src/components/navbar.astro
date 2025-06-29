@@ -2,9 +2,9 @@
 import Menu from "../components/menu.svg";
 
 const links = [
-	{ text: "/projects", href: "/projects", desc: "things i made" },
+	{ text: "/about", href: "/about", desc: "who am i?" },
 	{ text: "/blog", href: "/blog", desc: "i write too" },
-	{ text: "/read", href: "/read", desc: "bookmarks and etc" },
+	{ text: "/projects", href: "/projects", desc: "things i made" },
 ];
 
 const { label = Astro.site?.hostname } = Astro.props;
@@ -13,13 +13,13 @@ const is_homepage = Astro.url.pathname === "/";
 
 <script>
 	window.onpagehide = () => {
-		const popover = document.querySelector<HTMLElement>(":popover-open")
-		if (popover) popover.hidePopover()
-	}
+		const popover = document.querySelector<HTMLElement>(":popover-open");
+		if (popover) popover.hidePopover();
+	};
 </script>
 
 <header>
-	<span id="label">{ is_homepage ? "~/" : (<a href="/">~/</a>) } {label}</span>
+	<span id="label">{is_homepage ? "~/" : <a href="/">~/</a>} {label}</span>
 	<button popovertarget="navbar-s" title="Menu">
 		<Menu />
 	</button>
@@ -33,7 +33,7 @@ const is_homepage = Astro.url.pathname === "/";
 		</div>
 	</nav>
 	<nav id="navbar-l">
-		{ links.map((link) => <a href={link.href}>{link.text}</a>) }
+		{links.map((link) => <a href={link.href}>{link.text}</a>)}
 	</nav>
 </header>
 
@@ -66,7 +66,8 @@ const is_homepage = Astro.url.pathname === "/";
 		}
 	}
 
-	.links, .desc {
+	.links,
+	.desc {
 		display: flex;
 		flex-direction: column;
 		gap: 1rlh;
@@ -98,7 +99,8 @@ const is_homepage = Astro.url.pathname === "/";
 	}
 
 	@media (width >= 768px) {
-		button[popovertarget="navbar-s"], #navbar-s[popover] {
+		button[popovertarget="navbar-s"],
+		#navbar-s[popover] {
 			display: none;
 		}
 

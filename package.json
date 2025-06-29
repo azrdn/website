@@ -1,22 +1,22 @@
 {
-  "name": "azrd.dev",
-  "type": "module",
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro build && astro preview",
-    "preview:cf": "astro build && wrangler dev",
-    "lint": "oxlint",
-    "format": "oxlint --fix"
-  },
-  "dependencies": {
-    "@astrojs/mdx": "^4.3.0",
-    "@astrojs/sitemap": "^3.4.1",
-    "astro": "^5.10.0",
-    "rehype-autolink-headings": "^7.1.0"
-  },
-  "devDependencies": {
-    "oxlint": "^1.3.0"
-  }
+	"name": "azrd.dev",
+	"type": "module",
+	"version": "1.0.0",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro build && astro preview",
+		"preview:cf": "astro build && wrangler dev",
+		"lint": "oxlint",
+		"format": "oxlint --fix"
+	},
+	"dependencies": {
+		"@astrojs/mdx": "^4.3.0",
+		"@astrojs/sitemap": "^3.4.1",
+		"astro": "^5.10.0",
+		"rehype-autolink-headings": "^7.1.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.0.6"
+	}
 }

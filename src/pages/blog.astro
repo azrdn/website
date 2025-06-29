@@ -1,16 +1,19 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../layouts/posinega.astro";
-import Navbar from "../components/navbar.astro";
 import Footer from "../components/footer.astro";
+import Navbar from "../components/navbar.astro";
+import Layout from "../layouts/posinega.astro";
 
-const posts = await Promise.all([getCollection("blog"), getCollection("blog_mdx")])
-	.then((posts) => posts.flat())
-	.then((posts) => posts.sort(
-		(a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime()
-	));
+const collections = await Promise.all([
+	getCollection("blog"),
+	getCollection("blog_mdx"),
+]);
 
-const inline_label = `
+const posts = collections
+	.flat()
+	.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime());
+
+const style = `
 	display: inline-block;
 	background-color: var(--primary);
 	color: var(--bg);
@@ -20,7 +23,12 @@ const inline_label = `
 <Layout title="Blog">
 	<Navbar slot="header" label="Posts" />
 	<h1>I write stuff</h1>
-	{ import.meta.env.PROD ? null : (<strong style={inline_label}>&nbsp;DEVELOPMENT MODE&nbsp;</strong><span> - Blog posts are rendered from test-posts folder.</span>) }
+	{
+		!import.meta.env.PROD && (
+			<strong {style}>&nbsp;DEVELOPMENT MODE&nbsp;</strong>
+			<span>Rendered from /src/test-posts</span>
+		)
+	}
 	<p>Sometimes i write down my thoughts and experience on various topics.</p>
 	{
 		posts.map((post) => (

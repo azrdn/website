@@ -1,32 +1,52 @@
 ---
-import Layout from '../layouts/posinega.astro'
-import Navbar from '../components/navbar.astro'
-import Topography from '../components/topography.svg'
-import Footer from '../components/footer.astro'
+import Footer from "../components/footer.astro";
+import Navbar from "../components/navbar.astro";
+import Topography from "../components/topography.svg";
+import Layout from "../layouts/posinega.astro";
+
+const personal_links = [
+	{ href: "https://bsky.app/profile/azrd.dev", text: "bluesky" },
+	{ href: "https://web.facebook.com/app.yaml", text: "facebook" },
+	{ href: "https://github.com/azrdn", text: "github" },
+	{ href: "mailto:hi+web@azrd.dev", text: "email" },
+];
 ---
 
 <Layout title="azrd">
-	<Navbar slot="header"/>
+	<Navbar slot="header" />
 	<!-- image by freepik -->
-	<picture id="hero_banner"><Topography/></picture>
+	<picture id="_banner"><Topography /></picture>
 	<section>
-		<h1>Hi, i'm azis</h1>
-		<p>Jack of few trades, master of none.</p>
-		<p>Sometimes experimenting with new things, and often found eating fast foods from the local cafeteria.</p>
+		<h1>Hi, i'm azrd</h1>
+		<p>
+			Welcome to my humble website, feel free to explore
+			as much as you want.
+		</p>
+		<p>
+			I'm an amateur developer who likes topics about software.
+			Currently enrolled in a university,
+			learning about information systems.
+		</p>
 	</section>
-	<section>
-		<h1>About me</h1>
-		<p>Just a normie who likes to play video games and doomscroll through social media, My other hobbies include watching anime and listening to music.</p>
-		<p>Here's my SNS links if you want to know more about me: <a target="_blank" href="https://bento.me/azrd" rel="external nofollow">Bento</a></p>
+	<section id="_links">
+		{personal_links.map((link) => <a href={link.href}>{link.text}</a>)}
 	</section>
 	<Footer slot="footer" />
 </Layout>
 
 <style is:global>
-	#hero_banner {
+	#_banner {
 		border: 2px solid var(--secondary);
 		overflow: hidden;
 		margin: 1lh 0;
 		max-height: 6rlh;
+	}
+
+	#_links {
+		margin: 2em 0;
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 3ch;
+		row-gap: 1rlh;
 	}
 </style>

@@ -1,25 +1,50 @@
+---
+import proc from "node:child_process";
+
+let rev: string;
+try {
+	rev = proc
+		.execSync("git rev-parse HEAD", { timeout: 10000 })
+		.toString()
+		.trim();
+} catch {
+	rev = "";
+}
+
+const commit_url = `${import.meta.env.REPO_URL}/${rev ? `commit/${rev}` : ""}`;
+---
+
 <script>
 	const select = document.querySelector<HTMLSelectElement>("#theme-select");
-	const mq = window.matchMedia('(prefers-reduced-motion: no-preference)')
+	const mq = window.matchMedia("(prefers-reduced-motion: no-preference)");
 
 	if (!select) throw new Error("Theme selector missing");
 	select.value = localStorage.getItem("theme") || "system";
 	const set_theme = (theme: string = select.value) => {
 		document.documentElement.setAttribute("theme", theme);
 		localStorage.setItem("theme", theme);
-	}
+	};
 
 	select.onchange = () => {
 		if (!document.startViewTransition || !mq.matches) set_theme();
 		else document.startViewTransition(set_theme);
-	}
+	};
 </script>
 
 <footer>
 	<div class="left">
-		<p>© {new Date().getFullYear()} under the <a target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html" rel="external nofollow">GPLv3 License</a>.</p>
+		<p>
+			© {new Date().getFullYear()} under the <a
+				target="_blank"
+				href="https://www.gnu.org/licenses/gpl-3.0.en.html"
+				rel="external nofollow">GPLv3 License</a
+			>.
+		</p>
 		<p class="js">
-			<label for="theme-select">Theme:&nbsp;</label>[<select name="theme" id="theme-select">
+			<label for="theme-select">Theme:&nbsp;</label>[<select
+				name="theme"
+				id="theme-select"
+			>
 				<option value="system">System</option>
 				<option value="light">Light</option>
 				<option value="dark">Dark</option>
@@ -28,6 +53,7 @@
 	</div>
 	<div class="right">
 		<p>100% human-made.</p>
+		<p>Built on commit <a href={commit_url}>{rev.slice(0, 7)}</a></p>
 	</div>
 </footer>
 
@@ -85,6 +111,10 @@
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: start;
+		}
+
+		.right {
+			text-align: right;
 		}
 	}
 
