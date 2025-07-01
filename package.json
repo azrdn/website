@@ -5,10 +5,9 @@
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
-		"preview": "astro build && astro preview",
-		"preview:cf": "astro build && wrangler dev",
-		"lint": "oxlint",
-		"format": "oxlint --fix"
+		"preview": "nr ./src/utils/wb.ts",
+		"cf-preview": "nr ./src/utils/wb.ts cf",
+		"check": "biome check"
 	},
 	"dependencies": {
 		"@astrojs/mdx": "^4.3.0",
@@ -17,6 +16,7 @@
 		"rehype-autolink-headings": "^7.1.0"
 	},
 	"devDependencies": {
+		"@antfu/ni": "^25.0.0",
 		"@biomejs/biome": "2.0.6"
 	}
 }

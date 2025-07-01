@@ -1,17 +1,5 @@
 ---
-import proc from "node:child_process";
-
-let rev: string;
-try {
-	rev = proc
-		.execSync("git rev-parse HEAD", { timeout: 10000 })
-		.toString()
-		.trim();
-} catch {
-	rev = "";
-}
-
-const commit_url = `${import.meta.env.REPO_URL}/${rev ? `commit/${rev}` : ""}`;
+import { commit_url, hash } from "../utils/git";
 ---
 
 <script>
@@ -53,7 +41,7 @@ const commit_url = `${import.meta.env.REPO_URL}/${rev ? `commit/${rev}` : ""}`;
 	</div>
 	<div class="right">
 		<p>100% human-made.</p>
-		<p>Built on commit <a href={commit_url}>{rev.slice(0, 7)}</a></p>
+		<p>Built on commit <a href={commit_url}>{hash}</a></p>
 	</div>
 </footer>
 
