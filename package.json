@@ -7,8 +7,7 @@
 		"build": "astro build",
 		"preview": "nr ./src/utils/wb.ts",
 		"cf-preview": "nr ./src/utils/wb.ts cf",
-		"lint": "oxlint",
-		"format": "oxlint --fix"
+		"check": "biome check"
 	},
 	"dependencies": {
 		"@astrojs/mdx": "^4.3.0",
