@@ -5,8 +5,8 @@
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
-		"preview": "astro build && astro preview",
-		"preview:cf": "astro build && wrangler dev",
+		"preview": "nr ./src/utils/wb.ts",
+		"cf-preview": "nr ./src/utils/wb.ts cf",
 		"lint": "oxlint",
 		"format": "oxlint --fix"
 	},
@@ -17,6 +17,7 @@
 		"rehype-autolink-headings": "^7.1.0"
 	},
 	"devDependencies": {
+		"@antfu/ni": "^25.0.0",
 		"@biomejs/biome": "2.0.6"
 	}
 }
