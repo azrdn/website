@@ -6,9 +6,10 @@ const env_schema = z.object({
 	REPO_URL: z.string().url(),
 });
 
-const result = env_schema.safeParse(process.env);
+const result = env_schema.safeParse(import.meta.env);
 
 if (!result.success) {
+	console.error("Environment variables error:");
 	result.error.issues.map(err => {
 		console.error(`- ${err.path}: ${err.message}`);
 	});
@@ -18,7 +19,4 @@ if (!result.success) {
 type EnvSchema = z.infer<typeof env_schema>;
 declare global {
 	interface ImportMetaEnv extends EnvSchema {}
-	namespace NodeJS {
-		interface ProcessEnv extends EnvSchema {}
-	}
 }
