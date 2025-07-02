@@ -1,13 +1,10 @@
-import { execSync } from "node:child_process";
+import { exec } from "node:child_process";
+import { promisify } from "node:util";
 
-export let hash: string;
-try {
-	hash = execSync("git rev-parse --short HEAD", {
-		timeout: 10000,
-		encoding: "utf8",
-	}).trim();
-} catch {
-	hash = "";
-}
+const run = promisify(exec);
+const result = await run("git rev-parse --short HEAD", {
+	timeout: 10000,
+	encoding: "utf8",
+}).catch(() => ({ stdout: "" }));
 
-export const commit_url = `${import.meta.env.REPO_URL}/${hash ? `commit/${hash}` : ""}`;
+export const hash = result.stdout.trim();

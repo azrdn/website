@@ -1,5 +1,7 @@
 ---
-import { commit_url, hash } from "../utils/git";
+import { hash } from "../utils/git";
+
+const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 ---
 
 <script>
@@ -41,7 +43,9 @@ import { commit_url, hash } from "../utils/git";
 	</div>
 	<div class="right">
 		<p>100% human-made.</p>
-		<p>Built on commit <a href={commit_url}>{hash}</a></p>
+		<p>
+			Built on commit <a href={commit_url}>{hash}</a>
+		</p>
 	</div>
 </footer>
 

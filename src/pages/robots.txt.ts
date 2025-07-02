@@ -14,6 +14,6 @@ export const GET: APIRoute = async ({ site }) => {
 	const sitemap = new URL("sitemap-index.xml", site);
 
 	return new Response(
-		`${asciiText}\n` + `${robotsText}\n` + `Sitemap: ${sitemap.href}\n`,
+		`${asciiText}\n${robotsText}\nSitemap: ${sitemap.href}\n`,
 	);
 };
