@@ -1,4 +1,5 @@
 ---
+import { getCollection } from "astro:content";
 import Footer from "../components/footer.astro";
 import Navbar from "../components/navbar.astro";
 import Topography from "../components/topography.svg";
@@ -10,6 +11,16 @@ const personal_links = [
 	{ href: "https://github.com/azrdn", text: "github" },
 	{ href: "mailto:hi+web@azrd.dev", text: "email" },
 ];
+
+const collections = await Promise.all([
+	getCollection("blog"),
+	getCollection("blog_mdx"),
+]);
+
+const recent_posts = collections
+	.flat()
+	.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime())
+	.slice(0, 3);
 ---
 
 <Layout title="azrd">
@@ -19,17 +30,28 @@ const personal_links = [
 	<section>
 		<h1>Hi, i'm azrd</h1>
 		<p>
-			Welcome to my humble website, feel free to explore
-			as much as you want.
+			Welcome to my humble website, feel free to explore as much as you
+			want.
 		</p>
 		<p>
-			I'm an amateur developer who likes topics about software.
-			Currently enrolled in a university,
-			learning about information systems.
+			I'm an amateur developer who likes topics about software. Currently
+			enrolled in a university, learning about information systems.
 		</p>
 	</section>
-	<section id="_links">
-		{personal_links.map((link) => <a href={link.href}>{link.text}</a>)}
+	<section>
+		<p>Here are some links where you can contact me:</p>
+		<div id="_links">
+			{personal_links.map((link) => <a href={link.href}>{link.text}</a>)}
+		</div>
+	</section>
+	<hr />
+	<section>
+		<h1>Recent Blog Posts</h1>
+		<ul>
+			{recent_posts.map((post) => (
+				<li><a href={`/blog/${post.id}`}>{post.data.title}</a></li>
+			))}
+		</ul>
 	</section>
 	<Footer slot="footer" />
 </Layout>

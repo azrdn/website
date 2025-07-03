@@ -85,12 +85,6 @@ td {
 	vertical-align: top;
 }
 
-hr {
-	color: var(--bg-secondary);
-	border-style: solid;
-	margin: 1.5rlh 0;
-}
-
 sub,
 sup {
 	font-size: 0.75em;
