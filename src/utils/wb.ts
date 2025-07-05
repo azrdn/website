@@ -1,5 +1,6 @@
 import { exec, type StdioOptions, spawn } from "node:child_process";
 import { watch } from "node:fs";
+import { performance } from "node:perf_hooks";
 
 const [command, ...args] =
 	process.argv[2] === "cf"
@@ -20,8 +21,11 @@ watch(`${process.cwd()}/src`, { recursive: true }, async () => {
 	if (build_ongoing) return;
 
 	build_ongoing = true;
-	exec("astro build", { cwd: process.cwd() }, err => {
-		if (err) console.error("Build failed");
+	const start_time = performance.now();
+	exec("astro build", { cwd: process.cwd() }, (err) => {
+        const duration = performance.now() - start_time;
+        if (err) console.error("Build failed");
+        else console.log(`Rebuilt in ${duration.toFixed(0)}ms`);
 		build_ongoing = false;
-	});
+    });
 });
