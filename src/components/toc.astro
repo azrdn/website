@@ -1,0 +1,33 @@
+---
+import type { MarkdownHeading } from "astro";
+import TocHeading from "./toc_heading.astro";
+
+export interface TocItem extends MarkdownHeading {
+    subheadings: TocItem[];
+}
+
+function buildToc(headings: MarkdownHeading[]) {
+    const toc: TocItem[] = [];
+	const parentHeadings = new Map();
+	headings.forEach((h) => {
+		const heading = { ...h, subheadings: [] };
+		parentHeadings.set(heading.depth, heading);
+		// Change 2 to 1 if your markdown includes your <h1>
+		if (heading.depth === 1) {
+			toc.push(heading);
+		} else {
+			parentHeadings.get(heading.depth - 1).subheadings.push(heading);
+		}
+	});
+	return toc;
+}
+
+const { headings } = Astro.props;
+const toc = buildToc(headings)
+---
+
+<nav>
+	<ul>
+		{toc.map((heading) => <TocHeading heading={heading} />)}
+	</ul>
+</nav>
