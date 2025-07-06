@@ -10,6 +10,7 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 
 	if (!select) throw new Error("Theme selector missing");
 	select.value = localStorage.getItem("theme") || "system";
+
 	const set_theme = (theme: string = select.value) => {
 		document.documentElement.setAttribute("theme", theme);
 		localStorage.setItem("theme", theme);
@@ -24,7 +25,7 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 <footer>
 	<div class="left">
 		<p>
-			© {new Date().getFullYear()} under the <a
+			<span id="cl">©</span> {new Date().getFullYear()} under the <a
 				target="_blank"
 				href="https://www.gnu.org/licenses/gpl-3.0.en.html"
 				rel="external nofollow">GPLv3 License</a
@@ -58,6 +59,11 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 		background-color: var(--bg);
 		border-top: 1px solid var(--bg-secondary);
 		z-index: 1;
+
+		#cl {
+			display: inline-block;
+			transform: scale(-1, 1);
+		}
 	}
 
 	select {
