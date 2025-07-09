@@ -44,19 +44,25 @@ import "../../styles/blog.css";
 			{post.mdx ? "MDX" : "Markdown"}
 		</a>
 	</p>
-	<details id="_toc">
-		<summary>Table of Contents</summary>
-		<Toc {headings}/>
-	</details>
+	{
+		headings.length > 0 && (
+			<details id="_toc">
+				<summary>Table of Contents</summary>
+				<Toc {headings} />
+			</details>
+		)
+	}
 	<hr />
 	<Content />
 	<Footer slot="footer" />
 </Layout>
 
 <style>
-	#_toc { a {
-		text-decoration: none;
-	} }
+	#_toc {
+		a {
+			text-decoration: none;
+		}
+	}
 
 	@media (width >= 1600px) {
 		#_toc {
