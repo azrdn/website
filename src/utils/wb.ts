@@ -22,10 +22,10 @@ watch(`${process.cwd()}/src`, { recursive: true }, async () => {
 
 	build_ongoing = true;
 	const start_time = performance.now();
-	exec("astro build", { cwd: process.cwd() }, (err) => {
-        const duration = performance.now() - start_time;
-        if (err) console.error("Build failed");
-        else console.log(`Rebuilt in ${duration.toFixed(0)}ms`);
+	exec("astro build", { cwd: process.cwd() }, err => {
+		const duration = performance.now() - start_time;
+		if (err) console.error("Build failed");
+		else console.log(`Rebuilt in ${duration.toFixed(0)}ms`);
 		build_ongoing = false;
-    });
+	});
 });

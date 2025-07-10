@@ -3,13 +3,13 @@ import type { MarkdownHeading } from "astro";
 import TocHeading from "./toc_heading.astro";
 
 export interface TocItem extends MarkdownHeading {
-    subheadings: TocItem[];
+	subheadings: TocItem[];
 }
 
 function buildToc(headings: MarkdownHeading[]) {
-    const toc: TocItem[] = [];
+	const toc: TocItem[] = [];
 	const parentHeadings = new Map();
-	headings.forEach((h) => {
+	headings.forEach(h => {
 		const heading = { ...h, subheadings: [] };
 		parentHeadings.set(heading.depth, heading);
 		// Change 2 to 1 if your markdown includes your <h1>
@@ -23,7 +23,7 @@ function buildToc(headings: MarkdownHeading[]) {
 }
 
 const { headings } = Astro.props;
-const toc = buildToc(headings)
+const toc = buildToc(headings);
 ---
 
 <nav>

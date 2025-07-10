@@ -1,7 +1,7 @@
 import EleventyFetch from "@11ty/eleventy-fetch";
 import type { APIRoute } from "astro";
 
-const fetch_opts = { type: "text", duration: "1d" }
+const fetch_opts = { type: "text", duration: "1d" };
 
 export const GET: APIRoute = async ({ site }) => {
 	const [ascii, robots] = await Promise.all([
@@ -11,7 +11,5 @@ export const GET: APIRoute = async ({ site }) => {
 
 	const sitemap = new URL("sitemap-index.xml", site);
 
-	return new Response(
-		`${ascii}\n${robots}\nSitemap: ${sitemap.href}\n`,
-	);
+	return new Response(`${ascii}\n${robots}\nSitemap: ${sitemap.href}\n`);
 };
