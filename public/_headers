@@ -10,6 +10,9 @@
 /favicon.*
 	Cache-Control: public, max-age=604800, must-revalidate
 
+/88x31/*
+	Cache-Control: public, max-age=86400, must-revalidate
+
 # Workaround for missing charset
 /*.txt
 	Content-Type: text/plain; charset=utf-8
