@@ -6,8 +6,88 @@ import Layout from "../layouts/posinega.astro";
 
 <Layout title="Not found">
 	<Navbar slot="header" label="" />
-	<h1>404 - Not Found</h1>
-	<p>Page not found, might be work in progress, or it doesn't really exist at all.</p>
-	<p><a href="/">Go Back</a></p>
+	<section class="decor">
+		<div class="top">
+			<p>Fielding, et al.</p>
+			<p>Standards Track</p>
+			<p>[Page 65]</p>
+		</div>
+		<hr />
+		<div class="bot">
+			<p><a href="https://www.rfc-editor.org/rfc/rfc2616">RFC 2616</a></p>
+			<p>HTTP/1.1</p>
+			<p>June 1999</p>
+		</div>
+	</section>
+	<h1>
+		<a href="https://www.rfc-editor.org/rfc/rfc2616#section-10.4.5"
+			>10.4.5 404 Not Found
+		</a>
+	</h1>
+	<p class="indent">
+		The server has not found anything matching the Request-URI. No
+		indication is given of whether the condition is temporary or permanent.
+	</p>
+	<p class="indent">
+		The 410 (Gone) status code SHOULD be used if the server knows, through
+		some internally configurable mechanism, that an old resource is
+		permanently unavailable and has no forwarding address.
+	</p>
+	<p class="indent">
+		This status code is commonly used when the server does not wish to
+		reveal exactly why the request has been refused, or when no other
+		response is applicable.
+	</p>
+	<!-- <p><a href="/">Go Back</a></p> -->
 	<Footer slot="footer" />
 </Layout>
+
+<style>
+	.decor a {
+		color: inherit;
+		&:hover {
+			background-color: var(--bg-secondary);
+		}
+	}
+
+	.indent {
+		padding-left: 2ch;
+	}
+
+	hr {
+		margin: 0 0 1.5em;
+	}
+
+	.top,
+	.bot {
+		p {
+			margin: 0.5em 0;
+			text-align: center;
+		}
+
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@media (width >= 768px) {
+		.top,
+		.bot {
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+
+		.top p:nth-child(1),
+		.bot p:nth-child(1) {
+			text-align: left;
+		}
+
+		.top p:nth-child(2),
+		.bot p:nth-child(2) {
+			text-align: center;
+		}
+
+		.top p:nth-child(3),
+		.bot p:nth-child(3) {
+			text-align: right;
+		}
+	}
+</style>

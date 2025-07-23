@@ -2,6 +2,29 @@
 import { hash } from "../utils/git";
 
 const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
+
+const buttons = [
+	{
+		img: "/88x31/green-team.gif",
+		href: "https://512kb.club",
+		alt: "a proud member of the green team of 512KB club",
+	},
+	{
+		img: "/88x31/brainmade.png",
+		href: "https://brainmade.org",
+		alt: "brainmade.org badge",
+	},
+	{
+		img: "/88x31/bad-markup.gif",
+		href: "#",
+		alt: "lol"
+	},
+	{
+		img: "/88x31/gnu-linux.gif",
+		href: "#",
+		alt: "made on linux"
+	},
+];
 ---
 
 <script>
@@ -10,6 +33,7 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 
 	if (!select) throw new Error("Theme selector missing");
 	select.value = localStorage.getItem("theme") || "system";
+
 	const set_theme = (theme: string = select.value) => {
 		document.documentElement.setAttribute("theme", theme);
 		localStorage.setItem("theme", theme);
@@ -22,42 +46,79 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 </script>
 
 <footer>
-	<div class="left">
-		<p>
-			© {new Date().getFullYear()} under the <a
-				target="_blank"
-				href="https://www.gnu.org/licenses/gpl-3.0.en.html"
-				rel="external nofollow">GPLv3 License</a
-			>.
-		</p>
-		<p class="js">
-			<label for="theme-select">Theme:&nbsp;</label>[<select
-				name="theme"
-				id="theme-select"
-			>
-				<option value="system">System</option>
-				<option value="light">Light</option>
-				<option value="dark">Dark</option>
-			</select>]
-		</p>
-	</div>
-	<div class="right">
-		<p>100% human-made.</p>
-		<p>
-			Built on commit <a href={commit_url}>{hash}</a>
-		</p>
+	<section class="top">
+		<div class="left">
+			<p>
+				<span id="cl">©</span> {new Date().getFullYear()} under the <a
+					target="_blank"
+					href="https://www.gnu.org/licenses/gpl-3.0.en.html"
+					rel="external nofollow">GPLv3 License</a
+				>.
+			</p>
+			<p class="js">
+				<label for="theme-select">Theme:&nbsp;</label>[<select
+					name="theme"
+					id="theme-select"
+				>
+					<option value="system">System</option>
+					<option value="light">Light</option>
+					<option value="dark">Dark</option>
+				</select>]
+			</p>
+		</div>
+		<div class="right">
+			<p>Built on commit <a href={commit_url}>{hash}</a></p>
+			<p>Made with &lt;3</p>
+		</div>
+	</section>
+	<div class="bottom">
+		<details>
+			<summary>Badges</summary>
+			<p>
+				{buttons.map(button => (
+					<a href={button.href}>
+						<img src={button.img}
+							alt={button.alt}
+							loading="lazy"
+						/>
+					</a>
+				))}
+			</p>
+		</details>
 	</div>
 </footer>
 
 <style>
 	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		padding: 0 2ch;
+		z-index: 1;
 		background-color: var(--bg);
 		border-top: 1px solid var(--bg-secondary);
-		z-index: 1;
+		padding: 0 2ch;
+	}
+
+	.top {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+
+		#cl {
+			display: inline-block;
+			transform: scale(-1, 1);
+		}
+	}
+
+	.bottom {
+		border-top: 2px solid var(--bg-secondary);
+
+		p {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rlh 1ch;
+		}
+
+		a:hover {
+			background-color: unset;
+		}
 	}
 
 	select {
@@ -99,10 +160,10 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 	}
 
 	@media (width >= 768px) {
-		footer {
-			flex-direction: row;
+		.top {
 			justify-content: space-between;
 			align-items: start;
+			flex-direction: row;
 		}
 
 		.right {

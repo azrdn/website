@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import Footer from "../../components/footer.astro";
 import Navbar from "../../components/navbar.astro";
+import Toc from "../../components/toc.astro";
 import Layout from "../../layouts/posinega.astro";
 
 const iso_date = (date: Date) => date.toISOString().slice(0, 10);
@@ -37,10 +38,50 @@ import "../../styles/blog.css";
 		<br />
 		{fm.updatedAt ? `Updated: ${iso_date(fm.updatedAt)}` : null}
 	</p>
-	<a href={`/blog/${post.id}.${post.mdx ? "mdx" : "md"}`}>
-		{post.mdx ? "MDX" : "Markdown"}
-	</a>
+	<p>
+		Raw file:
+		<a href={`/blog/${post.id}.${post.mdx ? "mdx" : "md"}`}>
+			{post.mdx ? "MDX" : "Markdown"}
+		</a>
+	</p>
+	{
+		headings.length > 0 && (
+			<details id="_toc">
+				<summary>Table of Contents</summary>
+				<Toc {headings} />
+			</details>
+		)
+	}
 	<hr />
 	<Content />
 	<Footer slot="footer" />
 </Layout>
+
+<style>
+	#_toc {
+		background-color: light-dark(#e0e0e0, #2b2b2b);
+		margin: 0;
+		padding: 1em 2ch;
+		border-radius: 4px;
+
+		a {
+			text-decoration: none;
+		}
+	}
+
+	@media (width >= 1600px) {
+		#_toc {
+			view-transition-name: static-4;
+			position: fixed;
+			background-color: var(--bg);
+			top: 1lh;
+			left: 2ch;
+			max-height: 90svh;
+			width: 35ch;
+		}
+
+		#_toc[open] {
+			overflow-y: scroll;
+		}
+	}
+</style>

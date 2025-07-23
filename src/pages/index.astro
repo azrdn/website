@@ -45,14 +45,16 @@ const recent_posts = collections
 		</div>
 	</section>
 	<hr />
-	<section>
-		<h1>Recent Blog Posts</h1>
-		<ul>
-			{recent_posts.map((post) => (
-				<li><a href={`/blog/${post.id}`}>{post.data.title}</a></li>
-			))}
-		</ul>
-	</section>
+	{recent_posts.length > 0 && (
+		<section>
+			<h1>Recent Blog Posts</h1>
+			<ul>
+				{recent_posts.map((post) => (
+					<li><a href={`/blog/${post.id}`}>{post.data.title}</a></li>
+				))}
+			</ul>
+		</section>
+	)}
 	<Footer slot="footer" />
 </Layout>
 
