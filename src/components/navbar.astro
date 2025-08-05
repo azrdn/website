@@ -18,7 +18,7 @@ const is_homepage = Astro.url.pathname === "/";
 	};
 </script>
 
-<header>
+<header class="topheader">
 	<span id="label">{is_homepage ? "~/" : <a href="/">~/</a>} {label}</span>
 	<button popovertarget="navbar-s" title="Menu">
 		<Menu />

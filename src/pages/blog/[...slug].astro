@@ -32,32 +32,43 @@ import "../../styles/blog.css";
 
 <Layout title={fm.title}>
 	<Navbar slot="header" label="Blog Post" />
-	<h1>{fm.title}</h1>
-	<p>
-		Published: {iso_date(fm.createdAt)}
-		<br />
-		{fm.updatedAt ? `Updated: ${iso_date(fm.updatedAt)}` : null}
-	</p>
-	<p>
-		Raw file:
-		<a href={`/blog/${post.id}.${post.mdx ? "mdx" : "md"}`}>
-			{post.mdx ? "MDX" : "Markdown"}
-		</a>
-	</p>
-	{
-		headings.length > 0 && (
-			<details id="_toc">
-				<summary>Table of Contents</summary>
-				<Toc {headings} />
-			</details>
-		)
-	}
-	<hr />
-	<Content />
+	<article>
+		<header class="header">
+			<h1>{fm.title}</h1>
+			<p class="date">
+				<span>Publ: <time>{iso_date(fm.createdAt)}</time></span>
+				{fm.updatedAt &&
+					<span>Upd: <time>{iso_date(fm.updatedAt)}</time></span>
+				}
+			</p>
+			<p>
+				Raw file:
+				<a href={`/blog/${post.id}.${post.mdx ? "mdx" : "md"}`}>
+					{post.mdx ? "MDX" : "Markdown"}
+				</a>
+			</p>
+			{
+				headings.length > 0 && (
+					<details id="_toc">
+						<summary>Table of Contents</summary>
+						<Toc {headings} />
+					</details>
+				)
+			}
+		<hr />
+		</header>
+		<div class="content"><Content /></div>
+	</article>
 	<Footer slot="footer" />
 </Layout>
 
 <style>
+	.date {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 2ch;
+	}
+
 	#_toc {
 		background-color: light-dark(#e0e0e0, #2b2b2b);
 		margin: 0;
@@ -78,10 +89,10 @@ import "../../styles/blog.css";
 			left: 2ch;
 			max-height: 90svh;
 			width: 35ch;
-		}
 
-		#_toc[open] {
-			overflow-y: scroll;
+			&[open] {
+				overflow-y: scroll;
+			}
 		}
 	}
 </style>

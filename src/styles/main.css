@@ -12,7 +12,7 @@
 	@view-transition { navigation: auto; types: scroll }
 
 	:active-view-transition-type(scroll) {
-		header { view-transition-name: static-1 }
+		.topheader { view-transition-name: static-1 }
 		footer { view-transition-name: static-2 }
 		#navbar-s { view-transition-name: static-3 }
 

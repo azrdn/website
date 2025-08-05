@@ -7,28 +7,31 @@ import Opengraph from "../components/opengraph.astro";
 const { title = "azrd" } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<Opengraph />
-		<Font cssVariable="--font-subset" />
-		<link rel="icon" href="/favicon.ico" sizes="48x48" />
-		<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<script is:inline>document.documentElement.setAttribute("theme",localStorage.getItem("theme")||"system")</script>
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot name="header" />
-		<main>
-			<div id="page"><slot /></div>
-		</main>
-		<div id="bg"><div/></div>
-		<slot name="footer" />
-	</body>
-</html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<Opengraph />
+	<Font cssVariable="--font-subset" />
+	<link rel="icon" href="/favicon.ico" sizes="48x48" />
+	<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+	<link rel="sitemap" href="/sitemap-index.xml" />
+	<link
+		rel="alternate"
+		type="application/rss+xml"
+		title="azrd"
+		href={new URL("rss.xml", Astro.site)}
+	/>
+	<script is:inline>document.documentElement.setAttribute("theme",localStorage.getItem("theme")||"system")</script>
+	<title>{title}</title>
+</head>
+<body>
+	<slot name="header" />
+	<main>
+		<div id="page"><slot /></div>
+	</main>
+	<div id="bg"><div/></div>
+	<slot name="footer" />
+</body>
 
 <style>
 	html {

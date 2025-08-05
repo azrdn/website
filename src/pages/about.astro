@@ -2,6 +2,29 @@
 import Footer from "../components/footer.astro";
 import Navbar from "../components/navbar.astro";
 import Layout from "../layouts/posinega.astro";
+
+const buttons = [
+	{
+		img: "/88x31/green-team.gif",
+		href: "https://512kb.club",
+		alt: "a proud member of the green team of 512KB club",
+	},
+	{
+		img: "/88x31/brainmade.png",
+		href: "https://brainmade.org",
+		alt: "brainmade.org badge",
+	},
+	{
+		img: "/88x31/bad-markup.gif",
+		href: "#",
+		alt: "lol",
+	},
+	{
+		img: "/88x31/gnu-linux.gif",
+		href: "#",
+		alt: "made on linux",
+	},
+];
 ---
 
 <Layout title="About azrd">
@@ -42,5 +65,32 @@ import Layout from "../layouts/posinega.astro";
 			<li>Mouse: Pressplay Iris</li>
 		</ul>
 	</details>
+	<details id="badges">
+		<summary>Badges</summary>
+		<p>
+			{buttons.map(button => (
+				<a href={button.href}>
+					<img src={button.img}
+						alt={button.alt}
+						loading="lazy"
+					/>
+				</a>
+			))}
+		</p>
+	</details>
 	<Footer slot="footer" />
 </Layout>
+
+<style>
+	#badges {
+		p {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rlh 1ch;
+		}
+
+		a:hover {
+			background-color: unset;
+		}
+	}
+</style>
