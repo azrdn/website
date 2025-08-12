@@ -1,13 +1,10 @@
-.astro-code,
-.astro-code span {
+.astro-code, .astro-code span {
 	color: light-dark(var(--shiki-light), var(--shiki-dark));
 	background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
 }
 
 @media (prefers-color-scheme: dark) {
-
-	.astro-code,
-	.astro-code span {
+	.astro-code, .astro-code span {
 		font-style: var(--shiki-dark-font-style);
 		font-weight: var(--shiki-dark-font-weight);
 		text-decoration: var(--shiki-dark-text-decoration);
@@ -15,9 +12,7 @@
 }
 
 @media (prefers-color-scheme: light) {
-
-	.astro-code,
-	.astro-code span {
+	.astro-code, .astro-code span {
 		font-style: var(--shiki-light-font-style);
 		font-weight: var(--shiki-light-font-weight);
 		text-decoration: var(--shiki-light-text-decoration);
@@ -25,9 +20,7 @@
 }
 
 [theme="dark"] {
-
-	.astro-code,
-	.astro-code span {
+	.astro-code, .astro-code span {
 		color: var(--shiki-dark);
 		background-color: var(--shiki-dark-bg);
 		font-style: var(--shiki-dark-font-style);
@@ -37,9 +30,7 @@
 }
 
 [theme="light"] {
-
-	.astro-code,
-	.astro-code span {
+	.astro-code, .astro-code span {
 		color: var(--shiki-light);
 		background-color: var(--shiki-light-bg);
 		font-style: var(--shiki-light-font-style);

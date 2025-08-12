@@ -4,24 +4,6 @@ import { hash } from "../utils/git";
 const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 ---
 
-<script>
-	const select = document.querySelector<HTMLSelectElement>("#theme-select");
-	const mq = window.matchMedia("(prefers-reduced-motion: no-preference)");
-
-	if (!select) throw new Error("Theme selector missing");
-	select.value = localStorage.getItem("theme") || "system";
-
-	const set_theme = (theme: string = select.value) => {
-		document.documentElement.setAttribute("theme", theme);
-		localStorage.setItem("theme", theme);
-	};
-
-	select.onchange = () => {
-		if (!document.startViewTransition || !mq.matches) set_theme();
-		else document.startViewTransition(set_theme);
-	};
-</script>
-
 <footer>
 	<section class="top">
 		<div class="left">
@@ -49,6 +31,19 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 		</div>
 	</section>
 </footer>
+
+<script is:inline>
+	const select = document.querySelector("#theme-select");
+	if (!select) throw new Error("Theme selector missing");
+	select.value = localStorage.getItem("theme") || "system";
+
+	const set_theme = (theme) => {
+		document.documentElement.setAttribute("theme", theme);
+		localStorage.setItem("theme", theme);
+	};
+
+	select.onchange = () => set_theme(select.value);
+</script>
 
 <style>
 	footer {

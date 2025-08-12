@@ -1,28 +1,8 @@
-@keyframes move-out {
-	from { transform: translateY(0%); }
-	to { transform: translateY(100%); }
-}
+@view-transition { navigation: auto }
 
-@keyframes move-in {
-	from { transform: translateY(-100%); }
-	to { transform: translateY(0%); }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	@view-transition { navigation: auto; types: scroll }
-
-	:active-view-transition-type(scroll) {
-		.topheader { view-transition-name: static-1 }
-		footer { view-transition-name: static-2 }
-		#navbar-s { view-transition-name: static-3 }
-
-		&::view-transition-old(root) {
-			animation: 0.4s ease-in-out both move-out;
-		}
-		&::view-transition-new(root) {
-			animation: 0.4s ease-in-out both move-in;
-		}
-	}
+&::view-transition-old(root),
+&::view-transition-new(root) {
+	animation-duration: 0s;
 }
 
 :root {
