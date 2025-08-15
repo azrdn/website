@@ -42,22 +42,13 @@ img, picture, video, canvas, svg {
 }
 
 h1, h2, h3, h4, h5, h6 {
+	display: flex;
+	gap: 0 1ch;
 	font-size: unset;
 	scroll-margin-top: calc(2rlh + 1lh + 2em);
 	color: var(--primary);
 	margin: 2em 0;
 	padding: 0;
-
-	a[href^="#"] {
-		visibility: hidden;
-		margin: 0 1ch;
-	}
-
-	&:hover {
-		a[href^="#"] {
-			visibility: visible;
-		}
-	}
 }
 
 a {

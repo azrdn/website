@@ -45,16 +45,15 @@ blockquote {
 	border-left: 1ch solid var(--bg-secondary);
 }
 
-pre,
-code {
+pre, code {
 	border-radius: 4px;
 	font-family: inherit;
-	scrollbar-color: var(--primary) transparent;
+	scrollbar-color: var(--secondary) transparent;
 	line-height: 1.5;
 }
 
 pre:has(code) {
-	padding: 1rlh 2ch;
+	padding: 0.5rlh 1ch;
 }
 
 code:not(pre code) {
@@ -69,15 +68,21 @@ table {
 	border-collapse: collapse;
 }
 
-th,
-td {
+th {
+	text-align: start;
+	
+	&[align="right"] {
+		text-align: end;
+	}
+}
+
+th, td {
 	border: 2px solid var(--secondary);
 	padding: 0.5em 1ch;
 	vertical-align: top;
 }
 
-sub,
-sup {
+sub, sup {
 	font-size: 0.75em;
 	letter-spacing: 0.335ch;
 
@@ -93,4 +98,12 @@ sub {
 
 sup {
 	vertical-align: top;
+}
+
+.content {
+	h1::before { content: "#" }
+	h2::before { content: "##" }
+	h3, h4, h5, h6 {
+		&::before { content: "###" }
+	}
 }

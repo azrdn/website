@@ -1,8 +1,6 @@
-import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
-import heading_links from "rehype-autolink-headings";
 
 export default defineConfig({
 	site: "https://azrd.dev",
@@ -16,17 +14,6 @@ export default defineConfig({
 	},
 	devToolbar: { enabled: false },
 	markdown: {
-		rehypePlugins: [
-			rehypeHeadingIds,
-			[
-				heading_links,
-				{
-					behavior: "append",
-					content: { type: "text", value: "#" },
-					properties: { tabIndex: -1 },
-				},
-			],
-		],
 		shikiConfig: {
 			defaultColor: false,
 			themes: {
