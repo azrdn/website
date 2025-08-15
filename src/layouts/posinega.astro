@@ -29,7 +29,6 @@ const { title = "azrd" } = Astro.props;
 	<main>
 		<div id="page"><slot /></div>
 	</main>
-	<div id="bg"><div/></div>
 	<slot name="footer" />
 </body>
 
@@ -60,6 +59,7 @@ const { title = "azrd" } = Astro.props;
 	}
 
 	#page {
+		background-color: var(--bg);
 		min-width: 0;
 		width: 100%;
 		padding: 0 2ch 1rlh;
@@ -71,20 +71,8 @@ const { title = "azrd" } = Astro.props;
 		z-index: 1;
 	}
 
-	#bg {
-		display: flex;
-		position: absolute;
-		width: 100%;
-		height: 100%;
-
-		div {
-			width: 100%;
-			background-color: var(--bg);
-		}
-	}
-
 	@media (width >= 900px) {
-		#bg {
+		main {
 			&::before {
 				border-right: 1px var(--bg-secondary);
 				border-right-style: dashed;
@@ -102,14 +90,6 @@ const { title = "azrd" } = Astro.props;
 				background-color: var(--bg);
 				mask-image: url("../components/decoration.svg");
 				mask-size: contain;
-			}
-		}
-
-		main {
-			&::before, &::after {
-				flex-shrink: 0;
-				content: '';
-				width: 5ch;
 			}
 		}
 	}
