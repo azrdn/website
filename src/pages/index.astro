@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import Footer from "../components/footer.astro";
 import Navbar from "../components/navbar.astro";
-import Topography from "../components/topography.svg";
 import Layout from "../layouts/posinega.astro";
 
 const personal_links = [
@@ -21,12 +20,27 @@ const recent_posts = collections
 	.flat()
 	.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime())
 	.slice(0, 3);
+
+const ascii_art = `
+       .    *          .                .                                       
+   .                                .                      .     .         *    
+       .         .          *                  .     *                  .       
+ .    *                      .      .                  .                     .  
+              #######                                          *                
+............###    #####.....................####................#####..........
+:::::::::::##      ##$ ###::::::::::::::::###$#####::::::::::::##""$$####:::::::
+~~~~~~~~~##         #$"" ###~~~~~~~~~~#####""$$##  ###--~~~~###   ""$"# ###~~~~~
+======###            $$""" ####===#####      "$$##   #######       $$" ##  ###==
+%%%####              ##$$"""  #####             $$#   #####       $$ """###  ###
+###                   ##$$$"""   ###             $..       ###$$$$     "  ##    
+                       ###$$$      ####           #...                     ###  
+                         ## $$        ##             ...                     #  
+`;
 ---
 
 <Layout title="azrd">
 	<Navbar slot="header" />
-	<!-- image by freepik -->
-	<picture id="_banner"><Topography /></picture>
+	<pre>{ascii_art}</pre>
 	<section>
 		<h1>Hi, i'm azrd</h1>
 		<p>
@@ -59,18 +73,32 @@ const recent_posts = collections
 </Layout>
 
 <style>
-	#_banner {
-		border: 2px solid var(--secondary);
-		overflow: hidden;
-		margin: 1lh 0;
-		max-height: 6rlh;
-	}
-
 	#_links {
 		margin: 2em 0;
 		display: flex;
 		flex-wrap: wrap;
 		column-gap: 3ch;
 		row-gap: 1rlh;
+	}
+
+	pre {
+		position: relative;
+		font-family: inherit;
+		line-height: 1;
+		font-variant-ligatures: none;
+		margin: 2rem 0;
+		overflow: hidden;
+
+		&::before {
+			position: absolute;
+			content: "";
+			width: 100%;
+			height: 100%;
+			border: 2px solid var(--secondary);
+		}
+
+		@media (max-width: 900px) {
+			font-size: 1.9vw;
+		}
 	}
 </style>
