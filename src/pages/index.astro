@@ -24,23 +24,26 @@ const recent_posts = collections
 const ascii_art = `
        .    *          .                .                                       
    .                                .                      .     .         *    
-       .         .          *                  .     *                  .       .
+       .         .          *                  .     *                  .       
  .    *                      .      .                  .                     .  
               #######                                          *                
-............###    #####.....................####................#####...........
-:::::::::::##      ##$ ###::::::::::::::::###$#####::::::::::::##""$$####::::::::
-~~~~~~~~~##         #$"" ###~~~~~~~~~~#####""$$##  ###--~~~~###   ""$"# ###~~~~~~
-======###            $$""" ####===#####      "$$##   #######       $$" ##  ###===
-%%%####              ##$$"""  #####             $$#   #####       $$ """###  ###%
-###                   ##$$$"""   ###             $..       ###$$$$     "  ##    #
-                       ###$$$      ####           #...                     ###   
-                         ## $$        ##             ...                     #   
+............###    #####.....................####................#####..........
+:::::::::::##      ##$ ###::::::::::::::::###$#####::::::::::::##""$$####:::::::
+~~~~~~~~~##         #$"" ###~~~~~~~~~~#####""$$##  ###--~~~~###   ""$"# ###~~~~~
+======###            $$""" ####===#####      "$$##   #######       $$" ##  ###==
+%%%####              ##$$"""  #####             $$#   #####       $$ """###  ###
+###                   ##$$$"""   ###             $..       ###$$$$     "  ##    
+  ###                  ###$$$      ####           #...                     ###  
+                         ## $$        ##             ...                     #  
 `;
 ---
 
 <Layout title="azrd">
 	<Navbar slot="header" />
-	<pre>{ascii_art}</pre>
+	<div class="marquee" aria-hidden="true">
+		<pre>{ascii_art}</pre>
+		<pre>{ascii_art}</pre>
+	</div>
 	<section>
 		<h1>Hi, i'm azrd</h1>
 		<p>
@@ -81,20 +84,24 @@ const ascii_art = `
 		row-gap: 1rlh;
 	}
 
-	pre {
+	@keyframes marquee {
+		to { transform: translate(-100%)}
+	}
+
+	.marquee {
+		display: flex;
 		position: relative;
-		font-family: inherit;
-		line-height: 1;
-		font-variant-ligatures: none;
-		margin: 2rem 0;
+		margin: 2em 0;
 		overflow: hidden;
 
-		&::before {
-			position: absolute;
-			content: "";
-			width: 100%;
-			height: 100%;
-			border: 2px solid var(--secondary);
+		pre {
+			@media (prefers-reduced-motion: no-preference) {
+				animation: marquee 25s steps(80) infinite;
+			}
+			margin: 0;
+			font-family: inherit;
+			line-height: 1;
+			font-variant-ligatures: none;
 		}
 
 		@media (max-width: 900px) {
