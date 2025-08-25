@@ -19,7 +19,7 @@ const { title = "azrd" } = Astro.props;
 		rel="alternate"
 		type="application/rss+xml"
 		title="azrd"
-		href={new URL("rss.xml", Astro.site)}
+		href="/rss.xml"
 	/>
 	<script is:inline>document.documentElement.setAttribute("theme",localStorage.getItem("theme")||"system")</script>
 	<title>{title}</title>
@@ -31,6 +31,11 @@ const { title = "azrd" } = Astro.props;
 	</main>
 	<slot name="footer" />
 </body>
+
+<script>
+	// Opt out from BFCache to prevent popover state persisting
+	if (window.isSecureContext) navigator.locks.request("", () => {})
+</script>
 
 <style>
 	html {
@@ -62,7 +67,7 @@ const { title = "azrd" } = Astro.props;
 		background-color: var(--bg);
 		min-width: 0;
 		width: 100%;
-		padding: 0 2.5ch 1rlh;
+		padding: 0 2ch 1rlh;
 	}
 
 	main {
