@@ -82,22 +82,16 @@ th, td {
 	vertical-align: top;
 }
 
-sub, sup {
+sub {
 	font-size: 0.75em;
 	letter-spacing: 0.335ch;
-
-	a {
-		text-decoration: none;
-		scroll-margin-top: calc(2rlh + 1lh + 2.5em);
-	}
-}
-
-sub {
 	vertical-align: bottom;
 }
 
 sup {
-	vertical-align: top;
+	all: unset;
+	font-feature-settings: "frac";
+	a { text-decoration: none }
 }
 
 .content {
