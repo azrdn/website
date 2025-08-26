@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import type { GetStaticPaths } from "astro";
+import CopyBtn from "../../components/copy_btn.astro";
 import Footer from "../../components/footer.astro";
 import Navbar from "../../components/navbar.astro";
 import Toc from "../../components/toc.astro";
@@ -59,6 +60,7 @@ import "../../styles/blog.css";
 		</header>
 		<div class="content"><Content /></div>
 	</article>
+	<CopyBtn />
 	<Footer slot="footer" />
 </Layout>
 

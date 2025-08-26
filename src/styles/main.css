@@ -113,6 +113,13 @@ hr {
 	margin: 1.5rlh 0;
 }
 
+button {
+	display: block;
+	font-family: inherit;
+	font-size: inherit;
+	padding: 0 1ch;
+}
+
 @media (scripting: none) {
 	.js {
 		display: none !important;

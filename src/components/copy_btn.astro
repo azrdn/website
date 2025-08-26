@@ -1,0 +1,52 @@
+---
+// derived from https://www.roboleary.net/2022/01/13/copy-code-to-clipboard-blog.html
+---
+
+<template id="btn-templ">
+	<button>COPY</button>
+</template>
+
+<script>
+	function copy_handler(ref: HTMLElement) {
+		const code = ref.querySelector("code")!;
+		return () => navigator.clipboard.writeText(code.innerText);
+	}
+
+	const btn_templ = document.querySelector<HTMLTemplateElement>
+		("#btn-templ")!.content.firstElementChild!
+	const code_blocks = document.querySelectorAll<HTMLPreElement>
+		("pre:has(code)");
+
+	code_blocks.forEach(block => {
+		if (!navigator.clipboard) return;
+
+		const wrapper = document.createElement("div");
+		wrapper.classList.add("ngoding")
+		block.parentNode?.insertBefore(wrapper, block);
+		wrapper.appendChild(block);
+
+		const cpy_btn = btn_templ.cloneNode(true);
+		cpy_btn.addEventListener("click", copy_handler(block));
+
+		const btns = document.createElement("div");
+		btns.classList.add("code-buttons");
+		btns.appendChild(cpy_btn);
+
+		wrapper.insertAdjacentElement("beforeend", btns);
+	});
+</script>
+
+<style is:global>
+	.code-buttons {
+		visibility: hidden;
+		position: absolute;
+		padding: 0.75rlh 2ch;
+		top: 0;
+		right: 0;
+	}
+
+	.ngoding {
+		position: relative;
+		&:hover { .code-buttons { visibility: visible } }
+	}
+</style>
