@@ -1,8 +1,9 @@
 name = "web"
 compatibility_date = "2025-06-12"
-placement.mode = "smart"
+compatibility_flags = [ "nodejs_compat" ]
 dev.port = 4321
+main = "./dist/_worker.js"
 
 [assets]
 directory = "./dist"
-not_found_handling = "404-page"
+binding = "ASSETS"
