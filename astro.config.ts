@@ -1,4 +1,4 @@
-import { builtinModules } from 'node:module';
+import { builtinModules } from "node:module";
 import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
@@ -8,7 +8,7 @@ export default defineConfig({
 	site: "https://azrd.dev",
 	integrations: [sitemap(), mdx()],
 	adapter: cloudflare({
-		imageService: 'passthrough',
+		imageService: "passthrough",
 		platformProxy: {
 			enabled: true,
 		},
@@ -24,9 +24,9 @@ export default defineConfig({
 		ssr: {
 			external: [
 				...builtinModules,
-				...builtinModules.map(mod => `node:${mod}`)
-			]
-		}
+				...builtinModules.map(mod => `node:${mod}`),
+			],
+		},
 	},
 	devToolbar: { enabled: false },
 	markdown: {
