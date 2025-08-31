@@ -1,5 +1,3 @@
-import { builtinModules } from "node:module";
-import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
@@ -7,26 +5,12 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
 	site: "https://azrd.dev",
 	integrations: [sitemap(), mdx()],
-	adapter: cloudflare({
-		imageService: "passthrough",
-		platformProxy: {
-			enabled: true,
-		},
-	}),
 	scopedStyleStrategy: "class",
 	server: { host: true },
 	build: {
 		format: "preserve",
 		assets: "static",
 		concurrency: 2,
-	},
-	vite: {
-		ssr: {
-			external: [
-				...builtinModules,
-				...builtinModules.map(mod => `node:${mod}`),
-			],
-		},
 	},
 	devToolbar: { enabled: false },
 	markdown: {
