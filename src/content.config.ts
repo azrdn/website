@@ -1,6 +1,5 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
-import "./utils/env_validator";
 
 const posts_path = import.meta.env.PROD ? "./posts" : "./src/test-posts";
 const schema = z.object({

@@ -1,6 +1,7 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
+import { schema } from "./src/env";
 
 export default defineConfig({
 	site: "https://azrd.dev",
@@ -11,6 +12,10 @@ export default defineConfig({
 		format: "preserve",
 		assets: "static",
 		concurrency: 2,
+	},
+	env: {
+		schema,
+		validateSecrets: true,
 	},
 	devToolbar: { enabled: false },
 	markdown: {
