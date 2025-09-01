@@ -71,16 +71,16 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 		padding: 0;
 		border: none;
 		background: none;
-		color: var(--primary);
+		color: var(--fg);
 		font-family: inherit;
 		font-size: inherit;
 		text-overflow: ellipsis;
 
 		&::picker(select) {
 			appearance: base-select;
-			color: var(--primary);
+			color: var(--fg);
 			cursor: initial;
-			border: 2px solid var(--secondary);
+			border: 2px solid var(--fg-secondary);
 		}
 
 		&:open::picker-icon {

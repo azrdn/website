@@ -7,10 +7,10 @@
 
 :root {
 	color-scheme: light dark;
-	--primary: light-dark(#3d3d3d, #dadada);
-	--secondary: light-dark(#4e4e4e, #949494);
+	--fg: light-dark(#3d3d3d, #dadada);
+	--fg-secondary: light-dark(#4e4e4e, #949494);
 	--bg: light-dark(#f3f3f3, #1d1d1d);
-	--bg-secondary: light-dark(#cacaca, #424242);
+	--bg-secondary: light-dark(#bdbdbd, #383838);
 
 	&[theme="dark"] {
 		color-scheme: dark;
@@ -22,7 +22,7 @@
 }
 
 ::selection {
-	background-color: var(--primary);
+	background-color: var(--fg);
 	color: var(--bg);
 }
 
@@ -46,20 +46,20 @@ h1, h2, h3, h4, h5, h6 {
 	gap: 0 1ch;
 	font-size: unset;
 	scroll-margin-top: calc(2rlh + 1lh + 2em);
-	color: var(--primary);
+	color: var(--fg);
 	margin: 2em 0;
 	padding: 0;
 }
 
 a {
-	color: var(--primary);
+	color: var(--fg);
 	text-underline-offset: 0.25rlh;
 	overflow-wrap: break-word;
 	scroll-margin-top: calc(2rlh + 1lh + 1em);
 
 	&:hover {
 		color: var(--bg);
-		background-color: var(--primary);
+		background-color: var(--fg);
 		text-decoration: none;
 	}
 }
@@ -73,12 +73,12 @@ details {
 		list-style: none;
 
 		&:hover {
-			color: var(--primary);
+			color: var(--fg);
 		}
 
 		&::before {
 			display: inline;
-			color: var(--primary);
+			color: var(--fg);
 			content: "> ";
 			font-weight: 700;
 		}
@@ -88,7 +88,7 @@ details {
 		&::before {
 			content: "v ";
 		}
-		color: var(--primary);
+		color: var(--fg);
 	}
 }
 

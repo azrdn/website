@@ -48,7 +48,7 @@ blockquote {
 pre, code {
 	border-radius: 4px;
 	font-family: inherit;
-	scrollbar-color: var(--secondary) transparent;
+	scrollbar-color: var(--fg-secondary) transparent;
 	line-height: 1.5;
 }
 
@@ -58,7 +58,7 @@ pre:has(code) {
 }
 
 code:not(pre code) {
-	color: var(--primary);
+	color: var(--fg);
 	background-color: var(--bg-secondary);
 	padding: 0.1em 0.25em;
 }
@@ -78,7 +78,7 @@ th {
 }
 
 th, td {
-	border: 2px solid var(--secondary);
+	border: 2px solid var(--fg-secondary);
 	padding: 0.5em 1ch;
 	vertical-align: top;
 }

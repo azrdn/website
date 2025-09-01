@@ -43,7 +43,7 @@ const { title = "azrd" } = Astro.props;
 	html {
 		background-color: var(--bg);
 		font-family: "JetBrains Mono", "JetBrainsMono Nerd Font", var(--font-subset);
-		scrollbar-color: var(--primary) transparent;
+		scrollbar-color: var(--fg) transparent;
 		overflow-y: scroll;
 
 		@media (width >= 768px) {
@@ -52,7 +52,7 @@ const { title = "azrd" } = Astro.props;
 	}
 
 	body {
-		color: var(--secondary);
+		color: var(--fg-secondary);
 		display: flex;
 		flex-direction: column;
 		/* hyphens: auto; */

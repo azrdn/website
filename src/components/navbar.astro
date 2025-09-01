@@ -42,7 +42,7 @@ const is_homepage = Astro.url.pathname === "/";
 		top: 0;
 
 		#label {
-			color: var(--primary);
+			color: var(--fg);
 			a {
 				text-decoration-color: var(--bg-secondary);
 				text-decoration-style: dotted;
@@ -55,7 +55,7 @@ const is_homepage = Astro.url.pathname === "/";
 		cursor: pointer;
 
 		&:hover {
-			color: var(--primary);
+			color: var(--fg);
 		}
 	}
 
@@ -72,7 +72,7 @@ const is_homepage = Astro.url.pathname === "/";
 
 	#navbar-s[popover] {
 		top: calc(2rlh + 1lh);
-		color: var(--secondary);
+		color: var(--fg-secondary);
 		background-color: var(--bg);
 		justify-content: space-between;
 		border: none;
