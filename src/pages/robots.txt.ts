@@ -1,12 +1,10 @@
-import EleventyFetch from "@11ty/eleventy-fetch";
 import type { APIRoute } from "astro";
-
-const fetch_opts = { type: "text", duration: "1d" };
+import dogfetch from "../utils/cached_fetch";
 
 export const GET: APIRoute = async ({ site }) => {
 	const [ascii, robots] = await Promise.all([
-		EleventyFetch(import.meta.env.ASCII_ART_URL, fetch_opts),
-		EleventyFetch(import.meta.env.ROBOTS_TXT_URL, fetch_opts),
+		dogfetch(import.meta.env.ASCII_ART_URL, 7200),
+		dogfetch(import.meta.env.ROBOTS_TXT_URL, 7200),
 	]).catch(() => ["", ""]);
 
 	const sitemap = new URL("sitemap-index.xml", site);
