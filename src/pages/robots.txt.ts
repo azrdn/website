@@ -5,7 +5,9 @@ export const GET: APIRoute = async ({ site }) => {
 	const [ascii, robots] = await Promise.all([
 		dogfetch(import.meta.env.ASCII_ART_URL, 7200),
 		dogfetch(import.meta.env.ROBOTS_TXT_URL, 7200),
-	]).catch(() => ["", ""])
+	])
+		.then(([res1, res2]) => Promise.all([res1.text(), res2.text()]))
+		.catch(() => ["", ""])
 
 	const sitemap = new URL("sitemap-index.xml", site)
 
