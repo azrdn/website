@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import dogfetch from "../utils/cached_fetch";
+import { dogfetch } from "../utils/cached_fetch";
 
 export const GET: APIRoute = async ({ site }) => {
 	const [ascii, robots] = await Promise.all([
