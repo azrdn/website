@@ -1,25 +1,25 @@
 ---
-import { getCollection } from "astro:content";
-import Footer from "../components/footer.astro";
-import Navbar from "../components/navbar.astro";
-import Layout from "../layouts/posinega.astro";
+import { getCollection } from "astro:content"
+import Footer from "../components/footer.astro"
+import Navbar from "../components/navbar.astro"
+import Layout from "../layouts/posinega.astro"
 
 const personal_links = [
 	{ href: "https://bsky.app/profile/azrd.dev", text: "bluesky" },
 	{ href: "https://web.facebook.com/app.yaml", text: "facebook" },
 	{ href: "https://github.com/azrdn", text: "github" },
 	{ href: "mailto:hi+web@azrd.dev", text: "email" },
-];
+]
 
 const collections = await Promise.all([
 	getCollection("blog"),
 	getCollection("blog_mdx"),
-]);
+])
 
 const recent_posts = collections
 	.flat()
 	.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime())
-	.slice(0, 3);
+	.slice(0, 3)
 
 const ascii_art = `
        .    *          .                .                                       
@@ -35,7 +35,7 @@ const ascii_art = `
 ###                   ##$$$"""   ###             $..       ###$$$$     "  ##    
   ###                  ###$$$      ####           #...                     ###  
                          ## $$        ##             ...                     #  
-`;
+`
 ---
 
 <Layout title="azrd">

@@ -1,23 +1,23 @@
 ---
-import { getCollection } from "astro:content";
-import Footer from "../components/footer.astro";
-import Navbar from "../components/navbar.astro";
-import Layout from "../layouts/posinega.astro";
+import { getCollection } from "astro:content"
+import Footer from "../components/footer.astro"
+import Navbar from "../components/navbar.astro"
+import Layout from "../layouts/posinega.astro"
 
 const collections = await Promise.all([
 	getCollection("blog"),
 	getCollection("blog_mdx"),
-]);
+])
 
 const posts = collections
 	.flat()
-	.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime());
+	.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime())
 
 const style = `
 	display: inline-block;
 	background-color: var(--fg);
 	color: var(--bg);
-`;
+`
 ---
 
 <Layout title="Blog">

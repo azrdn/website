@@ -1,12 +1,12 @@
-import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
+import { defineCollection, z } from "astro:content"
+import { glob } from "astro/loaders"
 
-const posts_path = import.meta.env.PROD ? "./posts" : "./src/test/posts";
+const posts_path = import.meta.env.PROD ? "./posts" : "./src/test/posts"
 const schema = z.object({
 	title: z.string().min(1, "Title cannot be empty"),
 	createdAt: z.date(),
 	updatedAt: z.date().optional(),
-});
+})
 
 export const collections = {
 	blog: defineCollection({
@@ -17,4 +17,4 @@ export const collections = {
 		loader: glob({ pattern: "**/*.mdx", base: posts_path }),
 		schema,
 	}),
-};
+}

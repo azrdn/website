@@ -1,12 +1,12 @@
-import { getCollection } from "astro:content";
-import rss from "@astrojs/rss";
-import type { APIRoute } from "astro";
+import { getCollection } from "astro:content"
+import rss from "@astrojs/rss"
+import type { APIRoute } from "astro"
 
 export const GET: APIRoute = async ctx => {
 	const posts = await Promise.all([
 		getCollection("blog"),
 		getCollection("blog_mdx"),
-	]);
+	])
 
 	return rss({
 		title: "azrd",
@@ -19,5 +19,5 @@ export const GET: APIRoute = async ctx => {
 			pubDate: post.data.createdAt,
 			link: `/blog/${post.id}`,
 		})),
-	});
-};
+	})
+}

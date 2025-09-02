@@ -1,14 +1,14 @@
 ---
-import Menu from "../components/menu.svg";
+import Menu from "../components/menu.svg"
 
 const links = [
 	{ text: "/about", href: "/about", desc: "who am i?" },
 	{ text: "/blog", href: "/blog", desc: "i write too" },
 	{ text: "/projects", href: "/projects", desc: "things i made" },
-];
+]
 
-const { label = Astro.site?.hostname } = Astro.props;
-const is_homepage = Astro.url.pathname === "/";
+const { label = Astro.site?.hostname } = Astro.props
+const is_homepage = Astro.url.pathname === "/"
 ---
 
 <header class="topheader">

@@ -1,4 +1,4 @@
-import { envField as env } from "astro/config";
+import { envField as env } from "astro/config"
 
 export const schema = {
 	ASCII_ART_URL: env.string({
@@ -16,4 +16,4 @@ export const schema = {
 		access: "public",
 		optional: false,
 	}),
-};
+}

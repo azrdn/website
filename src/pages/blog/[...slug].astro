@@ -1,34 +1,34 @@
 ---
-import { getCollection, render } from "astro:content";
-import type { GetStaticPaths } from "astro";
-import CopyBtn from "../../components/copy_btn.astro";
-import Footer from "../../components/footer.astro";
-import Navbar from "../../components/navbar.astro";
-import Toc from "../../components/toc.astro";
-import Layout from "../../layouts/posinega.astro";
+import { getCollection, render } from "astro:content"
+import type { GetStaticPaths } from "astro"
+import CopyBtn from "../../components/copy_btn.astro"
+import Footer from "../../components/footer.astro"
+import Navbar from "../../components/navbar.astro"
+import Toc from "../../components/toc.astro"
+import Layout from "../../layouts/posinega.astro"
 
-const iso_date = (date: Date) => date.toISOString().slice(0, 10);
+const iso_date = (date: Date) => date.toISOString().slice(0, 10)
 
 export const getStaticPaths = (async () => {
 	const [md_collection, mdx_collection] = await Promise.all([
 		getCollection("blog"),
 		getCollection("blog_mdx"),
-	]);
+	])
 	const all_posts = [
 		...md_collection.map(post => ({ ...post, mdx: false })),
 		...mdx_collection.map(post => ({ ...post, mdx: true })),
-	];
+	]
 
 	return all_posts.map(post => ({
 		params: { slug: post.id },
 		props: { post, fm: post.data },
-	}));
-}) satisfies GetStaticPaths;
+	}))
+}) satisfies GetStaticPaths
 
-const { post, fm } = Astro.props;
-const { Content, headings } = await render(post);
+const { post, fm } = Astro.props
+const { Content, headings } = await render(post)
 
-import "../../styles/blog.css";
+import "../../styles/blog.css"
 ---
 
 <Layout title={fm.title}>
