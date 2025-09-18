@@ -1,9 +1,9 @@
 import { createHash } from "node:crypto"
 import fs from "node:fs/promises"
 
-export const dogfetch = async (url: string, ttl_secs: number) => {
+const cache_dir = ".cache"
+export default async (url: string, ttl_secs: number, init?: RequestInit) => {
 	const hash = createHash("md5").update(url).digest("hex")
-	const cache_dir = `${process.cwd()}/.cache`
 	await fs.mkdir(cache_dir, { recursive: true }).catch(() => {})
 
 	const files = await fs.readdir(cache_dir, { withFileTypes: true })
@@ -17,7 +17,7 @@ export const dogfetch = async (url: string, ttl_secs: number) => {
 		}
 	}
 
-	const res = await fetch(url)
+	const res = await fetch(url, init)
 	const data = await res.arrayBuffer()
 	const expiry = Date.now() + ttl_secs * 1000
 
