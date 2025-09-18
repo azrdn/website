@@ -4,10 +4,10 @@ import Footer from "../components/footer.astro"
 import Navbar from "../components/navbar.astro"
 import Layout from "../layouts/posinega.astro"
 
-const personal_links = [
+const social_links = [
 	{ href: "https://bsky.app/profile/azrd.dev", text: "bluesky" },
 	{ href: "https://web.facebook.com/app.yaml", text: "facebook" },
-	{ href: "https://github.com/azrdn", text: "github" },
+	{ href: "https://t.me/azisrdn", text: "telegram" },
 	{ href: "mailto:hi+web@azrd.dev", text: "email" },
 ]
 
@@ -56,9 +56,9 @@ const ascii_art = `
 		</p>
 	</section>
 	<section>
-		<p>Here are some links where you can contact me:</p>
+		<p>Here are some links where you can reach me:</p>
 		<div id="_links">
-			{personal_links.map((link) => <a href={link.href}>{link.text}</a>)}
+			{social_links.map((link) => <a href={link.href}>{link.text}</a>)}
 		</div>
 	</section>
 	<hr />
@@ -90,7 +90,7 @@ const ascii_art = `
 
 	.marquee {
 		display: flex;
-		border: 1px solid var(--fg-secondary);
+		border: 2px solid var(--bg-secondary);
 		position: relative;
 		margin: 2rem 0;
 		overflow: hidden;

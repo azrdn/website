@@ -120,6 +120,19 @@ button {
 	padding: 0 1ch;
 }
 
+pre, code {
+	border-radius: 4px;
+	font-family: inherit;
+	scrollbar-color: var(--fg-secondary) transparent;
+	line-height: 1.5;
+}
+
+code:not(pre code) {
+	color: var(--fg);
+	background-color: var(--bg-secondary);
+	padding: 0.1em 0.25em;
+}
+
 @media (scripting: none) {
 	.js {
 		display: none !important;

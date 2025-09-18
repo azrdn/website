@@ -45,22 +45,9 @@ blockquote {
 	border-left: 1ch solid var(--bg-secondary);
 }
 
-pre, code {
-	border-radius: 4px;
-	font-family: inherit;
-	scrollbar-color: var(--fg-secondary) transparent;
-	line-height: 1.5;
-}
-
 pre:has(code) {
 	position: relative;
 	padding: 0.75rlh 2ch;
-}
-
-code:not(pre code) {
-	color: var(--fg);
-	background-color: var(--bg-secondary);
-	padding: 0.1em 0.25em;
 }
 
 table {
