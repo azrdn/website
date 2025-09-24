@@ -16,7 +16,7 @@
 		"astro": "^5.13.10"
 	},
 	"devDependencies": {
-		"@antfu/ni": "^25.0.0",
+		"@antfu/ni": "^26.0.1",
 		"@biomejs/biome": "2.2.2",
 		"@types/bun": "^1.2.21"
 	}
