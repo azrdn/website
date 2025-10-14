@@ -70,18 +70,6 @@ th, td {
 	vertical-align: top;
 }
 
-sub {
-	font-size: 0.75em;
-	letter-spacing: 0.335ch;
-	vertical-align: bottom;
-}
-
-sup {
-	all: unset;
-	font-feature-settings: "frac";
-	a { text-decoration: none }
-}
-
 .content {
 	h1::before { content: "#" }
 	h2::before { content: "##" }

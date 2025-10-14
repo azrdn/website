@@ -41,8 +41,7 @@ const ascii_art = `
 <Layout title="azrd">
 	<Navbar slot="header" />
 	<div class="marquee" aria-hidden="true">
-		<pre>{ascii_art}</pre>
-		<pre>{ascii_art}</pre>
+		{ Array(3).fill(<pre>{ascii_art}</pre>) }
 	</div>
 	<section>
 		<h1>Hi, i'm azrd</h1>
@@ -61,8 +60,8 @@ const ascii_art = `
 			{social_links.map((link) => <a href={link.href}>{link.text}</a>)}
 		</div>
 	</section>
-	<hr />
 	{recent_posts.length > 0 && (
+		<hr />
 		<section>
 			<h1>Recent Blog Posts</h1>
 			<ul>
@@ -90,6 +89,7 @@ const ascii_art = `
 
 	.marquee {
 		display: flex;
+		font-size: 0.8rem;
 		border: 2px solid var(--bg-secondary);
 		position: relative;
 		margin: 2rem 0;
@@ -107,7 +107,7 @@ const ascii_art = `
 		}
 
 		@media (max-width: 900px) {
-			font-size: 1.9vw;
+			font-size: 1.8vw;
 		}
 	}
 </style>

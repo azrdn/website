@@ -31,17 +31,11 @@ export default defineConfig({
 		fonts: [
 			{
 				provider: "local",
-				name: "gitlabmono",
+				name: "myfont",
 				variants: [
 					{
-						weight: "100 800",
-						style: "normal",
-						src: ["./src/styles/GitLabMono.woff2"],
-					},
-					{
-						weight: "100 800",
-						style: "italic",
-						src: ["./src/styles/GitLabMono-Italic.woff2"],
+						weight: "400 700",
+						src: ["./src/styles/font.woff2"],
 					},
 				],
 				fallbacks: ["monospace"],

@@ -8,7 +8,7 @@
 :root {
 	color-scheme: light dark;
 	--fg: light-dark(#3d3d3d, #dadada);
-	--fg-secondary: light-dark(#4e4e4e, #949494);
+	--fg-secondary: light-dark(#4e4e4e, #a5a5a5);
 	--bg: light-dark(#f3f3f3, #1d1d1d);
 	--bg-secondary: light-dark(#bdbdbd, #383838);
 
@@ -65,6 +65,7 @@ a {
 }
 
 details {
+	color: var(--fg);
 	margin: 1em 0;
 	summary {
 		font-weight: 700;
@@ -72,13 +73,8 @@ details {
 		width: fit-content;
 		list-style: none;
 
-		&:hover {
-			color: var(--fg);
-		}
-
 		&::before {
 			display: inline;
-			color: var(--fg);
 			content: "> ";
 			font-weight: 700;
 		}
@@ -131,6 +127,10 @@ code:not(pre code) {
 	color: var(--fg);
 	background-color: var(--bg-secondary);
 	padding: 0.1em 0.25em;
+}
+
+option::checkmark {
+	content: "+";
 }
 
 @media (scripting: none) {

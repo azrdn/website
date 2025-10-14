@@ -1,5 +1,7 @@
 ---
 // filename reference https://www.youtube.com/watch?v=Iq3EZtD0QDE
+// TODO: remove this eventually
+// @ts-nocheck
 import "../styles/main.css"
 import { Font } from "astro:assets"
 import Opengraph from "../components/opengraph.astro"
@@ -22,7 +24,10 @@ const { title = "azrd" } = Astro.props
 			title="azrd"
 			href="/rss.xml"
 		/>
-		<script is:inline>document.documentElement.setAttribute("theme",localStorage.getItem("theme")||"system")</script>
+		<script is:inline type="module" blocking="render">
+			const theme = localStorage.getItem("theme") || "system"
+			document.documentElement.setAttribute("theme", theme)
+		</script>
 		<title>{title}</title>
 	</head>
 	<body>
@@ -42,7 +47,7 @@ const { title = "azrd" } = Astro.props
 <style>
 	html {
 		background-color: var(--bg);
-		font-family: "JetBrains Mono", "JetBrainsMono Nerd Font", var(--font-subset);
+		font-family: var(--font-subset);
 		scrollbar-color: var(--fg) transparent;
 		overflow-y: scroll;
 
@@ -58,7 +63,7 @@ const { title = "azrd" } = Astro.props
 		/* hyphens: auto; */
 		line-height: 1.65;
 		margin: 0 auto;
-		max-width: 95ch;
+		max-width: 90ch;
 		min-height: 100svh;
 		text-wrap: pretty;
 		text-size-adjust: none;
