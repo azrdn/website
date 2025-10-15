@@ -47,7 +47,8 @@ blockquote {
 
 pre:has(code) {
 	position: relative;
-	padding: 0.75rlh 2ch;
+	padding: 0.75em 1em;
+	font-size: 0.9em;
 }
 
 table {

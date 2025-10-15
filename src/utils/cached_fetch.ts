@@ -7,14 +7,22 @@ export default async (url: string, ttl_secs: number, init?: RequestInit) => {
 	await fs.mkdir(cache_dir, { recursive: true }).catch(() => {})
 
 	const files = await fs.readdir(cache_dir, { withFileTypes: true })
-	const cached_file = files.find(file => file.name.startsWith(hash))
+	const now = Date.now()
 
-	if (cached_file) {
-		const file_expiry = cached_file.name.split("-")[1] || "0"
-		if (Date.now() < parseInt(file_expiry, 10)) {
-			const file = await fs.readFile(`${cache_dir}/${cached_file.name}`)
-			return new Response(file as BodyInit)
+	for (const file of files) {
+		if (!file.isFile() || !file.name.startsWith(hash)) continue
+
+		const [, expiry_str = "0"] = file.name.split("-")
+		const expiry = Number.parseInt(expiry_str, 10)
+		const file_path = `${cache_dir}/${file.name}`
+
+		if (!Number.isFinite(expiry) || expiry <= now) {
+			await fs.rm(file_path).catch(() => {})
+			continue
 		}
+
+		const cached = await fs.readFile(file_path)
+		return new Response(cached as BodyInit)
 	}
 
 	const res = await fetch(url, init)

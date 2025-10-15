@@ -12,7 +12,7 @@ import Layout from "../layouts/posinega.astro"
 			<p>Standards Track</p>
 			<p>[Page 65]</p>
 		</div>
-		<hr />
+		<hr>
 		<div class="bot">
 			<p><a href="https://www.rfc-editor.org/rfc/rfc2616">RFC 2616</a></p>
 			<p>HTTP/1.1</p>
@@ -43,10 +43,13 @@ import Layout from "../layouts/posinega.astro"
 </Layout>
 
 <style>
-	.decor a {
-		color: inherit;
-		&:hover {
-			background-color: var(--bg-secondary);
+	.decor {
+		margin: 1em 0;
+		a {
+			color: inherit;
+			&:hover {
+				background-color: var(--bg-secondary);
+			}
 		}
 	}
 
@@ -55,18 +58,22 @@ import Layout from "../layouts/posinega.astro"
 	}
 
 	hr {
-		margin: 0 0 1.5em;
+		margin: 1em 0;
 	}
 
 	.top,
 	.bot {
 		p {
-			margin: 0.5em 0;
+			margin: 0;
 			text-align: center;
 		}
 
 		display: grid;
 		grid-template-columns: 1fr 1fr;
+	}
+
+	.bot {
+		margin-top: 1em;
 	}
 
 	@media (width >= 768px) {

@@ -1,7 +1,5 @@
 ---
 // filename reference https://www.youtube.com/watch?v=Iq3EZtD0QDE
-// TODO: remove this eventually
-// @ts-nocheck
 import "../styles/main.css"
 import { Font } from "astro:assets"
 import Opengraph from "../components/opengraph.astro"
@@ -14,7 +12,8 @@ const { title = "azrd" } = Astro.props
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<Opengraph />
-		<Font cssVariable="--font-subset" />
+		{ /* Preload hack to make fonts not flicker on pageload (dev only) */ }
+		<Font cssVariable="--font-subset" preload={import.meta.env.DEV} />
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
@@ -24,6 +23,7 @@ const { title = "azrd" } = Astro.props
 			title="azrd"
 			href="/rss.xml"
 		/>
+		{ /* @ts-ignore */ }
 		<script is:inline type="module" blocking="render">
 			const theme = localStorage.getItem("theme") || "system"
 			document.documentElement.setAttribute("theme", theme)
@@ -33,9 +33,8 @@ const { title = "azrd" } = Astro.props
 	<body>
 		<slot name="header" />
 		<main>
-			<div id="page"><slot /></div>
+			<div id="page"><slot /><slot name="footer" /></div>
 		</main>
-		<slot name="footer" />
 	</body>
 </html>
 
@@ -61,7 +60,7 @@ const { title = "azrd" } = Astro.props
 		display: flex;
 		flex-direction: column;
 		/* hyphens: auto; */
-		line-height: 1.65;
+		line-height: 1.5;
 		margin: 0 auto;
 		max-width: 90ch;
 		min-height: 100svh;
@@ -74,7 +73,7 @@ const { title = "azrd" } = Astro.props
 		background-color: var(--bg);
 		min-width: 0;
 		width: 100%;
-		padding: 0 2ch 1rlh;
+		padding: 0 2ch;
 	}
 
 	main {

@@ -35,6 +35,13 @@ export default defineConfig({
 				variants: [
 					{
 						weight: "400 700",
+						style: "normal",
+						src: ["./src/styles/font.woff2"],
+					},
+					{
+						weight: "400 700",
+						style: "oblique",
+						variationSettings: "'slnt' -8",
 						src: ["./src/styles/font.woff2"],
 					},
 				],

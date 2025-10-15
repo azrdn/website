@@ -1,0 +1,76 @@
+---
+const buttons = [
+	{
+		img: "/88x31/green-team.gif",
+		href: "https://512kb.club",
+		alt: "a proud member of the green team of 512KB club",
+	},
+	{
+		img: "/88x31/brainmade.png",
+		href: "https://brainmade.org",
+		alt: "brainmade.org badge",
+	},
+	{
+		img: "/88x31/bad-markup.gif",
+		href: "#",
+		alt: "lol",
+	},
+	{
+		img: "/88x31/astro.png",
+		href: "https://astro.build",
+		alt: "made on astro framework",
+	},
+	{
+		img: "/88x31/fedora.png",
+		href: "https://fedoraproject.org/",
+		alt: "fedora",
+	},
+	{
+		img: "/88x31/imissxp.gif",
+		href: "#",
+		alt: "i miss xp",
+	},
+	{
+		img: "/88x31/minecraft.gif",
+		href: "https://minecraft.net/",
+		alt: "minecraft",
+	},
+	{
+		img: "/88x31/ubo.png",
+		href: "https://github.com/gorhill/uBlock",
+		alt: "ublock origin",
+	},
+]
+---
+
+<div id="badges">
+	{
+		buttons.map((button) => (
+			<a href={button.href}>
+				<img src={button.img} alt={button.alt} loading="lazy" />
+			</a>
+		))
+	}
+</div>
+
+<style>
+	#badges {
+		margin: 2em 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+		justify-content: center;
+		align-items: center;
+
+		a {
+			width: 88px;
+			height: 31px;
+			margin: 0 auto;
+			&:hover { background-color: unset; }
+		}
+
+		a img {
+			width: 88px;
+			height: 31px;
+		}
+	}
+</style>
