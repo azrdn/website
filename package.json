@@ -17,7 +17,7 @@
 	},
 	"devDependencies": {
 		"@antfu/ni": "^26.2.0",
-		"@biomejs/biome": "2.2.2",
+		"@biomejs/biome": "2.2.6",
 		"@types/bun": "latest"
 	}
 }
