@@ -7,6 +7,7 @@
 
 :root {
 	color-scheme: light dark;
+	--max-width: 90ch;
 	--fg: light-dark(#3d3d3d, #dadada);
 	--fg-secondary: light-dark(#4e4e4e, #a5a5a5);
 	--bg: light-dark(#f3f3f3, #1d1d1d);
@@ -65,7 +66,7 @@ a {
 }
 
 details {
-	color: var(--fg);
+	color: var(--fg-secondary);
 	margin: 1em 0;
 	summary {
 		font-weight: 700;

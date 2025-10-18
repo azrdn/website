@@ -49,6 +49,7 @@ pre:has(code) {
 	position: relative;
 	padding: 0.75em 1em;
 	font-size: 0.9em;
+	scrollbar-width: thin;
 }
 
 table {

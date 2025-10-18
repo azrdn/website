@@ -62,7 +62,7 @@ const { title = "azrd" } = Astro.props
 		/* hyphens: auto; */
 		line-height: 1.5;
 		margin: 0 auto;
-		max-width: 90ch;
+		max-width: var(--max-width);
 		min-height: 100svh;
 		text-wrap: pretty;
 		text-size-adjust: none;
@@ -73,7 +73,7 @@ const { title = "azrd" } = Astro.props
 		background-color: var(--bg);
 		min-width: 0;
 		width: 100%;
-		padding: 0 2ch;
+		padding: calc(2rlh + 1lh) 2ch 0;
 	}
 
 	main {

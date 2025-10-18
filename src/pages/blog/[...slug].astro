@@ -45,7 +45,7 @@ import "../../styles/blog.css"
 			<p>
 				Raw file:
 				<a href={`/blog/${post.id}.${post.mdx ? "mdx" : "md"}`}>
-					{post.mdx ? "MDX" : "Markdown"}
+					{post.id}.{post.mdx ? "mdx" : "md"}
 				</a>
 			</p>
 			{
@@ -72,8 +72,6 @@ import "../../styles/blog.css"
 	}
 
 	#_toc {
-		background-color: var(--bg-secondary);
-		padding: 1em 2ch;
 		border-radius: 4px;
 
 		ul {
@@ -85,9 +83,10 @@ import "../../styles/blog.css"
 	@media (width >= 1600px) {
 		#_toc {
 			position: fixed;
+			padding: 1em 2ch;
 			background-color: var(--bg);
-			top: 1lh;
-			left: 2ch;
+			top: 0;
+			right: 2ch;
 			max-height: 90svh;
 			width: 35ch;
 

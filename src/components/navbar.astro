@@ -30,6 +30,22 @@ const is_homepage = Astro.url.pathname === "/"
 	</nav>
 </header>
 
+<script>
+	const header = document.querySelector<HTMLElement>(".topheader")
+	const mobile_menu = document.querySelector<HTMLElement>("#navbar-s")
+	let last_scroll_top = 0
+
+	window.addEventListener("scroll", () => {
+		const scroll_top = window.scrollY || document.documentElement.scrollTop
+		const dir = scroll_top > last_scroll_top ? "down" : "up"
+		if (Math.abs(scroll_top - last_scroll_top) > 3) {
+			header?.setAttribute("scroll-direction", dir)
+		}
+		last_scroll_top = scroll_top <= 0 ? 0 : scroll_top
+		mobile_menu?.hidePopover()
+	}, { passive: true })
+</script>
+
 <style>
 	header {
 		display: flex;
@@ -37,9 +53,12 @@ const is_homepage = Astro.url.pathname === "/"
 		border-bottom: 1px solid var(--bg-secondary);
 		padding: 1rlh 2ch;
 		background-color: var(--bg);
-		position: sticky;
+		position: fixed;
+		width: 100%;
+		max-width: var(--max-width);
 		z-index: 2;
 		top: 0;
+		transition: transform 0.2s ease;
 
 		#label {
 			color: var(--fg);
@@ -47,6 +66,11 @@ const is_homepage = Astro.url.pathname === "/"
 				text-decoration-color: var(--bg-secondary);
 				text-decoration-style: dotted;
 			}
+		}
+
+		&[scroll-direction="down"] {
+			transform: translateY(-100%);
+			pointer-events: none;
 		}
 	}
 
