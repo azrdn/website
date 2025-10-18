@@ -7,13 +7,30 @@ const links = [
 	{ text: "/projects", href: "/projects", desc: "things i made" },
 ]
 
-const { label = Astro.site?.hostname } = Astro.props
-const is_homepage = Astro.url.pathname === "/"
+const { label } = Astro.props
+const path_segments = Astro.url.pathname.split("/").filter(Boolean)
+const breadcrumb_segments = path_segments.map((segment, index, orig) => {
+	return {
+		text: decodeURIComponent(segment),
+		href: `/${orig.slice(0, index + 1).join("/")}`,
+		index
+	}
+})
 ---
 
 <header class="topheader">
-	<span id="label">{is_homepage ? "~/" : <a href="/">~/</a>} {label}</span>
-	<button popovertarget="navbar-s" title="Menu">
+	<span id="label">
+		<a href="/">~</a><span class="separator">/</span>
+		{label ?? breadcrumb_segments.map((segment) => (
+			<>
+				{segment.index === 0 ? null :<span class="separator">/</span>}
+				<span class="crumb">
+					<a href={segment.href}>{segment.text}</a>
+				</span>
+			</>
+		))}
+	</span>
+	<button popovertarget="navbar-s" title="Menu" aria-label="Toggle navigation">
 		<Menu />
 	</button>
 
@@ -49,6 +66,7 @@ const is_homepage = Astro.url.pathname === "/"
 <style>
 	header {
 		display: flex;
+		gap: 3ch;
 		justify-content: space-between;
 		border-bottom: 1px solid var(--bg-secondary);
 		padding: 1rlh 2ch;
@@ -61,10 +79,23 @@ const is_homepage = Astro.url.pathname === "/"
 		transition: transform 0.2s ease;
 
 		#label {
+			display: flex;
+			column-gap: 0.5ch;
+			white-space: nowrap;
+			overflow: hidden;
+			flex: 1;
 			color: var(--fg);
+
+			.crumb {
+				display: inline-flex;
+			}
+
+			.separator {
+				color: var(--fg-secondary);
+			}
+
 			a {
-				text-decoration-color: var(--bg-secondary);
-				text-decoration-style: dotted;
+				text-decoration: none;
 			}
 		}
 
