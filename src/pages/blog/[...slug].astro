@@ -15,8 +15,8 @@ export const getStaticPaths = (async () => {
 		getCollection("blog_mdx"),
 	])
 	const all_posts = [
-		...md_collection.map(post => ({ ...post, mdx: false })),
-		...mdx_collection.map(post => ({ ...post, mdx: true })),
+		...md_collection.map(post => ({ ...post, type: "md" })),
+		...mdx_collection.map(post => ({ ...post, type: "mdx" })),
 	]
 
 	return all_posts.map(post => ({
@@ -44,9 +44,7 @@ import "../../styles/blog.css"
 			</p>
 			<p>
 				Raw file:
-				<a href={`/blog/${post.id}.${post.mdx ? "mdx" : "md"}`}>
-					{post.id}.{post.mdx ? "mdx" : "md"}
-				</a>
+				<a href={`/blog/${post.id}.${post.type}`}>{post.id}.{post.type}</a>
 			</p>
 			{
 				headings.length > 0 && (
