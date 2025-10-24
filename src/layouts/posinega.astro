@@ -23,8 +23,7 @@ const { title = "azrd" } = Astro.props
 			title="azrd"
 			href="/rss.xml"
 		/>
-		{ /* @ts-ignore */ }
-		<script is:inline type="module" blocking="render">
+		<script is:inline>
 			const theme = localStorage.getItem("theme") || "system"
 			document.documentElement.setAttribute("theme", theme)
 		</script>

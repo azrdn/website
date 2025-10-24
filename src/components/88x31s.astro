@@ -1,4 +1,6 @@
 ---
+import { REPO_URL } from "astro:env/server"
+
 const buttons = [
 	{
 		src: "/88x31/green-team.gif",
@@ -12,7 +14,7 @@ const buttons = [
 	},
 	{
 		src: "/88x31/bad-markup.gif",
-		href: "#",
+		href: "https://validator.w3.org/nu/",
 		alt: "lol",
 	},
 	{
@@ -27,7 +29,7 @@ const buttons = [
 	},
 	{
 		src: "/88x31/imissxp.gif",
-		href: "#",
+		href: "https://en.wikipedia.org/wiki/Windows_XP",
 		alt: "i miss xp",
 	},
 	{
@@ -40,6 +42,10 @@ const buttons = [
 		href: "https://github.com/gorhill/uBlock",
 		alt: "ublock origin",
 	},
+	{
+		src: "/88x31/add.png",
+		href: `${REPO_URL}/pulls`,
+	}
 ]
 ---
 
@@ -59,6 +65,7 @@ const buttons = [
 		grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
 		justify-content: center;
 		align-items: center;
+		image-rendering: pixelated;
 
 		a {
 			width: 88px;

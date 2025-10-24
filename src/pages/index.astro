@@ -62,7 +62,7 @@ const ascii_art = `
 	</section>
 	{recent_posts.length > 0 && (
 		<hr />
-		<section>
+		<section id="recent_posts">
 			<h1>Recent Blog Posts</h1>
 			<ul>
 				{recent_posts.map((post) => (
@@ -81,6 +81,10 @@ const ascii_art = `
 		flex-wrap: wrap;
 		column-gap: 3ch;
 		row-gap: 1rlh;
+	}
+
+	#recent_posts {
+		margin: 2em 0;
 	}
 
 	@keyframes marquee {
