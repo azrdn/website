@@ -5,8 +5,7 @@
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
-		"preview": "nr ./src/utils/wb.ts",
-		"cf-preview": "nr ./src/utils/wb.ts cf",
+		"preview": "astro preview",
 		"check": "biome check"
 	},
 	"dependencies": {
@@ -16,7 +15,6 @@
 		"astro": "^5.15.1"
 	},
 	"devDependencies": {
-		"@antfu/ni": "^27.0.0",
 		"@biomejs/biome": "2.2.6",
 		"@types/bun": "latest"
 	}
