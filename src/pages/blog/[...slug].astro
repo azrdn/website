@@ -31,20 +31,31 @@ const { Content, headings } = await render(post)
 import "../../styles/blog.css"
 ---
 
+<script define:vars={{ id: post.id }} type="module">
+	await fetch("/api/hits", { method: "POST", body: id })
+		.then(res => res.text())
+		.then(hits => {
+			const hits_el = document.getElementById("pagehits")
+			if (hits_el) hits_el.textContent = hits
+		})
+		.catch(err => console.error("Failed to fetch page hits:", err))
+</script>
+
 <Layout title={fm.title}>
 	<Navbar slot="header" />
 	<article>
-		<header class="header">
+		<header>
 			<h1>{fm.title}</h1>
-			<p class="date">
+			<p>
+				Raw file:
+				<a href={`/blog/${post.id}.${post.type}`}>{post.id}.{post.type}</a>
+			</p>
+			<p id="info">
 				<span>Publ: <time>{iso_date(fm.createdAt)}</time></span>
 				{fm.updatedAt &&
 					<span>Upd: <time>{iso_date(fm.updatedAt)}</time></span>
 				}
-			</p>
-			<p>
-				Raw file:
-				<a href={`/blog/${post.id}.${post.type}`}>{post.id}.{post.type}</a>
+				<span class="js">Hits: <span id="pagehits">...</span></span>
 			</p>
 			{
 				headings.length > 0 && (
@@ -63,10 +74,21 @@ import "../../styles/blog.css"
 </Layout>
 
 <style>
-	.date {
+	#info {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0 2ch;
+		gap: 0.5em 2ch;
+
+		> * {
+			border: 2px solid var(--bg-secondary);
+			padding: 0.1em calc(1ch - 2px);
+		}
+
+		#pagehits {
+			display: inline-block;
+			width: 3ch;
+			text-align: right;
+		}
 	}
 
 	#_toc {
