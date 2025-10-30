@@ -32,7 +32,10 @@ const { title = "azrd" } = Astro.props
 	<body>
 		<slot name="header" />
 		<main>
-			<div id="page"><slot /><slot name="footer" /></div>
+			<div id="page">
+				<slot />
+				<slot name="footer" />
+			</div>
 		</main>
 	</body>
 </html>

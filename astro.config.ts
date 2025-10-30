@@ -1,10 +1,12 @@
+import { builtinModules } from "node:module"
+import cloudflare from "@astrojs/cloudflare"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
-import { defineConfig } from "astro/config"
-import { schema } from "./src/env"
+import { defineConfig, envField as env } from "astro/config"
 
 export default defineConfig({
 	site: "https://azrd.dev",
+	adapter: cloudflare({ imageService: "passthrough" }),
 	integrations: [sitemap(), mdx()],
 	scopedStyleStrategy: "class",
 	server: { host: true },
@@ -12,8 +14,32 @@ export default defineConfig({
 		format: "preserve",
 		assets: "static",
 	},
+	vite: {
+		ssr: {
+			external: [
+				...builtinModules,
+				...builtinModules.map(mod => `node:${mod}`),
+			],
+		},
+	},
 	env: {
-		schema,
+		schema: {
+			ASCII_ART_URL: env.string({
+				context: "server",
+				access: "public",
+				optional: false,
+			}),
+			ROBOTS_TXT_URL: env.string({
+				context: "server",
+				access: "public",
+				optional: false,
+			}),
+			REPO_URL: env.string({
+				context: "server",
+				access: "public",
+				optional: false,
+			}),
+		},
 		validateSecrets: true,
 	},
 	devToolbar: { enabled: false },

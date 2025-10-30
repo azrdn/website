@@ -1,7 +1,16 @@
 name = "web"
-compatibility_date = "2025-08-31"
+main = "dist/_worker.js/index.js"
+compatibility_date = "2025-10-29"
 dev.port = 4321
 
 [assets]
+binding = "ASSETS"
 directory = "./dist"
 not_found_handling = "404-page"
+
+[[kv_namespaces]]
+binding = "HITCOUNT"
+id = "3f3992f9add44830ab84ba3071dcda10"
+
+[observability]
+enabled = true
