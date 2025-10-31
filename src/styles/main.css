@@ -1,4 +1,6 @@
-@view-transition { navigation: auto }
+@view-transition {
+	navigation: auto;
+}
 
 &::view-transition-old(root),
 &::view-transition-new(root) {
@@ -135,6 +137,6 @@ option::checkmark {
 
 @media (scripting: none) {
 	.js {
-		display: none !important;
+		display: none;
 	}
 }
