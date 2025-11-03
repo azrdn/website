@@ -15,6 +15,9 @@ export default defineConfig({
 		assets: "static",
 	},
 	vite: {
+		build: {
+			assetsInlineLimit: 1024,
+		},
 		ssr: {
 			external: [
 				...builtinModules,

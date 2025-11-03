@@ -7,8 +7,9 @@ import Navbar from "../../components/navbar.astro"
 import Toc from "../../components/toc.astro"
 import Layout from "../../layouts/posinega.astro"
 
-const iso_date = (date: Date) => date.toISOString().slice(0, 10)
+import "../../styles/blog.css"
 
+const iso_date = (date: Date) => date.toISOString().slice(0, 10)
 export const getStaticPaths = (async () => {
 	const [md_collection, mdx_collection] = await Promise.all([
 		getCollection("blog"),
@@ -27,18 +28,14 @@ export const getStaticPaths = (async () => {
 
 const { post, fm } = Astro.props
 const { Content, headings } = await render(post)
-
-import "../../styles/blog.css"
 ---
 
 <script define:vars={{ id: post.id }} type="module">
-	await fetch("/api/hits", { method: "POST", body: id })
-		.then(res => res.text())
-		.then(hits => {
-			const hits_el = document.getElementById("pagehits")
-			if (hits_el) hits_el.textContent = hits
-		})
-		.catch(err => console.error("Failed to fetch page hits:", err))
+	const hits = await fetch("/api/hits", { method: "POST", body: id })
+	if (hits.ok) {
+		const hits_el = document.getElementById("pagehits")
+		if (hits_el) hits_el.textContent = await hits.text()
+	}
 </script>
 
 <Layout title={fm.title}>
