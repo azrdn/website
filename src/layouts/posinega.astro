@@ -42,7 +42,9 @@ const { title = "azrd" } = Astro.props
 
 <script>
 	// Opt out from BFCache to prevent popover state persisting
-	if (window.isSecureContext) navigator.locks.request("", () => {})
+	if (window.isSecureContext) {
+		navigator.locks.request("", () => new Promise(() => {}))
+	}
 </script>
 
 <style>
