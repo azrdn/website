@@ -1,0 +1,33 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "web",
+	"main": "./dist/_worker.js/index.js",
+	"compatibility_date": "2025-11-13",
+	"dev": {
+		"port": 4321
+	},
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist",
+		"not_found_handling": "404-page"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "HITCOUNT",
+			"id": "3f3992f9add44830ab84ba3071dcda10"
+		}
+	],
+	"ratelimits": [
+		{
+			"name": "IP",
+			"namespace_id": "1",
+			"simple": {
+				"limit": 5,
+				"period": 10
+			}
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}
