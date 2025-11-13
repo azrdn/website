@@ -32,9 +32,12 @@ const { Content, headings } = await render(post)
 
 <script define:vars={{ id: post.id }} type="module">
 	const hits = await fetch("/api/hits", { method: "POST", body: id })
-	if (hits.ok) {
-		const hits_el = document.getElementById("pagehits")
-		if (hits_el) hits_el.textContent = await hits.text()
+	const hits_el = document.getElementById("pagehits")
+
+	if (hits.ok && hits_el) hits_el.textContent = await hits.text()
+	else {
+		const hits = await fetch(`/api/hits?id=${id}`)
+		if (hits.ok && hits_el) hits_el.textContent = await hits.text()
 	}
 </script>
 
