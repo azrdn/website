@@ -10,6 +10,7 @@
 :root {
 	color-scheme: light dark;
 	--max-width: 90ch;
+	--accent: light-dark(#0073c0, #ff9900);
 	--fg: light-dark(#3d3d3d, #dadada);
 	--fg-secondary: light-dark(#4e4e4e, #a5a5a5);
 	--bg: light-dark(#f3f3f3, #1d1d1d);
@@ -61,9 +62,7 @@ a {
 	scroll-margin-top: calc(2rlh + 1lh + 1em);
 
 	&:hover {
-		color: var(--bg);
-		background-color: var(--fg);
-		text-decoration: none;
+		color: var(--accent);
 	}
 }
 
@@ -127,8 +126,8 @@ pre, code {
 
 code:not(pre code) {
 	color: var(--fg);
-	background-color: var(--bg-secondary);
-	padding: 0.1em 0.25em;
+	background-color: color-mix(in srgb, var(--bg-secondary), transparent 50%);
+	padding: 0.1em 1ch;
 }
 
 option::checkmark {
