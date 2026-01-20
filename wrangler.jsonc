@@ -1,8 +1,8 @@
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
+	"$schema": "https://unpkg.com/wrangler/config-schema.json",
 	"name": "web",
-	"main": "./dist/_worker.js/index.js",
 	"compatibility_date": "2025-11-13",
+	"compatibility_flags": ["nodejs_compat"],
 	"dev": {
 		"port": 4321
 	},
