@@ -30,14 +30,14 @@ const { post, fm } = Astro.props
 const { Content, headings } = await render(post)
 ---
 
-<script define:vars={{ id: post.id }} type="module">
+<script is:inline define:vars={{ id: post.id }} type="module">
 	const hits = await fetch("/api/hits", { method: "POST", body: id })
-	const hits_el = document.getElementById("pagehits")
+	const hits_el = document.getElementById("pagehits") ?? document.createElement("p")
 
-	if (hits.ok && hits_el) hits_el.textContent = await hits.text()
+	if (hits.ok) hits_el.textContent = await hits.text()
 	else {
 		const hits = await fetch(`/api/hits?id=${id}`)
-		if (hits.ok && hits_el) hits_el.textContent = await hits.text()
+		if (hits.ok) hits_el.textContent = await hits.text()
 	}
 </script>
 
@@ -46,10 +46,6 @@ const { Content, headings } = await render(post)
 	<article>
 		<header>
 			<h1>{fm.title}</h1>
-			<p>
-				Raw file:
-				<a href={`/blog/${post.id}.${post.type}`}>{post.id}.{post.type}</a>
-			</p>
 			<p id="info">
 				<span>Publ: <time>{iso_date(fm.createdAt)}</time></span>
 				{fm.updatedAt &&
