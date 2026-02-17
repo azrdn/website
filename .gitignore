@@ -1,5 +1,9 @@
 # build output
 dist/
+
+# commit hash
+public/commit_hash.json
+
 # generated types
 .astro/
 worker-configuration.d.ts

@@ -1,8 +1,7 @@
-import { builtinModules } from "node:module"
 import cloudflare from "@astrojs/cloudflare"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
-import { defineConfig, envField as env } from "astro/config"
+import { defineConfig, envField as env, fontProviders } from "astro/config"
 
 export default defineConfig({
 	site: "https://azrd.dev",
@@ -17,13 +16,7 @@ export default defineConfig({
 	vite: {
 		build: {
 			assetsInlineLimit: 1024,
-		},
-		ssr: {
-			external: [
-				...builtinModules,
-				...builtinModules.map(mod => `node:${mod}`),
-			],
-		},
+		}
 	},
 	env: {
 		schema: {
@@ -59,23 +52,25 @@ export default defineConfig({
 		contentIntellisense: true,
 		fonts: [
 			{
-				provider: "local",
+				provider: fontProviders.local(),
 				name: "myfont",
-				variants: [
-					{
-						weight: "400 700",
-						style: "normal",
-						src: ["./src/styles/font.woff2"],
-					},
-					{
-						weight: "400 700",
-						style: "oblique",
-						variationSettings: "'slnt' -8",
-						src: ["./src/styles/font.woff2"],
-					},
-				],
 				fallbacks: ["monospace"],
 				cssVariable: "--font-subset",
+				options: {
+					variants: [
+						{
+							weight: "400 700",
+							style: "normal",
+							src: ["./src/styles/font.woff2"],
+						},
+						{
+							weight: "400 700",
+							style: "oblique",
+							variationSettings: "'slnt' -8",
+							src: ["./src/styles/font.woff2"],
+						},
+					]
+				}
 			},
 		],
 	},

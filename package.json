@@ -6,8 +6,13 @@
 		"dev": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"check": "biome check",
-		"types": "wrangler types && astro sync"
+		"check": "astro check",
+		"lint": "biome check",
+		"types": "wrangler types && astro sync",
+		"preinstall": "bun ./src/commit_hash.ts",
+		"predev": "bun ./src/commit_hash.ts",
+		"prebuild": "bun ./src/commit_hash.ts",
+		"precheck": "bun ./src/commit_hash.ts"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "^12.6.12",
@@ -17,6 +22,9 @@
 		"astro": "^5.17.2"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.3.7"
+		"@astrojs/check": "^0.9.6",
+		"@biomejs/biome": "2.3.7",
+		"typescript": "^5.9.3",
+		"wrangler": "^4.65.0"
 	}
 }
