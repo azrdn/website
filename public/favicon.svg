@@ -1,10 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 8 8">
-    <desc>SOUL</desc>
-    <style>
-        circle {
-            color-scheme: light dark;
-            fill: light-dark(#c3b34c, #648ce4)
-        }
-    </style>
-    <circle cx="4" cy="4" r="3" />
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="32"
+   viewBox="0 0 32 32"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1">
+    <g
+       id="g59"
+       transform="matrix(1.2,0,0,1.2,-4.4000024,-4.5856436)"
+       style="stroke-width:0.833333">
+      <g
+         id="g60"
+         transform="matrix(0.95416654,0,0,0.95416654,0.77916891,0.78626035)"
+         style="stroke-width:0.873362">
+        <path
+           style="fill:#cccccc;stroke-width:0"
+           d="M 17.000002,5.6076962 7.0000011,11.3812 17.000002,17.154703 27.000003,11.3812 Z"
+           id="path59" />
+        <path
+           style="fill:#999999;stroke-width:0"
+           d="M 7.0000004,22.928205 17.000002,28.701709 V 17.154703 L 7.0000016,11.3812 Z"
+           id="path59-3" />
+        <path
+           style="fill:#f9f9f9;stroke-width:0"
+           d="m 17.000002,17.154702 -10e-7,11.547007 10.000001,-5.773501 V 11.381201 Z"
+           id="path59-3-1" />
+      </g>
+    </g>
+  </g>
 </svg>
