@@ -8,11 +8,7 @@
 		"preview": "astro preview",
 		"check": "astro check",
 		"lint": "biome check",
-		"types": "wrangler types && astro sync",
-		"preinstall": "bun ./src/commit_hash.ts",
-		"predev": "bun ./src/commit_hash.ts",
-		"prebuild": "bun ./src/commit_hash.ts",
-		"precheck": "bun ./src/commit_hash.ts"
+		"types": "wrangler types && astro sync"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "^12.6.12",

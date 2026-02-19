@@ -1,12 +1,20 @@
+import type { AstroIntegration } from "astro"
 import { execSync } from "node:child_process"
-import fs from "node:fs/promises"
+import { writeFileSync } from "node:fs"
 
-const hash = execSync(
-	"git rev-parse --short HEAD",
-	{
-		timeout: 2000,
-		encoding: "utf8",
+export default (): AstroIntegration => ({
+	name: "commit-hash",
+	hooks: {
+		"astro:config:setup": () => {
+			const hash = execSync("git rev-parse --short HEAD",
+				{
+					timeout: 2000,
+					encoding: "utf8",
+				}
+			).trim()
+			
+			writeFileSync("public/commit_hash.json", JSON.stringify({ hash }))
+			console.info("Written latest git commit hash to public directory.")
+		}
 	}
-).trim()
-
-await fs.writeFile("public/commit_hash.json", JSON.stringify({ hash }))
+})

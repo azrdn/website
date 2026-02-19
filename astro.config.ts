@@ -1,12 +1,13 @@
 import cloudflare from "@astrojs/cloudflare"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
+import commitHash from "./src/commit_hash"
 import { defineConfig, envField as env, fontProviders } from "astro/config"
 
 export default defineConfig({
 	site: "https://azrd.dev",
 	adapter: cloudflare({ imageService: "passthrough" }),
-	integrations: [sitemap(), mdx()],
+	integrations: [sitemap(), mdx(), commitHash()],
 	scopedStyleStrategy: "class",
 	server: { host: true },
 	build: {
