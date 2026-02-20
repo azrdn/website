@@ -31,11 +31,14 @@ const interests = [
 			Sometimes i experiment with new things, either tech or not, and
 			often found eating fast foods from the local stores and cafeteria.
 		</p>
-		<p>
-			You can find a bunch of my other links and profiles <a
-				href="https://bento.me/azrd">here</a
-			>.
-		</p>
+		{
+			/*(
+				<p>
+					You can find a bunch of my other links and profiles{" "}
+					<a href="https://bento.me/azrd">here</a>.
+				</p>
+			) */
+		}
 	</section>
 	<details>
 		<summary>Interests</summary>
@@ -51,12 +54,6 @@ const interests = [
 		</ul>
 	</details>
 	<Badges />
-	<details>
-		<summary>My Web Badge</summary>
-		<p>Feel free to add my badge to your website:</p>
-		<img src="/88x31/me.png" alt="azrdn's site">
-		<p>&lt;img src="{`${Astro.site}88x31/me.png`}" alt="azrdn's site" /&gt;</p>
-	</details>
 	<Footer slot="footer" />
 </Layout>
 
