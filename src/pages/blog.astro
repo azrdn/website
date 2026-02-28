@@ -50,7 +50,6 @@ const style = `
 		display: flex;
 		flex-direction: column;
 		position: relative;
-		border-radius: 4px;
 		padding: 1em 2ch;
 		margin: 1rlh 0;
 		gap: 1em;
@@ -65,12 +64,11 @@ const style = `
 			width: 100%;
 			height: 100%;
 			border: solid 2px var(--bg-secondary);
-			border-radius: 4px;
 			z-index: -1;
 		}
 
 		&:hover {
-			background-color: var(--bg-secondary);
+			background-color: color-mix(in srgb, var(--bg-secondary), transparent 75%);
 		}
 
 		a {
@@ -78,7 +76,6 @@ const style = `
 
 			&:hover {
 				background-color: unset;
-				color: var(--fg);
 				text-decoration: underline;
 			}
 		}

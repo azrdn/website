@@ -11,8 +11,13 @@ const { title = "azrd" } = Astro.props
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="keywords" content="personal,blog,azrd" />
 		<Opengraph />
-		{ /* Preload hack to make fonts not flicker on pageload (dev only) */ }
+		{/*
+			Font is preloaded only in dev mode beceause only prod has http caching
+			which makes fonts flicker on every page load in dev.
+		*/}
 		<Font cssVariable="--font-subset" preload={import.meta.env.DEV} />
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
@@ -42,6 +47,7 @@ const { title = "azrd" } = Astro.props
 
 <script>
 	// Opt out from BFCache to prevent popover state persisting
+	// TODO: find a better solution
 	if (window.isSecureContext) {
 		navigator.locks.request("", () => new Promise(() => {}))
 	}
@@ -77,7 +83,7 @@ const { title = "azrd" } = Astro.props
 		background-color: var(--bg);
 		min-width: 0;
 		width: 100%;
-		padding: calc(2rlh + 1lh) 2ch 0;
+		padding: calc(2rlh + 1lh) 2.5ch 0;
 	}
 
 	main {
@@ -87,6 +93,10 @@ const { title = "azrd" } = Astro.props
 	}
 
 	@media (width >= 900px) {
+		#page {
+			padding: calc(2rlh + 1lh) 2ch 0;
+		}
+
 		main {
 			&::before {
 				border-right: 1px var(--bg-secondary);

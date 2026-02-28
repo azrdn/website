@@ -20,12 +20,12 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 
 <header class="topheader">
 	<span id="label">
-		<a href="/">~</a><span class="separator">/</span>
+		<a class="navlink" href="/">~</a><span class="separator">/</span>
 		{label ?? breadcrumb_segments.map((segment) => (
 			<>
 				{segment.index === 0 ? null :<span class="separator">/</span>}
 				<span class="crumb">
-					<a href={segment.href}>{segment.text}</a>
+					<a class="navlink" href={segment.href}>{segment.text}</a>
 				</span>
 			</>
 		))}
@@ -39,11 +39,11 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 			{links.map((link) => <span>{link.desc}</span>)}
 		</div>
 		<div class="links">
-			{links.map((link) => <a href={link.href}>{link.text}</a>)}
+			{links.map((link) => <a class="navlink" href={link.href}>{link.text}</a>)}
 		</div>
 	</nav>
 	<nav id="navbar-l">
-		{links.map((link) => <a href={link.href}>{link.text}</a>)}
+		{links.map((link) => <a class="navlink" href={link.href}>{link.text}</a>)}
 	</nav>
 </header>
 
@@ -69,7 +69,7 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 		gap: 3ch;
 		justify-content: space-between;
 		border-bottom: 1px solid var(--bg-secondary);
-		padding: 1rlh 2ch;
+		padding: 1rlh 2.5ch;
 		background-color: var(--bg);
 		position: fixed;
 		width: 100%;
@@ -93,10 +93,6 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 			.separator {
 				color: var(--fg-secondary);
 			}
-
-			a {
-				text-decoration: none;
-			}
 		}
 
 		&[scroll-direction="down"] {
@@ -112,6 +108,10 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 		&:hover {
 			color: var(--fg);
 		}
+	}
+
+	.navlink {
+		text-decoration: none;
 	}
 
 	.links,
@@ -134,7 +134,7 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 		width: 100%;
 		max-width: 80ch;
 		margin: 0 auto;
-		padding: 0 2ch 1rlh;
+		padding: 0 2.5ch 1lh;
 	}
 
 	#navbar-s:popover-open {

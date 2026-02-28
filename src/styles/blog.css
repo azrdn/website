@@ -48,7 +48,7 @@ blockquote {
 pre:has(code) {
 	position: relative;
 	padding: 0.75em 1em;
-	font-size: 0.9em;
+	/* font-size: 0.95em; */
 	scrollbar-width: thin;
 }
 
