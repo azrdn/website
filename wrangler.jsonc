@@ -1,7 +1,6 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "web",
-	"main": "./dist/_worker.js/index.js",
 	"compatibility_date": "2026-02-17",
 	"dev": {
 		"port": 4321

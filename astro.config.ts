@@ -9,7 +9,6 @@ export default defineConfig({
 	adapter: cloudflare({ imageService: "passthrough" }),
 	integrations: [sitemap(), mdx(), commitHash()],
 	scopedStyleStrategy: "class",
-	server: { host: true },
 	build: {
 		format: "preserve",
 		assets: "static",
@@ -49,30 +48,30 @@ export default defineConfig({
 			},
 		},
 	},
+	fonts: [
+		{
+			provider: fontProviders.local(),
+			name: "myfont",
+			fallbacks: ["monospace"],
+			cssVariable: "--font-subset",
+			options: {
+				variants: [
+					{
+						weight: "400 700",
+						style: "normal",
+						src: ["./src/styles/font.woff2"],
+					},
+					{
+						weight: "400 700",
+						style: "oblique",
+						variationSettings: "'slnt' -8",
+						src: ["./src/styles/font.woff2"],
+					},
+				],
+			},
+		},
+	],
 	experimental: {
 		contentIntellisense: true,
-		fonts: [
-			{
-				provider: fontProviders.local(),
-				name: "myfont",
-				fallbacks: ["monospace"],
-				cssVariable: "--font-subset",
-				options: {
-					variants: [
-						{
-							weight: "400 700",
-							style: "normal",
-							src: ["./src/styles/font.woff2"],
-						},
-						{
-							weight: "400 700",
-							style: "oblique",
-							variationSettings: "'slnt' -8",
-							src: ["./src/styles/font.woff2"],
-						},
-					]
-				}
-			},
-		],
 	},
 })

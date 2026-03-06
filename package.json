@@ -10,14 +10,14 @@
 		"types": "wrangler types && astro sync"
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "^12.6.12",
-		"@astrojs/mdx": "^4.3.13",
-		"@astrojs/rss": "^4.0.15",
-		"@astrojs/sitemap": "^3.7.0",
-		"astro": "^5.17.2"
+		"@astrojs/cloudflare": "13.0.0-beta.13",
+		"@astrojs/mdx": "5.0.0-beta.11",
+		"@astrojs/rss": "4.0.15-beta.4",
+		"@astrojs/sitemap": "3.6.1-beta.3",
+		"astro": "6.0.0-beta.19"
 	},
 	"devDependencies": {
-		"@astrojs/check": "^0.9.6",
+		"@astrojs/check": "0.9.7-beta.1",
 		"typescript": "^5.9.3",
 		"wrangler": "^4.65.0"
 	}
