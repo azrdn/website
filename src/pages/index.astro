@@ -11,13 +11,9 @@ const social_links = [
 	{ href: "mailto:hi+web@azrd.dev", text: "email" },
 ]
 
-const collections = await Promise.all([
-	getCollection("blog"),
-	getCollection("blog_mdx"),
-])
+const collections = await getCollection("blog")
 
 const recent_posts = collections
-	.flat()
 	.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime())
 	.slice(0, 3)
 

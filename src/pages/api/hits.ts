@@ -2,11 +2,7 @@ import { getCollection } from "astro:content"
 import type { APIRoute } from "astro"
 
 const ResCode = (status: number) => new Response(null, { status })
-const collections = await Promise.all([
-	getCollection("blog"),
-	getCollection("blog_mdx"),
-])
-const ids = collections.flat().map(post => post.id)
+const ids = await getCollection("blog").then(c => c.map(post => post.id))
 
 export const prerender = false
 export const POST: APIRoute = async ({ locals, request }) => {
