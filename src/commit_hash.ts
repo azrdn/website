@@ -12,7 +12,6 @@ export default (outFile: string = "public/commit_hash.json"): AstroIntegration =
 					encoding: "utf8",
 				}
 			)
-			
 			writeFileSync(outFile, JSON.stringify({ hash: stdout.trim() }))
 			console.info(`Written latest git commit hash to ${outFile}`)
 		}
