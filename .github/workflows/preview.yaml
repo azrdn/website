@@ -15,6 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      # https://github.com/oven-sh/bun/issues/5951
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -24,7 +30,7 @@ jobs:
         run: |
           echo "${{ secrets.DOTENV }}" > .env
           bun install --production --frozen-lockfile
-          NODE_ENV=development bun -b run build
+          NODE_ENV=development bun run build
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
