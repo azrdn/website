@@ -6,7 +6,10 @@ import { defineConfig, envField as env, fontProviders } from "astro/config"
 
 export default defineConfig({
 	site: "https://azrd.dev",
-	adapter: cloudflare({ imageService: "passthrough" }),
+	adapter: cloudflare({
+		imageService: "passthrough",
+		prerenderEnvironment: "node"
+	}),
 	integrations: [sitemap(), mdx(), commitHash()],
 	scopedStyleStrategy: "class",
 	server: { host: true },
@@ -40,7 +43,7 @@ export default defineConfig({
 		validateSecrets: true,
 	},
 	devToolbar: { enabled: false },
-	markdown: {
+		markdown: {
 		shikiConfig: {
 			defaultColor: false,
 			themes: {
@@ -51,28 +54,29 @@ export default defineConfig({
 	},
 	experimental: {
 		contentIntellisense: true,
-		fonts: [
-			{
-				provider: fontProviders.local(),
-				name: "myfont",
-				fallbacks: ["monospace"],
-				cssVariable: "--font-subset",
-				options: {
-					variants: [
-						{
-							weight: "400 700",
-							style: "normal",
-							src: ["./src/styles/font.woff2"],
-						},
-						{
-							weight: "400 700",
-							style: "oblique",
-							variationSettings: "'slnt' -8",
-							src: ["./src/styles/font.woff2"],
-						},
-					]
-				}
-			},
-		],
+		queuedRendering: { enabled: true },
 	},
+	fonts: [
+		{
+			provider: fontProviders.local(),
+			name: "myfont",
+			fallbacks: ["monospace"],
+			cssVariable: "--font-subset",
+			options: {
+				variants: [
+					{
+						weight: "400 700",
+						style: "normal",
+						src: ["./src/styles/font.woff2"],
+					},
+					{
+						weight: "400 700",
+						style: "oblique",
+						variationSettings: "'slnt' -12",
+						src: ["./src/styles/font.woff2"],
+					},
+				]
+			}
+		},
+	],
 })
