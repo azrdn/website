@@ -42,8 +42,7 @@ export default defineConfig({
 		},
 		validateSecrets: true,
 	},
-	devToolbar: { enabled: false },
-		markdown: {
+	markdown: {
 		shikiConfig: {
 			defaultColor: false,
 			themes: {
