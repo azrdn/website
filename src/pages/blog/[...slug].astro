@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content"
 import type { GetStaticPaths } from "astro"
-import CopyBtn from "../../components/copy_btn.astro"
+import CodeBtns from "../../components/codeblock_btns.astro"
 import Footer from "../../components/footer.astro"
 import Navbar from "../../components/navbar.astro"
 import Toc from "../../components/toc.astro"
@@ -57,7 +57,7 @@ const { Content, headings } = await render(post)
 		</header>
 		<div class="content"><Content /></div>
 	</article>
-	<CopyBtn />
+	<CodeBtns />
 	<Footer slot="footer" />
 </Layout>
 
