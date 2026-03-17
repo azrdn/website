@@ -12,7 +12,7 @@
 	--max-width: 90ch;
 	--accent: light-dark(#0073c0, #ff9900);
 	--fg: light-dark(#3d3d3d, #dadada);
-	--fg-secondary: light-dark(#4e4e4e, #a5a5a5);
+	--fg-secondary: light-dark(#4e4e4e, #999999);
 	--bg: light-dark(#f3f3f3, #1d1d1d);
 	--bg-secondary: light-dark(#bdbdbd, #383838);
 

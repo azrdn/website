@@ -46,8 +46,8 @@ export default defineConfig({
 		shikiConfig: {
 			defaultColor: false,
 			themes: {
-				dark: "catppuccin-macchiato",
-				light: "github-light",
+				dark: "one-dark-pro",
+				light: "one-light",
 			},
 		},
 	},
