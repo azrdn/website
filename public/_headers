@@ -13,12 +13,6 @@
 /88x31/*
 	Cache-Control: public, max-age=86400, must-revalidate
 
-# Workaround for missing charset
+# https://github.com/cloudflare/workers-sdk/issues/9599
 /*.txt
 	Content-Type: text/plain; charset=utf-8
-
-/*.md
-	Content-Type: text/markdown; charset=utf-8
-
-/*.mdx
-	Content-Type: text/mdx; charset=utf-8

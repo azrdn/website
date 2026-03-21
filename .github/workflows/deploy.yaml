@@ -14,16 +14,22 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      # https://github.com/oven-sh/bun/issues/5951
+      - name: Setup Node
+        uses: actions/setup-node@v6
         with:
-          bun-version: latest
+          node-version: lts/*
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
       - name: Install dependencies and build
         run: |
           echo "${{ secrets.DOTENV }}" > .env
-          bun install --production --frozen-lockfile
-          bun -b run build
+          pnpm install --prod --frozen-lockfile
+          pnpm build
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3

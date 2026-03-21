@@ -1,0 +1,77 @@
+---
+// derived from https://www.roboleary.net/2022/01/13/copy-code-to-clipboard-blog.html
+---
+
+<template id="btn-templ">
+	<button>COPY</button>
+</template>
+
+<script>
+	function copy_handler(ref: HTMLElement) {
+		const code = ref.querySelector("code")!;
+		return async () => await navigator.clipboard.writeText(code.innerText);
+	}
+
+	const btn_templ = document.querySelector<HTMLTemplateElement>("#btn-templ")!;
+	const blocks = document.querySelectorAll<HTMLPreElement>("pre:has(code)");
+
+	blocks.forEach(code => {
+		if (!navigator.clipboard) return;
+
+		const wrapper = document.createElement("div");
+		wrapper.classList.add("code-wrapper")
+		code.parentNode?.insertBefore(wrapper, code);
+		wrapper.appendChild(code);
+
+		const cpy_btn = btn_templ.content.firstElementChild!.cloneNode(true);
+		cpy_btn.addEventListener("click", copy_handler(code));
+
+		const lang = code.getAttribute("data-language") ?? "";
+		const lang_btn = document.createElement("button");
+		lang_btn.textContent = lang.toUpperCase();
+
+		const buttons = document.createElement("div");
+		buttons.classList.add("code-buttons");
+		buttons.appendChild(lang_btn);
+		buttons.appendChild(cpy_btn);
+
+		wrapper.insertAdjacentElement("beforeend", buttons);
+	});
+</script>
+
+<style is:global>
+	.code-buttons {
+		display: flex;
+		font-size: 0.8em;
+		transition: opacity .2s ease, visibility .2s ease;
+		visibility: hidden;
+		opacity: 0;
+		position: absolute;
+		padding: 0.5em;
+		gap: 0.2em;
+		inset: 0 0 auto auto;
+
+		button {
+			border: 1px solid var(--bg-secondary);
+			border-radius: 4px;
+			padding: 0.15em 1ch;
+			color: var(--fg-secondary);
+			background: color-mix(in srgb, var(--bg), transparent 50%);
+
+			&:active {
+				border-color: var(--accent);
+				color: var(--fg);
+			}
+		}
+	}
+
+	.code-wrapper {
+		position: relative;
+		&:hover {
+			.code-buttons {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+	}
+</style>
