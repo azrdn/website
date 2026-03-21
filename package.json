@@ -5,20 +5,21 @@
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
-		"preview": "astro preview",
+		"preview": "astro build && astro preview",
 		"check": "astro check",
 		"types": "wrangler types && astro sync"
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "13.1.1",
-		"@astrojs/mdx": "5.0.0",
+		"@astrojs/cloudflare": "13.1.3",
+		"@astrojs/mdx": "5.0.2",
 		"@astrojs/rss": "4.0.17",
 		"@astrojs/sitemap": "3.7.1",
-		"astro": "6.0.4"
+		"astro": "6.0.8",
+		"astro-minify-html-swc": "^0.1.11"
 	},
 	"devDependencies": {
-		"@astrojs/check": "0.9.7",
+		"@astrojs/check": "0.9.8",
 		"typescript": "^5.9.3",
-		"wrangler": "^4.73.0"
+		"wrangler": "^4.76.0"
 	}
 }

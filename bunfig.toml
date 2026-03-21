@@ -1,4 +1,0 @@
-telemetry = false
-
-[install]
-linker = "isolated"
