@@ -3,7 +3,7 @@ import { getCollection } from "astro:content"
 import Footer from "../components/footer.astro"
 import Navbar from "../components/navbar.astro"
 import Layout from "../layouts/posinega.astro"
-import { text, width } from "../ascii_art.ts"
+import Marquee from "../components/marquee.astro"
 
 const social_links = [
 	{ href: "https://bsky.app/profile/azrd.dev", text: "bluesky" },
@@ -21,9 +21,7 @@ const recent_posts = collections
 
 <Layout title="azrd">
 	<Navbar slot="header" label="index"/>
-	<div class="marquee" aria-hidden="true">
-		{ Array(3).fill(<pre>{text}</pre>) }
-	</div>
+	<Marquee />
 	<hr />
 	<section>
 		<h1>Hi, i'm azrd</h1>
@@ -56,7 +54,7 @@ const recent_posts = collections
 	<Footer slot="footer" />
 </Layout>
 
-<style define:vars={{ width }}>
+<style>
 	#_links {
 		margin: 2em 0;
 		display: flex;
@@ -67,33 +65,5 @@ const recent_posts = collections
 
 	#recent_posts {
 		margin: 2em 0;
-	}
-
-	@keyframes marquee {
-		to { transform: translate(-100%)}
-	}
-
-	.marquee {
-		display: flex;
-		font-size: 0.8rem;
-		/* border: 2px solid var(--bg-secondary); */
-		position: relative;
-		margin: 2rem 0;
-		overflow: hidden;
-
-		pre {
-			margin: 0;
-			font-family: inherit;
-			line-height: 1;
-			font-variant-ligatures: none;
-		}
-
-		@media (prefers-reduced-motion: no-preference) {
-			pre { animation: marquee 20s steps(var(--width)) infinite }
-		}
-
-		@media (max-width: 900px) {
-			font-size: 1.8vw;
-		}
 	}
 </style>

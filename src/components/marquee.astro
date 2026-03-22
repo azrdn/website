@@ -1,0 +1,57 @@
+---
+const text = `
+       .    *          .                .                                                 
+   .                                .                      .     .         *              
+       .         .          *                  .     *                  .                 
+ .    *                      .      .                  .                     .            
+              #######                                          *                          
+............###    #####.....................####................#####....................
+:::::::::::##      ##$ ###::::::::::::::::###$#####::::::::::::##""$$####:::::::::::::::::
+~~~~~~~~~##         #$"" ###~~~~~~~~~~#####""$$##  ###--~~~~###   ""$"# ###~~~~~~~~~~~~~~~
+======###            $$""" ####===#####      "$$##   #######       $$" ##  ###=====#####==
+===####              ##$$"""  #####             $$#   #####       $$ """###  ######    ###
+###                   ##$$$"""   ###             $..       ###$$$$     "  ##      ###     
+  ###                  ###$$$      ####           #...                     ###            
+                         ## $$        ##             ...                     #            
+`
+
+const warning_msg = "warn: ASCII art line width is not consistent"
+const lines = text.split('\n').filter(Boolean)
+const width = lines[0]?.length ?? 0
+
+lines.forEach(line => line.length !== width ? console.warn(warning_msg) : true)
+---
+
+<div id="marquee" aria-hidden="true">
+	<pre>{text}</pre>
+	<pre>{text}</pre>
+</div>
+
+<style define:vars={{ width }}>
+	@keyframes marquee {
+		to { transform: translate(-100%)}
+	}
+
+	#marquee {
+		display: flex;
+		font-size: 0.8rem;
+		position: relative;
+		margin: 2rem 0;
+		overflow: hidden;
+
+		pre {
+			margin: 0;
+			font-family: inherit;
+			line-height: 1;
+			font-variant-ligatures: none;
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			pre { animation: marquee 20s steps(var(--width)) infinite }
+		}
+
+		@media (max-width: 900px) {
+			font-size: 1.8vw;
+		}
+	}
+</style>

@@ -1,7 +1,7 @@
 import cloudflare from "@astrojs/cloudflare"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
-import commitHash from "./src/commit_hash"
+import gitinfo from "./src/gitinfo"
 import minify from 'astro-minify-html-swc'
 import { defineConfig, envField as env, fontProviders } from "astro/config"
 
@@ -11,7 +11,7 @@ export default defineConfig({
 		imageService: "passthrough",
 		prerenderEnvironment: "node"
 	}),
-	integrations: [sitemap(), mdx(), commitHash(), minify()],
+	integrations: [sitemap(), mdx(), gitinfo(), minify()],
 	devToolbar: {
 		enabled: false
 	},

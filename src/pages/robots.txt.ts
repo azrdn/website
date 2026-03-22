@@ -5,7 +5,7 @@ export const GET: APIRoute = async ({ site }) => {
 	const [ascii, robots] = await Promise.all([
 		fetch(env.ASCII_ART_URL),
 		fetch(env.ROBOTS_TXT_URL),
-	])
+	]).catch(() => [new Response(), new Response()])
 
 	const sitemap = new URL("sitemap-index.xml", site)
 	return new Response(`

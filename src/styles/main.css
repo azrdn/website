@@ -2,17 +2,12 @@
 	navigation: auto;
 }
 
-&::view-transition-old(root),
-&::view-transition-new(root) {
-	animation-duration: 0s;
-}
-
 :root {
 	color-scheme: light dark;
 	--max-width: 90ch;
 	--accent: light-dark(#0073c0, #ff9900);
 	--fg: light-dark(#3d3d3d, #dadada);
-	--fg-secondary: light-dark(#4e4e4e, #999999);
+	--fg-secondary: light-dark(#4e4e4e, #919191);
 	--bg: light-dark(#f3f3f3, #1d1d1d);
 	--bg-secondary: light-dark(#bdbdbd, #383838);
 
@@ -57,18 +52,20 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
 	color: var(--fg);
+	text-decoration: underline solid var(--bg-secondary) 1px;
 	text-underline-offset: 0.25rlh;
 	overflow-wrap: break-word;
 	scroll-margin-top: calc(2rlh + 1lh + 1em);
 
 	&:hover {
 		color: var(--accent);
+		text-decoration-color: inherit;
 	}
 }
 
 details {
 	color: var(--fg-secondary);
-	margin: 1em 0;
+	margin: 1.5em 0;
 	summary {
 		font-weight: 700;
 		cursor: pointer;
@@ -107,7 +104,7 @@ ol p {
 
 hr {
 	color: var(--bg-secondary);
-	border-style: solid;
+	border-style: none none solid;
 	margin: 1.5rlh 0;
 }
 
@@ -131,7 +128,7 @@ code:not(pre code) {
 }
 
 option::checkmark {
-	content: "+";
+	content: "<";
 }
 
 @media (scripting: none) {

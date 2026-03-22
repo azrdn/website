@@ -1,6 +1,4 @@
 ---
-import Menu from "../components/menu.svg"
-
 const links = [
 	{ text: "/about", href: "/about", desc: "who am i?" },
 	{ text: "/blog", href: "/blog", desc: "i write too" },
@@ -31,7 +29,19 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 		))}
 	</span>
 	<button popovertarget="navbar-s" title="Menu" aria-label="Toggle navigation">
-		<Menu />
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+		>
+			<path d="M4 12h16"/>
+			<path d="M4 18h16"/>
+			<path d="M4 6h16"/>
+		</svg>
 	</button>
 
 	<nav popover id="navbar-s">
