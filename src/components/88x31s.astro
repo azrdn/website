@@ -1,7 +1,7 @@
 ---
 import { REPO_URL } from "astro:env/server"
 
-const buttons = [
+const buttons: { src: string; href: string; alt: string }[] = [
 	{
 		src: "/88x31/green-team.gif",
 		href: "https://512kb.club",
@@ -68,7 +68,9 @@ const buttons = [
 <div id="badges">
 	{
 		buttons.map(({ src, href, alt }) => (
-			<a {href}><img {src} {alt} loading="lazy" width="88" height="31" /></a>
+			<a {href} rel="external nofollow">
+				<img {src} {alt} loading="lazy" width="88" height="31" />
+			</a>
 		))
 	}
 </div>

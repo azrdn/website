@@ -10,13 +10,12 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 		<a href="/disclaimer">/disclaimer</a>
 		<a href="/status">/status</a>
 	</section>
-	<hr>
+	<hr />
 	<section class="bottom">
 		<div class="left">
 			<div>
 				<span id="cl">©</span> 2022-{new Date().getFullYear()}
 				<a
-					target="_blank"
 					href="https://www.gnu.org/licenses/gpl-3.0.en.html"
 					rel="external nofollow">GPLv3</a
 				>
@@ -34,7 +33,11 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 					<option value="dark">Dark</option>
 				</select>
 			</div>
-			<div>Version <a href={commit_url}>{hash}</a> ({timestamp})</div>
+			<div>
+				Version <a href={commit_url} rel="external nofollow">{hash}</a> ({
+					timestamp
+				})
+			</div>
 		</div>
 	</section>
 </footer>
@@ -130,7 +133,11 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 		padding: 0.25lh 1ch;
 
 		&:hover {
-			background-color: color-mix(in srgb, var(--bg-secondary), transparent 40%);
+			background-color: color-mix(
+				in srgb,
+				var(--bg-secondary),
+				transparent 40%
+			);
 		}
 
 		&::checkmark {

@@ -1,0 +1,49 @@
+---
+import Footer from "../components/footer.astro";
+import Navbar from "../components/navbar.astro";
+import Layout from "../layouts/posinega.astro";
+---
+
+<Layout>
+	<Navbar slot="header" />
+	<h1>Privacy Policy</h1>
+	<em>Last updated: 24-03-2026</em>
+	<ul>
+		<li>
+			This site uses <em>
+				<a
+					href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"
+					rel="external nofollow"
+				>
+					localStorage</a
+				>
+			</em> for the purpose of switching between light and dark themes, only
+			on the client side with no interaction with the server, There are no forms
+			or other mechanisms that process personal data.
+		</li>
+		<li>
+			This site collects anonymous page views on the blog pages to track
+			the number of visitors. This tracking does not use cookies, and no
+			personal data or personally identifiable information (PII) is
+			collected or stored in this process.
+		</li>
+		<li>
+			This site is hosted in
+			<a
+				href="https://workers.cloudflare.com/"
+				rel="external nofollow"
+			>
+				Cloudflare Workers</a
+			>. Cloudflare may collect user personal information from visitors to
+			this site, including logs of visitor IP addresses, to comply with
+			legal obligations, and to maintain the security and integrity of the
+			site and the service. See the Cloudflare Privacy Statement for
+			details.
+		</li>
+		<li>
+			All external links open in a new tab and by default are told not to
+			send a referrer in the header.
+		</li>
+	</ul>
+	<Footer slot="footer" />
+</Layout>

@@ -37,7 +37,11 @@ const recent_posts = collections
 	<section>
 		<p>Here are some links where you can reach me:</p>
 		<div id="_links">
-			{social_links.map((link) => <a href={link.href}>{link.text}</a>)}
+			{social_links.map((link) => (
+				<a href={link.href} rel="external nofollow">
+					{link.text}
+				</a>
+			))}
 		</div>
 	</section>
 	{recent_posts.length > 0 && (

@@ -3,6 +3,7 @@ import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
 import gitinfo from "./src/gitinfo"
 import minify from 'astro-minify-html-swc'
+import rehypeExtLinks from "rehype-external-links"
 import { defineConfig, envField as env, fontProviders } from "astro/config"
 
 export default defineConfig({
@@ -47,6 +48,7 @@ export default defineConfig({
 		validateSecrets: true,
 	},
 	markdown: {
+		rehypePlugins: [[rehypeExtLinks, { rel: "external nofollow" }]],
 		shikiConfig: {
 			defaultColor: false,
 			themes: {

@@ -15,7 +15,8 @@
 		"@astrojs/rss": "4.0.17",
 		"@astrojs/sitemap": "3.7.1",
 		"astro": "6.0.8",
-		"astro-minify-html-swc": "^0.1.11"
+		"astro-minify-html-swc": "^0.1.11",
+		"rehype-external-links": "^3.0.0"
 	},
 	"devDependencies": {
 		"@astrojs/check": "0.9.8",
