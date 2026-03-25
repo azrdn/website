@@ -1,0 +1,30 @@
+---
+import Footer from "../components/footer.astro";
+import Navbar from "../components/navbar.astro";
+import Layout from "../layouts/posinega.astro";
+---
+
+<Layout>
+	<Navbar slot="header" />
+	<h1>Disclaimer</h1>
+	<ul>
+		<li>
+			The views expressed on this site are my own and do not reflect those
+			of any individual or entity with which I have been or am currently
+			affiliated.
+		</li>
+		<li>
+			Any mention of individuals or entities on this site is not an
+			endorsement of them.
+		</li>
+		<li>
+			Site content may be modified, removed, or otherwise altered without
+			prior notice.
+		</li>
+		<li>
+			Opinions expressed in blog posts may have changed since their
+			original publication date.
+		</li>
+	</ul>
+	<Footer slot="footer" />
+</Layout>
