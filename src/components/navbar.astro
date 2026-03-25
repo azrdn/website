@@ -65,7 +65,7 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 	window.addEventListener("scroll", () => {
 		const scroll_top = window.scrollY || document.documentElement.scrollTop
 		const dir = scroll_top > last_scroll_top ? "down" : "up"
-		if (Math.abs(scroll_top - last_scroll_top) > 3) {
+		if (Math.abs(scroll_top - last_scroll_top) > 5) {
 			header?.setAttribute("scroll-direction", dir)
 		}
 		last_scroll_top = scroll_top <= 0 ? 0 : scroll_top
