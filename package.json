@@ -10,11 +10,11 @@
 		"types": "wrangler types && astro sync"
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "^12.6.12",
-		"@astrojs/mdx": "^4.3.13",
+		"@astrojs/cloudflare": "^13.1.4",
+		"@astrojs/mdx": "^5.0.3",
 		"@astrojs/rss": "^4.0.15",
 		"@astrojs/sitemap": "^3.7.0",
-		"astro": "^5.17.2"
+		"astro": "^6.1.1"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.6",
