@@ -66,6 +66,23 @@ a {
 details {
 	color: var(--fg-secondary);
 	margin: 1.5em 0;
+	interpolate-size: allow-keywords;
+
+	&::details-content {
+		opacity: 0;
+		block-size: 0;
+		overflow-y: clip; 
+		transition:
+			content-visibility .2s allow-discrete,
+			opacity .2s,
+			block-size .2s;
+	}
+	
+	&[open]::details-content {
+		opacity: 1;
+		block-size: auto;
+	}
+
 	summary {
 		font-weight: 700;
 		cursor: pointer;
@@ -92,6 +109,10 @@ ul {
 	row-gap: 0.5lh;
 	flex-direction: column;
 	padding-inline-start: 2ch;
+}
+
+ul li::marker {
+	content: "- ";
 }
 
 ol {

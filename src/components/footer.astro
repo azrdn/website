@@ -43,8 +43,8 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 </footer>
 
 <script is:inline>
+	/** @type {HTMLSelectElement} */
 	const select = document.querySelector("#theme-select");
-	if (!select) throw new Error("Theme selector missing");
 	select.value = localStorage.getItem("theme") || "system";
 
 	const set_theme = (theme) => {
@@ -52,7 +52,15 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 		localStorage.setItem("theme", theme);
 	};
 
-	select.onchange = () => set_theme(select.value);
+	select.onchange = () => {
+		if (!document.startViewTransition) {
+			set_theme(select.value);
+			return;
+		}
+		document.startViewTransition(() => {
+			set_theme(select.value);
+		});
+	};
 </script>
 
 <style>
