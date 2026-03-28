@@ -29,6 +29,6 @@
 		}
 	],
 	"observability": {
-		"enabled": true
+		"enabled": true,
 	}
 }
