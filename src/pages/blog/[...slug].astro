@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content"
 import type { GetStaticPaths } from "astro"
-import CopyBtn from "../../components/copy_btn.astro"
+import CodeBtns from "../../components/codeblock_btns.astro"
 import Footer from "../../components/footer.astro"
 import Navbar from "../../components/navbar.astro"
 import Toc from "../../components/toc.astro"
@@ -23,13 +23,13 @@ const { Content, headings } = await render(post)
 ---
 
 <script is:inline define:vars={{ id: post.id }} type="module">
-	const hits = await fetch("/api/hits", { method: "POST", body: id })
-	const hits_el = document.getElementById("pagehits") ?? document.createElement("p")
+	const views = await fetch("/api/views", { method: "POST", body: id })
+	const views_el = document.getElementById("pageviews") ?? document.createElement("p")
 
-	if (hits.ok) hits_el.textContent = await hits.text()
+	if (views.ok) views_el.textContent = await views.text()
 	else {
-		const hits = await fetch(`/api/hits?id=${id}`)
-		if (hits.ok) hits_el.textContent = await hits.text()
+		const views = await fetch(`/api/views?id=${id}`)
+		if (views.ok) views_el.textContent = await views.text()
 	}
 </script>
 
@@ -43,7 +43,7 @@ const { Content, headings } = await render(post)
 				{fm.updatedAt &&
 					<span>Upd: <time>{iso_date(fm.updatedAt)}</time></span>
 				}
-				<span class="js">Hits: <span id="pagehits">...</span></span>
+				<span class="js">Views: <span id="pageviews">...</span></span>
 			</p>
 			{
 				headings.length > 0 && (
@@ -57,7 +57,7 @@ const { Content, headings } = await render(post)
 		</header>
 		<div class="content"><Content /></div>
 	</article>
-	<CopyBtn />
+	<CodeBtns />
 	<Footer slot="footer" />
 </Layout>
 
@@ -68,11 +68,11 @@ const { Content, headings } = await render(post)
 		gap: 0.5em 2ch;
 
 		> * {
-			border: 2px solid var(--bg-secondary);
-			padding: 0.1em calc(1ch - 2px);
+			border: 1px solid var(--bg-secondary);
+			padding: 0.1em calc(1ch - 1px);
 		}
 
-		#pagehits {
+		#pageviews {
 			display: inline-block;
 			width: 3ch;
 			text-align: right;

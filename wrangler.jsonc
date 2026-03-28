@@ -1,9 +1,10 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "web",
-	"main": "./dist/_worker.js/index.js",
-	"compatibility_date": "2026-02-17",
+	"main": "@astrojs/cloudflare/entrypoints/server",
+	"compatibility_date": "2026-03-17",
 	"dev": {
+		"ip": "0.0.0.0",
 		"port": 4321
 	},
 	"assets": {
@@ -13,8 +14,8 @@
 	},
 	"kv_namespaces": [
 		{
-			"binding": "HITCOUNT",
-			"id": "3f3992f9add44830ab84ba3071dcda10"
+			"binding": "PAGEVIEWS",
+			"id": "d2b226ed72074fa38670e44c02be14c6"
 		}
 	],
 	"ratelimits": [
@@ -22,7 +23,7 @@
 			"name": "IP",
 			"namespace_id": "1",
 			"simple": {
-				"limit": 5,
+				"limit": 1,
 				"period": 10
 			}
 		}

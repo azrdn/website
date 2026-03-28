@@ -1,7 +1,7 @@
 ---
-import Footer from "../components/footer.astro"
-import Navbar from "../components/navbar.astro"
-import Layout from "../layouts/posinega.astro"
+import Footer from "../components/footer.astro";
+import Navbar from "../components/navbar.astro";
+import Layout from "../layouts/posinega.astro";
 ---
 
 <Layout title="Not found">
@@ -12,16 +12,26 @@ import Layout from "../layouts/posinega.astro"
 			<p>Standards Track</p>
 			<p>[Page 65]</p>
 		</div>
-		<hr>
+		<hr />
 		<div class="bot">
-			<p><a href="https://www.rfc-editor.org/rfc/rfc2616">RFC 2616</a></p>
+			<p>
+				<a
+					href="https://www.rfc-editor.org/rfc/rfc2616"
+					rel="external nofollow"
+				>
+					RFC 2616
+				</a>
+			</p>
 			<p>HTTP/1.1</p>
 			<p>June 1999</p>
 		</div>
 	</section>
 	<h1>
-		<a href="https://www.rfc-editor.org/rfc/rfc2616#section-10.4.5"
-			>10.4.5 404 Not Found
+		<a
+			href="https://www.rfc-editor.org/rfc/rfc2616#section-10.4.5"
+			rel="external nofollow"
+		>
+			10.4.5 404 Not Found
 		</a>
 	</h1>
 	<p class="indent">
@@ -38,7 +48,6 @@ import Layout from "../layouts/posinega.astro"
 		reveal exactly why the request has been refused, or when no other
 		response is applicable.
 	</p>
-	<!-- <p><a href="/">Go Back</a></p> -->
 	<Footer slot="footer" />
 </Layout>
 

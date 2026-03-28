@@ -67,8 +67,8 @@ th {
 }
 
 th, td {
-	border: 2px solid var(--fg-secondary);
-	padding: 0.5em 1ch;
+	border: 1px solid var(--fg-secondary);
+	padding: 0.5em calc(1ch - 1px);
 	vertical-align: top;
 }
 

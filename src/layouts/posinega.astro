@@ -11,8 +11,6 @@ const { title = "azrd" } = Astro.props
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="keywords" content="personal,blog,azrd" />
 		<Opengraph />
 		{/*
 			Font is preloaded only in dev mode beceause only prod has http caching
@@ -22,12 +20,7 @@ const { title = "azrd" } = Astro.props
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
-		<link
-			rel="alternate"
-			type="application/rss+xml"
-			title="azrd"
-			href="/rss.xml"
-		/>
+		<link rel="alternate" type="application/rss+xml" title="azrd" href="/rss.xml" />
 		<script is:inline>
 			const theme = localStorage.getItem("theme") || "system"
 			document.documentElement.setAttribute("theme", theme)
@@ -39,19 +32,11 @@ const { title = "azrd" } = Astro.props
 		<main>
 			<div id="page">
 				<slot />
-				<slot name="footer" />
 			</div>
 		</main>
+		<slot name="footer" />
 	</body>
 </html>
-
-<script>
-	// Opt out from BFCache to prevent popover state persisting
-	// TODO: find a better solution
-	if (window.isSecureContext) {
-		navigator.locks.request("", () => new Promise(() => {}))
-	}
-</script>
 
 <style>
 	html {
@@ -83,7 +68,7 @@ const { title = "azrd" } = Astro.props
 		background-color: var(--bg);
 		min-width: 0;
 		width: 100%;
-		padding: calc(2rlh + 1lh) 2.5ch 0;
+		padding: calc(2rlh + 1lh) 2.5ch 1lh;
 	}
 
 	main {
@@ -93,19 +78,15 @@ const { title = "azrd" } = Astro.props
 	}
 
 	@media (width >= 900px) {
-		#page {
-			padding: calc(2rlh + 1lh) 2ch 0;
-		}
-
 		main {
+			--pattern-color: light-dark(#00000019,#ffffff0b);
+			
 			&::before {
-				border-right: 1px var(--bg-secondary);
-				border-right-style: dashed;
+				border-right: 1px solid var(--bg-secondary);
 			}
 
 			&::after {
-				border-left: 1px var(--bg-secondary);
-				border-left-style: dashed;
+				border-left: 1px solid var(--bg-secondary);
 			}
 
 			&::before, &::after {
@@ -113,8 +94,14 @@ const { title = "azrd" } = Astro.props
 				content: '';
 				width: 5ch;
 				background-color: var(--bg);
-				mask-image: url("../components/decoration.svg");
-				mask-size: contain;
+				background-size: 10px 10px;
+				background-image: repeating-linear-gradient(
+					45deg,
+					var(--pattern-color) 0,
+					var(--pattern-color) 1px,
+					transparent 0,
+					transparent 50%
+				);
 			}
 		}
 	}

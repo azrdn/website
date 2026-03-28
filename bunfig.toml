@@ -1,8 +1,0 @@
-telemetry = false
-
-[run]
-bun = true
-
-[install]
-linker = "isolated"
-minimumReleaseAge = 86400

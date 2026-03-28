@@ -1,6 +1,4 @@
 ---
-import Menu from "../components/menu.svg"
-
 const links = [
 	{ text: "/about", href: "/about", desc: "who am i?" },
 	{ text: "/blog", href: "/blog", desc: "i write too" },
@@ -31,7 +29,19 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 		))}
 	</span>
 	<button popovertarget="navbar-s" title="Menu" aria-label="Toggle navigation">
-		<Menu />
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+		>
+			<path d="M4 12h16"/>
+			<path d="M4 18h16"/>
+			<path d="M4 6h16"/>
+		</svg>
 	</button>
 
 	<nav popover id="navbar-s">
@@ -48,19 +58,24 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 </header>
 
 <script>
-	const header = document.querySelector<HTMLElement>(".topheader")
-	const mobile_menu = document.querySelector<HTMLElement>("#navbar-s")
+	const header = document.querySelector<HTMLElement>(".topheader")!
+	const mobile_menu = document.querySelector<HTMLElement>("#navbar-s")!
 	let last_scroll_top = 0
 
 	window.addEventListener("scroll", () => {
 		const scroll_top = window.scrollY || document.documentElement.scrollTop
 		const dir = scroll_top > last_scroll_top ? "down" : "up"
-		if (Math.abs(scroll_top - last_scroll_top) > 3) {
-			header?.setAttribute("scroll-direction", dir)
+		if (Math.abs(scroll_top - last_scroll_top) > 5) {
+			header.setAttribute("scroll-direction", dir)
 		}
 		last_scroll_top = scroll_top <= 0 ? 0 : scroll_top
-		mobile_menu?.hidePopover()
+		mobile_menu.hidePopover()
 	}, { passive: true })
+
+	const mobile_links = mobile_menu.querySelectorAll("a")!
+	mobile_links.forEach(a => {
+		a.addEventListener("click", () => mobile_menu.hidePopover())
+	})
 </script>
 
 <style>
@@ -126,6 +141,10 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 	}
 
 	#navbar-s[popover] {
+		transition: opacity 0.2s, transform 0.2s, display 0.2s allow-discrete;
+		opacity: 0;
+		transform: translateY(-1rlh);
+
 		top: calc(2rlh + 1lh);
 		color: var(--fg-secondary);
 		background-color: var(--bg);
@@ -138,6 +157,16 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 	}
 
 	#navbar-s:popover-open {
+		opacity: 1;
+		transform: none;
+
+		@starting-style {
+			& {
+				opacity: 0;
+				transform: translateY(-1rlh);
+			}
+		}
+
 		display: flex;
 		border-bottom: 1px solid var(--bg-secondary);
 	}

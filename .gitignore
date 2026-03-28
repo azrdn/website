@@ -2,7 +2,7 @@
 dist/
 
 # commit hash
-public/commit_hash.json
+public/gitinfo.json
 
 # generated types
 .astro/
