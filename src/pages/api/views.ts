@@ -17,13 +17,13 @@ export const POST: APIRoute = async ({ request }) => {
 	if (!path) return ResCode(400)
 	if (!ids.includes(path)) return ResCode(404)
 
-	let views = await env.HITCOUNT
+	let views = await env.PAGEVIEWS
 		.get(path)
 		.then(str => parseInt(str ?? "0", 10))
 		.catch(() => 0)
 
 	views += 1
-	await env.HITCOUNT.put(path, views.toString())
+	await env.PAGEVIEWS.put(path, views.toString())
 	return new Response(views.toString(), { status: 201 })
 }
 
@@ -33,6 +33,6 @@ export const GET: APIRoute = async ({ request }) => {
 	if (!path) return ResCode(400)
 	if (!ids.includes(path)) return ResCode(404)
 
-	const views = await env.HITCOUNT.get(path).catch(() => "0")
+	const views = await env.PAGEVIEWS.get(path).catch(() => "0")
 	return new Response(views)
 }
