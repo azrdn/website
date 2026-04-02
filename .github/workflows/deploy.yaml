@@ -9,16 +9,13 @@ jobs:
   deploy:
     name: Build and deploy
     environment: prod
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
-
-      # https://github.com/oven-sh/bun/issues/5951
-      - name: Setup Node
-        uses: actions/setup-node@v6
         with:
-          node-version: lts/*
+          submodules: true
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v4
