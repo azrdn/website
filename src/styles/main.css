@@ -2,6 +2,11 @@
 	navigation: auto;
 }
 
+&::view-transition-old(root),
+&::view-transition-new(root) {
+	animation-duration: 0.2s;
+}
+
 :root {
 	color-scheme: light dark;
 	--max-width: 90ch;
