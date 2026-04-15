@@ -72,10 +72,8 @@ th, td {
 	vertical-align: top;
 }
 
-.content {
-	h1::before { content: "#" }
-	h2::before { content: "##" }
-	h3, h4, h5, h6 {
-		&::before { content: "###" }
-	}
+h1::before { content: "#" }
+h2::before { content: "##" }
+h3, h4, h5, h6 {
+	&::before { content: "###" }
 }

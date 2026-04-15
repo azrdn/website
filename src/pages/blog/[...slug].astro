@@ -55,7 +55,7 @@ const { Content, headings } = await render(post)
 			}
 		<hr />
 		</header>
-		<div class="content"><Content /></div>
+		<Content />
 	</article>
 	<CodeBtns />
 	<Footer slot="footer" />
@@ -82,7 +82,7 @@ const { Content, headings } = await render(post)
 	#_toc {
 		ul {
 			list-style-type: disc;
-			margin-bottom: 0;
+			margin: 0;
 		}
 
 		a {
@@ -93,10 +93,11 @@ const { Content, headings } = await render(post)
 	@media (width >= 1600px) {
 		#_toc {
 			position: fixed;
-			padding: 1em 2ch;
+			padding: 1rlh 2ch;
 			background-color: var(--bg);
 			top: 0;
-			right: 2ch;
+			margin: 0;
+			right: 3ch;
 			max-height: 90svh;
 			width: 35ch;
 
