@@ -106,3 +106,18 @@ const { Content, headings } = await render(post)
 		}
 	}
 </style>
+
+<script>
+	const header = document.querySelector<HTMLElement>(".topheader")!
+	const toc_links = document.querySelectorAll("#_toc a")
+
+	toc_links.forEach(link => {
+		link.addEventListener("click", () => {
+			header.setAttribute("disable-hide", "true")
+			window.addEventListener("scrollend", () => {
+				header.setAttribute("scroll-direction", "up")
+				header.removeAttribute("disable-hide")
+			}, { once: true })
+		})
+	})
+</script>

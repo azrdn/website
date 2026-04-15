@@ -114,6 +114,10 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 			transform: translateY(-100%);
 			pointer-events: none;
 		}
+
+		&[disable-hide="true"] {
+			transform: none;
+		}
 	}
 
 	button {
