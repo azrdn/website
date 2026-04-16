@@ -6,10 +6,10 @@ import Layout from "../layouts/posinega.astro"
 import Marquee from "../components/marquee.astro"
 
 const social_links = [
-	{ href: "https://bsky.app/profile/azrd.dev", text: "bluesky" },
+	{ href: "https://bsky.app/profile/did:plc:d7d6hxynbzfgbpvw5njtxbhw", text: "bluesky" },
 	{ href: "https://web.facebook.com/app.yaml", text: "facebook" },
 	{ href: "https://t.me/azisrdn", text: "telegram" },
-	{ href: "mailto:hi+web@azrd.dev", text: "email" },
+	{ href: `mailto:hi+web@${Astro.site?.hostname}`, text: "email" },
 ]
 
 const collections = await getCollection("blog")
@@ -26,7 +26,7 @@ const recent_posts = collections
 	<section>
 		<h1>Hi, i'm azrd</h1>
 		<p>
-			Welcome to my humble website, feel free to explore as much as you
+			Welcome to my website, feel free to explore as much as you
 			want.
 		</p>
 		<p>

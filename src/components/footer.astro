@@ -8,7 +8,7 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 	<section class="top links">
 		<a href="/privacy">/privacy</a>
 		<a href="/disclaimer">/disclaimer</a>
-		<a href="/status">/status</a>
+		<a href={`https://status.${Astro.site?.hostname}`} rel="external nofollow">/status</a>
 	</section>
 	<hr />
 	<section class="bottom">
@@ -53,13 +53,11 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 	};
 
 	select.onchange = () => {
-		if (!document.startViewTransition) {
+		if (document.startViewTransition) {
+			document.startViewTransition(() => { set_theme(select.value) });
+		} else {
 			set_theme(select.value);
-			return;
 		}
-		document.startViewTransition(() => {
-			set_theme(select.value);
-		});
 	};
 </script>
 
