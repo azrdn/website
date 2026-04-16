@@ -2,7 +2,7 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "web",
 	"main": "@astrojs/cloudflare/entrypoints/server",
-	"compatibility_date": "2026-03-17",
+	"compatibility_date": "2026-04-16",
 	"dev": {
 		"ip": "0.0.0.0",
 		"port": 4321

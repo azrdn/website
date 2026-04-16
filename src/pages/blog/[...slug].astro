@@ -22,15 +22,19 @@ const { post, fm } = Astro.props
 const { Content, headings } = await render(post)
 ---
 
-<script is:inline define:vars={{ id: post.id }} type="module">
-	const views = await fetch("/api/views", { method: "POST", body: id })
-	const views_el = document.getElementById("pageviews") ?? document.createElement("p")
+<script>
+import { actions } from 'astro:actions';
 
-	if (views.ok) views_el.textContent = await views.text()
-	else {
-		const views = await fetch(`/api/views?id=${id}`)
-		if (views.ok) views_el.textContent = await views.text()
-	}
+const views_el = document.querySelector<HTMLElement>("#pageviews")!
+const postId = views_el.dataset.id!
+
+const { data, error } = await actions.incrementViews(postId)
+if (error) {
+	const { data, error } = await actions.getViewcount(postId)
+	if (!error) views_el.textContent = data
+} else {
+	views_el.textContent = data
+}
 </script>
 
 <Layout title={fm.title}>
@@ -43,7 +47,9 @@ const { Content, headings } = await render(post)
 				{fm.updatedAt &&
 					<span>Upd: <time>{iso_date(fm.updatedAt)}</time></span>
 				}
-				<span class="js">Views: <span id="pageviews">...</span></span>
+				<span class="js">
+					Views: <span id="pageviews" data-id={post.id}>...</span>
+				</span>
 			</p>
 			{
 				headings.length > 0 && (
