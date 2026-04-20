@@ -1,28 +1,57 @@
 ---
 // filename reference https://www.youtube.com/watch?v=Iq3EZtD0QDE
-import "../styles/main.css"
-import { Font } from "astro:assets"
-import Opengraph from "../components/opengraph.astro"
+import "../styles/main.css";
+import { Font } from "astro:assets";
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<Opengraph />
-		{/*
+		<meta name="generator" content={Astro.generator} />
+		<meta name="keywords" content="personal,blog,azrd" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:image" content=`${Astro.site}og.png` />
+		<meta name="og:site_name" content={Astro.site?.hostname} />
+		<meta property="og:image" content=`${Astro.site}og.png` />
+		<meta property="og:title" content="azrd" />
+		<meta
+			name="description"
+			property="og:description"
+			content="My personal website - a quiet place in the internet"
+		/>
+		<meta property="og:type" content="website" />
+		{
+			/*
 			Font is preloaded only in dev mode beceause only prod has http caching
 			which makes fonts flicker on every page load in dev.
-			(gonna be fixed later)
-		*/}
+			(gonna be fixed later when astro caching is implemented)
+			*/
+		}
 		<Font cssVariable="--font-subset" preload={import.meta.env.DEV} />
+		{
+			/* native view transitions gives page load fouc on dev mode only idk why */
+			import.meta.env.DEV ? null : (
+				<style>
+					@view-transition {
+						navigation: auto;
+						types: fade
+					}
+				</style>
+			)
+		}
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
-		<link rel="alternate" type="application/rss+xml" title="azrd" href="/rss.xml" />
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="azrd"
+			href="/rss.xml"
+		/>
 		<script is:inline>
-			const theme = localStorage.getItem("theme") || "system"
-			document.documentElement.setAttribute("theme", theme)
+			const theme = localStorage.getItem("theme") || "system";
+			document.documentElement.setAttribute("theme", theme);
 		</script>
 		<title>{Astro.props.title ?? "azrd"}</title>
 	</head>
@@ -89,9 +118,10 @@ import Opengraph from "../components/opengraph.astro"
 				border-left: 1px solid var(--bg-secondary);
 			}
 
-			&::before, &::after {
+			&::before,
+			&::after {
 				flex-shrink: 0;
-				content: '';
+				content: "";
 				width: 5ch;
 				background-color: var(--bg);
 				background-size: 10px 10px;

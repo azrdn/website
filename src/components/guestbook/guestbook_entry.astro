@@ -1,0 +1,52 @@
+---
+interface Props {
+	username: string;
+	url?: string | null;
+	created_at: string;
+}
+
+const { username, url, created_at } = Astro.props;
+
+---
+
+<div class="gb_entry">
+	<div class="message">
+		<slot/>
+	</div>
+	<div class="entry_info">
+		<time datetime={created_at}>{ created_at }</time>
+		{
+			url ? <a href={url}>{username}</a> : <span>{username}</span>
+		}
+	</div>
+</div>
+
+<style>
+	.gb_entry {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+		padding: 1rlh 2ch;
+		border: 1px solid var(--bg-secondary);
+		background-color: color-mix(in srgb,var(--bg-secondary),transparent 75%);
+	}
+	
+	.message {
+		color: var(--fg);
+	}
+
+	.entry_info {
+		display: flex;
+		flex-direction: column;
+		gap: 0 2ch;
+		
+		time, a, span {
+			text-align: right;
+		}
+		
+		@media (min-width: 520px) {
+			flex-direction: row;
+			justify-content: space-between;
+		}
+	}
+</style>

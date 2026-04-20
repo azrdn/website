@@ -39,12 +39,6 @@
 	}
 }
 
-blockquote {
-	margin: 0;
-	padding: 0 0 0 2ch;
-	border-left: 1ch solid var(--bg-secondary);
-}
-
 pre:has(code) {
 	position: relative;
 	padding: 0.75em 1em;
@@ -72,8 +66,8 @@ th, td {
 	vertical-align: top;
 }
 
-h1::before { content: "#" }
-h2::before { content: "##" }
-h3, h4, h5, h6 {
-	&::before { content: "###" }
+:not(header *) {
+	&:is(h1)::before { content: "#" }
+	&:is(h2)::before { content: "##" }
+	&:is(h3, h4, h5, h6)::before { content: "###" }
 }

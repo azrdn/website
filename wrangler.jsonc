@@ -1,34 +1,42 @@
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "web",
-	"main": "@astrojs/cloudflare/entrypoints/server",
-	"compatibility_date": "2026-04-16",
-	"dev": {
-		"ip": "0.0.0.0",
-		"port": 4321
-	},
-	"assets": {
-		"binding": "ASSETS",
-		"directory": "./dist",
-		"not_found_handling": "404-page"
-	},
-	"kv_namespaces": [
-		{
-			"binding": "PAGEVIEWS",
-			"id": "d2b226ed72074fa38670e44c02be14c6"
-		}
-	],
-	"ratelimits": [
-		{
-			"name": "IP",
-			"namespace_id": "1",
-			"simple": {
-				"limit": 1,
-				"period": 10
-			}
-		}
-	],
-	"observability": {
-		"enabled": true
-	}
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "web",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-04-16",
+  "dev": {
+    "ip": "0.0.0.0",
+    "port": 4321,
+  },
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+  },
+  "kv_namespaces": [
+    {
+      "binding": "PAGEVIEWS",
+      "id": "d2b226ed72074fa38670e44c02be14c6",
+    },
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "azrd.dev",
+      "database_id": "6f275174-b9e3-4955-a6c9-b71d932f1479",
+      "migrations_dir": "./src/db/migrations"
+    },
+  ],
+  "ratelimits": [
+    {
+      "name": "IP",
+      "namespace_id": "1",
+      "simple": {
+        "limit": 1,
+        "period": 10,
+      },
+    },
+  ],
+  "observability": {
+    "enabled": true,
+  },
 }

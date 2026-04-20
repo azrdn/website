@@ -1,0 +1,8 @@
+-- Migration number: 0001 	 2026-04-17T14:31:59.755Z
+CREATE TABLE guestbook (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT NOT NULL,
+  url TEXT,
+  message TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

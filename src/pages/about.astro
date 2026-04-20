@@ -1,7 +1,8 @@
 ---
-import Badges from "../components/88x31s.astro"
-import Footer from "../components/footer.astro"
-import Navbar from "../components/navbar.astro"
+import { REPO_URL } from "astro:env/server"
+import Badges from "../components/main/88x31s.astro"
+import Footer from "../components/main/footer.astro"
+import Navbar from "../components/main/navbar.astro"
 import Layout from "../layouts/posinega.astro"
 
 const interests = [
@@ -22,31 +23,37 @@ const interests = [
 	<section>
 		<h1>Who am I</h1>
 		<p>
-			Just a <em>normie</em> who likes to play video games, doomscroll through
+			Just a <code>normal</code> person who likes to play video games, doomscroll through
 			social media, and searching for his true passion, nothing special.
 		</p>
 		<p>
 			Sometimes i experiment with new things, either tech or not, and
 			often found eating fast foods from the local stores and cafeteria.
 		</p>
-
+		<blockquote>
+			"I'm pretty fond of them, you know? They suit me perfectly. I'm about as ordinary as you can get."
+			<footer>
+				<br>
+				<cite> - Larry</cite>
+			</footer>
+		</blockquote>
 	</section>
-	<details>
-		<summary>Interests</summary>
-		<p>I have so many interests, but some of my main ones include:</p>
-		<p id="interests">{interests.map((int) => <code>{int}</code>)}</p>
-	</details>
-	<details>
-		<summary>My Gear</summary>
-		<ul>
-			<li>Computer: Acer Aspire 5 A514-54G</li>
-			<li>Monitor: Viewsonic VX2479-HD-PRO</li>
-			<li>Keyboard: Ajazz AK832</li>
-			<li>Mouse: Logitech G102 / Pressplay Iris</li>
-		</ul>
-	</details>
+	<hr>
+	<h1>Interests</h1>
+	<p>I have so many interests, but some of my main ones include:</p>
+	<p id="interests">{interests.map((int) => <code>{int}</code>)}</p>
+	<hr>
+	<h1>My Gear</h1>
+	<ul>
+		<li>Computer: Acer Aspire 5 A514-54G</li>
+		<li>Monitor: Viewsonic VX2479-HD-PRO</li>
+		<li>Keyboard: Ajazz AK832</li>
+		<li>Mouse: Logitech G102 / Pressplay Iris</li>
+	</ul>
+	<hr>
 	<details>
 		<summary>Badges</summary>
+		<p>Add yours by <a href={`${REPO_URL}/pulls`}>opening a pull request here</a></p>
 		<Badges />
 	</details>
 	<Footer slot="footer" />

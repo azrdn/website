@@ -7,7 +7,8 @@
 		"build": "astro build",
 		"preview": "astro build && astro preview",
 		"check": "astro check",
-		"types": "wrangler types && astro sync"
+		"types": "wrangler types && astro sync",
+		"db": "wrangler d1"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "13.1.10",
@@ -20,7 +21,7 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "0.9.8",
-		"typescript": "^6.0.2",
+		"typescript": "^6.0.3",
 		"wrangler": "^4.83.0"
 	}
 }

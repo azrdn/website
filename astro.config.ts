@@ -9,11 +9,10 @@ import { defineConfig, envField as env, fontProviders } from "astro/config"
 export default defineConfig({
 	site: "https://azrd.dev",
 	adapter: cloudflare({ imageService: "passthrough" }),
-	integrations: [sitemap(), mdx(), gitinfo(), minify()],
 	devToolbar: {
-		enabled: false
+		enabled: false,
 	},
-	scopedStyleStrategy: "class",
+	integrations: [sitemap(), mdx(), gitinfo(), minify()],
 	server: { host: true },
 	build: {
 		format: "preserve",

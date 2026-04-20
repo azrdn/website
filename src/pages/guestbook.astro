@@ -1,0 +1,131 @@
+---
+export const prerender = false;
+
+import { env } from "cloudflare:workers";
+import Footer from "../components/main/footer.astro";
+import Navbar from "../components/main/navbar.astro";
+import Layout from "../layouts/posinega.astro";
+import GuestbookEntry from "../components/guestbook/guestbook_entry.astro";
+
+type GuestbookEntry = {
+	username: string;
+	url: string | null;
+	message: string;
+	created_at: string;
+};
+
+const MAX_UNAME_LENGTH = 20
+const MAX_MSG_LENGTH = 100
+
+const { results } = await env.DB.prepare(
+	"SELECT * FROM guestbook",
+).all<GuestbookEntry>();
+
+const sortedResults = results.sort(
+	(a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+);
+---
+
+<Layout>
+	<Navbar slot="header" />
+	<h1>Guestbook</h1>
+	<form action="/api/guestbook" method="post">
+		<fieldset>
+			<div>
+				<label for="username">Name:</label>
+				<input
+					type="text"
+					id="username"
+					name="username"
+					required
+					maxlength={MAX_UNAME_LENGTH}
+				/>
+			</div>
+			<div>
+				<label for="url">URL (optional):</label>
+				<input type="url" id="url" name="url" />
+			</div>
+			<div>
+				<label for="message">Message:</label>
+				<textarea
+					id="message"
+					name="message"
+					required
+					maxlength={MAX_MSG_LENGTH}
+					autocorrect="off"
+				></textarea>
+			</div>
+			<button type="submit">Submit</button>
+		</fieldset>
+	</form>
+
+	<div id="gb">
+		{
+			sortedResults.map(({ username, url, created_at, message }) => {
+				return (
+					<GuestbookEntry
+						{username}
+						{url}
+						created_at={`${created_at.slice(0, 10)}`}
+					>
+						{message}
+					</GuestbookEntry>
+				);
+			})
+		}
+	</div>
+	<Footer slot="footer" />
+</Layout>
+
+<style>
+	#gb {
+		display: flex;
+		flex-direction: column;
+		gap: 1lh 0;
+		margin: 1lh 0;
+	}
+	
+	fieldset {
+		display: flex;
+		flex-direction: column;
+		gap: 1em 0;
+		padding: 0;
+		margin: 0;
+		border: none;
+	}
+	
+	input, textarea {
+		display: block;
+		line-height: inherit;
+		outline: 0;
+		border: 0;
+		width: 100%;
+		font-size: unset;
+		font-family: inherit;
+		color: var(--fg);
+		background-color: color-mix(in srgb, var(--bg-secondary) 50%, transparent);
+		padding: 0;
+	}
+	
+	textarea {
+		field-sizing: content;
+		resize: none;
+		overflow-wrap: anywhere;
+	}
+	
+	button[type="submit"] {
+		line-height: inherit;
+		padding: 0 1ch;
+		border: 0;
+		font-size: inherit;
+		color: var(--bg);
+		background-color: var(--fg-secondary);
+		align-self: flex-end;
+		cursor: pointer;
+		user-select: none;
+		
+		&:focus {
+			background-color: var(--accent);
+		}
+	}
+</style>

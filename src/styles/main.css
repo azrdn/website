@@ -1,12 +1,3 @@
-@view-transition {
-	navigation: auto;
-}
-
-&::view-transition-old(root),
-&::view-transition-new(root) {
-	animation-duration: 0.2s;
-}
-
 :root {
 	color-scheme: light dark;
 	--max-width: 90ch;
@@ -23,17 +14,15 @@
 	&[theme="light"] {
 		color-scheme: light;
 	}
+	
+	@media (prefers-reduced-motion: no-preference) {
+		scroll-behavior: smooth;
+	}
 }
 
 ::selection {
 	background-color: var(--fg);
 	color: var(--bg);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	:root {
-		scroll-behavior: smooth;
-	}
 }
 
 *, *::before, *::after {
@@ -161,6 +150,12 @@ code:not(pre code) {
 
 option::checkmark {
 	content: "<";
+}
+
+blockquote {
+	margin: 0;
+	padding: 0 0 0 2ch;
+	border-left: 1ch solid var(--bg-secondary);
 }
 
 @media (scripting: none) {

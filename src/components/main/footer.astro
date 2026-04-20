@@ -1,5 +1,5 @@
 ---
-import { hash, timestamp } from "../../public/gitinfo.json";
+import { hash, timestamp } from "../../../public/gitinfo.json";
 
 const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 ---
@@ -8,6 +8,7 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 	<section class="top links">
 		<a href="/privacy">/privacy</a>
 		<a href="/disclaimer">/disclaimer</a>
+		<a href="/guestbook">/guestbook</a>
 		<a href={`https://status.${Astro.site?.hostname}`} rel="external nofollow">/status</a>
 	</section>
 	<hr />
@@ -34,20 +35,18 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 				</select>
 			</div>
 			<div>
-				Version <a href={commit_url} rel="external nofollow">{hash}</a> ({
-					timestamp
-				})
+				Version <a href={commit_url} rel="external nofollow">{hash}</a>
+				<time datetime={timestamp}>{timestamp}</time>
 			</div>
 		</div>
 	</section>
 </footer>
 
-<script is:inline>
-	/** @type {HTMLSelectElement} */
-	const select = document.querySelector("#theme-select");
+<script>
+	const select = document.getElementById("theme-select") as unknown as HTMLSelectElement;
 	select.value = localStorage.getItem("theme") || "system";
 
-	const set_theme = (theme) => {
+	const set_theme = (theme: string) => {
 		document.documentElement.setAttribute("theme", theme);
 		localStorage.setItem("theme", theme);
 	};
