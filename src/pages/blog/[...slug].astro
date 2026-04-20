@@ -23,15 +23,35 @@ const { Content, headings } = await render(post)
 ---
 
 <script>
-	const views_el = document.getElementById("pageviews")!
-	const id = views_el.dataset.id!
-	const views = await fetch("/api/views", { method: "POST", body: id })
+	const setup = async () => {
+		const header = document.querySelector<HTMLElement>(".topheader")
+		const views_el = document.getElementById("pageviews")
+		const toc_links = document.querySelectorAll("#_toc a")
+		if (!header || !views_el) return
+		
+		const id = views_el.dataset.id
+		if (!id) return
+		
+		toc_links.forEach(link => {
+			link.addEventListener("click", () => {
+				header.setAttribute("disable-hide", "true")
+				window.addEventListener("scrollend", () => {
+					header.setAttribute("scroll-direction", "up")
+					header.removeAttribute("disable-hide")
+				}, { once: true })
+			})
+		})
+		
+		const views = await fetch("/api/views", { method: "POST", body: id })
 
-	if (views.ok) views_el.textContent = await views.text()
-	else {
-		const views = await fetch(`/api/views?id=${id}`)
 		if (views.ok) views_el.textContent = await views.text()
+		else {
+			const views = await fetch(`/api/views?id=${id}`)
+			if (views.ok) views_el.textContent = await views.text()
+		}
 	}
+	setup()
+	document.addEventListener("astro:after-swap", setup)
 </script>
 
 <Layout title={fm.title}>
@@ -110,18 +130,3 @@ const { Content, headings } = await render(post)
 		}
 	}
 </style>
-
-<script>
-	const header = document.querySelector<HTMLElement>(".topheader")!
-	const toc_links = document.querySelectorAll("#_toc a")
-
-	toc_links.forEach(link => {
-		link.addEventListener("click", () => {
-			header.setAttribute("disable-hide", "true")
-			window.addEventListener("scrollend", () => {
-				header.setAttribute("scroll-direction", "up")
-				header.removeAttribute("disable-hide")
-			}, { once: true })
-		})
-	})
-</script>

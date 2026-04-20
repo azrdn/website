@@ -7,36 +7,41 @@
 </template>
 
 <script>
-	function copy_handler(ref: HTMLElement) {
+	const copy_handler = (ref: HTMLElement) => {
 		const code = ref.querySelector("code")!;
 		return async () => await navigator.clipboard.writeText(code.innerText);
 	}
+	
+	const setup = () => {
+		const btn_templ = document.querySelector<HTMLTemplateElement>("#btn-templ")!;
+		const blocks = document.querySelectorAll<HTMLPreElement>("pre:has(code)");
 
-	const btn_templ = document.querySelector<HTMLTemplateElement>("#btn-templ")!;
-	const blocks = document.querySelectorAll<HTMLPreElement>("pre:has(code)");
+		blocks.forEach(code => {
+			if (!navigator.clipboard) return;
 
-	blocks.forEach(code => {
-		if (!navigator.clipboard) return;
+			const wrapper = document.createElement("div");
+			wrapper.classList.add("code-wrapper")
+			code.parentNode?.insertBefore(wrapper, code);
+			wrapper.appendChild(code);
 
-		const wrapper = document.createElement("div");
-		wrapper.classList.add("code-wrapper")
-		code.parentNode?.insertBefore(wrapper, code);
-		wrapper.appendChild(code);
+			const cpy_btn = btn_templ.content.firstElementChild!.cloneNode(true);
+			cpy_btn.addEventListener("click", copy_handler(code));
 
-		const cpy_btn = btn_templ.content.firstElementChild!.cloneNode(true);
-		cpy_btn.addEventListener("click", copy_handler(code));
+			const lang = code.getAttribute("data-language") ?? "";
+			const lang_btn = document.createElement("button");
+			lang_btn.textContent = lang.toUpperCase();
 
-		const lang = code.getAttribute("data-language") ?? "";
-		const lang_btn = document.createElement("button");
-		lang_btn.textContent = lang.toUpperCase();
+			const buttons = document.createElement("div");
+			buttons.classList.add("code-buttons");
+			buttons.appendChild(lang_btn);
+			buttons.appendChild(cpy_btn);
 
-		const buttons = document.createElement("div");
-		buttons.classList.add("code-buttons");
-		buttons.appendChild(lang_btn);
-		buttons.appendChild(cpy_btn);
-
-		wrapper.insertAdjacentElement("beforeend", buttons);
-	});
+			wrapper.insertAdjacentElement("beforeend", buttons);
+		});
+	}
+	
+	setup();
+	document.addEventListener("astro:after-swap", setup);
 </script>
 
 <style is:global>

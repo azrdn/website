@@ -58,24 +58,28 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 </header>
 
 <script>
-	const header = document.querySelector<HTMLElement>(".topheader")!
-	const mobile_menu = document.querySelector<HTMLElement>("#navbar-s")!
-	let last_scroll_top = 0
+	const setup = () => {
+		const header = document.querySelector<HTMLElement>(".topheader")!
+		const mobile_menu = document.querySelector<HTMLElement>("#navbar-s")!
+		let last_scroll_top = 0
 
-	window.addEventListener("scroll", () => {
-		const scroll_top = window.scrollY || document.documentElement.scrollTop
-		const dir = scroll_top > last_scroll_top ? "down" : "up"
-		if (Math.abs(scroll_top - last_scroll_top) > 5) {
-			header.setAttribute("scroll-direction", dir)
-		}
-		last_scroll_top = scroll_top <= 0 ? 0 : scroll_top
-		mobile_menu.hidePopover()
-	}, { passive: true })
+		document.addEventListener("scroll", () => {
+			const scroll_top = window.scrollY || document.documentElement.scrollTop
+			const dir = scroll_top > last_scroll_top ? "down" : "up"
+			if (Math.abs(scroll_top - last_scroll_top) > 5) {
+				header.setAttribute("scroll-direction", dir)
+			}
+			last_scroll_top = scroll_top <= 0 ? 0 : scroll_top
+			mobile_menu.hidePopover()
+		}, { passive: true })
 
-	const mobile_links = mobile_menu.querySelectorAll("a")!
-	mobile_links.forEach(a => {
-		a.addEventListener("click", () => mobile_menu.hidePopover())
-	})
+		const mobile_links = mobile_menu.querySelectorAll("a")!
+		mobile_links.forEach(a => {
+			a.addEventListener("click", () => mobile_menu.hidePopover())
+		})	
+	}
+	setup()
+	document.addEventListener("astro:after-swap", setup)
 </script>
 
 <style>

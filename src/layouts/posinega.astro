@@ -2,6 +2,7 @@
 // filename reference https://www.youtube.com/watch?v=Iq3EZtD0QDE
 import "../styles/main.css";
 import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <html lang="en">
@@ -29,17 +30,7 @@ import { Font } from "astro:assets";
 			*/
 		}
 		<Font cssVariable="--font-subset" preload={import.meta.env.DEV} />
-		{
-			/* native view transitions gives page load fouc on dev mode only idk why */
-			import.meta.env.DEV ? null : (
-				<style>
-					@view-transition {
-						navigation: auto;
-						types: fade
-					}
-				</style>
-			)
-		}
+		<ClientRouter />
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
@@ -50,8 +41,12 @@ import { Font } from "astro:assets";
 			href="/rss.xml"
 		/>
 		<script is:inline>
-			const theme = localStorage.getItem("theme") || "system";
-			document.documentElement.setAttribute("theme", theme);
+			function setTheme() {
+				const theme = localStorage.getItem("theme") || "system";
+				document.documentElement.setAttribute("theme", theme);
+			}
+			setTheme();
+			document.addEventListener("astro:after-swap", setTheme);
 		</script>
 		<title>{Astro.props.title ?? "azrd"}</title>
 	</head>
