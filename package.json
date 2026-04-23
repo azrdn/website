@@ -11,11 +11,11 @@
 		"db": "wrangler d1"
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "13.1.10",
-		"@astrojs/mdx": "5.0.3",
+		"@astrojs/cloudflare": "13.2.1",
+		"@astrojs/mdx": "5.0.4",
 		"@astrojs/rss": "4.0.18",
 		"@astrojs/sitemap": "3.7.2",
-		"astro": "6.1.8",
+		"astro": "6.1.9",
 		"astro-minify-html-swc": "^0.1.11",
 		"rehype-external-links": "^3.0.0"
 	},
