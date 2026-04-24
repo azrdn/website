@@ -1,11 +1,9 @@
 # build output
 dist/
 
-# commit hash
-public/gitinfo.json
-
 # generated types
 .astro/
+src/db/migrations/meta/
 worker-configuration.d.ts
 
 # dependencies

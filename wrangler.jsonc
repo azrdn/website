@@ -12,28 +12,12 @@
     "directory": "./dist",
     "not_found_handling": "404-page",
   },
-  "kv_namespaces": [
-    {
-      "binding": "PAGEVIEWS",
-      "id": "d2b226ed72074fa38670e44c02be14c6",
-    },
-  ],
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "azrd.dev",
       "database_id": "6f275174-b9e3-4955-a6c9-b71d932f1479",
       "migrations_dir": "./src/db/migrations"
-    },
-  ],
-  "ratelimits": [
-    {
-      "name": "IP",
-      "namespace_id": "1",
-      "simple": {
-        "limit": 1,
-        "period": 10,
-      },
     },
   ],
   "observability": {

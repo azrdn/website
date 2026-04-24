@@ -6,22 +6,25 @@
 		"dev": "astro dev",
 		"build": "astro build",
 		"preview": "astro build && astro preview",
-		"check": "astro check",
-		"types": "wrangler types && astro sync",
-		"db": "wrangler d1"
+		"types": "astro sync",
+		"cf:types": "wrangler types",
+		"db": "drizzle-kit",
+		"db migrate": "wrangler d1 migrations apply DB"
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "13.1.10",
-		"@astrojs/mdx": "5.0.3",
+		"@astrojs/cloudflare": "^13.2.1",
+		"@astrojs/compiler-rs": "^0.1.9",
+		"@astrojs/mdx": "5.0.4",
 		"@astrojs/rss": "4.0.18",
 		"@astrojs/sitemap": "3.7.2",
-		"astro": "6.1.8",
+		"astro": "^6.1.9",
 		"astro-minify-html-swc": "^0.1.11",
+		"drizzle-orm": "^0.45.2",
 		"rehype-external-links": "^3.0.0"
 	},
 	"devDependencies": {
-		"@astrojs/check": "0.9.8",
+		"drizzle-kit": "^0.31.10",
 		"typescript": "^6.0.3",
-		"wrangler": "^4.83.0"
+		"wrangler": "^4.84.1"
 	}
 }

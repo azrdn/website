@@ -1,0 +1,28 @@
+---
+import { actions } from "astro:actions";
+import { AstroError } from "astro/errors";
+import GuestbookEntry from "@components/guestbook/guestbook_entry.astro"
+
+export const prerender = false;
+
+const { data, error } = await Astro.callAction(
+	actions.getGuestbookEntries,
+	null,
+);
+if (error) throw new AstroError("Failed to load guestbook entries.");
+
+const posts = data.sort(
+	(a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+);
+---
+
+{
+  posts.map(({ username, created_at, url, message }) => (
+    <GuestbookEntry
+      username={username}
+      created_at={created_at}
+      url={url}
+      message={message}
+    />
+  ))
+}

@@ -20,12 +20,12 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 	<span id="label">
 		<a class="navlink" href="/">~</a><span class="separator">/</span>
 		{label ?? breadcrumb_segments.map((segment) => (
-			<>
+			<Fragment>
 				{segment.index === 0 ? null :<span class="separator">/</span>}
 				<span class="crumb">
 					<a class="navlink" href={segment.href}>{segment.text}</a>
 				</span>
-			</>
+			</Fragment>
 		))}
 	</span>
 	<button popovertarget="navbar-s" title="Menu" aria-label="Toggle navigation">
@@ -76,7 +76,7 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 		const mobile_links = mobile_menu.querySelectorAll("a")!
 		mobile_links.forEach(a => {
 			a.addEventListener("click", () => mobile_menu.hidePopover())
-		})	
+		})
 	}
 	setup()
 	document.addEventListener("astro:after-swap", setup)
@@ -117,10 +117,6 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 		&[scroll-direction="down"] {
 			transform: translateY(-100%);
 			pointer-events: none;
-		}
-
-		&[disable-hide="true"] {
-			transform: none;
 		}
 	}
 

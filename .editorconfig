@@ -1,7 +1,10 @@
 root = true
 
-[*.{astro,css,ts,json}]
+[*.{css,ts,json}]
 end_of_line = lf
 insert_final_newline = true
 indent_size = 4
 indent_style = tab
+
+[*.astro]
+indent_size = 2

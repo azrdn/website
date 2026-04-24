@@ -1,52 +1,58 @@
 ---
 interface Props {
-	username: string;
-	url?: string | null;
-	created_at: string;
+  message: string;
+  username: string;
+  url?: string | null;
+  created_at: string;
 }
 
-const { username, url, created_at } = Astro.props;
-
+const { message, username, url, created_at } = Astro.props;
+import Box from "@components/main/box.astro";
 ---
 
-<div class="gb_entry">
-	<div class="message">
-		<slot/>
-	</div>
-	<div class="entry_info">
-		<time datetime={created_at}>{ created_at }</time>
-		{
-			url ? <a href={url}>{username}</a> : <span>{username}</span>
-		}
-	</div>
-</div>
+<Box tag="article" class="gb_entry">
+  <div class="message">{message}</div>
+  <div class="entry_info">
+    <time datetime={created_at} title={created_at}>
+      {created_at.slice(0, 10)}
+    </time>
+    {
+      url ? (
+        <a href={url} rel="external nofollow">
+          {username}
+        </a>
+      ) : (
+        <span>{username}</span>
+      )
+    }
+  </div>
+</Box>
 
 <style>
-	.gb_entry {
-		display: flex;
-		flex-direction: column;
-		gap: 1em;
-		padding: 1rlh 2ch;
-		border: 1px solid var(--bg-secondary);
-		background-color: color-mix(in srgb,var(--bg-secondary),transparent 75%);
-	}
-	
-	.message {
-		color: var(--fg);
-	}
+  .gb_entry {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
 
-	.entry_info {
-		display: flex;
-		flex-direction: column;
-		gap: 0 2ch;
-		
-		time, a, span {
-			text-align: right;
-		}
-		
-		@media (min-width: 520px) {
-			flex-direction: row;
-			justify-content: space-between;
-		}
-	}
+  .message {
+    color: var(--fg);
+  }
+
+  .entry_info {
+    display: flex;
+    flex-direction: column;
+    gap: 0 2ch;
+
+    time,
+    a,
+    span {
+      text-align: right;
+    }
+
+    @media (min-width: 520px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
 </style>

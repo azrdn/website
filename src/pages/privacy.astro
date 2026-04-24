@@ -1,13 +1,13 @@
 ---
-import Footer from "../components/main/footer.astro";
-import Navbar from "../components/main/navbar.astro";
-import Layout from "../layouts/posinega.astro";
+import Footer from "@components/main/footer.astro";
+import Navbar from "@components/main/navbar.astro";
+import Layout from "@components/layout.astro";
 ---
 
 <Layout>
 	<Navbar slot="header" />
 	<h1>Privacy Policy</h1>
-	<em>Last updated: 24-03-2026</em>
+	<em>Last updated: 23-04-2026</em>
 	<ul>
 		<li>
 			This site uses <em>
@@ -20,12 +20,6 @@ import Layout from "../layouts/posinega.astro";
 			</em> for the purpose of switching between light and dark themes, only
 			on the client side with no interaction with the server, There are no forms
 			or other mechanisms that process personal data.
-		</li>
-		<li>
-			This site collects anonymous page views on the blog pages to track
-			the number of visitors. This tracking does not use cookies, and no
-			personal data or personally identifiable information (PII) is
-			collected or stored in this process.
 		</li>
 		<li>
 			This site is hosted in
@@ -43,6 +37,9 @@ import Layout from "../layouts/posinega.astro";
 		<li>
 			All external links open in a new tab and by default are told not to
 			send a referrer in the header.
+		</li>
+		<li>
+			This Privacy Policy may be updated at any time without prior notice.
 		</li>
 	</ul>
 	<Footer slot="footer" />

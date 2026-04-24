@@ -1,8 +1,9 @@
 ---
 import { getCollection } from "astro:content"
-import Footer from "../components/main/footer.astro"
-import Navbar from "../components/main/navbar.astro"
-import Layout from "../layouts/posinega.astro"
+import Footer from "@components/main/footer.astro"
+import Navbar from "@components/main/navbar.astro"
+import Layout from "@components/layout.astro"
+import Box from "@components/main/box.astro"
 
 const collections = await getCollection("blog")
 
@@ -21,9 +22,8 @@ const style = `
 	<Navbar slot="header" />
 	<h1>I write stuff</h1>
 	{
-		!import.meta.env.PROD && (
+		import.meta.env.DEV && (
 			<strong {style}>&nbsp;DEVELOPMENT MODE&nbsp;</strong>
-			<span>Rendered from /src/test/posts</span>
 		)
 	}
 	<p>Sometimes i write down my thoughts and experience on various topics.</p>
@@ -31,55 +31,28 @@ const style = `
 		You can also view my posts via
 		<a href="/rss.xml" rel="alternate" type="application/rss+xml">RSS</a>.
 	</p>
+	<hr>
 	{
 		posts.map((post) => (
-			<article>
+			<Box tag="article" class="post">
 				<a href={`/blog/${post.id}`}>{post.data.title}</a>
 				<span>{post.data.createdAt.toISOString().slice(0, 10)}</span>
-			</article>
+			</Box>
 		))
 	}
 	<Footer slot="footer" />
 </Layout>
 
 <style>
-	article {
+	.post {
 		display: flex;
 		flex-direction: column;
-		position: relative;
-		padding: 1em 2ch;
-		margin: 1rlh 0;
-		gap: 1em;
-		z-index: 0;
-
-		&::before {
-			content: "";
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			translate: -50% -50%;
-			width: 100%;
-			height: 100%;
-			border: solid 1px var(--bg-secondary);
-			z-index: -1;
-		}
-
-		&:hover {
-			background-color: color-mix(in srgb, var(--bg-secondary), transparent 75%);
-		}
-
-		a {
-			text-decoration: none;
-
-			&:hover {
-				background-color: unset;
-				text-decoration: underline;
-			}
-		}
+		row-gap: 1em;
+		margin: 1em 0;
 	}
 
 	@media (width >= 768px) {
-		article {
+		.post {
 			flex-direction: row;
 			justify-content: space-between;
 		}

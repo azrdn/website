@@ -37,6 +37,7 @@ const toc = buildToc(headings);
 	nav {
 		ul {
 			row-gap: 0;
+			margin: 0;
 		}
 
 		li {
@@ -52,6 +53,10 @@ const toc = buildToc(headings);
 					border-color: var(--accent);
 				}
 			}
+		}
+
+		a {
+			text-decoration: none;
 		}
 
 		li::before {

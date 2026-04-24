@@ -1,7 +1,10 @@
 ---
-import { hash, timestamp } from "../../../public/gitinfo.json";
+import { getEntry } from "astro:content";
 
-const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
+const gitHash = (await getEntry("gitInfo", "0")!).data.output
+const lastChange = (await getEntry("gitInfo", "1")!).data.output
+
+const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
 ---
 
 <footer>
@@ -36,15 +39,15 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${hash}`;
 				</select>
 			</div>
 			<div>
-				Version <a href={commit_url} rel="external nofollow">{hash}</a>
-				<time datetime={timestamp}>{timestamp}</time>
+				Version <a href={commit_url} rel="external nofollow">{gitHash}</a>
+				<time datetime={lastChange}>({lastChange})</time>
 			</div>
 		</div>
 	</section>
 </footer>
 
 <script>
-	const select = document.getElementById("theme-select") as unknown as HTMLSelectElement;
+	const select = document.querySelector("#theme-select") as unknown as HTMLSelectElement;
 	select.value = localStorage.getItem("theme") || "system";
 
 	const set_theme = (theme: string) => {
