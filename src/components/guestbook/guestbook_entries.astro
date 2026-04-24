@@ -1,0 +1,30 @@
+---
+import GBEntry from "./guestbook_entry.astro";
+
+import { GET } from "../../pages/api/guestbook"
+import type { GETResponse } from "../../pages/api/guestbook"
+
+const data = await GET(Astro)
+const posts = await data.json<GETResponse[]>()
+---
+
+<div id="gb">
+	{
+		posts.map(({ username, url, created_at, message }) => {
+			return (
+				<GBEntry {username} {url} {created_at}>
+					{message}
+				</GBEntry>
+			);
+		})
+	}
+</div>
+
+<style>
+	#gb {
+		display: flex;
+		flex-direction: column;
+		gap: 1lh 0;
+		margin: 1lh 0;
+	}
+</style>

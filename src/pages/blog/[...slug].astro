@@ -1,76 +1,42 @@
 ---
 import { getCollection, render } from "astro:content"
 import type { GetStaticPaths } from "astro"
-import CodeBtns from "../../components/blog/codeblock_btns.astro"
-import Footer from "../../components/main/footer.astro"
-import Navbar from "../../components/main/navbar.astro"
-import Toc from "../../components/blog/toc.astro"
-import Layout from "../../layouts/posinega.astro"
+import CodeBtns from "@components/blog/codeblock_btns.astro"
+import Footer from "@components/main/footer.astro"
+import Navbar from "@components/main/navbar.astro"
+import Toc from "@components/blog/toc.astro"
+import Layout from "@components/layout.astro"
 
 import "../../styles/blog.css"
 
 const iso_date = (date: Date) => date.toISOString().slice(0, 10)
+
 export const getStaticPaths = (async () => {
 	const collection = await getCollection("blog")
 	return collection.map(post => ({
 		params: { slug: post.id },
-		props: { post, fm: post.data },
+		props: { post },
 	}))
 }) satisfies GetStaticPaths
 
-const { post, fm } = Astro.props
+const { post } = Astro.props
 const { Content, headings } = await render(post)
 ---
 
-<script>
-	const setup = async () => {
-		const header = document.querySelector<HTMLElement>(".topheader")
-		const views_el = document.getElementById("pageviews")
-		const toc_links = document.querySelectorAll("#_toc a")
-		if (!header || !views_el) return
-		
-		const id = views_el.dataset.id
-		if (!id) return
-		
-		toc_links.forEach(link => {
-			link.addEventListener("click", () => {
-				header.setAttribute("disable-hide", "true")
-				window.addEventListener("scrollend", () => {
-					header.setAttribute("scroll-direction", "up")
-					header.removeAttribute("disable-hide")
-				}, { once: true })
-			})
-		})
-		
-		const views = await fetch("/api/views", { method: "POST", body: id })
-
-		if (views.ok) views_el.textContent = await views.text()
-		else {
-			const views = await fetch(`/api/views?id=${id}`)
-			if (views.ok) views_el.textContent = await views.text()
-		}
-	}
-	setup()
-	document.addEventListener("astro:after-swap", setup)
-</script>
-
-<Layout title={fm.title}>
+<Layout title={post.data.title}>
 	<Navbar slot="header" />
 	<article>
 		<header>
-			<h1>{fm.title}</h1>
+			<h1>{post.data.title}</h1>
 			<p id="info">
-				<span>Publ: <time>{iso_date(fm.createdAt)}</time></span>
-				{fm.updatedAt &&
-					<span>Upd: <time>{iso_date(fm.updatedAt)}</time></span>
+				<span>Publ: <time>{iso_date(post.data.createdAt)}</time></span>
+				{post.data.updatedAt &&
+					<span>Upd: <time>{iso_date(post.data.updatedAt)}</time></span>
 				}
-				<span class="js">
-					Views: <span id="pageviews" data-id={post.id}>...</span>
-				</span>
 			</p>
 			{
 				headings.length > 0 && (
-					<details id="_toc">
+					<details id="toc">
 						<summary>Table of Contents</summary>
 						<Toc {headings} />
 					</details>
@@ -102,19 +68,8 @@ const { Content, headings } = await render(post)
 		}
 	}
 
-	#_toc {
-		ul {
-			list-style-type: disc;
-			margin: 0;
-		}
-
-		a {
-			text-decoration: none;
-		}
-	}
-
 	@media (width >= 1600px) {
-		#_toc {
+		#toc {
 			position: fixed;
 			padding: 1rlh 2ch;
 			background-color: var(--bg);
@@ -128,5 +83,9 @@ const { Content, headings } = await render(post)
 				overflow-y: scroll;
 			}
 		}
+	}
+
+	:global(body:has(#toc:hover) .topheader) {
+		transform: none;
 	}
 </style>

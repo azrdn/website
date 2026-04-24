@@ -16,7 +16,7 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 })
 ---
 
-<header class="topheader">
+<header class="topheader" transition:persist>
 	<span id="label">
 		<a class="navlink" href="/">~</a><span class="separator">/</span>
 		{label ?? breadcrumb_segments.map((segment) => (
@@ -58,7 +58,7 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 </header>
 
 <script>
-	const setup = () => {
+	// const setup = () => {
 		const header = document.querySelector<HTMLElement>(".topheader")!
 		const mobile_menu = document.querySelector<HTMLElement>("#navbar-s")!
 		let last_scroll_top = 0
@@ -76,10 +76,10 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 		const mobile_links = mobile_menu.querySelectorAll("a")!
 		mobile_links.forEach(a => {
 			a.addEventListener("click", () => mobile_menu.hidePopover())
-		})	
-	}
-	setup()
-	document.addEventListener("astro:after-swap", setup)
+		})
+	// }
+	// setup()
+	// document.addEventListener("astro:after-swap", setup)
 </script>
 
 <style>
@@ -117,10 +117,6 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 		&[scroll-direction="down"] {
 			transform: translateY(-100%);
 			pointer-events: none;
-		}
-
-		&[disable-hide="true"] {
-			transform: none;
 		}
 	}
 

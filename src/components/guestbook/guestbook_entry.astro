@@ -6,7 +6,7 @@ interface Props {
 }
 
 const { username, url, created_at } = Astro.props;
-
+const shortDate = created_at.slice(0, 10);
 ---
 
 <div class="gb_entry">
@@ -14,9 +14,11 @@ const { username, url, created_at } = Astro.props;
 		<slot/>
 	</div>
 	<div class="entry_info">
-		<time datetime={created_at}>{ created_at }</time>
+		<time datetime={created_at} title={created_at}>{shortDate}</time>
 		{
-			url ? <a href={url}>{username}</a> : <span>{username}</span>
+			url ?
+				<a href={url} rel="external nofollow">{username}</a> :
+				<span>{username}</span>
 		}
 	</div>
 </div>

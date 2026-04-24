@@ -1,5 +1,11 @@
 {
 	"extends": "astro/tsconfigs/strictest",
+	"compilerOptions": {
+		"paths": {
+			"@components/*": ["./src/components/*"],
+			"@db/*": ["./src/db/*"]
+		}
+	},
 	"include": [".astro/types.d.ts", "**/*"],
 	"exclude": ["dist"]
 }

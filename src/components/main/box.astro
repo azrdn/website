@@ -1,0 +1,9 @@
+<div {...Astro.props}><slot /></div>
+
+<style>
+	div {
+		border: 1px solid var(--bg-secondary);
+		padding: 1em calc(2ch - 2px);
+		background-color: color-mix(in srgb, var(--bg-secondary), transparent 75%);
+	}
+</style>

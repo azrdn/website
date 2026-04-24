@@ -1,29 +1,8 @@
 ---
-export const prerender = false;
-
-import { env } from "cloudflare:workers";
-import Footer from "../components/main/footer.astro";
-import Navbar from "../components/main/navbar.astro";
-import Layout from "../layouts/posinega.astro";
-import GuestbookEntry from "../components/guestbook/guestbook_entry.astro";
-
-type GuestbookEntry = {
-	username: string;
-	url: string | null;
-	message: string;
-	created_at: string;
-};
-
-const MAX_UNAME_LENGTH = 20
-const MAX_MSG_LENGTH = 100
-
-const { results } = await env.DB.prepare(
-	"SELECT * FROM guestbook",
-).all<GuestbookEntry>();
-
-const sortedResults = results.sort(
-	(a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-);
+import Footer from "@components/main/footer.astro";
+import Navbar from "@components/main/navbar.astro";
+import Layout from "@components/layout.astro";
+import GuestbookList from "@components/guestbook/guestbook_entries.astro";
 ---
 
 <Layout>
@@ -37,8 +16,9 @@ const sortedResults = results.sort(
 					type="text"
 					id="username"
 					name="username"
+					autocomplete="off"
+					maxlength="30"
 					required
-					maxlength={MAX_UNAME_LENGTH}
 				/>
 			</div>
 			<div>
@@ -51,40 +31,19 @@ const sortedResults = results.sort(
 					id="message"
 					name="message"
 					required
-					maxlength={MAX_MSG_LENGTH}
+					minlength="5"
+					maxlength="150"
 					autocorrect="off"
 				></textarea>
 			</div>
 			<button type="submit">Submit</button>
 		</fieldset>
 	</form>
-
-	<div id="gb">
-		{
-			sortedResults.map(({ username, url, created_at, message }) => {
-				return (
-					<GuestbookEntry
-						{username}
-						{url}
-						created_at={`${created_at.slice(0, 10)}`}
-					>
-						{message}
-					</GuestbookEntry>
-				);
-			})
-		}
-	</div>
+	<GuestbookList />
 	<Footer slot="footer" />
 </Layout>
 
 <style>
-	#gb {
-		display: flex;
-		flex-direction: column;
-		gap: 1lh 0;
-		margin: 1lh 0;
-	}
-	
 	fieldset {
 		display: flex;
 		flex-direction: column;
@@ -123,7 +82,7 @@ const sortedResults = results.sort(
 		align-self: flex-end;
 		cursor: pointer;
 		user-select: none;
-		
+
 		&:focus {
 			background-color: var(--accent);
 		}

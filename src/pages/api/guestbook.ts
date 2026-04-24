@@ -1,35 +1,40 @@
 import type { APIRoute } from "astro";
 import z from "astro/zod"
+import { guestbook_tbl as tbl } from "@db/schema"
+import { drizzle } from "drizzle-orm/d1"
 import { env } from 'cloudflare:workers';
 
+export const prerender = false
+
+const db = drizzle(env.DB)
 const schema = z.object({
 	username: z.string().min(1).max(20),
-	url: z.preprocess((val) => (val === "" ? undefined : val),
-		z.url().optional()
+	url: z.pipe(
+		z.string().transform(val => val === "" ? null : val),
+		z.url().nullable(),
 	),
 	message: z.string().min(1).max(100),
 })
 
-export const prerender = false
-
-
 export const POST: APIRoute = async ({ request, redirect }) => {
-	const ip = request.headers.get("cf-connecting-ip")
-	if (!ip) return new Response(null, { status: 403 })
-
-	const rate = await env.IP.limit({ key: ip })
-	if (!rate.success) return new Response(null, { status: 429 })
-
 	const body = await request.formData()
 	const object = Object.fromEntries(body.entries())
+	
 	const { success, data } = schema.safeParse(object)
 	if (!success) return new Response(null, { status: 400 })
 
-	await env.DB
-		.prepare("INSERT INTO guestbook (username, url, message) VALUES (?, ?, ?)")
-		.bind(data.username, data.url ?? null, data.message)
-		.run()
-
-	console.log(data)
+	await db
+		.insert(tbl)
+		.values(data)
+		.returning({ id: tbl.id })
+	
 	return redirect("/guestbook")
 }
+
+export const GET: APIRoute = async () => {
+	const entries = await db.select().from(tbl)
+	return new Response(JSON.stringify(entries), { status: 200 })
+}
+
+export type GETResponse = typeof tbl.$inferSelect
+export type POSTResponse = { id: typeof tbl.$inferInsert.id }[]

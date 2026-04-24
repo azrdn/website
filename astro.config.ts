@@ -1,18 +1,20 @@
 import cloudflare from "@astrojs/cloudflare"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
-import gitinfo from "./src/gitinfo"
 import minify from 'astro-minify-html-swc'
 import rehypeExtLinks from "rehype-external-links"
-import { defineConfig, envField as env, fontProviders } from "astro/config"
+import { defineConfig, envField, fontProviders } from "astro/config"
 
 export default defineConfig({
+	prefetch: false,
 	site: "https://azrd.dev",
-	adapter: cloudflare({ imageService: "passthrough" }),
+	adapter: cloudflare({
+		imageService: "passthrough"
+	}),
 	devToolbar: {
 		enabled: false,
 	},
-	integrations: [sitemap(), mdx(), gitinfo(), minify()],
+	integrations: [sitemap(), mdx(), minify()],
 	server: { host: true },
 	build: {
 		format: "preserve",
@@ -21,24 +23,25 @@ export default defineConfig({
 	vite: {
 		build: {
 			assetsInlineLimit: 1024,
+		},
+		optimizeDeps: {
+			exclude: ["es-git"]
 		}
 	},
 	env: {
 		schema: {
-			ASCII_ART_URL: env.string({
+			ASCII_ART_URL: envField.string({
 				context: "server",
 				access: "public",
-				optional: false,
 			}),
-			ROBOTS_TXT_URL: env.string({
+			ROBOTS_TXT_URL: envField.string({
 				context: "server",
 				access: "public",
-				optional: false,
 			}),
-			REPO_URL: env.string({
+			REPO_URL: envField.string({
 				context: "server",
 				access: "public",
-				optional: false,
+				default: "https://github.com/azrd/azrd.dev"
 			}),
 		},
 		validateSecrets: true,
