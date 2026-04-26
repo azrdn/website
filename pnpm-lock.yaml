@@ -30,8 +30,8 @@ importers:
         specifier: ^0.1.11
         version: 0.1.11
       drizzle-kit:
-        specifier: 1.0.0-beta.23
-        version: 1.0.0-beta.23
+        specifier: 1.0.0-beta.9-e89174b
+        version: 1.0.0-beta.9-e89174b
       drizzle-orm:
         specifier: 1.0.0-beta.22
         version: 1.0.0-beta.22(zod@4.3.6)
@@ -1409,8 +1409,8 @@ packages:
   domutils@3.2.2:
     resolution: {integrity: sha512-6kZKyUajlDuqlHKVX1w7gyslj9MPIXzIFiz/rGu35uC1wMi+kMhQwGhl4lt9unC9Vb9INnY9Z3/ZA3+FhASLaw==}
 
-  drizzle-kit@1.0.0-beta.23:
-    resolution: {integrity: sha512-AXVAYTItegF3h1JQECt4s4z9RwipiBoK99A3IY/thGZ0xdSPlsXZr/SU9sh6JvQi5bq08ZYXmKcdIwJpNxITig==}
+  drizzle-kit@1.0.0-beta.9-e89174b:
+    resolution: {integrity: sha512-Xrw3k8E2CbSZr+kqe3k5W4oxd2fbEyczjKtyGIkAq0x9Wqpa/VtAT6Mkh83sIzqG4OSN7lOoUafsDxSE/AR7RA==}
     hasBin: true
 
   drizzle-orm@1.0.0-beta.22:
@@ -3659,13 +3659,12 @@ snapshots:
       domelementtype: 2.3.0
       domhandler: 5.0.3
 
-  drizzle-kit@1.0.0-beta.23:
+  drizzle-kit@1.0.0-beta.9-e89174b:
     dependencies:
       '@drizzle-team/brocli': 0.11.0
       '@js-temporal/polyfill': 0.5.1
       esbuild: 0.25.12
-      get-tsconfig: 4.14.0
-      jiti: 2.6.1
+      tsx: 4.21.0
 
   drizzle-orm@1.0.0-beta.22(zod@4.3.6):
     optionalDependencies:
@@ -4072,7 +4071,8 @@ snapshots:
     dependencies:
       is-inside-container: 1.0.0
 
-  jiti@2.6.1: {}
+  jiti@2.6.1:
+    optional: true
 
   js-yaml@4.1.1:
     dependencies:
@@ -4979,7 +4979,6 @@ snapshots:
       get-tsconfig: 4.14.0
     optionalDependencies:
       fsevents: 2.3.3
-    optional: true
 
   typescript@6.0.3: {}
 
