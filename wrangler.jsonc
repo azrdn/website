@@ -3,14 +3,8 @@
   "name": "web",
   "main": "@astrojs/cloudflare/entrypoints/server",
   "compatibility_date": "2026-04-16",
-  "dev": {
-    "ip": "0.0.0.0",
-    "port": 4321,
-  },
   "assets": {
-    "binding": "ASSETS",
     "directory": "./dist",
-    "not_found_handling": "404-page",
   },
   "d1_databases": [
     {
