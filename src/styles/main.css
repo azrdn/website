@@ -38,6 +38,20 @@ img, picture, video, canvas, svg {
 	max-width: 100%;
 }
 
+button {
+	line-height: inherit;
+	padding: 0 1ch;
+	border: 0;
+	font-size: inherit;
+	color: var(--bg);
+	background-color: var(--fg-secondary);
+	user-select: none;
+
+	&:focus {
+		background-color: var(--accent);
+	}
+}
+
 h1, h2, h3, h4, h5, h6 {
 	display: flex;
 	gap: 0 1ch;

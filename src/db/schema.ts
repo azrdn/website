@@ -10,5 +10,3 @@ export const table = t.sqliteTable("guestbook", {
     	.notNull()
     	.default(sql`(current_timestamp)`),
 });
-
-export type GuestbookEntry = typeof table.$inferSelect;

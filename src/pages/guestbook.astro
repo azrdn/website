@@ -4,7 +4,8 @@ import { actions } from "astro:actions";
 import Footer from "@components/main/footer.astro";
 import Navbar from "@components/main/navbar.astro";
 import Layout from "@components/layout.astro";
-import GuestbookEntries from "@components/guestbook/guestbook_entries.astro";
+import GuestbookEntries from "@components/guestbook/entries.astro";
+import GuestbookSkeleton from "@components/guestbook/skeleton.astro";
 
 export const prerender = false;
 const result = Astro.getActionResult(actions.addGuestbookEntry);
@@ -27,7 +28,7 @@ if (result && !result.error) return Astro.redirect("/guestbook");
 					id="username"
 					name="username"
 					autocomplete="off"
-					maxlength="30"
+					maxlength="20"
 					required
 				/>
 			</div>
@@ -42,15 +43,19 @@ if (result && !result.error) return Astro.redirect("/guestbook");
 					name="message"
 					required
 					minlength="5"
-					maxlength="150"
+					maxlength="100"
 					autocorrect="off"></textarea>
 			</div>
-			<button type="submit">Submit</button>
+			<button type="submit">&gt; Submit</button>
 		</fieldset>
 	</form>
 	<hr />
 	<div id="entries">
-		<GuestbookEntries server:defer />
+		<GuestbookEntries server:defer>
+			<Fragment slot="fallback">
+				{[...Array(5)].map(() => <GuestbookSkeleton />)}
+			</Fragment>
+		</GuestbookEntries>
 	</div>
 	<Footer slot="footer" />
 </Layout>
@@ -79,31 +84,19 @@ if (result && !result.error) return Astro.redirect("/guestbook");
 		padding: 0;
 	}
 
+	button {
+		align-self: flex-end;
+	}
+
 	textarea {
 		field-sizing: content;
 		resize: none;
 		overflow-wrap: anywhere;
 	}
 
-	button[type="submit"] {
-		line-height: inherit;
-		padding: 0 1ch;
-		border: 0;
-		font-size: inherit;
-		color: var(--bg);
-		background-color: var(--fg-secondary);
-		align-self: flex-end;
-		cursor: pointer;
-		user-select: none;
-
-		&:focus {
-			background-color: var(--accent);
-		}
-	}
-
 	#entries {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+	}
 </style>

@@ -1,0 +1,21 @@
+---
+import { actions } from "astro:actions";
+import { AstroError } from "astro/errors";
+import GuestbookItem from "@components/guestbook/item.astro"
+
+export const prerender = false;
+
+const { data, error } = await Astro.callAction(actions.getGuestbookEntries, null);
+if (error) throw new AstroError("Failed to load guestbook entries.");
+---
+
+{
+  data.map(({ username, created_at, url, message }) => (
+    <GuestbookItem
+      username={username}
+      created_at={created_at}
+      url={url}
+      message={message}
+    />
+  ))
+}
