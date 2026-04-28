@@ -7,6 +7,7 @@ import Box from "@components/main/box.astro"
 
 const collections = await getCollection("blog")
 
+const ISODate = (date: Date) => date.toISOString()
 const posts = collections.sort((a, b) => {
 	return b.data.createdAt.getTime() - a.data.createdAt.getTime()
 })
@@ -32,11 +33,13 @@ const style = `
 		<a href="/rss.xml" rel="alternate" type="application/rss+xml">RSS</a>.
 	</p>
 	<hr>
-	{
-		posts.map((post) => (
+	{ 
+		posts.map(({ data, id }) => (
 			<Box tag="article" class="post">
-				<a href={`/blog/${post.id}`}>{post.data.title}</a>
-				<span>{post.data.createdAt.toISOString().slice(0, 10)}</span>
+				<a href={`/blog/${id}`}>{data.title}</a>
+				<time datetime={ISODate(data.createdAt)} title={ISODate(data.createdAt)}>
+					{ISODate(data.createdAt).slice(0, 10)}
+				</time>
 			</Box>
 		))
 	}

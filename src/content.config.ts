@@ -18,7 +18,7 @@ export const collections = {
 	gitInfo: defineCollection({
 		loader: cmdLoader([
 			"git rev-parse --short HEAD",
-			"git show -s --format=%cd --date=format:'%Y-%m-%d' HEAD"
+			"git show -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' HEAD"
 		]),
 	})
 }
