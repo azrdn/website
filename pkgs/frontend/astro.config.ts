@@ -18,17 +18,12 @@ export default c.defineConfig({
 			ASCII_ART_URL: c.envField.string({
 				context: "server",
 				access: "public",
-				optional: true,
-			}),
-			ROBOTS_TXT_URL: c.envField.string({
-				context: "server",
-				access: "public",
-				optional: true,
+				url: true,
 			}),
 			REPO_URL: c.envField.string({
 				context: "server",
 				access: "public",
-				optional: true,
+				url: true,
 			}),
 			BACKEND_URL: c.envField.string({
 				context: "client",
