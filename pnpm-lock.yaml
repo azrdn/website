@@ -36,9 +36,6 @@ importers:
       drizzle-kit:
         specifier: 1.0.0-beta.22
         version: 1.0.0-beta.22
-      wrangler:
-        specifier: ^4.86.0
-        version: 4.86.0
 
   pkgs/frontend:
     dependencies:
@@ -67,9 +64,6 @@ importers:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
-      wrangler:
-        specifier: ^4.86.0
-        version: 4.86.0
 
 packages:
 
