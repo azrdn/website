@@ -26,7 +26,6 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           version: 10.33.2
-          cache: true
 
       - name: Install dependencies and build
         working-directory: pkgs/frontend
@@ -59,7 +58,6 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           version: 10.33.0
-          cache: true
 
       - name: Install dependencies and build
         working-directory: pkgs/backend
