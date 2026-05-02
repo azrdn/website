@@ -1,5 +1,5 @@
 {
-	"name": "azrd.dev",
+	"name": "frontend",
 	"type": "module",
 	"version": "1.0.0",
 	"scripts": {
@@ -9,11 +9,11 @@
 		"types": "astro sync"
 	},
 	"dependencies": {
-		"@astrojs/mdx": "^5.0.4",
+		"@astrojs/mdx": "6.0.0-alpha.0",
 		"@astrojs/rss": "^4.0.18",
 		"@astrojs/sitemap": "^3.7.2",
 		"@elysia/eden": "^1.4.10",
-		"astro": "^6.2.1",
+		"astro": "7.0.0-alpha.0",
 		"astro-minify-html-swc": "^0.1.11",
 		"rehype-external-links": "^3.0.0"
 	},

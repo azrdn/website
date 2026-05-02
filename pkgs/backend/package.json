@@ -1,23 +1,23 @@
 {
-  "name": "my-app",
+  "name": "backend",
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
+    "dev:db": "pglite-server --db=./db/pglite",
     "build": "wrangler build",
     "deploy": "wrangler deploy --minify",
-    "db:dev": "pglite-server --db=./db/pglite",
     "dk": "drizzle-kit",
-    "cf-typegen": "wrangler types"
+    "types": "wrangler types"
   },
   "dependencies": {
     "@elysia/cors": "^1.4.2",
-    "drizzle-orm": "1.0.0-beta.22",
+    "drizzle-orm": "1.0.0-rc.1",
     "elysia": "^1.4.28",
     "postgres": "^3.4.9",
     "zod": "^4.4.2"
   },
   "devDependencies": {
     "@electric-sql/pglite-socket": "^0.1.5",
-    "drizzle-kit": "1.0.0-beta.22"
+    "drizzle-kit": "1.0.0-rc.1"
   }
 }
