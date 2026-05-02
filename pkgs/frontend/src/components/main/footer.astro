@@ -1,9 +1,7 @@
 ---
-import { execSync } from "node:child_process";
-
-const gitHash = execSync("git rev-parse --short HEAD").toString().trim();
-const lastChange = execSync("git show -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' HEAD").toString().trim();
-const shortDate = lastChange.slice(0, 10);
+const gitHash = "dummy";
+const lastChange = "dummy";
+const shortDate = "dummy";
 
 const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
 ---
