@@ -1,19 +1,12 @@
-import cloudflare from "@astrojs/cloudflare"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
-import minify from 'astro-minify-html-swc'
+import * as c from "astro/config"
 import rehypeExtLinks from "rehype-external-links"
-import { defineConfig, envField, fontProviders } from "astro/config"
+import minify from 'astro-minify-html-swc'
 
-export default defineConfig({
-	prefetch: false,
+export default c.defineConfig({
 	site: "https://azrd.dev",
-	adapter: cloudflare({
-		imageService: "passthrough"
-	}),
-	devToolbar: {
-		enabled: false,
-	},
+	devToolbar: { enabled: false },
 	integrations: [sitemap(), mdx(), minify()],
 	server: { host: true },
 	build: {
@@ -22,18 +15,25 @@ export default defineConfig({
 	},
 	env: {
 		schema: {
-			ASCII_ART_URL: envField.string({
+			ASCII_ART_URL: c.envField.string({
 				context: "server",
 				access: "public",
+				optional: true,
 			}),
-			ROBOTS_TXT_URL: envField.string({
+			ROBOTS_TXT_URL: c.envField.string({
 				context: "server",
 				access: "public",
+				optional: true,
 			}),
-			REPO_URL: envField.string({
+			REPO_URL: c.envField.string({
 				context: "server",
 				access: "public",
-				default: "https://github.com/azrd/azrd.dev"
+				optional: true,
+			}),
+			BACKEND_URL: c.envField.string({
+				context: "client",
+				access: "public",
+				url: true,
 			}),
 		},
 		validateSecrets: true,
@@ -54,7 +54,7 @@ export default defineConfig({
 	},
 	fonts: [
 		{
-			provider: fontProviders.local(),
+			provider: c.fontProviders.local(),
 			name: "myfont",
 			fallbacks: ["monospace"],
 			cssVariable: "--font-subset",

@@ -1,0 +1,246 @@
+---
+import { BACKEND_URL } from "astro:env/client";
+
+import Footer from "@components/main/footer.astro";
+import Navbar from "@components/main/navbar.astro";
+import Layout from "@components/layout.astro";
+import Box from "@components/main/box.astro";
+
+const formAction = `${BACKEND_URL}/guestbook`;
+---
+
+<script>
+  import { treaty } from "@elysia/eden";
+  import type { App } from "../../../backend/src/index";
+  import { BACKEND_URL } from "astro:env/client";
+
+  class GuestbookEntry extends HTMLElement {
+    constructor() {
+      super();
+      const style = document.querySelector<HTMLStyleElement>("#entries-style");
+      const template = document.querySelector<HTMLTemplateElement>(
+        "#guestbook-template",
+      );
+      if (!style || !template) return;
+
+      const css = new CSSStyleSheet();
+      css.replaceSync(style.textContent);
+
+      this.attachShadow({ mode: "open" });
+      this.shadowRoot!.appendChild(template.content.cloneNode(true));
+      this.shadowRoot!.adoptedStyleSheets = [css];
+    }
+  }
+  customElements.define("guestbook-entry", GuestbookEntry);
+
+  const setup = async () => {
+    const backend = treaty<App>(`${BACKEND_URL}`);
+    const { data, error } = await backend.guestbook.get();
+    if (error) throw new Error("Failed to fetch guestbook entries");
+
+    for (const { created_at, message, url, username } of data) {
+      const msg_el = Object.assign(document.createElement("span"), {
+        slot: "message",
+        textContent: message,
+      });
+      const time_el = Object.assign(document.createElement("time"), {
+        slot: "date",
+        dateTime: created_at.toISOString(),
+        title: created_at.toISOString(),
+        textContent: created_at.toISOString().slice(0, 10),
+      });
+      const user_el = Object.assign(
+        url ? document.createElement("a") : document.createElement("span"),
+        {
+          slot: "username",
+          href: url ? url : undefined,
+          rel: url ? "external nofollow" : undefined,
+          textContent: username,
+        }
+      );
+
+      const entries_el = document.getElementById("entries");
+      const entry = document.createElement("guestbook-entry");
+
+      entry.append(msg_el, time_el, user_el);
+      if (entries_el) entries_el.appendChild(entry);
+    }
+  };
+  await setup();
+
+  document.addEventListener("astro:after-swap", setup);
+</script>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  const setup = async () => {
+    const form_el = document.querySelector<HTMLFormElement>("#guestbook-form");
+    if (!form_el) return;
+
+    form_el.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const res = await fetch(form_el.action, {
+        method: "POST",
+        body: new FormData(form_el),
+      });
+
+      if (!res.ok) alert("Failed to submit message");
+      else await navigate("/guestbook");
+    });
+  };
+
+  setup();
+  document.addEventListener("astro:after-swap", setup);
+</script>
+
+<Layout>
+  <template id="guestbook-template">
+    <article>
+      <div class="message">
+        <slot is:inline name="message" />
+      </div>
+      <div class="entry-info">
+        <slot is:inline name="date" />
+        <slot is:inline name="username" />
+      </div>
+    </article>
+  </template>
+
+  <style is:inline id="entries-style">
+    article {
+      border: 1px solid var(--bg-secondary);
+      padding: 1em calc(2ch - 2px);
+      background-color: color-mix(
+        in srgb,
+        var(--bg-secondary),
+        transparent 75%
+      );
+      display: flex;
+      flex-direction: column;
+      overflow-wrap: break-word;
+      gap: 1lh;
+    }
+
+    .message {
+      color: var(--fg);
+    }
+
+    .entry-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0 2ch;
+    }
+
+    ::slotted(time),
+    ::slotted(a),
+    ::slotted(span) {
+      text-align: right;
+    }
+
+    @media (min-width: 520px) {
+      .entry-info {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  </style>
+
+  <Navbar slot="header" />
+  <h1>Guestbook</h1>
+  <form
+    method="post"
+    action={formAction}
+    enctype="multipart/form-data"
+    id="guestbook-form"
+  >
+    <fieldset>
+      <div>
+        <label for="username">Name:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          autocomplete="off"
+          maxlength="20"
+          required
+        />
+      </div>
+      <div>
+        <label for="url">URL (optional):</label>
+        <input type="url" id="url" name="url" />
+      </div>
+      <div>
+        <label for="message">Message:</label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          minlength="5"
+          maxlength="100"
+          autocorrect="off"></textarea>
+      </div>
+      <button type="submit">&gt; Submit</button>
+    </fieldset>
+  </form>
+  <hr />
+  <Box class="no-js">
+    <div>
+      Uh oh, you seem to have Javascript disabled, sadly you need it to be
+      enabled to see the guestbook entries.
+    </div>
+    <br />
+    <div>But don't worry, you can still submit yours without it.</div>
+  </Box>
+  <div id="entries" class="js"></div>
+  <Footer slot="footer" />
+</Layout>
+
+<style>
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 1em 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  input,
+  textarea {
+    display: block;
+    line-height: inherit;
+    outline: 0;
+    border: 0;
+    width: 100%;
+    font-size: unset;
+    font-family: inherit;
+    color: var(--fg);
+    background-color: color-mix(in srgb, var(--bg-secondary) 50%, transparent);
+    padding: 0;
+  }
+
+  button {
+    align-self: flex-end;
+  }
+
+  textarea {
+    field-sizing: content;
+    resize: none;
+    overflow-wrap: anywhere;
+  }
+
+  #entries {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .no-js {
+    display: none;
+
+    @media (scripting: none) {
+      display: block;
+    }
+  }
+</style>

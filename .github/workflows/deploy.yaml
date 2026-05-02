@@ -6,11 +6,11 @@ on:
       - main
 
 jobs:
-  deploy:
-    name: Build and deploy
+  frontend:
+    name: Build and deploy frontend
     environment: prod
-    runs-on: ubuntu-slim
-    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
         with:
@@ -23,6 +23,7 @@ jobs:
           version: 10.33.0
 
       - name: Install dependencies and build
+        working-directory: pkgs/frontend
         run: |
           echo "${{ secrets.DOTENV }}" > .env
           pnpm install --prod --frozen-lockfile
@@ -34,3 +35,28 @@ jobs:
           wranglerVersion: "latest"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: pkgs/frontend
+
+  backend:
+    name: Build and deploy backend
+    environment: prod
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v6
+        with:
+          version: 10.33.0
+
+      - name: Install dependencies and build
+        working-directory: pkgs/backend
+        run: pnpm install --prod --frozen-lockfile
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          wranglerVersion: "latest"
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: pkgs/backend

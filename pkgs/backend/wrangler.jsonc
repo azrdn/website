@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "backend",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-04-28",
+  "compatibility_flags": ["nodejs_compat"],
+  "placement": {
+    "mode": "smart",
+  },
+  "secrets": {
+    "required": ["DATABASE_URL", "FRONTEND_URL"]
+  },
+  "observability": {
+    "enabled": true
+  }
+}

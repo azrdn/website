@@ -1,3 +1,6 @@
+packages:
+  - "pkgs/*"
+
 allowBuilds:
   esbuild: true
   sharp: true

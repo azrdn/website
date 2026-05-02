@@ -1,8 +1,8 @@
 ---
-import { getEntry } from "astro:content";
+import { execSync } from "node:child_process";
 
-const gitHash = (await getEntry("gitInfo", "0")!).data.output
-const lastChange = (await getEntry("gitInfo", "1")!).data.output
+const gitHash = execSync("git rev-parse --short HEAD").toString().trim();
+const lastChange = execSync("git show -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' HEAD").toString().trim();
 const shortDate = lastChange.slice(0, 10);
 
 const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
@@ -19,7 +19,7 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
 	<section class="bottom">
 		<div class="left">
 			<div>
-				<span id="cl">©</span> 2022-{new Date().getFullYear()}
+				<span id="cl">&copy;</span> 2022-{new Date().getFullYear()}
 				<a
 					href="https://www.gnu.org/licenses/gpl-3.0.en.html"
 					rel="external nofollow">GPLv3</a

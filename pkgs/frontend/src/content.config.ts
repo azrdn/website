@@ -1,9 +1,8 @@
 import { defineCollection } from "astro:content"
 import { glob } from "astro/loaders"
 import { z } from "astro/zod"
-import { cmdLoader } from "./cmd.loader"
 
-const posts_path = import.meta.env.PROD ? "./posts" : "./src/test/posts"
+const posts_path = import.meta.env.PROD ? "../posts" : "./src/test/posts"
 
 export const collections = {
 	blog: defineCollection({
@@ -13,12 +12,5 @@ export const collections = {
 			createdAt: z.date(),
 			updatedAt: z.date().optional(),
 		})
-	}),
-
-	gitInfo: defineCollection({
-		loader: cmdLoader([
-			"git rev-parse --short HEAD",
-			"git show -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' HEAD"
-		]),
 	})
 }

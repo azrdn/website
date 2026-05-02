@@ -7,26 +7,20 @@ on:
       - renovate/*
 
 jobs:
-  deploy:
-    name: Build and deploy preview
+  frontend:
+    name: Build and deploy frontend
     environment: dev
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
-
-      # https://github.com/oven-sh/bun/issues/5951
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: lts/*
-
       - name: Setup PNPM
         uses: pnpm/action-setup@v6
         with:
           version: 10.33.0
 
       - name: Install dependencies and build
+        working-directory: pkgs/frontend
         run: |
           echo "${{ secrets.DOTENV }}" > .env
           pnpm install --prod --frozen-lockfile
@@ -38,4 +32,5 @@ jobs:
           wranglerVersion: "latest"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: pkgs/frontend
           command: versions upload
