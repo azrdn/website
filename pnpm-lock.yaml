@@ -37,8 +37,8 @@ importers:
         specifier: ^0.1.5
         version: 0.1.5(@electric-sql/pglite@0.4.5)
       drizzle-kit:
-        specifier: 1.0.0-rc.1
-        version: 1.0.0-rc.1
+        specifier: 1.0.0-rc.2-203eab8
+        version: 1.0.0-rc.2-203eab8
 
   pkgs/frontend:
     dependencies:
@@ -1415,8 +1415,8 @@ packages:
   domutils@3.2.2:
     resolution: {integrity: sha512-6kZKyUajlDuqlHKVX1w7gyslj9MPIXzIFiz/rGu35uC1wMi+kMhQwGhl4lt9unC9Vb9INnY9Z3/ZA3+FhASLaw==}
 
-  drizzle-kit@1.0.0-rc.1:
-    resolution: {integrity: sha512-eDvXzRhke7OwvmN7AciGOU1E2y17MKNhghGciyw1RbmmkuD/2KDXLn3rFRZcDBmfj6CQSEnyvbU+7Fqrn2JQyA==}
+  drizzle-kit@1.0.0-rc.2-203eab8:
+    resolution: {integrity: sha512-Agbh2172vtsvVmKteZ0gIYG2VLDkZdK6bFUGF+2DjZxFGOaVRwzJNuuv/+ehVe6pmHQT98FMkBRw7kKztSynIg==}
     hasBin: true
 
   drizzle-orm@1.0.0-rc.1:
@@ -3752,7 +3752,7 @@ snapshots:
       domelementtype: 2.3.0
       domhandler: 5.0.3
 
-  drizzle-kit@1.0.0-rc.1:
+  drizzle-kit@1.0.0-rc.2-203eab8:
     dependencies:
       '@drizzle-team/brocli': 0.11.0
       '@js-temporal/polyfill': 0.5.1
