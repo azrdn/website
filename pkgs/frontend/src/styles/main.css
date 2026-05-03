@@ -39,9 +39,11 @@ img, picture, video, canvas, svg {
 }
 
 button {
+	display: block;
 	line-height: inherit;
 	padding: 0 1ch;
 	border: 0;
+	font-family: inherit;
 	font-size: inherit;
 	color: var(--bg);
 	background-color: var(--fg-secondary);
@@ -145,13 +147,6 @@ hr {
 	color: var(--bg-secondary);
 	border-style: none none solid;
 	margin: 1.5rlh 0;
-}
-
-button {
-	display: block;
-	font-family: inherit;
-	font-size: inherit;
-	padding: 0 1ch;
 }
 
 pre, code {

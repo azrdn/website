@@ -124,8 +124,9 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 		all: unset;
 		-webkit-tap-highlight-color: transparent;
 
-		&:hover {
-			color: var(--fg);
+		&:focus {
+		  color: var(--fg);
+		  background-color: unset;
 		}
 	}
 
