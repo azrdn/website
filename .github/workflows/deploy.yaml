@@ -8,7 +8,9 @@ on:
 jobs:
   frontend:
     name: Build and deploy frontend
-    environment: prod
+    environment:
+      name: prod
+      url: ${{ steps.cloudflare-frontend.outputs.deployment_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -35,6 +37,7 @@ jobs:
           pnpm build
 
       - name: Deploy to Cloudflare Workers
+        id: cloudflare-frontend
         uses: cloudflare/wrangler-action@v3
         with:
           packageManager: pnpm
@@ -44,7 +47,9 @@ jobs:
 
   backend:
     name: Build and deploy backend
-    environment: prod
+    environment:
+      name: prod
+      url: ${{ steps.cloudflare-backend.outputs.deployment_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -64,6 +69,7 @@ jobs:
         run: pnpm install --prod --frozen-lockfile
 
       - name: Deploy to Cloudflare Workers
+        id: cloudflare-backend
         uses: cloudflare/wrangler-action@v3
         with:
           packageManager: pnpm

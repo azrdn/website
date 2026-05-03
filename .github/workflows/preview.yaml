@@ -9,7 +9,9 @@ on:
 jobs:
   frontend:
     name: Build and deploy frontend
-    environment: dev
+    environment:
+      name: dev
+      url: ${{ steps.cloudflare.outputs.deployment_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -32,6 +34,7 @@ jobs:
           NODE_ENV=development pnpm build
 
       - name: Deploy to Cloudflare Workers
+        id: cloudflare
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
