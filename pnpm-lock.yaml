@@ -21,8 +21,8 @@ importers:
         specifier: ^1.4.15
         version: 1.4.15(elysia@1.4.28(@sinclair/typebox@0.34.49)(exact-mirror@1.0.0)(file-type@22.0.1)(openapi-types@12.1.3)(typescript@6.0.3))
       drizzle-orm:
-        specifier: 1.0.0-rc.1
-        version: 1.0.0-rc.1(@electric-sql/pglite@0.4.5)(@sinclair/typebox@0.34.49)(postgres@3.4.9)(zod@4.4.2)
+        specifier: 1.0.0-rc.2-203eab8
+        version: 1.0.0-rc.2-203eab8(@electric-sql/pglite@0.4.5)(@sinclair/typebox@0.34.49)(postgres@3.4.9)(zod@4.4.2)
       elysia:
         specifier: ^1.4.28
         version: 1.4.28(@sinclair/typebox@0.34.49)(exact-mirror@1.0.0)(file-type@22.0.1)(openapi-types@12.1.3)(typescript@6.0.3)
@@ -1419,8 +1419,8 @@ packages:
     resolution: {integrity: sha512-eDvXzRhke7OwvmN7AciGOU1E2y17MKNhghGciyw1RbmmkuD/2KDXLn3rFRZcDBmfj6CQSEnyvbU+7Fqrn2JQyA==}
     hasBin: true
 
-  drizzle-orm@1.0.0-rc.1:
-    resolution: {integrity: sha512-jGCqAgxpz+OSHP2jQGooUHBxnFMTYl0TTRSfULBl52VNf7CtyNRnazUi+VdbSxvJrDP2lnIsmUh5O+HhKeSJCg==}
+  drizzle-orm@1.0.0-rc.2-203eab8:
+    resolution: {integrity: sha512-DHTKZHqy1+75/uj9C1boJxGw18nGpzTG7zQI8LtAhtH82xtQYecSw9is8pjgqsOQUtU5YSLhYqIbXeBbU2V1Pw==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=4'
@@ -3760,7 +3760,7 @@ snapshots:
       get-tsconfig: 4.14.0
       jiti: 2.6.1
 
-  drizzle-orm@1.0.0-rc.1(@electric-sql/pglite@0.4.5)(@sinclair/typebox@0.34.49)(postgres@3.4.9)(zod@4.4.2):
+  drizzle-orm@1.0.0-rc.2-203eab8(@electric-sql/pglite@0.4.5)(@sinclair/typebox@0.34.49)(postgres@3.4.9)(zod@4.4.2):
     optionalDependencies:
       '@electric-sql/pglite': 0.4.5
       '@sinclair/typebox': 0.34.49
