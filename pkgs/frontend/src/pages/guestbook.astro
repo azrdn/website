@@ -76,17 +76,26 @@ const formAction = `${BACKEND_URL}/guestbook`;
 
   const setup = async () => {
     const form_el = document.querySelector<HTMLFormElement>("#guestbook-form");
-    if (!form_el) return;
+    const button = document.querySelector<HTMLButtonElement>("button[type='submit']");
+    if (!form_el || !button) return;
 
     form_el.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      button.disabled = true;
+      button.dataset.loading = "";
       const res = await fetch(form_el.action, {
         method: "POST",
         body: new FormData(form_el),
       });
 
-      if (!res.ok) alert("Failed to submit message");
-      else await navigate("/guestbook");
+      if (!res.ok) {
+        button.disabled = false;
+        delete button.dataset.loading;
+        alert("Failed to submit message");
+      } else {
+        await navigate("/guestbook");
+      }
     });
   };
 
@@ -180,7 +189,7 @@ const formAction = `${BACKEND_URL}/guestbook`;
           maxlength="100"
           autocorrect="off"></textarea>
       </div>
-      <button type="submit">&gt; Submit</button>
+      <button type="submit">Submit</button>
     </fieldset>
   </form>
   <hr />
@@ -197,6 +206,21 @@ const formAction = `${BACKEND_URL}/guestbook`;
 </Layout>
 
 <style>
+  @keyframes loading {
+    0% {
+      content: "| ";
+    }
+    33% {
+      content: "/ ";
+    }
+    66% {
+      content: "- ";
+    }
+    100% {
+      content: "\\ ";
+    }
+  }
+
   fieldset {
     display: flex;
     flex-direction: column;
@@ -222,6 +246,18 @@ const formAction = `${BACKEND_URL}/guestbook`;
 
   button {
     align-self: flex-end;
+
+    &:before {
+      content: "> ";
+    }
+
+    &[data-loading] {
+      &:before {
+        animation: loading .5s linear infinite;
+      }
+      background-color: var(--accent);
+      cursor: wait;
+    }
   }
 
   textarea {
