@@ -12,5 +12,23 @@
   },
   "observability": {
     "enabled": true
-  }
+  },
+  "ratelimits": [
+    {
+      "name": "CONTENT",
+      "namespace_id": "1",
+      "simple": {
+        "limit": 2,
+        "period": 60
+      }
+    },
+    {
+      "name": "IP",
+      "namespace_id": "2",
+      "simple": {
+        "limit": 10,
+        "period": 60
+      }
+    }
+  ]
 }
