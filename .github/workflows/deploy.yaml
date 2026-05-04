@@ -6,11 +6,28 @@ on:
       - main
 
 jobs:
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    outputs:
+      frontend: ${{ steps.filter.outputs.frontend }}
+      backend: ${{ steps.filter.outputs.backend }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            frontend:
+              - 'pkgs/frontend/**'
+            backend:
+              - 'pkgs/backend/**'
+
   frontend:
-    name: Build and deploy frontend
-    environment:
-      name: prod
-      url: ${{ steps.cloudflare-frontend.outputs.deployment_url }}
+    name: Frontend
+    environment: prod
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -27,7 +44,7 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v6
         with:
-          version: 10.33.2
+          version: 11.0.4
 
       - name: Install dependencies and build
         working-directory: pkgs/frontend
@@ -46,10 +63,10 @@ jobs:
           workingDirectory: pkgs/frontend
 
   backend:
-    name: Build and deploy backend
-    environment:
-      name: prod
-      url: ${{ steps.cloudflare-backend.outputs.deployment_url }}
+    name: Backend
+    environment: prod
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -62,7 +79,7 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v6
         with:
-          version: 10.33.0
+          version: 11.0.4
 
       - name: Install dependencies and build
         working-directory: pkgs/backend
