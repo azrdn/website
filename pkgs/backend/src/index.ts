@@ -27,6 +27,7 @@ const app = new Elysia({ adapter: CloudflareAdapter })
 		}),
 	)
 	.use(openapi())
+	.get("/", async ({ status }) => status(200))
 	.get("/guestbook", async () => {
 		const db = drizzle(process.env.DATABASE_URL);
 		return await db.select().from(table).orderBy(desc(table.id));
