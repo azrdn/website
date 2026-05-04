@@ -7,11 +7,28 @@ on:
       - renovate/*
 
 jobs:
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    outputs:
+      frontend: ${{ steps.filter.outputs.frontend }}
+      backend: ${{ steps.filter.outputs.backend }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            frontend:
+              - 'pkgs/frontend/**'
+            backend:
+              - 'pkgs/backend/**'
+
   frontend:
-    name: Build and deploy frontend
-    environment:
-      name: dev
-      url: ${{ steps.cloudflare.outputs.deployment_url }}
+    name: Frontend
+    environment: dev
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -24,7 +41,7 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v6
         with:
-          version: 10.33.2
+          version: 11.0.4
 
       - name: Install dependencies and build
         working-directory: pkgs/frontend
@@ -40,4 +57,39 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: pkgs/frontend
+          command: versions upload
+
+  backend:
+    name: Backend
+    environment: dev
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "lts/*"
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11.0.4
+
+      - name: Install dependencies and build
+        working-directory: pkgs/backend
+        run: |
+          echo "${{ secrets.DOTENV }}" > .env
+          pnpm install --prod --frozen-lockfile
+          NODE_ENV=development pnpm build
+
+      - name: Deploy to Cloudflare Workers
+        id: cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: pkgs/backend
           command: versions upload
