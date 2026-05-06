@@ -6,6 +6,6 @@
 		"db": "pnpm -F backend dev:db"
 	},
 	"dependencies": {
-		"wrangler": "^4.86.0"
+		"wrangler": "^4.87.0"
 	}
 }
