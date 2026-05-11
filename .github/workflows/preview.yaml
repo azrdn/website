@@ -15,9 +15,16 @@ jobs:
       backend: ${{ steps.filter.outputs.backend }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+
+      - id: previous-sha
+        run: 'echo "sha=$(git rev-list -n 1 ${{ github.ref }}^)" >> $GITHUB_OUTPUT'
+
       - uses: dorny/paths-filter@v4
         id: filter
         with:
+          base: "${{ steps.previous-sha.outputs.sha }}"
           filters: |
             frontend:
               - 'pkgs/frontend/**'
