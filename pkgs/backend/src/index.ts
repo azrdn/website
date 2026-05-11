@@ -1,71 +1,60 @@
-import { Elysia } from "elysia";
-import { cors } from "@elysia/cors";
-import { openapi } from "@elysia/openapi";
-import { CloudflareAdapter } from "elysia/adapter/cloudflare-worker";
-import { createHash } from "node:crypto";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { sValidator } from "@hono/standard-validator";
 import z from "zod";
 
 import { drizzle } from "drizzle-orm/postgres-js";
-import { desc } from "drizzle-orm";
+import { lt, desc } from "drizzle-orm";
 import { table } from "../db/schema";
 
-import { env } from "cloudflare:workers";
+const stringToNum = z.preprocess(
+	(val: string) => Number.parseInt(val, 10),
+	z.number().positive(),
+);
 
-const hasher = (str: string) => createHash("sha256").update(str).digest("hex");
-const ratelimiter = async (content: string, ip: string) => {
-	const [ipResult, contentResult] = await Promise.all([
-		env.IP.limit({ key: ip }),
-		env.CONTENT.limit({ key: hasher(content) }),
-	]);
-	return ipResult.success && contentResult.success;
-};
-
-const app = new Elysia({ adapter: CloudflareAdapter })
-	.use(
-		cors({
-			origin: process.env.FRONTEND_URL,
-		}),
+const app = new Hono()
+	.use(cors({ origin: process.env.FRONTEND_URL }))
+	.get("/", (c) => c.text("OK", 200))
+	.get(
+		"/guestbook",
+		sValidator("query", z.object({
+			from: stringToNum.optional(),
+			limit: stringToNum,
+		})),
+		async ({ req, json }) => {
+			const db = drizzle(process.env.DATABASE_URL);
+			const { from, limit } = req.valid("query");
+			const res = await db
+				.select()
+				.from(table)
+				.where(from ? lt(table.id, from) : undefined)
+				.orderBy(desc(table.id))
+				.limit(limit)
+			return json(res, 200);
+		},
 	)
-	.use(openapi())
-	.get("/", async ({ status }) => status(200))
-	.get("/guestbook", async () => {
-		const db = drizzle(process.env.DATABASE_URL);
-		return await db.select().from(table).orderBy(desc(table.id));
-	})
 	.post(
 		"/guestbook",
-		async ({ body, status, redirect, headers }) => {
-			const input = JSON.stringify(body);
-			const ip = headers["cf-connecting-ip"] ?? "";
-			const allowed = await ratelimiter(input, ip);
-			if (!allowed) return status(429);
-
-			const fetchMode = headers["sec-fetch-mode"];
-			const db = drizzle(process.env.DATABASE_URL);
-			await db.insert(table).values(body);
-
-			if (fetchMode !== "navigate") return status(201);
-			return redirect(`${process.env.FRONTEND_URL}/guestbook`, 303);
-		},
-		{
-			parse: "multipart/form-data",
-			body: z.object({
+		sValidator(
+			"form",
+			z.object({
 				username: z.string().min(1).max(20),
 				message: z.string().min(5).max(100),
-				url: z
-					.pipe(
-						z.string().transform((s) => (s === "" ? null : s)),
-						z.url().nullable(),
-					)
-					.optional(),
+				url: z.url().or(z.literal("")),
 			}),
-			headers: z.object({
-				"sec-fetch-mode": z.string().nullish(),
-				"cf-connecting-ip": z.string().nullish(),
-			}),
+		),
+		async ({ req, json, redirect }) => {
+			const db = drizzle(process.env.DATABASE_URL)
+			const fetchMode = req.header("sec-fetch-mode")
+			const res = await db
+				.insert(table)
+				.values(req.valid("form"))
+				.returning({ id: table.id });
+
+			if (fetchMode !== "navigate") return json(res[0], 201);
+			return redirect(`${process.env.FRONTEND_URL}/guestbook`, 303);
 		},
 	)
-	.compile();
 
-export type App = typeof app;
 export default app;
+export type App = typeof app;

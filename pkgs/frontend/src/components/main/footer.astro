@@ -53,7 +53,7 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
 	select.value = localStorage.getItem("theme") || "system";
 
 	const set_theme = (theme: string) => {
-		document.documentElement.setAttribute("theme", theme);
+		document.documentElement.dataset.theme = theme;
 		localStorage.setItem("theme", theme);
 	};
 

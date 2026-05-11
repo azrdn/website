@@ -4,7 +4,7 @@ import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 ---
 
-<html lang="en">
+<html lang="en" data-theme="system">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -25,7 +25,6 @@ import { ClientRouter } from "astro:transitions";
 			/*
 			Font is preloaded only in dev mode beceause only prod has http caching
 			which makes fonts flicker on every page load in dev.
-			(gonna be fixed later when astro caching is implemented)
 			*/
 		}
 		<Font cssVariable="--font-subset" preload={import.meta.env.DEV} />
@@ -40,12 +39,12 @@ import { ClientRouter } from "astro:transitions";
 			href="/rss.xml"
 		/>
 		<script is:inline>
-			function setTheme() {
-				const theme = localStorage.getItem("theme") || "system";
-				document.documentElement.setAttribute("theme", theme);
+			function setup() {
+				const theme = localStorage.getItem("theme") ?? "system";
+				document.documentElement.dataset.theme = theme;
 			}
-			setTheme();
-			document.addEventListener("astro:after-swap", setTheme);
+			setup();
+			document.addEventListener("astro:after-swap", setup);
 		</script>
 		<title>{Astro.props.title ?? "azrd"}</title>
 	</head>

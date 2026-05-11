@@ -1,0 +1,73 @@
+<Fragment>
+  <script>
+    class GuestbookEntry extends HTMLElement {
+      constructor() {
+        super();
+        const style = document.querySelector<HTMLStyleElement>("#entries-style");
+        const template = document.querySelector<HTMLTemplateElement>(
+          "#guestbook-template",
+        );
+        if (!style || !template) return;
+    
+        const css = new CSSStyleSheet();
+        css.replaceSync(style.textContent);
+    
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot!.appendChild(template.content.cloneNode(true));
+        this.shadowRoot!.adoptedStyleSheets = [css];
+      }
+    }
+    customElements.define("guestbook-entry", GuestbookEntry);
+  </script>
+  
+  <template id="guestbook-template">
+    <article>
+      <div class="message">
+        <slot is:inline name="message" />
+      </div>
+      <div class="entry-info">
+        <slot is:inline name="date" />
+        <slot is:inline name="username" />
+      </div>
+    </article>
+  </template>
+
+  <style is:inline id="entries-style">
+    article {
+      border: 1px solid var(--bg-secondary);
+      padding: 1em calc(2ch - 2px);
+      background-color: color-mix(
+        in srgb,
+        var(--bg-secondary),
+        transparent 75%
+      );
+      display: flex;
+      flex-direction: column;
+      overflow-wrap: break-word;
+      gap: 1lh;
+    }
+
+    .message {
+      color: var(--fg);
+    }
+
+    .entry-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0 2ch;
+    }
+
+    ::slotted(time),
+    ::slotted(a),
+    ::slotted(span) {
+      text-align: right;
+    }
+
+    @media (min-width: 520px) {
+      .entry-info {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</Fragment>
