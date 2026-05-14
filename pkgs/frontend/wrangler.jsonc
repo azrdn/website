@@ -2,8 +2,12 @@
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "web",
   "compatibility_date": "2026-04-16",
+  "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "404-page"
+  },
+  "dev": {
+    "upstream_protocol": "http",
+    "port": 4321
   }
 }

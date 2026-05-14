@@ -1,8 +1,8 @@
 ---
-import { execSync } from "node:child_process";
+import { getEntry } from "astro:content";
 
-const gitHash = execSync("git rev-parse --short HEAD").toString().trim();
-const lastChange = execSync("git show -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' HEAD").toString().trim();
+const gitHash = (await getEntry("gitInfo", "0")!).data.output
+const lastChange = (await getEntry("gitInfo", "1")!).data.output
 const shortDate = lastChange.slice(0, 10);
 
 const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;

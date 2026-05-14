@@ -4,12 +4,12 @@ import { sValidator } from "@hono/standard-validator";
 import z from "zod";
 
 import { drizzle } from "drizzle-orm/postgres-js";
-import { lt, desc } from "drizzle-orm";
+import { desc, count } from "drizzle-orm";
 import { table } from "../db/schema";
 
 const stringToNum = z.preprocess(
 	(val: string) => Number.parseInt(val, 10),
-	z.number().positive(),
+	z.number().nonnegative(),
 );
 
 const app = new Hono()
@@ -18,20 +18,28 @@ const app = new Hono()
 	.get(
 		"/guestbook",
 		sValidator("query", z.object({
-			from: stringToNum.optional(),
-			limit: stringToNum,
+			offset: stringToNum.optional(),
+			limit: stringToNum.optional(),
 		})),
 		async ({ req, json }) => {
 			const db = drizzle(process.env.DATABASE_URL);
-			const { from, limit } = req.valid("query");
+			const { offset, limit } = req.valid("query");
 			const res = await db
 				.select()
 				.from(table)
-				.where(from ? lt(table.id, from) : undefined)
 				.orderBy(desc(table.id))
-				.limit(limit)
+				.limit(limit ?? 10)
+				.offset(offset ?? 0)
 			return json(res, 200);
 		},
+	)
+	.get(
+		"/guestbook/count",
+		async ({ json }) => {
+			const db = drizzle(process.env.DATABASE_URL);
+			const res = await db.select({ rows: count() }).from(table)
+			return json(res[0].rows, 200);
+		}
 	)
 	.post(
 		"/guestbook",

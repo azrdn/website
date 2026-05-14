@@ -1,189 +1,115 @@
 ---
-import { hc } from "hono/client";
-import type { App } from "../../../backend/src/index";
 import { BACKEND_URL } from "astro:env/client";
-
+import { AstroError } from "astro/errors";
+import z from "astro/zod";
 import Footer from "@components/main/footer.astro";
 import Navbar from "@components/main/navbar.astro";
 import Layout from "@components/layout.astro";
-import EntryTemplate from "@components/guestbook/template.astro";
-import Skeleton from "@components/guestbook/skeleton.astro";
+import GuestbookEntry from "@components/guestbook/entry.astro";
 
-const formAction = hc<App>(`${BACKEND_URL}`).guestbook.$url().toString();
+import { hc } from "hono/client";
+import type { App } from "../../../backend/src/index";
+
+const backend = hc<App>(BACKEND_URL);
+const pageParam = Astro.url.searchParams.get("page") ?? "1";
+const pageParamSchema = z.preprocess(
+  (val: string) => parseInt(val, 10),
+  z.number().positive(),
+);
+
+const { success, data: page } = pageParamSchema.safeParse(pageParam);
+if (!success) throw new AstroError("Invalid page query parameter");
+
+const entriesPerPage = 10;
+const [countRes, entriesRes] = await Promise.all([
+  backend.guestbook.count.$get(),
+  backend.guestbook.$get({
+    query: {
+      offset: (entriesPerPage * (page - 1)).toString(),
+      limit: entriesPerPage.toString(),
+    },
+  }),
+]);
+if (!countRes.ok || !entriesRes.ok) throw new AstroError("Failed to fetch guestbook data");
+
+const [count, entries] = await Promise.all([
+  countRes.json(),
+  entriesRes.json(),
+]);
+
+const totalPages = Math.max(1, Math.ceil(count / entriesPerPage));
+export const prerender = false;
 ---
 
 <Layout>
-  <EntryTemplate />
-
   <Navbar slot="header" />
-  <h1>Guestbook</h1>
-  <form
-    method="post"
-    action={formAction}
-    enctype="multipart/form-data"
-    id="guestbook-form"
-  >
-    <fieldset>
-      <div>
-        <label for="username">Name:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          autocomplete="off"
-          maxlength="20"
-          required
-        />
+  {
+    page === 1 && (
+      <h1>Guestbook</h1>
+      <form
+        method="post"
+        action={backend.guestbook.$url().toString()}
+        enctype="multipart/form-data"
+      >
+        <fieldset>
+          <div>
+            <label for="username">Name:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              autocomplete="off"
+              maxlength="30"
+              required
+            />
+          </div>
+          <div>
+            <label for="url">URL (optional):</label>
+            <input type="url" id="url" name="url" />
+          </div>
+          <div>
+            <label for="message">Message:</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              minlength="5"
+              maxlength="150"
+              autocorrect="off"
+            />
+          </div>
+          <button type="submit">Submit</button>
+        </fieldset>
+      </form>
+    )
+  }
+  <hr>
+  {
+    entries.length > 0 && (
+      <div id="entries">
+        {entries.map((entry) => <GuestbookEntry {...entry} />)}
       </div>
-      <div>
-        <label for="url">URL (optional):</label>
-        <input type="url" id="url" name="url" />
-      </div>
-      <div>
-        <label for="message">Message:</label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          minlength="5"
-          maxlength="100"
-          autocorrect="off"></textarea>
-      </div>
-      <button type="submit">Submit</button>
-    </fieldset>
-  </form>
-  <hr />
-  <div id="entries" class="js">
-    {[...Array(5)].map(() => <Skeleton />)}
+    )
+  }
+  <div class="pagination">
+    <p>Viewing page {page} out of {totalPages}</p>
+    <div class="pagelinks">
+      {
+        page > 1 && (
+          <a href={`/guestbook?page=${page - 1}`}>Previous Page</a>
+        )
+      }
+      {
+        page < totalPages && (
+          <a href={`/guestbook?page=${page + 1}`}>Next Page</a>
+        )
+      }
+    </div>
   </div>
-  <button class="js loadmore">Load more entries</button>
   <Footer slot="footer" />
 </Layout>
 
-<script>
-  import { hc } from "hono/client";
-  import type { App } from "../../../backend/src/index";
-  import { BACKEND_URL } from "astro:env/client";
-  import { navigate } from "astro:transitions/client";
-  import { renderEntry } from "@components/guestbook/renderer";
-
-  const backend = hc<App>(`${BACKEND_URL}`);
-  let lastId: number;
-
-  const setup1 = async () => {
-    const entries_el = document.getElementById("entries");
-    const res = await backend.guestbook.$get({ query: { limit: "5" } });
-    if (!entries_el || !res.ok) return;
-
-    const data = await res.json();
-
-    entries_el.replaceChildren();
-    data.forEach((entry_data) => {
-      const template = document.createElement("guestbook-entry");
-      const entry = renderEntry(template, entry_data);
-      entries_el.append(entry);
-    });
-
-    lastId = data.at(-1)?.id ?? 0;
-  };
-
-  const setup2 = async () => {
-    const limit = 5;
-    const form_el = document.querySelector<HTMLFormElement>("#guestbook-form");
-    const entries_el = document.getElementById("entries");
-    const username_el = document.querySelector<HTMLInputElement>("#username");
-    const url_el = document.querySelector<HTMLInputElement>("#url");
-    const message_el = document.querySelector<HTMLTextAreaElement>("#message");
-    const loadMoreBtn = document.querySelector<HTMLButtonElement>(".loadmore");
-    const subBtn = document.querySelector<HTMLButtonElement>("[type=submit]");
-    if (
-      !form_el ||
-      !entries_el ||
-      !username_el ||
-      !url_el ||
-      !message_el ||
-      !loadMoreBtn ||
-      !subBtn
-    )
-      return;
-
-    form_el.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      subBtn.disabled = true;
-      subBtn.dataset.loading = "";
-
-      const res = await backend.guestbook.$post({
-        form: {
-          username: username_el.value,
-          url: url_el.value,
-          message: message_el.value,
-        },
-      });
-
-      if (!res.ok) {
-        subBtn.disabled = false;
-        delete subBtn.dataset.loading;
-        alert("Failed to submit message");
-      } else {
-        await navigate("/guestbook");
-      }
-    });
-
-    loadMoreBtn.addEventListener("click", async () => {
-      const res = await backend.guestbook.$get({
-        query: {
-          from: lastId.toString(),
-          limit: limit.toString(),
-        },
-      });
-      if (!res.ok) {
-        alert("Failed to load more entries");
-        return;
-      }
-
-      const data = await res.json();
-      const render = () => {
-        data.forEach((entry) => {
-          const template = document.createElement("guestbook-entry");
-          const rendered = renderEntry(template, entry);
-          entries_el.appendChild(rendered);
-        });
-      };
-
-      if (document.startViewTransition) {
-        document.startViewTransition(render);
-      } else {
-        render();
-      }
-
-      const newLastId = data.at(-1)?.id;
-      if (newLastId === undefined) return;
-      lastId = newLastId;
-    });
-  };
-
-  const setup = async () => await Promise.all([setup1(), setup2()]);
-  await setup();
-  document.addEventListener("astro:after-swap", setup);
-</script>
-
 <style>
-  @keyframes loading {
-    0% {
-      content: "| ";
-    }
-    33% {
-      content: "/ ";
-    }
-    66% {
-      content: "- ";
-    }
-    100% {
-      content: "\\ ";
-    }
-  }
-
   fieldset {
     display: flex;
     flex-direction: column;
@@ -213,18 +139,6 @@ const formAction = hc<App>(`${BACKEND_URL}`).guestbook.$url().toString();
     &:before {
       content: "> ";
     }
-
-    &[data-loading] {
-      &:before {
-        animation: loading 0.5s linear infinite;
-      }
-      background-color: var(--accent);
-      cursor: wait;
-    }
-  }
-
-  .loadmore {
-    margin: 1lh 0;
   }
 
   textarea {
@@ -237,5 +151,15 @@ const formAction = hc<App>(`${BACKEND_URL}`).guestbook.$url().toString();
     display: flex;
     flex-direction: column;
     gap: 1em;
+  }
+
+  .pagination {
+    margin: 1lh 0;
+  }
+
+  .pagelinks {
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
   }
 </style>

@@ -9,7 +9,8 @@
 		"types": "astro sync"
 	},
 	"dependencies": {
-		"@astrojs/mdx": "^5.0.4",
+		"@astrojs/cloudflare": "^13.5.0",
+		"@astrojs/mdx": "^5.0.5",
 		"@astrojs/rss": "^4.0.18",
 		"@astrojs/sitemap": "^3.7.2",
 		"astro": "^6.3.1",

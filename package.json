@@ -1,11 +1,12 @@
 {
 	"scripts": {
 		"dev": "pnpm -r --parallel \"/dev/\"",
+		"dev:be": "pnpm --parallel -F backend \"/(dev|dev:db)/\"",
+		"build": "pnpm -r --parallel \"/build/\"",
 		"fe": "pnpm -F frontend",
-		"be": "pnpm -F backend",
-		"db": "pnpm -F backend dev:db"
+		"be": "pnpm -F backend"
 	},
 	"dependencies": {
-		"wrangler": "^4.87.0"
+		"wrangler": "^4.90.1"
 	}
 }

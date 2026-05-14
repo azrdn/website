@@ -3,16 +3,17 @@ import sitemap from "@astrojs/sitemap"
 import * as c from "astro/config"
 import rehypeExtLinks from "rehype-external-links"
 import minify from 'astro-minify-html-swc'
+import cloudflare from '@astrojs/cloudflare';
 
 export default c.defineConfig({
+	adapter: cloudflare({
+		imageService: "passthrough"
+	}),
 	site: "https://azrd.dev",
 	devToolbar: { enabled: false },
 	integrations: [sitemap(), mdx(), minify()],
 	server: { host: true },
-	build: {
-		format: "preserve",
-		assets: "static",
-	},
+	build: { assets: "static" },
 	env: {
 		schema: {
 			ASCII_ART_URL: c.envField.string({

@@ -1,14 +1,18 @@
 # my website
 
-ssg, works without client javascript enabled
+Hybrid SSR/SSG site using [Astro](https://astro.build/) and [Hono](https://hono.dev/)
+
+Requirements:
+- Node.js
+- PNPM
 
 ## develop
-the usual `npm run dev` then go wild
+- fill the .env file
+- run `pnpm dev`
+- go wild
 
 ## deploy
-`npm run build`\
-results in a static files in `dist` folder, because its just html and css, you can deploy it everywhere
-
-go figure it out
-
-also read: ["embrace the platform"](https://css-tricks.com/embrace-the-platform/)
+- fill the .env file
+- run `pnpm build`
+- results in `dist` directory in each workspace
+- and then you go figure it out yourself

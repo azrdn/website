@@ -23,12 +23,19 @@ import { ClientRouter } from "astro:transitions";
 		<meta property="og:type" content="website" />
 		{
 			/*
-			Font is preloaded only in dev mode beceause only prod has http caching
-			which makes fonts flicker on every page load in dev.
+			  Font is preloaded only in dev mode beceause only prod has http caching
+				which makes fonts flicker on every page load in dev.
 			*/
 		}
 		<Font cssVariable="--font-subset" preload={import.meta.env.DEV} />
-		<ClientRouter />
+		{
+		  /*
+				the unresolved theme FOUC in dev mode are making me crazy
+				this is the only workaround I could find
+			*/
+		  import.meta.env.DEV && <ClientRouter />
+		}
+		<style is:inline>@view-transition { navigation: auto }</style>
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />

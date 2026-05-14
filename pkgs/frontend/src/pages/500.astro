@@ -1,0 +1,22 @@
+---
+import Footer from "@components/main/footer.astro";
+import Navbar from "@components/main/navbar.astro";
+import Layout from "@components/layout.astro";
+import { AstroError } from "astro/errors";
+
+export const prerender = false
+
+interface Props {
+  error: unknown;
+}
+
+const { error } = Astro.props;
+console.log(error);
+---
+
+<Layout title="Error">
+	<Navbar slot="header" />
+	<h1>Error</h1>
+	<div>{error instanceof AstroError ? error.message : "Unknown error"}</div>
+	<Footer slot="footer" />
+</Layout>

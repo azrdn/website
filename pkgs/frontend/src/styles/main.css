@@ -1,7 +1,3 @@
-@view-transition {
-	navigation: auto
-}
-
 :root {
 	color-scheme: light dark;
 	--max-width: 90ch;
@@ -49,8 +45,13 @@ button {
 	background-color: var(--fg-secondary);
 	user-select: none;
 
-	&:active {
+	&:active:not(:disabled) {
 		background-color: var(--accent);
+	}
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
 	}
 }
 
