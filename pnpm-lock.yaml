@@ -19,7 +19,7 @@ importers:
         version: 0.2.2(@standard-schema/spec@1.1.0)(hono@4.12.18)
       drizzle-orm:
         specifier: 1.0.0-rc.1
-        version: 1.0.0-rc.1(@electric-sql/pglite@0.4.5)(postgres@3.4.9)(zod@4.4.2)
+        version: 1.0.0-rc.1(@electric-sql/pglite@0.4.5)(postgres@3.4.9)(zod@4.4.3)
       hono:
         specifier: ^4.12.18
         version: 4.12.18
@@ -27,8 +27,8 @@ importers:
         specifier: ^3.4.9
         version: 3.4.9
       zod:
-        specifier: ^4.4.2
-        version: 4.4.2
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@electric-sql/pglite-socket':
         specifier: ^0.1.5
@@ -2332,9 +2332,6 @@ packages:
   youch@4.1.0-beta.10:
     resolution: {integrity: sha512-rLfVLB4FgQneDr0dv1oddCVZmKjcJ6yX6mS4pU82Mq/Dt9a3cLZQ62pDBL4AUO+uVrCvtWz3ZFUL2HFAFJ/BXQ==}
 
-  zod@4.4.2:
-    resolution: {integrity: sha512-IynmDyxsEsb9RKzO3J9+4SxXnl2FTFSzNBaKKaMV6tsSk0rw9gYw9gs+JFCq/qk2LCZ78KDwyj+Z289TijSkUw==}
-
   zod@4.4.3:
     resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
@@ -3358,11 +3355,11 @@ snapshots:
       get-tsconfig: 4.14.0
       jiti: 2.6.1
 
-  drizzle-orm@1.0.0-rc.1(@electric-sql/pglite@0.4.5)(postgres@3.4.9)(zod@4.4.2):
+  drizzle-orm@1.0.0-rc.1(@electric-sql/pglite@0.4.5)(postgres@3.4.9)(zod@4.4.3):
     optionalDependencies:
       '@electric-sql/pglite': 0.4.5
       postgres: 3.4.9
-      zod: 4.4.2
+      zod: 4.4.3
 
   dset@3.1.4: {}
 
@@ -4815,8 +4812,6 @@ snapshots:
       '@speed-highlight/core': 1.2.15
       cookie: 1.1.1
       youch-core: 0.3.3
-
-  zod@4.4.2: {}
 
   zod@4.4.3: {}
 
