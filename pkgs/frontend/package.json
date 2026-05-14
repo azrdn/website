@@ -9,11 +9,11 @@
 		"types": "astro sync"
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "^13.5.0",
-		"@astrojs/mdx": "^5.0.5",
+		"@astrojs/cloudflare": "^13.5.1",
+		"@astrojs/mdx": "^5.0.6",
 		"@astrojs/rss": "^4.0.18",
 		"@astrojs/sitemap": "^3.7.2",
-		"astro": "^6.3.1",
+		"astro": "^6.3.3",
 		"astro-minify-html-swc": "^0.1.11",
 		"hono": "^4.12.18",
 		"rehype-external-links": "^3.0.0"
