@@ -1,7 +1,6 @@
 ---
 import "../styles/main.css";
 import { Font } from "astro:assets";
-import { ClientRouter } from "astro:transitions";
 ---
 
 <html lang="en" data-theme="system">
@@ -29,13 +28,8 @@ import { ClientRouter } from "astro:transitions";
 		}
 		<Font cssVariable="--font-subset" preload={import.meta.env.DEV} />
 		{
-		  /*
-				the unresolved theme FOUC in dev mode are making me crazy
-				this is the only workaround I could find
-			*/
-		  import.meta.env.DEV && <ClientRouter />
+		  !import.meta.env.DEV && <style is:inline>@view-transition { navigation: auto }</style>
 		}
-		<style is:inline>@view-transition { navigation: auto }</style>
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
@@ -46,12 +40,8 @@ import { ClientRouter } from "astro:transitions";
 			href="/rss.xml"
 		/>
 		<script is:inline>
-			function setup() {
-				const theme = localStorage.getItem("theme") ?? "system";
-				document.documentElement.dataset.theme = theme;
-			}
-			setup();
-			document.addEventListener("astro:after-swap", setup);
+			const theme = localStorage.getItem("theme") ?? "system";
+			document.documentElement.dataset.theme = theme;
 		</script>
 		<title>{Astro.props.title ?? "azrd"}</title>
 	</head>
@@ -83,14 +73,12 @@ import { ClientRouter } from "astro:transitions";
 		color: var(--fg-secondary);
 		display: flex;
 		flex-direction: column;
-		/* hyphens: auto; */
 		line-height: 1.5;
 		margin: 0 auto;
 		max-width: var(--max-width);
 		min-height: 100svh;
 		text-wrap: pretty;
 		text-size-adjust: none;
-		position: relative;
 	}
 
 	#page {

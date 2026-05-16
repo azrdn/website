@@ -1,8 +1,8 @@
 ---
 const links = [
-	{ text: "/about", href: "/about", desc: "who am i?" },
-	{ text: "/blog", href: "/blog", desc: "i write too" },
-	{ text: "/projects", href: "/projects", desc: "things i made" },
+	{ text: "/about", href: "/about/", desc: "who am i?" },
+	{ text: "/blog", href: "/blog/", desc: "i write too" },
+	{ text: "/projects", href: "/projects/", desc: "things i made" },
 ]
 
 const { label } = Astro.props
@@ -58,28 +58,24 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 </header>
 
 <script>
-	const setup = () => {
-		const header = document.querySelector<HTMLElement>(".topheader")!
-		const mobile_menu = document.querySelector<HTMLElement>("#navbar-s")!
-		let last_scroll_top = 0
+	const header = document.querySelector<HTMLElement>(".topheader")!
+	const mobile_menu = document.querySelector<HTMLElement>("#navbar-s")!
+	let last_scroll_top = 0
 
-		document.addEventListener("scroll", () => {
-			const scroll_top = window.scrollY || document.documentElement.scrollTop
-			const dir = scroll_top > last_scroll_top ? "down" : "up"
-			if (Math.abs(scroll_top - last_scroll_top) > 5) {
-				header.setAttribute("scroll-direction", dir)
-			}
-			last_scroll_top = scroll_top <= 0 ? 0 : scroll_top
-			mobile_menu.hidePopover()
-		}, { passive: true })
+	document.addEventListener("scroll", () => {
+		const scroll_top = window.scrollY || document.documentElement.scrollTop
+		const dir = scroll_top > last_scroll_top ? "down" : "up"
+		if (Math.abs(scroll_top - last_scroll_top) > 5) {
+			header.setAttribute("scroll-direction", dir)
+		}
+		last_scroll_top = scroll_top <= 0 ? 0 : scroll_top
+		mobile_menu.hidePopover()
+	}, { passive: true })
 
-		const mobile_links = mobile_menu.querySelectorAll("a")!
-		mobile_links.forEach(a => {
-			a.addEventListener("click", () => mobile_menu.hidePopover())
-		})
-	}
-	setup()
-	document.addEventListener("astro:after-swap", setup)
+	const mobile_links = mobile_menu.querySelectorAll("a")!
+	mobile_links.forEach(a => {
+		a.addEventListener("click", () => mobile_menu.hidePopover())
+	})
 </script>
 
 <style>

@@ -5,9 +5,10 @@
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": "./dist",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/guestbook"]
   },
   "dev": {
-    "upstream_protocol": "http",
     "port": 4321
   }
 }
