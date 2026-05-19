@@ -7,6 +7,6 @@
 		"be": "pnpm -F backend"
 	},
 	"dependencies": {
-		"wrangler": "^4.90.1"
+		"wrangler": "^4.92.0"
 	}
 }
