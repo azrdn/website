@@ -12,7 +12,9 @@ import "../../styles/blog.css"
 const iso_date = (date: Date) => date.toISOString().slice(0, 10)
 
 export const getStaticPaths = (async () => {
-	const collection = await getCollection("blog")
+  const test_blog = import.meta.env.DEV ? await getCollection("test_blog") : []
+  const blog = await getCollection("blog")
+  const collection = [...test_blog, ...blog]
 	return collection.map(post => ({
 		params: { slug: post.id },
 		props: { post },

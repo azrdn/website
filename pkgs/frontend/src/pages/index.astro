@@ -12,7 +12,9 @@ const social_links = [
 	{ href: `mailto:hi+web@${Astro.site?.hostname}`, text: "email" },
 ]
 
-const collections = await getCollection("blog")
+const test_blog = import.meta.env.DEV ? await getCollection("test_blog") : []
+const blog = await getCollection("blog")
+const collections = [...test_blog, ...blog]
 
 const recent_posts = collections
 	.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime())

@@ -5,7 +5,9 @@ import Navbar from "@components/main/navbar.astro"
 import Layout from "@components/layout.astro"
 import Box from "@components/main/box.astro"
 
-const collections = await getCollection("blog")
+const test_blog = import.meta.env.DEV ? await getCollection("test_blog") : []
+const blog = await getCollection("blog")
+const collections = [...test_blog, ...blog]
 
 const ISODate = (date: Date) => date.toISOString()
 const posts = collections.sort((a, b) => {
