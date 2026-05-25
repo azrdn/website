@@ -40,7 +40,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
-        with:/robots.txt
+        with:
           submodules: true
           token: ${{ secrets.GH_TOKEN }}
 
