@@ -15,7 +15,7 @@
 		"@astrojs/sitemap": "^3.7.2",
 		"astro": "7.0.0-alpha.1",
 		"astro-minify-html-swc": "^0.1.11",
-		"hono": "^4.12.19",
+		"hono": "^4.12.22",
 		"rehype-external-links": "^3.0.0"
 	},
 	"devDependencies": {
