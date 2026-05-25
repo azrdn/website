@@ -27,6 +27,7 @@ jobs:
           filters: |
             frontend:
               - 'pkgs/frontend/**'
+              - 'pkgs/posts/**'
             backend:
               - 'pkgs/backend/**'
 
@@ -39,7 +40,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
-        with:
+        with:/robots.txt
           submodules: true
           token: ${{ secrets.GH_TOKEN }}
 

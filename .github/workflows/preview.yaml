@@ -28,6 +28,7 @@ jobs:
           filters: |
             frontend:
               - 'pkgs/frontend/**'
+              - 'pkgs/posts/**'
             backend:
               - 'pkgs/backend/**'
 
