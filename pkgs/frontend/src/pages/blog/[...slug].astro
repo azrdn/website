@@ -26,7 +26,7 @@ const { Content, headings } = await render(post)
 ---
 
 <Layout title={post.data.title}>
-	<Navbar slot="header" />
+	<Navbar slot="header" label="post" />
 	<article>
 		<header>
 			<h1>{post.data.title}</h1>
