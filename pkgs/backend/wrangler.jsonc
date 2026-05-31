@@ -11,7 +11,10 @@
     "required": ["DATABASE_URL", "FRONTEND_URL"]
   },
   "observability": {
-    "enabled": true
+    "enabled": true,
+    "traces": {
+      "enabled": true,
+    }
   },
   "ratelimits": [
     {
