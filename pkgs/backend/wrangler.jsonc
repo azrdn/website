@@ -8,7 +8,7 @@
     "mode": "smart",
   },
   "secrets": {
-    "required": ["DATABASE_URL", "FRONTEND_URL"]
+    "required": ["FRONTEND_URL"]
   },
   "observability": {
     "enabled": true,
@@ -16,6 +16,13 @@
       "enabled": true,
     }
   },
+  "hyperdrive": [
+    {
+      "binding": "HYPERDRIVE",
+      "id": "707bb48737b94bd68cb8299386d6b058",
+      "localConnectionString": "postgresql://postgres:postgres@127.0.0.1:5432/postgres"
+    }
+  ],
   "ratelimits": [
     {
       "name": "IP",

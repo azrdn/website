@@ -7,13 +7,15 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import { desc, count } from "drizzle-orm";
 import { table } from "../db/schema";
 
+import { env } from "cloudflare:workers"
+
 const stringToNum = z.preprocess(
 	(val: string) => Number.parseInt(val, 10),
 	z.number().nonnegative(),
 );
 
 const app = new Hono()
-	.use(cors({ origin: process.env.FRONTEND_URL }))
+	.use(cors({ origin: env.FRONTEND_URL }))
 	.get("/", (c) => c.text("OK", 200))
 	.get(
 		"/guestbook",
@@ -22,7 +24,7 @@ const app = new Hono()
 			limit: stringToNum.optional(),
 		})),
 		async ({ req, json }) => {
-			const db = drizzle(process.env.DATABASE_URL);
+			const db = drizzle(env.HYPERDRIVE.connectionString);
 			const { offset, limit } = req.valid("query");
 			const res = await db
 				.select()
@@ -36,7 +38,7 @@ const app = new Hono()
 	.get(
 		"/guestbook/count",
 		async ({ json }) => {
-			const db = drizzle(process.env.DATABASE_URL);
+			const db = drizzle(env.HYPERDRIVE.connectionString);
 			const res = await db.select({ rows: count() }).from(table)
 			return json(res[0].rows, 200);
 		}
@@ -52,7 +54,7 @@ const app = new Hono()
 			}),
 		),
 		async ({ req, json, redirect }) => {
-			const db = drizzle(process.env.DATABASE_URL)
+			const db = drizzle(env.HYPERDRIVE.connectionString)
 			const fetchMode = req.header("sec-fetch-mode")
 			const res = await db
 				.insert(table)
