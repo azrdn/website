@@ -21,8 +21,8 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 ---
 
 <header class="topheader">
-  <span id="label">
-    <a class="navlink" href="/">~</a><span class="separator">/</span>
+  <nav id="label" aria-label="Breadcrumb">
+    <a class="navlink" href="/" aria-label="Home">~</a><span class="separator">/</span>
     <slot name="breadcrumb">
       {
         label ??
@@ -38,7 +38,7 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
           ))
       }
     </slot>
-  </span>
+  </nav>
   <button popovertarget="navbar-s" title="Menu" aria-label="Toggle navigation">
     <svg
       xmlns="http://www.w3.org/2000/svg"

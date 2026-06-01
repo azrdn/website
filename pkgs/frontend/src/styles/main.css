@@ -1,9 +1,9 @@
 :root {
 	color-scheme: light dark;
 	--max-width: 90ch;
-	--accent: light-dark(#0073c0, #ff9900);
-	--fg: light-dark(#3d3d3d, #dcdcdc);
-	--fg-secondary: light-dark(#4e4e4e, #a5a5a5);
+	--accent: light-dark(#0057db, #efc22f);
+	--fg: light-dark(#333333, #dcdcdc);
+	--fg-secondary: light-dark(#404040, #a5a5a5);
 	--bg: light-dark(#e9e9e9, #1d1d1d);
 	--bg-secondary: light-dark(#bdbdbd, #383838);
 
@@ -46,6 +46,7 @@ button {
 	user-select: none;
 
 	&:active:not(:disabled) {
+		color: var(--bg);
 		background-color: var(--accent);
 	}
 

@@ -1,0 +1,69 @@
+---
+import { BACKEND_URL } from "astro:env/client";
+import { AstroError } from "astro/errors";
+import GuestbookEntry from "@components/guestbook/entry.astro";
+import { hc } from "hono/client";
+import type { App } from "../../../../backend/src/index";
+
+export const prerender = false;
+interface Props {
+  count: number
+  page: number
+}
+
+const backend = hc<App>(BACKEND_URL)
+const entriesPerPage = 10;
+const { count, page } = Astro.props;
+
+const res = await backend.guestbook.$get({
+  query: {
+    offset: (entriesPerPage * (page - 1)).toString(),
+    limit: entriesPerPage.toString(),
+  },
+})
+if (!res.ok) throw new AstroError("Failed to fetch guestbook data");
+
+const entries = await res.json();
+const totalPages = Math.max(1, Math.ceil(count / entriesPerPage));
+---
+
+{
+  entries.length > 0 && (
+    <div id="entries">
+      {entries.map((entry) => <GuestbookEntry {...entry} />)}
+    </div>
+  )
+}
+<div class="pagination">
+  <p>Viewing page {page} out of {totalPages}</p>
+  <div class="pagelinks">
+    {
+      page > 1 && (
+        <a href={`/guestbook?page=${page - 1}`}>Previous Page</a>
+      )
+    }
+    {
+      page < totalPages && (
+        <a href={`/guestbook?page=${page + 1}`}>Next Page</a>
+      )
+    }
+  </div>
+</div>
+
+<style>
+#entries {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.pagination {
+  margin: 1lh 0;
+}
+
+.pagelinks {
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+}
+</style>

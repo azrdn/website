@@ -1,0 +1,80 @@
+---
+interface Props {
+	url: string
+}
+---
+
+<form
+  method="post"
+  action={Astro.props.url}
+  enctype="multipart/form-data"
+>
+  <fieldset>
+    <div>
+      <label for="username">Name:</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        autocomplete="off"
+        maxlength="30"
+        required
+      />
+    </div>
+    <div>
+      <label for="url">URL (optional):</label>
+      <input type="url" id="url" name="url" />
+    </div>
+    <div>
+      <label for="message">Message:</label>
+      <textarea
+        id="message"
+        name="message"
+        required
+        minlength="5"
+        maxlength="150"
+        autocorrect="off"
+      />
+    </div>
+    <button type="submit">Submit</button>
+  </fieldset>
+</form>
+
+<style>
+fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 1em 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+input,
+textarea {
+  display: block;
+  line-height: inherit;
+  outline: 0;
+  border: 0;
+  width: 100%;
+  font-size: unset;
+  font-family: inherit;
+  color: var(--fg);
+  background-color: color-mix(in srgb, var(--bg-secondary) 50%, transparent);
+  padding: 0;
+}
+
+button[type="submit"] {
+  align-self: flex-end;
+
+  &:before {
+    content: "> ";
+  }
+}
+
+textarea {
+  field-sizing: content;
+  resize: none;
+  overflow-wrap: anywhere;
+}
+</style>
