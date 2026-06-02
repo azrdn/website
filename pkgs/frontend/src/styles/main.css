@@ -14,10 +14,6 @@
 	&[data-theme="light"] {
 		color-scheme: light;
 	}
-	
-	@media (prefers-reduced-motion: no-preference) {
-		scroll-behavior: smooth;
-	}
 }
 
 ::selection {
@@ -32,6 +28,26 @@
 img, picture, video, canvas, svg {
 	display: block;
 	max-width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:root {
+		scroll-behavior: smooth;
+	}
+
+	button, a, summary, select {
+		transition:
+			background-color .1s,
+			color .1s,
+			text-decoration-color .1s;
+	}
+
+	::details-content {
+		transition:
+			content-visibility .2s allow-discrete,
+			opacity .2s,
+			block-size .2s;
+	}
 }
 
 button {
@@ -87,16 +103,19 @@ details {
 	&::details-content {
 		opacity: 0;
 		block-size: 0;
-		overflow-y: clip; 
-		transition:
-			content-visibility .2s allow-discrete,
-			opacity .2s,
-			block-size .2s;
+		overflow-y: clip;
 	}
-	
+
 	&[open]::details-content {
 		opacity: 1;
 		block-size: auto;
+	}
+
+	&[open] summary {
+		&::before {
+			content: "v ";
+		}
+		color: var(--fg);
 	}
 
 	summary {
@@ -110,13 +129,10 @@ details {
 			content: "> ";
 			font-weight: 700;
 		}
-	}
 
-	&[open] summary {
-		&::before {
-			content: "v ";
+		&:hover {
+			color: var(--accent);
 		}
-		color: var(--fg);
 	}
 }
 

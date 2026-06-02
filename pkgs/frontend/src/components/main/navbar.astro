@@ -39,7 +39,7 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
       }
     </slot>
   </nav>
-  <button popovertarget="navbar-s" title="Menu" aria-label="Toggle navigation">
+  <button id="burger" popovertarget="navbar-s" title="Menu" aria-label="Toggle navigation">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -143,7 +143,7 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
     }
   }
 
-  button {
+  #burger {
     all: unset;
     -webkit-tap-highlight-color: transparent;
 
@@ -169,10 +169,6 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
   }
 
   #navbar-s[popover] {
-    transition:
-      opacity 0.2s,
-      transform 0.2s,
-      display 0.2s allow-discrete;
     opacity: 0;
     transform: translateY(-1rlh);
 
@@ -185,6 +181,13 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
     max-width: 80ch;
     margin: 0 auto;
     padding: 0 2.5ch 1lh;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        opacity 0.2s,
+        transform 0.2s,
+        display 0.2s allow-discrete;
+    }
   }
 
   #navbar-s:popover-open {
@@ -207,7 +210,7 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
   }
 
   @media (width >= 768px) {
-    button[popovertarget="navbar-s"],
+    #burger,
     #navbar-s[popover] {
       display: none;
     }
