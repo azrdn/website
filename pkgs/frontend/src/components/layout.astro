@@ -1,6 +1,12 @@
 ---
 import "../styles/main.css";
 import { Font } from "astro:assets";
+
+const og_desc = "My personal website - a quiet place in the internet"
+
+interface Props {
+	title?: string
+}
 ---
 
 <html lang="en" data-theme="system">
@@ -9,17 +15,16 @@ import { Font } from "astro:assets";
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="keywords" content="personal,blog,azrd" />
+		<meta name="twitter:title" content={Astro.props.title} />
+		<meta name="twitter:description" content={og_desc} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:image" content=`${Astro.site}og.png` />
-		<meta name="og:site_name" content={Astro.site?.hostname} />
-		<meta property="og:image" content=`${Astro.site}og.png` />
-		<meta property="og:title" content="azrd" />
-		<meta
-			name="description"
-			property="og:description"
-			content="My personal website - a quiet place in the internet"
-		/>
+		<meta property="og:site_name" content={Astro.site?.hostname} />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:image" name="image" content=`${Astro.site}og.png` />
+		<meta property="og:title" name="title" content="azrd" />
 		<meta property="og:type" content="website" />
+		<meta property="og:description" name="description" content={og_desc} />
 		{
 			/*
 			  Font is preloaded only in dev mode beceause only prod has http caching
