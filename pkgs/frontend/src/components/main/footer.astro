@@ -57,8 +57,10 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
 	};
 
 	select.onchange = () => {
-		const vt = document.startViewTransition?.(() => set_theme(select.value));
-		if (!vt) set_theme(select.value);
+		const reducedMotion = window.matchMedia("(prefers-reduced-motion)").matches;
+		if (reducedMotion || !document.startViewTransition) return set_theme(select.value);
+		
+		document.startViewTransition(() => set_theme(select.value));
 	};
 </script>
 
