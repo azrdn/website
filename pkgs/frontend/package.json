@@ -10,9 +10,9 @@
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "14.0.0-alpha.0",
-		"@astrojs/mdx": "6.0.0-alpha.0",
+		"@astrojs/mdx": "6.0.2",
 		"@astrojs/rss": "^4.0.18",
-		"@astrojs/sitemap": "^3.7.2",
+		"@astrojs/sitemap": "^3.7.3",
 		"astro": "7.0.0-alpha.1",
 		"astro-minify-html-swc": "^0.1.11",
 		"hono": "^4.12.22",
