@@ -9,7 +9,10 @@ import Layout from "@components/layout.astro"
 
 import "../../styles/blog.css"
 
-const iso_date = (date: Date) => date.toISOString().slice(0, 10)
+const ISO = (date: Date, isShort: boolean = false) => {
+  const string = date.toISOString()
+  return isShort ? string.slice(0, 10) : string
+}
 
 export const getStaticPaths = (async () => {
   const test_blog = import.meta.env.DEV ? await getCollection("test_blog") : []
@@ -21,19 +24,19 @@ export const getStaticPaths = (async () => {
 	}))
 }) satisfies GetStaticPaths
 
-const { post } = Astro.props
-const { Content, headings } = await render(post)
+const { Content, headings } = await render(Astro.props.post)
+const post = Astro.props.post.data
 ---
 
-<Layout title={post.data.title}>
-	<Navbar slot="header" label="post" />
+<Layout title={post.title}>
+  <Navbar slot="header" label="post" />
 	<article>
 		<header>
-			<h1>{post.data.title}</h1>
+			<h1>{post.title}</h1>
 			<p id="info">
-				<span>Publ: <time>{iso_date(post.data.createdAt)}</time></span>
-				{post.data.updatedAt &&
-					<span>Upd: <time>{iso_date(post.data.updatedAt)}</time></span>
+				<span title={ISO(post.createdAt)}>Publ: <time>{ISO(post.createdAt, true)}</time></span>
+				{post.updatedAt &&
+					<span title={ISO(post.updatedAt)}>Upd: <time>{ISO(post.updatedAt, true)}</time></span>
 				}
 			</p>
 			{

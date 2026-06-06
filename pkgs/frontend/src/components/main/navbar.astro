@@ -1,5 +1,6 @@
 ---
 interface Props {
+  /** custom text for last breadcrumb segment */
   label?: string;
 }
 
@@ -24,19 +25,16 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
   <nav id="label" aria-label="Breadcrumb">
     <a class="navlink" href="/" aria-label="Home">~</a><span class="separator">/</span>
     <slot name="breadcrumb">
-      {
-        label ??
-          breadcrumb_segments.map((segment) => (
-            <Fragment>
-              {segment.index === 0 ? null : <span class="separator">/</span>}
-              <span class="crumb">
-                <a class="navlink" href={segment.href}>
-                  {segment.text}
-                </a>
-              </span>
-            </Fragment>
-          ))
-      }
+      {breadcrumb_segments.map((segment, index, orig) => (
+        <Fragment>
+          {segment.index !== 0 && <span class="separator">/</span>}
+          <span class="crumb">
+            <a class="navlink" href={segment.href}>
+              {index === orig.length - 1 && label ? label : segment.text}
+            </a>
+          </span>
+        </Fragment>
+      ))}
     </slot>
   </nav>
   <button id="burger" popovertarget="navbar-s" title="Menu" aria-label="Toggle navigation">

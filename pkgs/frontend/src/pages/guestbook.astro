@@ -20,14 +20,14 @@ const pageParamSchema = z.preprocess(
   z.number().positive(),
 );
 
-const { success, data: page } = pageParamSchema.safeParse(pageParam);
+const { success, data: curPage } = pageParamSchema.safeParse(pageParam);
 if (!success) throw new AstroError("Invalid page query parameter");
 
 const countRes = await backend.guestbook.count.$get();
 if (!countRes.ok) throw new AstroError("Failed to fetch entry count");
 const count = await countRes.json()
 const totalPages = Math.max(1, Math.ceil(count / entriesPerPage));
-if (page > totalPages) return Astro.redirect("/404")
+if (curPage > totalPages) return Astro.redirect("/404")
 
 export const prerender = false;
 ---
@@ -35,12 +35,12 @@ export const prerender = false;
 <Layout>
   <Navbar slot="header" />
   {
-    page === 1 && (
+    curPage === 1 && (
       <h1>Guestbook</h1>
       <GBForm url={backend.guestbook.$url().toString()} />
     )
   }
   <hr>
-  <GBEntries {page} {count} />
+  <GBEntries {curPage} {count} />
   <Footer slot="footer" />
 </Layout>

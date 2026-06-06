@@ -10,7 +10,6 @@ export default c.defineConfig({
 		imageService: "passthrough"
 	}),
 	site: "https://azrd.dev",
-	devToolbar: { enabled: false },
 	integrations: [sitemap(), mdx(), minify()],
 	server: { host: true },
 	build: { assets: "static" },

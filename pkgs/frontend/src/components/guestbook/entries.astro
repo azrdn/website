@@ -8,16 +8,16 @@ import type { App } from "../../../../backend/src/index";
 export const prerender = false;
 interface Props {
   count: number
-  page: number
+  curPage: number
 }
 
 const backend = hc<App>(BACKEND_URL)
 const entriesPerPage = 10;
-const { count, page } = Astro.props;
+const { count, curPage } = Astro.props;
 
 const res = await backend.guestbook.$get({
   query: {
-    offset: (entriesPerPage * (page - 1)).toString(),
+    offset: (entriesPerPage * (curPage - 1)).toString(),
     limit: entriesPerPage.toString(),
   },
 })
@@ -35,16 +35,16 @@ const totalPages = Math.max(1, Math.ceil(count / entriesPerPage));
   )
 }
 <div class="pagination">
-  <p>Viewing page {page} out of {totalPages}</p>
+  <p>Viewing page {curPage} out of {totalPages}</p>
   <div class="pagelinks">
     {
-      page > 1 && (
-        <a href={`/guestbook?page=${page - 1}`}>Previous Page</a>
+      curPage > 1 && (
+        <a href={`/guestbook?page=${curPage - 1}`}>Previous Page</a>
       )
     }
     {
-      page < totalPages && (
-        <a href={`/guestbook?page=${page + 1}`}>Next Page</a>
+      curPage < totalPages && (
+        <a href={`/guestbook?page=${curPage + 1}`}>Next Page</a>
       )
     }
   </div>
