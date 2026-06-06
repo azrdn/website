@@ -1,0 +1,87 @@
+---
+interface Props {
+  uri: string;
+}
+
+const { uri } = Astro.props;
+const isAT = uri.startsWith("at:");
+
+const likeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+  <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/>
+  </svg>`;
+const replyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/>
+  </svg>`;
+---
+
+<script>
+  import "bsky-comments";
+</script>
+<bsky-comments
+  post={isAT ? undefined : uri}
+  uri={isAT ? uri : undefined}
+  icon-like={likeIcon}
+  icon-reply={replyIcon}
+>
+</bsky-comments>
+
+<style is:global>
+  .bsky-header {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 2ch;
+    margin: 1lh 0;
+  }
+
+  .bsky-reply-btn {
+    text-align: right;
+  }
+
+  .bsky-meta {
+    display: flex;
+    flex-direction: column;
+    column-gap: 1ch;
+
+    @media (min-width: 600px) {
+      flex-direction: row;
+    }
+  }
+
+  .bsky-date {
+    color: var(--fg-secondary);
+  }
+
+  .bsky-comment {
+    border: 1px solid var(--bg-secondary);
+    padding: 1em calc(2ch - 2px);
+    background-color: color-mix(in srgb, var(--bg-secondary), transparent 75%);
+    margin-top: 1em;
+  }
+
+  .bsky-comment-header {
+    display: flex;
+    column-gap: 1ch;
+  }
+
+  .bsky-avatar {
+    width: 5ch;
+    height: 5ch;
+  }
+
+  .bsky-icon {
+    display: flex;
+    height: 1em;
+    width: 2ch;
+    align-self: center;
+  }
+
+  .bsky-actions {
+    display: flex;
+    column-gap: 2ch;
+  }
+
+  .bsky-like,
+  .bsky-reply {
+    display: flex;
+  }
+</style>

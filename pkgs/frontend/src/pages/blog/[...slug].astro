@@ -6,6 +6,7 @@ import Footer from "@components/main/footer.astro"
 import Navbar from "@components/main/navbar.astro"
 import Toc from "@components/blog/toc.astro"
 import Layout from "@components/layout.astro"
+import BskyComments from "@components/blog/bsky_comments.astro"
 
 import "../../styles/blog.css"
 
@@ -50,6 +51,13 @@ const post = Astro.props.post.data
 		<hr />
 		</header>
 		<Content />
+		{post.bskyCommentUri && (
+		  <hr>
+      <details>
+        <summary>Comments</summary>
+        <BskyComments uri={post.bskyCommentUri} />
+      </details>
+		)}
 	</article>
 	<CodeBtns />
 	<Footer slot="footer" />
