@@ -128,8 +128,13 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
 			border: 1px solid var(--fg-secondary);
 		}
 
+		&::picker-icon {
+      content: "∨";
+      color: var(--fg-secondary);
+		}
+
 		&:open::picker-icon {
-			rotate: 180deg;
+		  content: "∧";
 		}
 
 		&:hover {

@@ -1,4 +1,6 @@
 ---
+import MenuIcon from "../icons/menu.svg";
+
 interface Props {
   /** custom text for last breadcrumb segment */
   label?: string;
@@ -38,19 +40,7 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
     </slot>
   </nav>
   <button id="burger" popovertarget="navbar-s" title="Menu" aria-label="Toggle navigation">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-    >
-      <path d="M4 12h16"></path>
-      <path d="M4 18h16"></path>
-      <path d="M4 6h16"></path>
-    </svg>
+    <MenuIcon />
   </button>
 
   <nav popover id="navbar-s">

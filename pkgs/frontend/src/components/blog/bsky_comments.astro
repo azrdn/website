@@ -1,17 +1,13 @@
 ---
+import likeIcon from "../icons/heart-fill.svg?raw";
+import replyIcon from "../icons/message-fill.svg?raw";
+
 interface Props {
   uri: string;
 }
 
 const { uri } = Astro.props;
 const isAT = uri.startsWith("at:");
-
-const likeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-  <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/>
-  </svg>`;
-const replyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/>
-  </svg>`;
 ---
 
 <script>
@@ -29,7 +25,7 @@ const replyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16
   .bsky-header {
     display: flex;
     justify-content: space-between;
-    column-gap: 2ch;
+    column-gap: 5ch;
     margin: 1lh 0;
   }
 
@@ -48,6 +44,7 @@ const replyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16
   }
 
   .bsky-date {
+    text-decoration: none;
     color: var(--fg-secondary);
   }
 

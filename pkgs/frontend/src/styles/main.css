@@ -1,5 +1,7 @@
 :root {
 	color-scheme: light dark;
+	font-size: clamp(1rem, 0.874rem + 0.465vw, 1.2rem);
+	
 	--max-width: 90ch;
 	--accent: light-dark(#0057db, #efc22f);
 	--fg: light-dark(#333333, #dcdcdc);
@@ -35,11 +37,12 @@ img, picture, video, canvas, svg {
 		scroll-behavior: smooth;
 	}
 
-	button, a, summary, select {
+	button, a, summary, summary::before, select {
 		transition:
 			background-color .1s,
 			color .1s,
-			text-decoration-color .1s;
+			text-decoration-color .1s,
+			rotate .1s;
 	}
 
 	::details-content {
@@ -99,6 +102,7 @@ details {
 	color: var(--fg-secondary);
 	margin: 1.5em 0;
 	interpolate-size: allow-keywords;
+	-webkit-tap-highlight-color: transparent;
 
 	&::details-content {
 		opacity: 0;
@@ -113,20 +117,22 @@ details {
 
 	&[open] summary {
 		&::before {
-			content: "v ";
+			rotate: 90deg;
 		}
 		color: var(--fg);
 	}
 
 	summary {
+		display: flex;
+		gap: 1ch;
 		font-weight: 700;
 		cursor: pointer;
 		width: fit-content;
 		list-style: none;
 
 		&::before {
-			display: inline;
-			content: "> ";
+			display: inline-block;
+			content: ">";
 			font-weight: 700;
 		}
 
