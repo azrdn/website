@@ -1,0 +1,41 @@
+---
+import Box from "@components/main/box.astro"
+const ISODate = (date: Date) => date.toISOString()
+
+interface Props {
+	title: string,
+	href: string,
+	date: Date
+}
+
+const { title, href, date } = Astro.props
+---
+
+<Box tag="article" class="post">
+	<a {href}>{title}</a>
+	<time datetime={ISODate(date)} title={ISODate(date)}>
+		{ISODate(date).slice(0, 10)}
+	</time>
+</Box>
+
+
+<style>
+  .post {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    margin: 1em 0;
+  }
+
+  @media (width >= 768px) {
+    .post {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    a {
+      max-width: 70%;
+      text-decoration: none;
+    }
+  }
+</style>

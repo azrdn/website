@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "14.0.0-alpha.0",
+		"@astrojs/markdown-remark": "^7.2.0",
 		"@astrojs/mdx": "6.0.0-alpha.0",
 		"@astrojs/rss": "^4.0.18",
 		"@astrojs/sitemap": "^3.7.3",
@@ -17,6 +18,7 @@
 		"astro-minify-html-swc": "^0.1.11",
 		"bsky-comments": "^1.0.1",
 		"hono": "^4.12.22",
+		"rehype-autolink-headings": "^7.1.0",
 		"rehype-external-links": "^3.0.0"
 	},
 	"devDependencies": {

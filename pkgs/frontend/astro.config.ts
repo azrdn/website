@@ -1,7 +1,9 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import * as c from "astro/config";
+import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import rehypeExtLinks from "rehype-external-links";
+import rehypeHeadingLinks from "rehype-autolink-headings";
 import minify from "astro-minify-html-swc";
 import cloudflare from "@astrojs/cloudflare";
 
@@ -15,11 +17,6 @@ export default c.defineConfig({
 	build: { assets: "static" },
 	env: {
 		schema: {
-			ASCII_ART_URL: c.envField.string({
-				context: "server",
-				access: "public",
-				url: true,
-			}),
 			REPO_URL: c.envField.string({
 				context: "server",
 				access: "public",
@@ -34,7 +31,11 @@ export default c.defineConfig({
 		validateSecrets: true,
 	},
 	markdown: {
-		rehypePlugins: [[rehypeExtLinks, { rel: "external nofollow" }]],
+		rehypePlugins: [
+			rehypeHeadingIds,
+			rehypeHeadingLinks,
+			[rehypeExtLinks, { rel: "external nofollow" }],
+		],
 		shikiConfig: {
 			defaultColor: false,
 			themes: {

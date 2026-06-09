@@ -19,7 +19,7 @@
 }
 
 ::selection {
-	background-color: var(--fg);
+	background-color: var(--accent);
 	color: var(--bg);
 }
 

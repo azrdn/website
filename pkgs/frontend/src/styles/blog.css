@@ -66,7 +66,17 @@ th, td {
 }
 
 :not(header *) {
-	&:is(h1)::before { content: "#" }
-	&:is(h2)::before { content: "##" }
-	&:is(h3, h4, h5, h6)::before { content: "###" }
+	h1, h2, h3, h4, h5, h6 {
+		a {
+			text-decoration: none;
+		}
+	}
+	
+	h1 .icon::before { content: "#" }
+	h2 .icon::before { content: "##" }
+	h3, h4, h5, h6 {
+		.icon::before {
+			content: "###";
+		}
+	}
 }

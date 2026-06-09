@@ -51,11 +51,11 @@ const post = Astro.props.post.data
 		<hr />
 		</header>
 		<Content />
-		{post.bskyCommentUri && (
+		{post.bskyPostUri && (
 		  <hr>
       <details>
         <summary>Comments</summary>
-        <BskyComments uri={post.bskyCommentUri} />
+        <BskyComments uri={post.bskyPostUri} />
       </details>
 		)}
 	</article>

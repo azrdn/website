@@ -22,8 +22,17 @@ const isAT = uri.startsWith("at:");
 </bsky-comments>
 
 <style is:global>
-  .bsky-header {
+  .bsky-header,
+  .bsky-meta,
+  .bsky-comment-header,
+  .bsky-icon,
+  .bsky-actions,
+  .bsky-like,
+  .bsky-reply {
     display: flex;
+  }
+
+  .bsky-header {
     justify-content: space-between;
     column-gap: 5ch;
     margin: 1lh 0;
@@ -34,7 +43,6 @@ const isAT = uri.startsWith("at:");
   }
 
   .bsky-meta {
-    display: flex;
     flex-direction: column;
     column-gap: 1ch;
 
@@ -56,7 +64,6 @@ const isAT = uri.startsWith("at:");
   }
 
   .bsky-comment-header {
-    display: flex;
     column-gap: 1ch;
   }
 
@@ -66,19 +73,12 @@ const isAT = uri.startsWith("at:");
   }
 
   .bsky-icon {
-    display: flex;
     height: 1em;
     width: 2ch;
     align-self: center;
   }
 
   .bsky-actions {
-    display: flex;
     column-gap: 2ch;
-  }
-
-  .bsky-like,
-  .bsky-reply {
-    display: flex;
   }
 </style>

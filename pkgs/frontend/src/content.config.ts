@@ -7,7 +7,7 @@ const blog_schema = z.object({
 	title: z.string().min(1, "Title cannot be empty"),
 	createdAt: z.date(),
 	updatedAt: z.date().optional(),
-	bskyCommentUri: z.string().optional()
+	bskyPostUri: z.string().optional()
 })
 
 export const collections = {

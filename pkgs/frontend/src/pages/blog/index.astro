@@ -1,70 +1,34 @@
 ---
-import { getCollection } from "astro:content"
-import Footer from "@components/main/footer.astro"
-import Navbar from "@components/main/navbar.astro"
-import Layout from "@components/layout.astro"
-import Box from "@components/main/box.astro"
+import { getCollection } from "astro:content";
+import Footer from "@components/main/footer.astro";
+import Navbar from "@components/main/navbar.astro";
+import Layout from "@components/layout.astro";
+import BlogCard from "@components/blog/card.astro";
+import DevModeLabel from "@components/main/devmode.astro";
 
-const test_blog = import.meta.env.DEV ? await getCollection("test_blog") : []
-const blog = await getCollection("blog")
-const collections = [...test_blog, ...blog]
+const test_blog = import.meta.env.DEV ? await getCollection("test_blog") : [];
+const blog = await getCollection("blog");
+const collections = [...test_blog, ...blog];
 
-const ISODate = (date: Date) => date.toISOString()
 const posts = collections.sort((a, b) => {
-	return b.data.createdAt.getTime() - a.data.createdAt.getTime()
-})
-
-const style = `
-	display: inline-block;
-	background-color: var(--fg);
-	color: var(--bg);
-`
+  return b.data.createdAt.getTime() - a.data.createdAt.getTime();
+});
 ---
 
 <Layout title="Blog">
-	<Navbar slot="header" />
-	<h1>I write stuff</h1>
-	{
-		import.meta.env.DEV && (
-			<strong {style}>&nbsp;DEVELOPMENT MODE&nbsp;</strong>
-		)
-	}
-	<p>Sometimes i write down my thoughts and experience on various topics.</p>
-	<p>
-		You can also view my posts via
-		<a href="/rss.xml" rel="alternate" type="application/rss+xml">RSS</a>.
-	</p>
-	<hr>
-	{ 
-		posts.map(({ data, id }) => (
-			<Box tag="article" class="post">
-				<a href={`/blog/${id}`}>{data.title}</a>
-				<time datetime={ISODate(data.createdAt)} title={ISODate(data.createdAt)}>
-					{ISODate(data.createdAt).slice(0, 10)}
-				</time>
-			</Box>
-		))
-	}
-	<Footer slot="footer" />
+  <Navbar slot="header" />
+  <h1>I write stuff</h1>
+  {import.meta.env.DEV && <DevModeLabel />}
+  <p>Sometimes i write down my thoughts and experience on various topics.</p>
+  <p>
+    You can also view my posts via
+    <a href="/rss.xml" rel="alternate" type="application/rss+xml">RSS</a>.
+  </p>
+  <hr />
+  {
+    posts.map(({ data, id }) => (
+      <BlogCard title={data.title} href={`/blog/${id}`} date={data.createdAt} />
+    ))
+  }
+  <Footer slot="footer" />
 </Layout>
-
-<style>
-	.post {
-		display: flex;
-		flex-direction: column;
-		row-gap: 1em;
-		margin: 1em 0;
-	}
-
-	@media (width >= 768px) {
-		.post {
-			flex-direction: row;
-			justify-content: space-between;
-		}
-
-		a {
-			max-width: 70%;
-			text-decoration: none;
-		}
-	}
-</style>

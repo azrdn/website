@@ -4,6 +4,7 @@ import Footer from "@components/main/footer.astro"
 import Navbar from "@components/main/navbar.astro"
 import Layout from "@components/layout.astro"
 import Marquee from "@components/main/marquee.astro"
+import BlogCard from "@components/blog/card.astro"
 
 const social_links = [
 	{ href: "https://bsky.app/profile/did:plc:d7d6hxynbzfgbpvw5njtxbhw", text: "bluesky" },
@@ -25,7 +26,7 @@ const recent_posts = collections
 	<Navbar slot="header" label="index"/>
 	<Marquee />
 	<hr />
-	<section>
+	<section id="introduction">
 		<h1>Hi, i'm azrd</h1>
 		<p>
 			Welcome to my website, feel free to explore as much as you
@@ -36,7 +37,7 @@ const recent_posts = collections
 			enrolled in a university, learning about information systems.
 		</p>
 		<p>Here are some links where you can reach me:</p>
-		<div id="_links">
+		<div id="links">
 			{social_links.map((link) => (
 				<a href={link.href} rel="external nofollow">
 					{link.text}
@@ -48,26 +49,21 @@ const recent_posts = collections
 		<hr />
 		<section id="recent_posts">
 			<h1>Recent Blog Posts</h1>
-			<ul>
-				{recent_posts.map((post) => (
-					<li><a href={`/blog/${post.id}`}>{post.data.title}</a></li>
-				))}
-			</ul>
+			{recent_posts.map(({ data, id }) => (
+				<BlogCard title={data.title} href={`/blog/${id}`} date={data.createdAt} />
+			))}
+			<p>Read more on the <a href="/blog">blog</a>.</p>
 		</section>
 	)}
 	<Footer slot="footer" />
 </Layout>
 
 <style>
-	#_links {
+	#links {
 		margin: 2em 0;
 		display: flex;
 		flex-wrap: wrap;
 		column-gap: 3ch;
 		row-gap: 1rlh;
-	}
-
-	#recent_posts {
-		margin: 2em 0;
 	}
 </style>

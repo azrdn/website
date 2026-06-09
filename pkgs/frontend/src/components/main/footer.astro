@@ -1,182 +1,189 @@
 ---
 import { getEntry } from "astro:content";
 
-const gitHash = (await getEntry("gitInfo", "0")!).data.output
-const lastChange = (await getEntry("gitInfo", "1")!).data.output
+const gitHash = (await getEntry("gitInfo", "0")!).data.output;
+const lastChange = (await getEntry("gitInfo", "1")!).data.output;
 const shortDate = lastChange.slice(0, 10);
 
 const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
 ---
 
 <footer>
-	<section class="top links">
-		<a href="/privacy/">/privacy</a>
-		<a href="/disclaimer/">/disclaimer</a>
-		<a href="/guestbook">/guestbook</a>
-		<a href={`https://status.${Astro.site?.hostname}`} rel="external nofollow">/status</a>
-	</section>
-	<hr />
-	<section class="bottom">
-		<div class="left">
-			<div>
-				<span id="cl">&copy;</span> 2022-{new Date().getFullYear()}
-				<a
-					href="https://www.gnu.org/licenses/gpl-3.0.en.html"
-					rel="external nofollow">GPLv3</a
-				>
-			</div>
-			<div>Made with &lt;3</div>
-		</div>
-		<div class="right">
-			<div class="js">
-				<label for="theme-select">Theme:&nbsp;</label><select
-					name="theme"
-					id="theme-select"
-				>
-					<option value="system">System</option>
-					<option value="light">Light</option>
-					<option value="dark">Dark</option>
-				</select>
-			</div>
-			<div>
-				Version <a href={commit_url} rel="external nofollow">{gitHash}</a>
-				<time datetime={lastChange} title={lastChange}>({shortDate})</time>
-			</div>
-		</div>
-	</section>
+  <section class="top links">
+    <a href="/privacy/">/privacy</a>
+    <a href="/disclaimer/">/disclaimer</a>
+    <a href="/guestbook">/guestbook</a>
+    <a href={`https://status.${Astro.site?.hostname}`} rel="external nofollow"
+      >/status</a
+    >
+  </section>
+  <hr />
+  <section class="bottom">
+    <div class="left">
+      <div>
+        <span id="cl">&copy;</span> 2022-{new Date().getFullYear()}
+        <a
+          href="https://www.gnu.org/licenses/gpl-3.0.en.html"
+          rel="external nofollow">GPLv3</a
+        >
+      </div>
+      <div>Made with &lt;3</div>
+    </div>
+    <div class="right">
+      <div class="js">
+        <label for="theme-select">Theme:&nbsp;</label><select
+          name="theme"
+          id="theme-select"
+        >
+          <option value="system">System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+      <div>
+        Version <a href={commit_url} rel="external nofollow">{gitHash}</a>
+        <time datetime={lastChange} title={lastChange}>({shortDate})</time>
+      </div>
+    </div>
+  </section>
 </footer>
 
 <script>
-	const select = document.querySelector<HTMLSelectElement>("#theme-select");
-	if (!select) throw new Error("Theme selector not found");
-	select.value = localStorage.getItem("theme") || "system";
+  const select = document.querySelector<HTMLSelectElement>("#theme-select");
+  if (!select) throw new Error("Theme selector not found");
+  select.value = localStorage.getItem("theme") || "system";
 
-	const set_theme = (theme: string) => {
-		document.documentElement.dataset.theme = theme;
-		localStorage.setItem("theme", theme);
-	};
+  const set_theme = (theme: string) => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+  };
 
-	select.onchange = () => {
-		const reducedMotion = window.matchMedia("(prefers-reduced-motion)").matches;
-		if (reducedMotion || !document.startViewTransition) return set_theme(select.value);
-		
-		document.startViewTransition(() => set_theme(select.value));
-	};
+  select.onchange = () => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion)").matches;
+    if (reducedMotion || !document.startViewTransition)
+      return set_theme(select.value);
+
+    document.startViewTransition(() => set_theme(select.value));
+  };
 </script>
 
 <style>
-	footer {
-		z-index: 1;
-		padding: 0.2em 2.5ch;
-		background-color: var(--bg);
-		border-top: 1px solid var(--bg-secondary);
+  footer {
+    z-index: 1;
+    padding: 0.2em 2.5ch;
+    background-color: var(--bg);
+    border-top: 1px solid var(--bg-secondary);
 
-		hr {
-			margin: 1rlh 0;
-		}
-	}
+    hr {
+      margin: 1rlh 0;
+    }
+  }
 
-	.top {
-		display: flex;
-		flex-wrap: wrap;
-		margin: 1em 0;
-		gap: 1em 3ch;
+  .top {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1em 0;
+    gap: 1em 3ch;
 
-		a {
-			text-decoration: none;
-		}
-	}
+    a {
+      text-decoration: none;
+    }
+  }
 
-	.bottom {
-		display: flex;
-		justify-content: space-between;
-		flex-direction: column;
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 
-		#cl {
-			display: inline-block;
-			transform: scale(-1, 1);
-		}
-	}
+    #cl {
+      display: inline-block;
+      transform: scale(-1, 1);
+    }
+  }
 
-	section {
-		margin: 1em 0;
+  section {
+    margin: 1em 0;
 
-		.right,
-		.left {
-			display: flex;
-			flex-direction: column;
-			row-gap: 1em;
-		}
-	}
+    .right,
+    .left {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1em;
+    }
+  }
 
-	select {
-		/* TODO: rework after customizable select lands in FF */
-		appearance: base-select;
-		cursor: pointer;
-		padding: 0;
-		border: none;
-		background: none;
-		color: var(--fg);
-		font-family: inherit;
-		font-size: inherit;
-		text-overflow: ellipsis;
+  select {
+    /* TODO: rework after customizable select lands in FF */
+    appearance: base-select;
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--fg);
+    font-family: inherit;
+    font-size: inherit;
+    text-overflow: ellipsis;
 
-		&::picker(select) {
-			appearance: base-select;
-			color: var(--fg);
-			cursor: initial;
-			border: 1px solid var(--fg-secondary);
-		}
+    &::picker(select) {
+      appearance: base-select;
+      color: var(--fg);
+      cursor: initial;
+      border: 1px solid var(--fg-secondary);
+    }
 
-		&::picker-icon {
-      content: "∨";
+    &::picker-icon {
+      content: "<";
       color: var(--fg-secondary);
-		}
 
-		&:open::picker-icon {
-		  content: "∧";
-		}
+      @media (prefers-reduced-motion: no-preference) {
+        transition: rotate 0.1s;
+      }
+    }
 
-		&:hover {
-			color: var(--accent);
-		}
-	}
+    &:open::picker-icon {
+      rotate: 90deg;
+    }
 
-	option {
-		background-color: var(--bg);
-		padding: 0.25lh 1ch;
+    &:hover {
+      color: var(--accent);
+    }
+  }
 
-		&:hover {
-			background-color: color-mix(
-				in srgb,
-				var(--bg-secondary),
-				transparent 40%
-			);
-		}
+  option {
+    background-color: var(--bg);
+    padding: 0.25lh 1ch;
 
-		&::checkmark {
-			order: 1;
-			margin-left: auto;
-		}
-	}
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--bg-secondary),
+        transparent 40%
+      );
+    }
 
-	@media (width >= 768px) {
-		.bottom {
-			justify-content: space-between;
-			align-items: start;
-			flex-direction: row;
-		}
+    &::checkmark {
+      order: 1;
+      margin-left: auto;
+    }
+  }
 
-		.right {
-			text-align: right;
-		}
-	}
+  @media (width >= 768px) {
+    .bottom {
+      justify-content: space-between;
+      align-items: start;
+      flex-direction: row;
+    }
 
-	@media (scripting: none) {
-		.left::after {
-			display: block;
-			content: "JS is not required btw :)";
-			margin: 1em 0;
-		}
-	}
+    .right {
+      text-align: right;
+    }
+  }
+
+  @media (scripting: none) {
+    .left::after {
+      display: block;
+      content: "JS is not required btw :)";
+      margin: 1em 0;
+    }
+  }
 </style>
