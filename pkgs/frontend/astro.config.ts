@@ -1,28 +1,25 @@
+import { defineConfig, envField, fontProviders } from "astro/config";
+import { unified, rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import * as c from "astro/config";
-import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import rehypeExtLinks from "rehype-external-links";
 import rehypeHeadingLinks from "rehype-autolink-headings";
-import minify from "astro-minify-html-swc";
 import cloudflare from "@astrojs/cloudflare";
 
-export default c.defineConfig({
-	adapter: cloudflare({
-		imageService: "passthrough",
-	}),
+export default defineConfig({
+	adapter: cloudflare({ imageService: "passthrough" }),
 	site: "https://azrd.dev",
-	integrations: [sitemap(), mdx(), minify()],
+	integrations: [sitemap(), mdx()],
 	server: { host: true },
 	build: { assets: "static" },
 	env: {
 		schema: {
-			REPO_URL: c.envField.string({
+			REPO_URL: envField.string({
 				context: "server",
 				access: "public",
 				url: true,
 			}),
-			BACKEND_URL: c.envField.string({
+			BACKEND_URL: envField.string({
 				context: "client",
 				access: "public",
 				url: true,
@@ -31,11 +28,13 @@ export default c.defineConfig({
 		validateSecrets: true,
 	},
 	markdown: {
-		rehypePlugins: [
-			rehypeHeadingIds,
-			rehypeHeadingLinks,
-			[rehypeExtLinks, { rel: "external nofollow" }],
-		],
+		processor: unified({
+			rehypePlugins: [
+				rehypeHeadingIds,
+				rehypeHeadingLinks,
+				[rehypeExtLinks, { rel: "external nofollow" }],
+			],
+		}),
 		shikiConfig: {
 			defaultColor: false,
 			themes: {
@@ -44,13 +43,9 @@ export default c.defineConfig({
 			},
 		},
 	},
-	experimental: {
-		contentIntellisense: true,
-		queuedRendering: { enabled: true },
-	},
 	fonts: [
 		{
-			provider: c.fontProviders.local(),
+			provider: fontProviders.local(),
 			name: "Ioskeley Mono",
 			fallbacks: ["monospace"],
 			cssVariable: "--font-subset",

@@ -76,6 +76,7 @@ interface Props {
 
 	body {
 		color: var(--fg-secondary);
+		scrollbar-gutter: stable both-edges;
 		display: flex;
 		flex-direction: column;
 		line-height: 1.5;
@@ -90,7 +91,7 @@ interface Props {
 		background-color: var(--bg);
 		min-width: 0;
 		width: 100%;
-		padding: calc(2rlh + 1lh) 2.5ch 1lh;
+		padding: calc(2rlh + 1lh) 2ch 1lh;
 	}
 
 	main {
@@ -126,6 +127,11 @@ interface Props {
 					transparent 50%
 				);
 			}
+		}
+
+		#page {
+		  padding-left: 2.5ch;
+		  padding-right: 2.5ch;
 		}
 	}
 </style>

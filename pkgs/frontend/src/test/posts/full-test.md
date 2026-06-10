@@ -1,7 +1,7 @@
 ---
-title: Markdown full test page
-createdAt: 2025-01-01
-updatedAt: 2025-06-14
+title: "Markdown full test page"
+createdAt: "2025-01-01T00:00:00Z"
+updatedAt: "2025-06-14T00:00:00Z"
 ---
 
 Testing for the rendering of all Markdown elements into a html page

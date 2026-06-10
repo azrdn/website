@@ -9,11 +9,7 @@ import Layout from "@components/layout.astro"
 import BskyComments from "@components/blog/bsky_comments.astro"
 
 import "../../styles/blog.css"
-
-const ISO = (date: Date, isShort: boolean = false) => {
-  const string = date.toISOString()
-  return isShort ? string.slice(0, 10) : string
-}
+import { ISO } from "@utils/date"
 
 export const getStaticPaths = (async () => {
   const test_blog = import.meta.env.DEV ? await getCollection("test_blog") : []
@@ -81,14 +77,14 @@ const post = Astro.props.post.data
 		}
 	}
 
-	@media (width >= 1600px) {
+	@media (width >= 1750px) {
 		#toc {
 			position: fixed;
 			padding: 1rlh 2ch;
 			background-color: var(--bg);
 			top: 0;
+			left: 0;
 			margin: 0;
-			right: 3ch;
 			max-height: 90svh;
 			width: 35ch;
 

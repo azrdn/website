@@ -193,6 +193,12 @@ blockquote {
 	border-left: 1ch solid var(--bg-secondary);
 }
 
+.box {
+	border: 1px solid var(--bg-secondary);
+	padding: 1em calc(2ch - 2px);
+	background-color: color-mix(in srgb, var(--bg-secondary), transparent 75%);
+}
+
 @media (scripting: none) {
 	.js {
 		display: none;

@@ -1,12 +1,13 @@
 import { defineCollection } from "astro:content"
 import { glob } from "astro/loaders"
-import { cmdLoader } from "./utils/cmd.loader"
 import { z } from "astro/zod"
+
+import { cmdLoader } from "@utils/cmd.loader"
 
 const blog_schema = z.object({
 	title: z.string().min(1, "Title cannot be empty"),
-	createdAt: z.date(),
-	updatedAt: z.date().optional(),
+	createdAt: z.iso.datetime().transform(v => new Date(v)),
+	updatedAt: z.iso.datetime().transform(v => new Date(v)).optional(),
 	bskyPostUri: z.string().optional()
 })
 
@@ -22,7 +23,7 @@ export const collections = {
 	gitInfo: defineCollection({
 		loader: cmdLoader([
 			"git rev-parse --short HEAD",
-			"git show -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' HEAD"
+			"git show -s --format=%ct HEAD"
 		]),
 	})
 }

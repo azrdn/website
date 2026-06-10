@@ -1,6 +1,6 @@
 ---
-title: Table of content test
-createdAt: 2025-01-01
+title: "Table of content test"
+createdAt: "2025-01-01T00:00:00Z"
 ---
 
 # Lorem ipsum dolor

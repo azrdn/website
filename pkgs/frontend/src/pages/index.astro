@@ -52,7 +52,6 @@ const recent_posts = collections
 			{recent_posts.map(({ data, id }) => (
 				<BlogCard title={data.title} href={`/blog/${id}`} date={data.createdAt} />
 			))}
-			<p>Read more on the <a href="/blog">blog</a>.</p>
 		</section>
 	)}
 	<Footer slot="footer" />
