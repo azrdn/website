@@ -69,23 +69,18 @@ const post = Astro.props.post.data
 			border: 1px solid var(--bg-secondary);
 			padding: 0.1em calc(1ch - 1px);
 		}
-
-		#pageviews {
-			display: inline-block;
-			width: 3ch;
-			text-align: right;
-		}
 	}
 
-	@media (width >= 1750px) {
+	@media (width >= 1700px) {
 		#toc {
 			position: fixed;
 			padding: 1rlh 2ch;
 			background-color: var(--bg);
-			top: 0;
-			left: 0;
-			margin: 0;
-			max-height: 90svh;
+			transform: translateY(-50%);
+			top: 50%;
+			right: 0;
+			margin: 2ch;
+			max-height: 70svh;
 			width: 35ch;
 
 			&[open] {

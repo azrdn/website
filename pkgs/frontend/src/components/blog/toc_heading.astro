@@ -5,13 +5,11 @@ interface Props {
 	heading: TocItem
 }
 
-const { heading }: Props = Astro.props
+const { heading } = Astro.props
 ---
 
 <li>
-	<a href={"#" + heading.slug}>
-		{heading.text}
-	</a>
+	<a href={`#${heading.slug}`}>{heading.text}</a>
 	{
 		heading.subheadings.length > 0 && (
 			<ul>

@@ -1,6 +1,6 @@
 :root {
 	color-scheme: light dark;
-	font-size: clamp(1rem, 0.874rem + 0.465vw, 1.2rem);
+	font-size: clamp(1rem, 0.85rem + 0.6vw, 1.15rem);
 	
 	--max-width: 90ch;
 	--accent: light-dark(#0057db, #efc22f);
