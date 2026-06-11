@@ -8,6 +8,9 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - astro
+  - '@astrojs/compiler-binding*'
+  - '@astrojs/compiler-rs'
+  - '@napi-rs/wasm-runtime'
 
 overrides:
   "@astrojs/compiler-rs": "^0.2.2"

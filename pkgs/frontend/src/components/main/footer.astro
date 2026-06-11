@@ -1,11 +1,11 @@
 ---
 import { getEntry } from "astro:content";
+import { ISO } from "@utils/date";
 
 const gitHash = (await getEntry("gitInfo", "0")!).data.output;
 const lastChangeEpoch = (await getEntry("gitInfo", "1")!).data.output;
 
-const longDate = new Date(parseInt(lastChangeEpoch, 10) * 1000).toISOString();
-const shortDate = longDate.slice(0, 10);
+const date = new Date(parseInt(lastChangeEpoch, 10) * 1000)
 const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
 ---
 
@@ -43,7 +43,7 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
       </div>
       <div>
         Version <a href={commit_url} rel="external nofollow">{gitHash}</a>
-        <time datetime={longDate} title={longDate}>({shortDate})</time>
+        <time datetime={ISO(date)} title={ISO(date)}>({ISO(date, true)})</time>
       </div>
     </div>
   </section>
@@ -181,10 +181,10 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
   }
 
   @media (scripting: none) {
-    .left::after {
+    .right::before {
       display: block;
       content: "JS is not required btw :)";
-      margin: 1em 0;
+      color: var(--accent);
     }
   }
 </style>

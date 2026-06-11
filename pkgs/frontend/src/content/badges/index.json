@@ -1,0 +1,57 @@
+[
+	{
+		"image": "./images/green-team.gif",
+		"href": "https://512kb.club",
+		"alt": "a proud member of the green team of 512KB club"
+	},
+	{
+		"image": "./images/brainmade.png",
+		"href": "https://brainmade.org",
+		"alt": "brainmade.org badge"
+	},
+	{
+		"image": "./images/bad-markup.gif",
+		"href": "https://validator.w3.org/nu/",
+		"alt": "lol"
+	},
+	{
+		"image": "./images/astro.png",
+		"href": "https://astro.build",
+		"alt": "made on astro framework"
+	},
+	{
+		"image": "./images/fedora.png",
+		"href": "https://fedoraproject.org/",
+		"alt": "fedora"
+	},
+	{
+		"image": "./images/imissxp.gif",
+		"href": "https://en.wikipedia.org/wiki/Windows_XP",
+		"alt": "i miss xp"
+	},
+	{
+		"image": "./images/minecraft.gif",
+		"href": "https://minecraft.net/",
+		"alt": "minecraft"
+	},
+	{
+		"image": "./images/ubo.png",
+		"href": "https://github.com/gorhill/uBlock",
+		"alt": "ublock origin"
+	},
+	{
+		"image": "./images/inetarcv.png",
+		"href": "https://archive.org/",
+		"alt": "internet Archive"
+	},
+	{
+		"image": "./images/lain.png",
+		"href": "https://www.nbcuni.co.jp/rondorobe/anime/lain/",
+		"alt": "lain"
+	},
+	{
+		"image": "./images/terraria.gif",
+		"href": "https://terraria.org/",
+		"alt": "terraria"
+	}
+]

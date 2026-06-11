@@ -6,7 +6,7 @@ interface Props {
   label?: string;
 }
 
-const links = [
+const links: { text: string; href: string; desc: string }[] = [
   { text: "/about", href: "/about/", desc: "who am i?" },
   { text: "/blog", href: "/blog/", desc: "i write too" },
   { text: "/projects", href: "/projects/", desc: "things i made" },

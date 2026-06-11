@@ -29,6 +29,7 @@ export default defineConfig({
 	},
 	markdown: {
 		processor: unified({
+			smartypants: false,
 			rehypePlugins: [
 				rehypeHeadingIds,
 				rehypeHeadingLinks,

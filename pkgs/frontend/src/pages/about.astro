@@ -1,68 +1,96 @@
 ---
-import { REPO_URL } from "astro:env/server"
-import Badges from "@components/main/88x31s.astro"
-import Footer from "@components/main/footer.astro"
-import Navbar from "@components/main/navbar.astro"
-import Layout from "@components/layout.astro"
+import { REPO_URL } from "astro:env/server";
+import { getEntry } from "astro:content"
 
+import Footer from "@components/main/footer.astro";
+import Navbar from "@components/main/navbar.astro";
+import Layout from "@components/layout.astro";
+
+const badges = await getEntry("badges", "index");
 const interests = [
-	"Video Games",
-	"Open Source",
-	"GNU/Linux",
-	"Digital/Traditional Human Art",
-	"Anime",
-	"Cloud Computing",
-	"DevOps",
-	"Cloud Orchestration",
-	"Simplicity",
-]
+  "Video Games",
+  "Open Source",
+  "GNU/Linux",
+  "Digital/Traditional Human Art",
+  "Anime",
+  "Cloud Computing",
+  "DevOps",
+  "Cloud Orchestration",
+  "Simplicity",
+];
 ---
 
 <Layout title="About azrd">
-	<Navbar slot="header" />
-	<section>
-		<h1>Who am I</h1>
-		<p>
-			Just a <code>normal</code> person who likes to play video games, doomscroll through
-			social media, and searching for his true passion, nothing special.
-		</p>
-		<p>
-			Sometimes i experiment with new things, either tech or not, and
-			often found eating fast foods from the local stores and cafeteria.
-		</p>
-		<blockquote>
-			"I'm pretty fond of them, you know? They suit me perfectly. I'm about as ordinary as you can get."
-			<footer>
-				<br>
-				<cite> - Larry</cite>
-			</footer>
-		</blockquote>
-	</section>
-	<hr>
-	<h1>Interests</h1>
-	<p>I have so many interests, but some of my main ones include:</p>
-	<p id="interests">{interests.map((int) => <code>{int}</code>)}</p>
-	<hr>
-	<h1>My Gear</h1>
-	<ul>
-		<li>Computer: Acer Aspire 5 A514-54G</li>
-		<li>Monitor: Viewsonic VX2479-HD-PRO</li>
-		<li>Keyboard: Ajazz AK832</li>
-		<li>Mouse: Logitech G102 / Pressplay Iris</li>
-	</ul>
-	<hr>
-	<details>
-		<summary>Badges</summary>
-		<p>Add yours by <a href={`${REPO_URL}/pulls`}>opening a pull request here</a></p>
-		<Badges />
-	</details>
-	<Footer slot="footer" />
+  <Navbar slot="header" />
+  <section>
+    <h1>Who am I</h1>
+    <p>
+      Just a <code>normal</code> person who likes to play video games, doomscroll
+      through social media, and searching for his true passion, nothing special.
+    </p>
+    <p>
+      Sometimes i experiment with new things, either tech or not, and often
+      found eating fast foods from the local stores and cafeteria.
+    </p>
+    <blockquote>
+      "I'm pretty fond of them, you know? They suit me perfectly. I'm about as
+      ordinary as you can get."
+      <footer>
+        <br />
+        <cite> - Larry</cite>
+      </footer>
+    </blockquote>
+  </section>
+  <hr />
+  <h1>Interests</h1>
+  <p>I have so many interests, but some of my main ones include:</p>
+  <p id="interests">{interests.map((int) => <code>{int}</code>)}</p>
+  <hr />
+  <h1>My Gear</h1>
+  <ul>
+    <li>Computer: Acer Aspire 5 A514-54G</li>
+    <li>Monitor: Viewsonic VX2479-HD-PRO</li>
+    <li>Keyboard: Ajazz AK832</li>
+    <li>Mouse: Logitech G102 / Pressplay Iris</li>
+  </ul>
+  <hr />
+  <details>
+    <summary>Badges</summary>
+    <p>
+      Add yours by <a href={`${REPO_URL}/pulls`}>opening a pull request here</a>
+    </p>
+    <div id="badges">
+      {
+        badges?.data.map(({ image: { src }, href, alt }) => (
+          <a {href} rel="external nofollow">
+            <img {src} {alt} loading="lazy" width="88" height="31" />
+          </a>
+        ))
+      }
+    </div>
+  </details>
+  <Footer slot="footer" />
 </Layout>
 
 <style>
-	#interests {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1ch;
-	}
+  #interests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1ch;
+  }
+
+  #badges {
+    margin: 2em 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+    justify-content: center;
+    align-items: center;
+    image-rendering: pixelated;
+
+    a {
+      width: 88px;
+      height: 31px;
+      margin: 0 auto;
+    }
+  }
 </style>
