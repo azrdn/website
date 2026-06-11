@@ -24,7 +24,7 @@ export const collections = {
 		loader: glob({ pattern: "*.json", base: "./src/content/badges" }),
 		schema: ({ image }) => z.object({
 			image: image(),
-			href: z.url(),
+			href: z.string().regex(/^(.*)\/([^/]*)$/),
 			alt: z.string(),
 		}).array()
 	}),

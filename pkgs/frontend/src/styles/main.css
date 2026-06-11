@@ -184,7 +184,7 @@ code:not(pre code) {
 }
 
 option::checkmark {
-	content: "<";
+	content: "←";
 }
 
 blockquote {

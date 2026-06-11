@@ -1,0 +1,23 @@
+/* TEAM */
+
+The amateur: azrd
+Contact: hi [at] azrd.dev
+Bluesky: @azrd.dev
+Location: Bandung, Indonesia
+
+
+/* THANKS */
+
+Inspiration: usgraphics.com
+Inspiration: Rasmus Andersson (rsms.me)
+Tutorials: CSS Tricks (css-tricks.com)
+References: Mozilla Developer Network (developer.mozilla.org)
+References: Google WebDev (web.dev)
+My Friends: hiiruki, ainsworth, fawkeys, sahel, rifki, fahnov, and much more
+The reason this file exists: humanstxt.org
+
+/* SITE */
+
+Standards: HTML5, CSS3, JavaScript, Markdown
+Components: Astro, TypeScript
+Software: Zed Editor, Git, Helium Browser, Inkscape

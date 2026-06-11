@@ -53,5 +53,20 @@
 		"image": "./images/terraria.gif",
 		"href": "https://terraria.org/",
 		"alt": "terraria"
+	},
+	{
+		"image": "./images/bluesky.gif",
+		"href": "https://bsky.app/",
+		"alt": "bluesky"
+	},
+	{
+		"image": "./images/personalsites.gif",
+		"href": "https://personalsit.es",
+		"alt": "personalsit.es"
+	},
+	{
+		"image": "./images/humanstxt.gif",
+		"href": "/humans.txt",
+		"alt": "humanstxt.org badge"
 	}
 ]

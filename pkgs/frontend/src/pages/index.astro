@@ -6,13 +6,6 @@ import Layout from "@components/layout.astro"
 import Marquee from "@components/main/marquee.astro"
 import BlogCard from "@components/blog/card.astro"
 
-const social_links = [
-	{ href: "https://bsky.app/profile/did:plc:d7d6hxynbzfgbpvw5njtxbhw", text: "bluesky" },
-	{ href: "https://web.facebook.com/app.yaml", text: "facebook" },
-	{ href: "https://t.me/azisrdn", text: "telegram" },
-	{ href: `mailto:hi+web@${Astro.site?.hostname}`, text: "email" },
-]
-
 const test_blog = import.meta.env.DEV ? await getCollection("test_blog") : []
 const blog = await getCollection("blog")
 const collections = [...test_blog, ...blog]
@@ -38,11 +31,18 @@ const recent_posts = collections
 		</p>
 		<p>Here are some links where you can reach me:</p>
 		<div id="links">
-			{social_links.map((link) => (
-				<a href={link.href} rel="external nofollow">
-					{link.text}
-				</a>
-			))}
+			<a href="https://bsky.app/profile/did:plc:d7d6hxynbzfgbpvw5njtxbhw" rel="external nofollow">
+				bluesky
+			</a>
+			<a href="https://web.facebook.com/app.yaml" rel="external nofollow">
+				facebook
+			</a>
+			<a href="https://t.me/azisrdn" rel="external nofollow">
+				telegram
+			</a>
+			<a href={`mailto:hi+web@${Astro.site?.hostname}`} rel="external nofollow">
+				email
+			</a>
 		</div>
 	</section>
 	{recent_posts.length > 0 && (
