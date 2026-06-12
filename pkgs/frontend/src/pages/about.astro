@@ -54,21 +54,19 @@ const interests = [
     <li>Mouse: Logitech G102 / Pressplay Iris</li>
   </ul>
   <hr />
-  <details>
-    <summary>Badges</summary>
-    <p>
-      Add yours by <a href={`${REPO_URL}/pulls`}>opening a pull request here</a>
-    </p>
-    <div id="badges">
-      {
-        badges?.data.map(({ image: { src }, href, alt }) => (
-          <a {href} rel="external nofollow">
-            <img {src} {alt} loading="lazy" width="88" height="31" />
-          </a>
-        ))
-      }
-    </div>
-  </details>
+  <h1>Badges</h1>
+  <p>
+    Add yours by <a href={`${REPO_URL}/pulls`}>opening a pull request here</a>
+  </p>
+  <div id="badges">
+    {
+      badges?.data.map(({ image: { src }, href, alt }) => (
+        <a {href} rel="external nofollow">
+          <img {src} {alt} loading="lazy" width="88" height="31" />
+        </a>
+      ))
+    }
+  </div>
   <Footer slot="footer" />
 </Layout>
 

@@ -130,7 +130,7 @@ if (!breadcrumbs.length && label)
     top: 0;
     gap: 3ch;
     z-index: 2;
-    padding: 1rlh 2.5ch;
+    padding: 1rlh var(--side-padding);
     border-bottom: 1px solid var(--bg-secondary);
     background-color: var(--bg);
     transition: transform 0.2s;
@@ -163,7 +163,7 @@ if (!breadcrumbs.length && label)
     -webkit-tap-highlight-color: transparent;
 
     &:focus {
-      color: var(--fg);
+      color: var(--accent);
       background-color: unset;
     }
   }
@@ -195,7 +195,7 @@ if (!breadcrumbs.length && label)
     width: 100%;
     max-width: 80ch;
     margin: 0 auto;
-    padding: 0 2.5ch 1lh;
+    padding: 0 var(--side-padding) 1lh;
 
     @media (prefers-reduced-motion: no-preference) {
       transition:

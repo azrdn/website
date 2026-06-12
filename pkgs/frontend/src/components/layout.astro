@@ -36,6 +36,7 @@ interface Props {
 		{
 		  !import.meta.env.DEV && <style is:inline>@view-transition { navigation: auto }</style>
 		}
+		<link rel="canonical" href={Astro.url} />
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
@@ -92,7 +93,7 @@ interface Props {
 		background-color: var(--bg);
 		min-width: 0;
 		width: 100%;
-		padding: 0 2ch 1lh;
+		padding: 0 var(--page-padding) 2rlh;
 	}
 
 	main {
@@ -101,7 +102,7 @@ interface Props {
 		z-index: 1;
 	}
 
-	@media (width >= 900px) {
+	/*@media (width >= 900px) {
 		main {
 			--pattern-color: light-dark(#00000019, #ffffff0b);
 
@@ -128,11 +129,6 @@ interface Props {
 					transparent 50%
 				);
 			}
-		}
-
-		#page {
-		  padding-left: 2.5ch;
-		  padding-right: 2.5ch;
-		}
+		}*/
 	}
 </style>

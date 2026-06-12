@@ -2,19 +2,26 @@
 	color-scheme: light dark;
 	font-size: clamp(1rem, 0.85rem + 0.6vw, 1.15rem);
 	
-	--max-width: 90ch;
+	--max-width: 85ch;
+	--side-padding: 2ch;
+	--page-padding: 2ch;
 	--accent: light-dark(#0057db, #efc22f);
 	--fg: light-dark(#333333, #dcdcdc);
 	--fg-secondary: light-dark(#404040, #a5a5a5);
-	--bg: light-dark(#e9e9e9, #1d1d1d);
-	--bg-secondary: light-dark(#bdbdbd, #383838);
+	--bg: light-dark(#e9e9e9, #171717);
+	--bg-secondary: light-dark(#bdbdbd, #353535);
 
 	&[data-theme="dark"] {
-		color-scheme: dark;
+		color-scheme: only dark;
 	}
 
 	&[data-theme="light"] {
-		color-scheme: light;
+		color-scheme: only light;
+	}
+
+	@media (width >= 768px) {
+		--side-padding: 2.5ch;
+		--page-padding: 4.5ch;
 	}
 }
 
