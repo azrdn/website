@@ -15,6 +15,7 @@ interface Props {
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="keywords" content="personal,blog,azrd" />
+		<meta name="bingbot" content="noarchive" />
 		<meta name="twitter:title" content={Astro.props.title} />
 		<meta name="twitter:description" content={og_desc} />
 		<meta name="twitter:card" content="summary_large_image" />
@@ -91,7 +92,7 @@ interface Props {
 		background-color: var(--bg);
 		min-width: 0;
 		width: 100%;
-		padding: calc(2rlh + 1lh) 2ch 1lh;
+		padding: 0 2ch 1lh;
 	}
 
 	main {

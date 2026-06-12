@@ -1,17 +1,13 @@
 /*
-	Content-Security-Policy: object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+	Content-Security-Policy: object-src 'none'; frame-ancestors 'none';
 	Cross-Origin-Opener-Policy: same-origin
 	Referrer-Policy: no-referrer
-	X-Robots-Tag: noarchive
 
 /static/*
 	Cache-Control: public, max-age=31556952, immutable
 
 /favicon.*
 	Cache-Control: public, max-age=604800, must-revalidate
-
-/88x31/*
-	Cache-Control: public, max-age=86400, must-revalidate
 
 # https://github.com/cloudflare/workers-sdk/issues/9599
 /*.txt

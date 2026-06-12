@@ -14,32 +14,48 @@ const links: { text: string; href: string; desc: string }[] = [
 
 const { label } = Astro.props;
 const path_segments = Astro.url.pathname.split("/").filter(Boolean);
-const breadcrumb_segments = path_segments.map((segment, index, orig) => {
+const breadcrumbs = path_segments.map((segment, index, orig) => {
   return {
     text: decodeURIComponent(segment),
     href: `/${orig.slice(0, index + 1).join("/")}`,
     index,
   };
 });
+
+if (!breadcrumbs.length && label)
+  breadcrumbs.push({
+    text: label,
+    href: "/",
+    index: 0,
+  });
 ---
 
+<div class="spacer"></div>
 <header class="topheader">
   <nav id="label" aria-label="Breadcrumb">
-    <a class="navlink" href="/" aria-label="Home">~</a><span class="separator">/</span>
+    <a class="navlink" href="/" aria-label="Home">~</a>
+    <span class="separator">/</span>
     <slot name="breadcrumb">
-      {breadcrumb_segments.map((segment, index, orig) => (
-        <Fragment>
-          {segment.index !== 0 && <span class="separator">/</span>}
-          <span class="crumb">
-            <a class="navlink" href={segment.href}>
-              {index === orig.length - 1 && label ? label : segment.text}
-            </a>
-          </span>
-        </Fragment>
-      ))}
+      {
+        breadcrumbs.map((crumb, index, orig) => (
+          <Fragment>
+            {crumb.index !== 0 && <span class="separator">/</span>}
+            <span class="crumb">
+              <a class="navlink" href={crumb.href}>
+                {index === orig.length - 1 && label ? label : crumb.text}
+              </a>
+            </span>
+          </Fragment>
+        ))
+      }
     </slot>
   </nav>
-  <button id="burger" popovertarget="navbar-s" title="Menu" aria-label="Toggle navigation">
+  <button
+    id="burger"
+    popovertarget="navbar-s"
+    title="Menu"
+    aria-label="Toggle navigation"
+  >
     <MenuIcon />
   </button>
 
@@ -70,43 +86,54 @@ const breadcrumb_segments = path_segments.map((segment, index, orig) => {
 
 <script>
   const header = document.querySelector<HTMLElement>(".topheader")!;
-  const mobile_menu = document.querySelector<HTMLElement>("#navbar-s")!;
-  let last_scroll_top = 0;
+  const mobileMenu = document.querySelector<HTMLElement>("#navbar-s")!;
+  const mq = window.matchMedia("(prefers-reduced-motion: no-preference)");
+  let lastScrollTop = 0;
 
-  document.addEventListener(
-    "scroll",
-    () => {
-      const scroll_top = window.scrollY || document.documentElement.scrollTop;
-      const dir = scroll_top > last_scroll_top ? "down" : "up";
-      if (Math.abs(scroll_top - last_scroll_top) > 5) {
-        header.setAttribute("scroll-direction", dir);
-      }
-      last_scroll_top = scroll_top <= 0 ? 0 : scroll_top;
-      mobile_menu.hidePopover();
-    },
-    { passive: true },
-  );
+  if (mq.matches)
+    document.addEventListener(
+      "scroll",
+      () => {
+        const scroll_top = window.scrollY || document.documentElement.scrollTop;
+        const dir = scroll_top > lastScrollTop ? "down" : "up";
+        if (Math.abs(scroll_top - lastScrollTop) > 1) {
+          header.setAttribute("scroll-direction", dir);
+        }
+        lastScrollTop = scroll_top <= 0 ? 0 : scroll_top;
+        mobileMenu.hidePopover();
+      },
+      { passive: true },
+    );
 
-  const mobile_links = mobile_menu.querySelectorAll("a")!;
-  mobile_links.forEach((a) => {
-    a.addEventListener("click", () => mobile_menu.hidePopover());
+  const mobileLinks = mobileMenu.querySelectorAll("a")!;
+  mobileLinks.forEach((a) => {
+    a.addEventListener("click", () => mobileMenu.hidePopover());
   });
 </script>
 
 <style>
-  header {
-    display: flex;
-    gap: 3ch;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--bg-secondary);
-    padding: 1rlh 2.5ch;
-    background-color: var(--bg);
-    position: fixed;
+  .spacer {
+    position: absolute;
+    top: 0;
+    height: calc(2rlh + 1lh);
     width: 100%;
     max-width: var(--max-width);
-    z-index: 2;
+    background-color: var(--bg);
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--max-width);
+    position: sticky;
     top: 0;
-    transition: transform 0.2s ease;
+    gap: 3ch;
+    z-index: 2;
+    padding: 1rlh 2.5ch;
+    border-bottom: 1px solid var(--bg-secondary);
+    background-color: var(--bg);
+    transition: transform 0.2s;
 
     #label {
       display: flex;
