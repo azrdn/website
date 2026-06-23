@@ -7,7 +7,7 @@
 	Cache-Control: public, max-age=31556952, immutable
 
 /favicon.*
-	Cache-Control: public, max-age=604800, must-revalidate
+	Cache-Control: public, max-age=604800, stale-while-revalidate=86400, must-revalidate
 
 # https://github.com/cloudflare/workers-sdk/issues/9599
 /*.txt

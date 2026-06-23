@@ -11,7 +11,8 @@ export default defineConfig({
 	site: "https://azrd.dev",
 	integrations: [sitemap(), mdx()],
 	server: { host: true },
-	build: { assets: "static", format: "file" },
+	build: { assets: "static", format: "directory" },
+	trailingSlash: "always",
 	env: {
 		schema: {
 			REPO_URL: envField.string({

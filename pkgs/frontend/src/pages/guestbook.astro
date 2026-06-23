@@ -10,7 +10,7 @@ import GBForm from "@components/guestbook/form.astro";
 import GBEntries from "@components/guestbook/entries.astro";
 
 import { hc } from "hono/client";
-import type { App } from "../../../backend/src/index";
+import type { App } from "@backend/index";
 
 const backend = hc<App>(BACKEND_URL);
 const pageParam = Astro.url.searchParams.get("page") ?? "1";
@@ -30,6 +30,7 @@ const totalPages = Math.max(1, Math.ceil(count / entriesPerPage));
 if (curPage > totalPages) return Astro.redirect("/404")
 
 export const prerender = false;
+Astro.cache.set({ maxAge: 180, swr: 60 });
 ---
 
 <Layout>

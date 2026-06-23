@@ -15,7 +15,7 @@ console.log(error);
 ---
 
 <Layout title="Error">
-	<Navbar slot="header" />
+	<Navbar slot="header" label="5XX" />
 	<h1>Error</h1>
 	<div>{error instanceof AstroError ? error.message : "Unknown error"}</div>
 	<Footer slot="footer" />

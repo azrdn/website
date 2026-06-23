@@ -27,7 +27,7 @@ const posts = collections.sort((a, b) => {
   <hr />
   {
     posts.map(({ data, id }) => (
-      <BlogCard title={data.title} href={`/blog/${id}`} date={data.createdAt} />
+      <BlogCard title={data.title} href={`/blog/${id}/`} date={data.createdAt} />
     ))
   }
   <Footer slot="footer" />

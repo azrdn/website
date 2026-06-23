@@ -14,20 +14,12 @@ const links: { text: string; href: string; desc: string }[] = [
 
 const { label } = Astro.props;
 const path_segments = Astro.url.pathname.split("/").filter(Boolean);
-const breadcrumbs = path_segments.map((segment, index, orig) => {
-  return {
-    text: decodeURIComponent(segment),
-    href: `/${orig.slice(0, index + 1).join("/")}`,
-    index,
-  };
-});
+const breadcrumbs = path_segments.map((text, i, orig) => ({
+  text,
+  href: `/${orig.slice(0, i + 1).join("/")}`,
+}));
 
-if (!breadcrumbs.length && label)
-  breadcrumbs.push({
-    text: label,
-    href: "/",
-    index: 0,
-  });
+if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
 ---
 
 <div class="spacer"></div>
@@ -37,12 +29,12 @@ if (!breadcrumbs.length && label)
     <span class="separator">/</span>
     <slot name="breadcrumb">
       {
-        breadcrumbs.map((crumb, index, orig) => (
+        breadcrumbs.map((crumb, i, orig) => (
           <Fragment>
-            {crumb.index !== 0 && <span class="separator">/</span>}
+            {i !== 0 && <span class="separator">/</span>}
             <span class="crumb">
               <a class="navlink" href={crumb.href}>
-                {index === orig.length - 1 && label ? label : crumb.text}
+                {i === orig.length - 1 && label ? label : crumb.text}
               </a>
             </span>
           </Fragment>

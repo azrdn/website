@@ -50,7 +50,7 @@ const recent_posts = collections
 		<section id="recent_posts">
 			<h1>Recent Blog Posts</h1>
 			{recent_posts.map(({ data, id }) => (
-				<BlogCard title={data.title} href={`/blog/${id}`} date={data.createdAt} />
+				<BlogCard title={data.title} href={`/blog/${id}/`} date={data.createdAt} />
 			))}
 		</section>
 	)}

@@ -2,11 +2,14 @@
 import "../styles/main.css";
 import { Font } from "astro:assets";
 
-const og_desc = "My personal website - a quiet place in the internet"
-
 interface Props {
 	title?: string
 }
+
+const ogDesc = "A quiet place in the internet"
+const ogImage = new URL("og.png", Astro.site)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const title = Astro.props.title ?? "azrd"
 ---
 
 <html lang="en" data-theme="system">
@@ -16,16 +19,16 @@ interface Props {
 		<meta name="generator" content={Astro.generator} />
 		<meta name="keywords" content="personal,blog,azrd" />
 		<meta name="bingbot" content="noarchive" />
-		<meta name="twitter:title" content={Astro.props.title} />
-		<meta name="twitter:description" content={og_desc} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={ogDesc} />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:image" content=`${Astro.site}og.png` />
+		<meta name="twitter:image" content={ogImage} />
 		<meta property="og:site_name" content={Astro.site?.hostname} />
-		<meta property="og:url" content={Astro.url} />
-		<meta property="og:image" name="image" content=`${Astro.site}og.png` />
-		<meta property="og:title" name="title" content="azrd" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" name="image" content={ogImage} />
+		<meta property="og:title" name="title" content={title} />
 		<meta property="og:type" content="website" />
-		<meta property="og:description" name="description" content={og_desc} />
+		<meta property="og:description" name="description" content={ogDesc} />
 		{
 			/*
 			  Font is preloaded only in dev mode beceause only prod has http caching
@@ -36,7 +39,7 @@ interface Props {
 		{
 		  !import.meta.env.DEV && <style is:inline>@view-transition { navigation: auto }</style>
 		}
-		<link rel="canonical" href={Astro.url} />
+		<link rel="canonical" href={canonicalURL} />
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
@@ -50,7 +53,7 @@ interface Props {
 			const theme = localStorage.getItem("theme") ?? "system";
 			document.documentElement.dataset.theme = theme;
 		</script>
-		<title>{Astro.props.title ?? "azrd"}</title>
+		<title>{title}</title>
 	</head>
 	<body>
 		<slot name="header" />
