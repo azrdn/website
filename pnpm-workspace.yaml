@@ -11,6 +11,9 @@ minimumReleaseAgeExclude:
   - '@astrojs/compiler-binding*'
   - '@astrojs/compiler-rs'
   - '@napi-rs/wasm-runtime'
+  - '@astrojs/cloudflare@14.0.0'
+  - '@astrojs/mdx@7.0.0'
+  - '@astrojs/markdown-satteri@0.3.1'
 
 overrides:
   "@astrojs/compiler-rs": "^0.2.2"
