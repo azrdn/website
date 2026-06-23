@@ -21,8 +21,8 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
   <hr />
   <section class="bottom">
     <div class="left">
-      <div>
-        <span id="cl">&copy;</span> 2022-{new Date().getFullYear()}
+      <div class="copy">
+        <span id="cl">&copy;</span>2022-{new Date().getFullYear()}
         <a
           href="https://www.gnu.org/licenses/gpl-3.0.en.html"
           rel="external nofollow">GPLv3</a
@@ -41,8 +41,8 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
           <option value="dark">Dark</option>
         </select>
       </div>
-      <div>
-        Version <a href={commit_url} rel="external nofollow">{gitHash}</a>
+      <div class="commit">
+        Version<a href={commit_url} rel="external nofollow">{gitHash}</a>
         <time datetime={ISO(date)} title={ISO(date)}>({ISO(date, true)})</time>
       </div>
     </div>
@@ -96,10 +96,15 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
     justify-content: space-between;
     flex-direction: column;
 
-    #cl {
-      display: inline-block;
-      transform: scale(-1, 1);
+    .copy, .commit {
+      display: flex;
+      column-gap: 1ch;
     }
+  }
+
+  #cl {
+    display: inline-block;
+    transform: scale(-1, 1);
   }
 
   section {
