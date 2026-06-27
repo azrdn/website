@@ -1,12 +1,14 @@
 ---
 import { getEntry } from "astro:content";
 import { ISO } from "@utils/date";
+import ThemeSwitcher from "./theme_switcher.astro";
 
 const gitHash = (await getEntry("gitInfo", "0")!).data.output;
 const lastChangeEpoch = (await getEntry("gitInfo", "1")!).data.output;
 
-const date = new Date(parseInt(lastChangeEpoch, 10) * 1000)
-const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
+const date = new Date(parseInt(lastChangeEpoch, 10) * 1000);
+const commitUrl = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
+const statusUrl = `https://status.${Astro.site?.hostname}`;
 ---
 
 <footer>
@@ -14,9 +16,7 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
     <a href="/privacy/">/privacy</a>
     <a href="/disclaimer/">/disclaimer</a>
     <a href="/guestbook/">/guestbook</a>
-    <a href={`https://status.${Astro.site?.hostname}`} rel="external nofollow"
-      >/status</a
-    >
+    <a href={statusUrl} rel="external nofollow">/status</a>
   </section>
   <hr />
   <section class="bottom">
@@ -32,41 +32,16 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
     </div>
     <div class="right">
       <div class="js">
-        <label for="theme-select">Theme:&nbsp;</label><select
-          name="theme"
-          id="theme-select"
-        >
-          <option value="system">System</option>
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-        </select>
+        <label for="theme-select">Theme:&nbsp;</label>
+        <ThemeSwitcher id="theme-select" />
       </div>
       <div class="commit">
-        Version<a href={commit_url} rel="external nofollow">{gitHash}</a>
+        Version<a href={commitUrl} rel="external nofollow">{gitHash}</a>
         <time datetime={ISO(date)} title={ISO(date)}>({ISO(date, true)})</time>
       </div>
     </div>
   </section>
 </footer>
-
-<script>
-  const select = document.querySelector<HTMLSelectElement>("#theme-select");
-  if (!select) throw new Error("Theme selector not found");
-  select.value = localStorage.getItem("theme") || "system";
-
-  const set_theme = (theme: string) => {
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem("theme", theme);
-  };
-
-  select.onchange = () => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion)").matches;
-    if (reducedMotion || !document.startViewTransition)
-      return set_theme(select.value);
-
-    document.startViewTransition(() => set_theme(select.value));
-  };
-</script>
 
 <style>
   footer {
@@ -115,58 +90,6 @@ const commit_url = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
       display: flex;
       flex-direction: column;
       row-gap: 1em;
-    }
-  }
-
-  select {
-    appearance: base-select;
-    padding: 0;
-    border: none;
-    background: none;
-    color: var(--fg);
-    font-family: inherit;
-    font-size: inherit;
-    text-overflow: ellipsis;
-
-    &::picker(select) {
-      margin: 0;
-      appearance: base-select;
-      color: var(--fg);
-      cursor: initial;
-      border: 1px solid var(--bg-secondary);
-      background-color: var(--bg);
-    }
-
-    &::picker-icon {
-      content: "<";
-      color: var(--fg-secondary);
-
-      @media (prefers-reduced-motion: no-preference) {
-        transition: rotate 0.1s;
-      }
-    }
-
-    &:open::picker-icon {
-      rotate: 90deg;
-    }
-
-    &:hover {
-      color: var(--accent);
-    }
-  }
-
-  option {
-    padding: 0 calc(1ch - 1px);
-    margin: 0.5em 0;
-
-    &:hover {
-      background-color: unset;
-      color: var(--accent);
-    }
-
-    &::checkmark {
-      order: 1;
-      margin-left: auto;
     }
   }
 

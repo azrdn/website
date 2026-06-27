@@ -13,12 +13,12 @@ export interface TocItem extends MarkdownHeading {
 const buildToc = (headings: MarkdownHeading[]): TocItem[] => {
   const toc: TocItem[] = [];
   const parentH = new Map();
-  headings.forEach((heading) => {
-    const h = { ...heading, subheadings: [] };
-    parentH.set(h.depth, h);
-    if (h.depth === 1) toc.push(h);
-    else parentH.get(h.depth - 1).subheadings.push(h);
-  });
+  for (const h of headings) {
+    const heading = { ...h, subheadings: [] };
+    parentH.set(h.depth, heading);
+    if (h.depth === 1) toc.push(heading);
+    else parentH.get(h.depth - 1).subheadings.push(heading);
+  }
   return toc;
 };
 
@@ -34,8 +34,9 @@ const toc = buildToc(headings);
 
 <script>
   /* modified from https://codepen.io/bramus/pen/ExaEqMJ */
+  const headings = document.querySelectorAll(":is(h1,h2,h3,h4,h5,h6)[id]")
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+    for (const entry of entries) {
       const id = entry.target.getAttribute("id");
       if (entry.intersectionRatio > 0) {
         const el = document.querySelector<HTMLAnchorElement>(
@@ -48,11 +49,9 @@ const toc = buildToc(headings);
         );
         if (el) el.parentElement?.classList.remove("active");
       }
-    });
+    }
   });
-  document.querySelectorAll(":is(h1,h2,h3,h4,h5,h6)[id]").forEach((el) => {
-    observer.observe(el);
-  });
+  for (const h of headings) observer.observe(h);
 </script>
 
 {/* modified from hiiruki.moe/blob/main/src/components/blog/TOC.astro */}

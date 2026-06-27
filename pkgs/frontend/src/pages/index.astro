@@ -10,7 +10,7 @@ const test_blog = import.meta.env.DEV ? await getCollection("test_blog") : []
 const blog = await getCollection("blog")
 const collections = [...test_blog, ...blog]
 
-const recent_posts = collections
+const recentPosts = collections
 	.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime())
 	.slice(0, 3)
 ---
@@ -45,11 +45,11 @@ const recent_posts = collections
 			</a>
 		</div>
 	</section>
-	{recent_posts.length > 0 && (
+	{recentPosts.length > 0 && (
 		<hr />
 		<section id="recent_posts">
 			<h1>Recent Blog Posts</h1>
-			{recent_posts.map(({ data, id }) => (
+			{recentPosts.map(({ data, id }) => (
 				<BlogCard title={data.title} href={`/blog/${id}/`} date={data.createdAt} />
 			))}
 		</section>

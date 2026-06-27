@@ -13,10 +13,10 @@ const links: { text: string; href: string; desc: string }[] = [
 ];
 
 const { label } = Astro.props;
-const path_segments = Astro.url.pathname.split("/").filter(Boolean);
-const breadcrumbs = path_segments.map((text, i, orig) => ({
+const pathSegments = Astro.url.pathname.split("/").filter(Boolean);
+const breadcrumbs = pathSegments.map((text, i, orig) => ({
   text,
-  href: `/${orig.slice(0, i + 1).join("/")}`,
+  href: `/${orig.slice(0, i + 1).join("/")}/`,
 }));
 
 if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
@@ -86,21 +86,21 @@ if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
     document.addEventListener(
       "scroll",
       () => {
-        const scroll_top = window.scrollY || document.documentElement.scrollTop;
-        const dir = scroll_top > lastScrollTop ? "down" : "up";
-        if (Math.abs(scroll_top - lastScrollTop) > 1) {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const dir = scrollTop > lastScrollTop ? "down" : "up";
+        if (Math.abs(scrollTop - lastScrollTop) > 1) {
           header.setAttribute("scroll-direction", dir);
         }
-        lastScrollTop = scroll_top <= 0 ? 0 : scroll_top;
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         mobileMenu.hidePopover();
       },
       { passive: true },
     );
 
-  const mobileLinks = mobileMenu.querySelectorAll("a")!;
-  mobileLinks.forEach((a) => {
+  const mbLinks = mobileMenu.querySelectorAll("a")!;
+  for (const a of mbLinks) {
     a.addEventListener("click", () => mobileMenu.hidePopover());
-  });
+  }
 </script>
 
 <style>
