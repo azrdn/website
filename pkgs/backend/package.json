@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@hono/standard-validator": "^0.2.2",
-    "drizzle-orm": "1.0.0-rc.4",
+    "drizzle-orm": "1.0.0-rc.4-5d5b77c",
     "hono": "^4.12.27",
     "postgres": "^3.4.9",
     "zod": "^4.4.3"
