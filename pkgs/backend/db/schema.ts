@@ -5,5 +5,5 @@ export const table = t.pgTable("guestbook", {
 	username: t.text().notNull(),
 	url: t.text(),
 	message: t.text().notNull(),
-	created_at: t.timestamp("created_at").defaultNow().notNull(),
+	createdAt: t.timestamp("created_at").defaultNow().notNull(),
 });

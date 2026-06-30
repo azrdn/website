@@ -1,10 +1,9 @@
 import { defineConfig, envField, fontProviders } from "astro/config";
-import { unified, rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import rehypeExtLinks from "rehype-external-links";
-import rehypeHeadingLinks from "rehype-autolink-headings";
+import plugins from "@utils/satteri.plugins"
 import cloudflare from "@astrojs/cloudflare";
+import { satteri, satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
 
 export default defineConfig({
 	adapter: cloudflare({ imageService: "passthrough" }),
@@ -29,12 +28,10 @@ export default defineConfig({
 		validateSecrets: true,
 	},
 	markdown: {
-		processor: unified({
-			smartypants: false,
-			rehypePlugins: [
-				rehypeHeadingIds,
-				rehypeHeadingLinks,
-				[rehypeExtLinks, { rel: "external nofollow" }],
+		processor: satteri({
+			hastPlugins: [
+				satteriHeadingIdsPlugin(),
+				...plugins,
 			],
 		}),
 		shikiConfig: {

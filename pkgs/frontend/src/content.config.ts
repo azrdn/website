@@ -12,7 +12,7 @@ const blogSchema = z.object({
 })
 
 export const collections = {
-	test_blog: defineCollection({
+	testBlog: defineCollection({
 		loader: glob({ pattern: "**/*.test.{md,mdx}", base: "./src/content/posts" }),
 		schema: blogSchema
 	}),

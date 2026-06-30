@@ -3,18 +3,15 @@ interface Props {
   message: string;
   username: string;
   url?: string | null;
-  created_at: string;
+  createdAt: string;
 }
 
-const { message, username, url, created_at } = Astro.props;
+const { message, username, url, createdAt } = Astro.props;
 ---
 
 <article class="gb_entry box">
   <div class="message">{message}</div>
   <div class="entry_info">
-    <time datetime={created_at} title={created_at}>
-      {created_at.slice(0, 10)}
-    </time>
     {
       url ? (
         <a href={url} rel="external nofollow">
@@ -24,6 +21,9 @@ const { message, username, url, created_at } = Astro.props;
         <span>{username}</span>
       )
     }
+    <time datetime={createdAt} title={createdAt}>
+      {createdAt.slice(0, 10)}
+    </time>
   </div>
 </article>
 

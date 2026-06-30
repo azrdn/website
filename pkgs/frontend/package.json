@@ -10,15 +10,14 @@
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "14.0.1",
-		"@astrojs/markdown-remark": "^7.2.0",
+		"@astrojs/markdown-satteri": "^0.3.2",
 		"@astrojs/mdx": "7.0.0",
 		"@astrojs/rss": "^4.0.18",
 		"@astrojs/sitemap": "^3.7.3",
 		"astro": "7.0.3",
 		"bsky-comments": "^1.0.1",
 		"hono": "^4.12.27",
-		"rehype-autolink-headings": "^7.1.0",
-		"rehype-external-links": "^3.0.0"
+		"satteri": "^0.9.3"
 	},
 	"devDependencies": {
 		"typescript": "^6.0.3",

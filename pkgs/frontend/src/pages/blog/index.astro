@@ -6,9 +6,9 @@ import Layout from "@components/layout.astro";
 import BlogCard from "@components/blog/card.astro";
 import DevModeLabel from "@components/main/devmode.astro";
 
-const test_blog = import.meta.env.DEV ? await getCollection("test_blog") : [];
+const testBlog = import.meta.env.DEV ? await getCollection("testBlog") : [];
 const blog = await getCollection("blog");
-const collections = [...test_blog, ...blog];
+const collections = [...testBlog, ...blog];
 
 const posts = collections.sort((a, b) => {
   return b.data.createdAt.getTime() - a.data.createdAt.getTime();

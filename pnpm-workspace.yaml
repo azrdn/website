@@ -8,12 +8,8 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - astro
-  - '@astrojs/compiler-binding*'
-  - '@astrojs/compiler-rs'
+  - '@astrojs/*'
   - '@napi-rs/wasm-runtime'
-  - '@astrojs/cloudflare@14.0.0'
-  - '@astrojs/mdx@7.0.0'
-  - '@astrojs/markdown-satteri@0.3.1'
 
 overrides:
-  "@astrojs/compiler-rs": "^0.2.3"
+  "@astrojs/compiler-rs": "^0.3.0"
