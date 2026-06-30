@@ -1,9 +1,9 @@
 import { defineConfig, envField, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import plugins from "@utils/satteri.plugins"
 import cloudflare from "@astrojs/cloudflare";
 import { satteri, satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
+import plugins from "./src/utils/satteri.plugins"
 
 export default defineConfig({
 	adapter: cloudflare({ imageService: "passthrough" }),
