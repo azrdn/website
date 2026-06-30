@@ -17,7 +17,7 @@
 		"astro": "7.0.3",
 		"bsky-comments": "^1.0.1",
 		"hono": "^4.12.27",
-		"satteri": "^0.9.3"
+		"satteri": "^0.9.4"
 	},
 	"devDependencies": {
 		"typescript": "^6.0.3",
