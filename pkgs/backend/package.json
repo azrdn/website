@@ -10,7 +10,7 @@
     "types": "wrangler types"
   },
   "dependencies": {
-    "@hono/standard-validator": "^0.2.2",
+    "@hono/standard-validator": "^0.2.3",
     "drizzle-orm": "1.0.0-rc.4",
     "hono": "^4.12.27",
     "postgres": "^3.4.9",
