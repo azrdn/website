@@ -9,12 +9,12 @@
 		"types": "astro sync"
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "14.0.1",
+		"@astrojs/cloudflare": "14.1.0",
 		"@astrojs/markdown-satteri": "^0.3.2",
-		"@astrojs/mdx": "7.0.0",
-		"@astrojs/rss": "^4.0.18",
+		"@astrojs/mdx": "7.0.1",
+		"@astrojs/rss": "^4.0.19",
 		"@astrojs/sitemap": "^3.7.3",
-		"astro": "7.0.3",
+		"astro": "7.0.5",
 		"bsky-comments": "^1.0.1",
 		"hono": "^4.12.27",
 		"satteri": "^0.9.3"
