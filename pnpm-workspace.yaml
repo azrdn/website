@@ -12,4 +12,5 @@ minimumReleaseAgeExclude:
   - '@napi-rs/wasm-runtime'
 
 overrides:
-  "@astrojs/compiler-rs": "^0.3.0"
+  "@astrojs/compiler-rs": "latest"
+  "satteri": "latest"

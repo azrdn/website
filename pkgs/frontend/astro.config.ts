@@ -27,6 +27,16 @@ export default defineConfig({
 		},
 		validateSecrets: true,
 	},
+	vite: {
+		optimizeDeps: {
+			include: [
+				"bsky-comments",
+				"astro/zod",
+				"astro/assets/services/noop",
+				"astro/env/runtime"
+			]
+		},
+	},
 	markdown: {
 		processor: satteri({
 			hastPlugins: [
