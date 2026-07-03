@@ -1,13 +1,11 @@
+import { env } from "cloudflare:workers";
+import { sValidator } from "@hono/standard-validator";
+import { count, desc } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/postgres-js";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { sValidator } from "@hono/standard-validator";
 import z from "zod";
-
-import { drizzle } from "drizzle-orm/postgres-js";
-import { desc, count } from "drizzle-orm";
 import { table } from "../db/schema";
-
-import { env } from "cloudflare:workers"
 
 const stringToNum = z.preprocess(
 	(val: string) => Number.parseInt(val, 10),
@@ -19,10 +17,13 @@ const app = new Hono()
 	.get("/", (c) => c.text("OK", 200))
 	.get(
 		"/guestbook",
-		sValidator("query", z.object({
-			offset: stringToNum.optional(),
-			limit: stringToNum.optional(),
-		})),
+		sValidator(
+			"query",
+			z.object({
+				offset: stringToNum.optional(),
+				limit: stringToNum.optional(),
+			}),
+		),
 		async ({ req, json }) => {
 			const db = drizzle(env.HYPERDRIVE.connectionString);
 			const { offset, limit } = req.valid("query");
@@ -31,18 +32,15 @@ const app = new Hono()
 				.from(table)
 				.orderBy(desc(table.id))
 				.limit(limit ?? 10)
-				.offset(offset ?? 0)
+				.offset(offset ?? 0);
 			return json(res, 200);
 		},
 	)
-	.get(
-		"/guestbook/count",
-		async ({ json }) => {
-			const db = drizzle(env.HYPERDRIVE.connectionString);
-			const res = await db.select({ rows: count() }).from(table)
-			return json(res[0].rows, 200);
-		}
-	)
+	.get("/guestbook/count", async ({ json }) => {
+		const db = drizzle(env.HYPERDRIVE.connectionString);
+		const res = await db.select({ rows: count() }).from(table);
+		return json(res[0].rows, 200);
+	})
 	.post(
 		"/guestbook",
 		sValidator(
@@ -54,8 +52,8 @@ const app = new Hono()
 			}),
 		),
 		async ({ req, json, redirect }) => {
-			const db = drizzle(env.HYPERDRIVE.connectionString)
-			const fetchMode = req.header("sec-fetch-mode")
+			const db = drizzle(env.HYPERDRIVE.connectionString);
+			const fetchMode = req.header("sec-fetch-mode");
 			const res = await db
 				.insert(table)
 				.values(req.valid("form"))
@@ -64,7 +62,7 @@ const app = new Hono()
 			if (fetchMode !== "navigate") return json(res[0], 201);
 			return redirect(`${process.env.FRONTEND_URL}/guestbook`, 303);
 		},
-	)
+	);
 
 export default app;
 export type App = typeof app;

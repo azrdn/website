@@ -1,26 +1,26 @@
 ---
 import { BACKEND_URL } from "astro:env/client";
-import { AstroError } from "astro/errors";
 import GuestbookEntry from "@components/guestbook/entry.astro";
+import { AstroError } from "astro/errors";
 import { hc } from "hono/client";
 import type { App } from "../../../../backend/src/index";
 
 export const prerender = false;
 interface Props {
-  count: number
-  curPage: number
+	count: number;
+	curPage: number;
 }
 
-const backend = hc<App>(BACKEND_URL)
+const backend = hc<App>(BACKEND_URL);
 const entriesPerPage = 10;
 const { count, curPage } = Astro.props;
 
 const res = await backend.guestbook.$get({
-  query: {
-    offset: (entriesPerPage * (curPage - 1)).toString(),
-    limit: entriesPerPage.toString(),
-  },
-})
+	query: {
+		offset: (entriesPerPage * (curPage - 1)).toString(),
+		limit: entriesPerPage.toString(),
+	},
+});
 if (!res.ok) throw new AstroError("Failed to fetch guestbook data");
 
 const entries = await res.json();

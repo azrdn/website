@@ -1,28 +1,28 @@
 ---
-import { getCollection, render } from "astro:content"
-import type { GetStaticPaths } from "astro"
-import CodeBtns from "@components/blog/codeblock_btns.astro"
-import Footer from "@components/main/footer.astro"
-import Navbar from "@components/main/navbar.astro"
-import Toc from "@components/blog/toc.astro"
-import Layout from "@components/layout.astro"
-import BskyComments from "@components/blog/bsky_comments.astro"
+import { getCollection, render } from "astro:content";
+import BskyComments from "@components/blog/bsky_comments.astro";
+import CodeBtns from "@components/blog/codeblock_btns.astro";
+import Toc from "@components/blog/toc.astro";
+import Layout from "@components/layout.astro";
+import Footer from "@components/main/footer.astro";
+import Navbar from "@components/main/navbar.astro";
+import type { GetStaticPaths } from "astro";
 
-import "../../styles/blog.css"
-import { ISO } from "@utils/date"
+import "../../styles/blog.css";
+import { ISO } from "@utils/date";
 
 export const getStaticPaths = (async () => {
-  const testBlog = import.meta.env.DEV ? await getCollection("testBlog") : []
-  const blog = await getCollection("blog")
-  const collection = [...testBlog, ...blog]
-	return collection.map(post => ({
+	const testBlog = import.meta.env.DEV ? await getCollection("testBlog") : [];
+	const blog = await getCollection("blog");
+	const collection = [...testBlog, ...blog];
+	return collection.map((post) => ({
 		params: { slug: post.id },
 		props: { post },
-	}))
-}) satisfies GetStaticPaths
+	}));
+}) satisfies GetStaticPaths;
 
-const { Content, headings } = await render(Astro.props.post)
-const post = Astro.props.post.data
+const { Content, headings } = await render(Astro.props.post);
+const post = Astro.props.post.data;
 ---
 
 <Layout title={post.title}>

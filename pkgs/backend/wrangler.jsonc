@@ -1,37 +1,37 @@
 {
-  "$schema": "../../node_modules/wrangler/config-schema.json",
-  "name": "backend",
-  "main": "src/index.ts",
-  "compatibility_date": "2026-06-30",
-  "compatibility_flags": ["nodejs_compat"],
-  "placement": {
-    "mode": "smart",
-  },
-  "secrets": {
-    "required": ["FRONTEND_URL"]
-  },
-  "observability": {
-    "enabled": true,
-    "traces": {
-      "enabled": true,
-      "head_sampling_rate": 0.5
-    }
-  },
-  "hyperdrive": [
-    {
-      "binding": "HYPERDRIVE",
-      "id": "707bb48737b94bd68cb8299386d6b058",
-      "localConnectionString": "postgresql://postgres:postgres@127.0.0.1:5432/postgres"
-    }
-  ],
-  "ratelimits": [
-    {
-      "name": "IP",
-      "namespace_id": "2",
-      "simple": {
-        "limit": 10,
-        "period": 60
-      }
-    }
-  ]
+	"$schema": "../../node_modules/wrangler/config-schema.json",
+	"name": "backend",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-06-30",
+	"compatibility_flags": ["nodejs_compat"],
+	"placement": {
+		"mode": "smart"
+	},
+	"secrets": {
+		"required": ["FRONTEND_URL"]
+	},
+	"observability": {
+		"enabled": true,
+		"traces": {
+			"enabled": true,
+			"head_sampling_rate": 0.5
+		}
+	},
+	"hyperdrive": [
+		{
+			"binding": "HYPERDRIVE",
+			"id": "707bb48737b94bd68cb8299386d6b058",
+			"localConnectionString": "postgresql://postgres:postgres@127.0.0.1:5432/postgres"
+		}
+	],
+	"ratelimits": [
+		{
+			"name": "IP",
+			"namespace_id": "2",
+			"simple": {
+				"limit": 10,
+				"period": 60
+			}
+		}
+	]
 }

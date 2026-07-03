@@ -1,1 +1,2 @@
+<!-- biome-ignore lint/a11y/noSvgWithoutTitle: svg file -->
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><g stroke-width=".8734"><path fill="#ccc" d="M16 2.7787 4.55 9.3893 16 16l11.45-6.6107Z"/><path fill="#999" d="M4.55 22.6107 16 29.2213V16L4.55 9.3893Z"/><path fill="#f9f9f9" d="M16 16v13.2213l11.45-6.6106V9.3893Z"/></g></svg>

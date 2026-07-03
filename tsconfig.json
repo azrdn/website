@@ -7,5 +7,5 @@
 		"skipLibCheck": true,
 		"lib": ["ESNext"],
 		"noEmit": true
-	},
+	}
 }

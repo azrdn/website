@@ -1,7 +1,7 @@
 :root {
 	color-scheme: light dark;
 	font-size: clamp(1rem, 0.85rem + 0.6vw, 1.15rem);
-	
+
 	--max-width: 85ch;
 	--side-padding: 2ch;
 	--page-padding: 2ch;
@@ -30,11 +30,17 @@
 	color: var(--bg);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
 	display: block;
 	max-width: 100%;
 }
@@ -44,19 +50,23 @@ img, picture, video, canvas, svg {
 		scroll-behavior: smooth;
 	}
 
-	button, a, summary, summary::before, select {
+	button,
+	a,
+	summary,
+	summary::before,
+	select {
 		transition:
-			background-color .1s,
-			color .1s,
-			text-decoration-color .1s,
-			rotate .1s;
+			background-color 0.1s,
+			color 0.1s,
+			text-decoration-color 0.1s,
+			rotate 0.1s;
 	}
 
 	::details-content {
 		transition:
-			content-visibility .2s allow-discrete,
-			opacity .2s,
-			block-size .2s;
+			content-visibility 0.2s allow-discrete,
+			opacity 0.2s,
+			block-size 0.2s;
 	}
 }
 
@@ -82,7 +92,12 @@ button {
 	}
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	display: flex;
 	gap: 0 1ch;
 	font-size: unset;
@@ -111,24 +126,6 @@ details {
 	interpolate-size: allow-keywords;
 	-webkit-tap-highlight-color: transparent;
 
-	&::details-content {
-		opacity: 0;
-		block-size: 0;
-		overflow-y: clip;
-	}
-
-	&[open]::details-content {
-		opacity: 1;
-		block-size: auto;
-	}
-
-	&[open] summary {
-		&::before {
-			rotate: 90deg;
-		}
-		color: var(--fg);
-	}
-
 	summary {
 		display: flex;
 		gap: 1ch;
@@ -146,6 +143,24 @@ details {
 		&:hover {
 			color: var(--accent);
 		}
+	}
+
+	&::details-content {
+		opacity: 0;
+		block-size: 0;
+		overflow-y: clip;
+	}
+
+	&[open]::details-content {
+		opacity: 1;
+		block-size: auto;
+	}
+
+	&[open] summary {
+		&::before {
+			rotate: 90deg;
+		}
+		color: var(--fg);
 	}
 }
 
@@ -178,7 +193,8 @@ hr {
 	margin: 1.5rlh 0;
 }
 
-pre, code {
+pre,
+code {
 	border-radius: 4px;
 	font-family: inherit;
 	scrollbar-color: var(--fg-secondary) transparent;

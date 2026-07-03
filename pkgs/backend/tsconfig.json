@@ -5,12 +5,8 @@
 		"moduleResolution": "bundler",
 		"strict": true,
 		"skipLibCheck": true,
-		"lib": [
-			"ESNext"
-		],
-		"types": [
-			"node"
-		],
-		"noEmit": true,
-	},
+		"lib": ["ESNext"],
+		"types": ["node"],
+		"noEmit": true
+	}
 }

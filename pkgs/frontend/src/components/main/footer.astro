@@ -1,12 +1,14 @@
 ---
-import { getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import { ISO } from "@utils/date";
 import ThemeSwitcher from "./theme_switcher.astro";
 
-const gitHash = (await getEntry("gitInfo", "0")!).data.output;
-const lastChangeEpoch = (await getEntry("gitInfo", "1")!).data.output;
+const commands = (await getCollection("gitInfo")).map((c) => c.data);
+const gitHash = commands[0]?.output ?? "badnews";
+const lastChangeEpoch = commands[1]?.output ?? "0";
 
 const date = new Date(parseInt(lastChangeEpoch, 10) * 1000);
+const currentYear = new Date().getFullYear();
 const commitUrl = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
 const statusUrl = `https://status.${Astro.site?.hostname}`;
 ---
@@ -22,7 +24,7 @@ const statusUrl = `https://status.${Astro.site?.hostname}`;
   <section class="bottom">
     <div class="left">
       <div class="copy">
-        <span id="cl">&copy;</span>2022-{new Date().getFullYear()}
+        <span id="cl">&copy;</span>2022-{currentYear}
         <a
           href="https://www.gnu.org/licenses/gpl-3.0.en.html"
           rel="external nofollow">GPLv3</a

@@ -1,10 +1,12 @@
-.astro-code, .astro-code span {
+.astro-code,
+.astro-code span {
 	color: light-dark(var(--shiki-light), var(--shiki-dark));
 	background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
 }
 
 @media (prefers-color-scheme: dark) {
-	.astro-code, .astro-code span {
+	.astro-code,
+	.astro-code span {
 		font-style: var(--shiki-dark-font-style);
 		font-weight: var(--shiki-dark-font-weight);
 		text-decoration: var(--shiki-dark-text-decoration);
@@ -12,7 +14,8 @@
 }
 
 @media (prefers-color-scheme: light) {
-	.astro-code, .astro-code span {
+	.astro-code,
+	.astro-code span {
 		font-style: var(--shiki-light-font-style);
 		font-weight: var(--shiki-light-font-weight);
 		text-decoration: var(--shiki-light-text-decoration);
@@ -20,7 +23,8 @@
 }
 
 [theme="dark"] {
-	.astro-code, .astro-code span {
+	.astro-code,
+	.astro-code span {
 		color: var(--shiki-dark);
 		background-color: var(--shiki-dark-bg);
 		font-style: var(--shiki-dark-font-style);
@@ -30,7 +34,8 @@
 }
 
 [theme="light"] {
-	.astro-code, .astro-code span {
+	.astro-code,
+	.astro-code span {
 		color: var(--shiki-light);
 		background-color: var(--shiki-light-bg);
 		font-style: var(--shiki-light-font-style);
@@ -59,22 +64,35 @@ th {
 	}
 }
 
-th, td {
+th,
+td {
 	border: 1px solid var(--fg-secondary);
 	padding: 0.5em calc(1ch - 1px);
 	vertical-align: top;
 }
 
 :not(header *) {
-	h1, h2, h3, h4, h5, h6 {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		a {
 			text-decoration: none;
 		}
 	}
-	
-	h1 .icon::before { content: "#" }
-	h2 .icon::before { content: "##" }
-	h3, h4, h5, h6 {
+
+	h1 .icon::before {
+		content: "#";
+	}
+	h2 .icon::before {
+		content: "##";
+	}
+	h3,
+	h4,
+	h5,
+	h6 {
 		.icon::before {
 			content: "###";
 		}

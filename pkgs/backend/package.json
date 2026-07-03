@@ -1,24 +1,24 @@
 {
-  "name": "backend",
-  "type": "module",
-  "scripts": {
-    "dev": "wrangler dev",
-    "dev:db": "pglite-server --db=./db/pglite",
-    "build": "wrangler build",
-    "deploy": "wrangler deploy --minify",
-    "dk": "drizzle-kit",
-    "types": "wrangler types"
-  },
-  "dependencies": {
-    "@hono/standard-validator": "^0.2.3",
-    "drizzle-orm": "1.0.0-rc.4",
-    "hono": "^4.12.27",
-    "postgres": "^3.4.9",
-    "zod": "^4.4.3"
-  },
-  "devDependencies": {
-    "@electric-sql/pglite-socket": "^0.2.6",
-    "@types/node": "^26.0.1",
-    "drizzle-kit": "1.0.0-rc.4"
-  }
+	"name": "backend",
+	"type": "module",
+	"scripts": {
+		"dev": "wrangler dev",
+		"dev:db": "pglite-server --db=./db/pglite",
+		"build": "wrangler build",
+		"deploy": "wrangler deploy --minify",
+		"dk": "drizzle-kit",
+		"types": "wrangler types"
+	},
+	"dependencies": {
+		"@hono/standard-validator": "^0.2.3",
+		"drizzle-orm": "1.0.0-rc.4",
+		"hono": "^4.12.27",
+		"postgres": "^3.4.9",
+		"zod": "^4.4.3"
+	},
+	"devDependencies": {
+		"@electric-sql/pglite-socket": "^0.2.6",
+		"@types/node": "^26.0.1",
+		"drizzle-kit": "1.0.0-rc.4"
+	}
 }

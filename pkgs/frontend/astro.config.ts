@@ -1,9 +1,11 @@
+// biome-ignore-all assist/source/organizeImports: lemme do it
 import { defineConfig, envField, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
-import { satteri, satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
-import plugins from "./src/utils/satteri.plugins"
+import { satteri, satteriHeadingIdsPlugin } from "@astrojs/markdown-satteri";
+
+import plugins from "./src/utils/satteri.plugins";
 
 export default defineConfig({
 	adapter: cloudflare({ imageService: "passthrough" }),
@@ -33,16 +35,13 @@ export default defineConfig({
 				"bsky-comments",
 				"astro/zod",
 				"astro/assets/services/noop",
-				"astro/env/runtime"
-			]
+				"astro/env/runtime",
+			],
 		},
 	},
 	markdown: {
 		processor: satteri({
-			hastPlugins: [
-				satteriHeadingIdsPlugin(),
-				...plugins,
-			],
+			hastPlugins: [satteriHeadingIdsPlugin(), ...plugins],
 		}),
 		shikiConfig: {
 			defaultColor: false,

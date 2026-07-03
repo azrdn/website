@@ -27,17 +27,19 @@ export const headingLinks = defineHastPlugin({
 					tabindex: -1,
 					ariaLabel: "Permalink for this heading",
 				},
-				children: [{
-					type: "element",
-					tagName: "span",
-					properties: {
-						className: "icon",
+				children: [
+					{
+						type: "element",
+						tagName: "span",
+						children: [],
+						properties: {
+							className: "icon",
+						},
 					},
-					children: [{ type: "text", value: "" }],
-				}]
-			})
+				],
+			});
 		},
-	}
+	},
 });
 
 export default [extLinks, headingLinks];

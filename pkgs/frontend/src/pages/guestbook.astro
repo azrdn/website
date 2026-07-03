@@ -1,23 +1,21 @@
 ---
 import { BACKEND_URL } from "astro:env/client";
-import { AstroError } from "astro/errors";
-import z from "astro/zod";
-
+import type { App } from "@backend/index";
+import GBEntries from "@components/guestbook/entries.astro";
+import GBForm from "@components/guestbook/form.astro";
+import Layout from "@components/layout.astro";
 import Footer from "@components/main/footer.astro";
 import Navbar from "@components/main/navbar.astro";
-import Layout from "@components/layout.astro";
-import GBForm from "@components/guestbook/form.astro";
-import GBEntries from "@components/guestbook/entries.astro";
-
+import { AstroError } from "astro/errors";
+import z from "astro/zod";
 import { hc } from "hono/client";
-import type { App } from "@backend/index";
 
 const backend = hc<App>(BACKEND_URL);
 const pageParam = Astro.url.searchParams.get("page") ?? "1";
 const entriesPerPage = 10;
 const pageParamSchema = z.preprocess(
-  (val: string) => parseInt(val, 10),
-  z.number().positive(),
+	(val: string) => parseInt(val, 10),
+	z.number().positive(),
 );
 
 const { success, data: curPage } = pageParamSchema.safeParse(pageParam);
@@ -25,9 +23,9 @@ if (!success) throw new AstroError("Invalid page query parameter");
 
 const countRes = await backend.guestbook.count.$get();
 if (!countRes.ok) throw new AstroError("Failed to fetch entry count");
-const count = await countRes.json()
+const count = await countRes.json();
 const totalPages = Math.max(1, Math.ceil(count / entriesPerPage));
-if (curPage > totalPages) return Astro.redirect("/404")
+if (curPage > totalPages) return Astro.redirect("/404");
 
 export const prerender = false;
 Astro.cache.set({ maxAge: 180, swr: 60 });

@@ -1,13 +1,13 @@
 ---
+import Layout from "@components/layout.astro";
 import Footer from "@components/main/footer.astro";
 import Navbar from "@components/main/navbar.astro";
-import Layout from "@components/layout.astro";
 import { AstroError } from "astro/errors";
 
-export const prerender = false
+export const prerender = false;
 
 interface Props {
-  error: unknown;
+	error: unknown;
 }
 
 const { error } = Astro.props;
