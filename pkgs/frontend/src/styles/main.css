@@ -19,6 +19,15 @@
 		color-scheme: only light;
 	}
 
+	&[data-theme="ctp"] {
+		color-scheme: only dark;
+		--bg: #181825;
+		--bg-secondary: #313244;
+		--fg: #cdd6f4;
+		--fg-secondary: #bac2de;
+		--accent: #89b4fa;
+	}
+
 	@media (width >= 768px) {
 		--side-padding: 2.5ch;
 		--page-padding: 4.5ch;
