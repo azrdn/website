@@ -3,6 +3,7 @@ import { defineConfig, envField, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
+import { cacheCloudflare } from "@astrojs/cloudflare/cache";
 import { satteri, satteriHeadingIdsPlugin } from "@astrojs/markdown-satteri";
 
 import plugins from "./src/utils/satteri.plugins";
@@ -50,6 +51,9 @@ export default defineConfig({
 				light: "catppuccin-latte",
 			},
 		},
+	},
+	cache: {
+		provider: cacheCloudflare(),
 	},
 	fonts: [
 		{
