@@ -74,15 +74,13 @@ const post = Astro.props.post.data;
 	@media (width >= 1700px) {
 		#toc {
 			position: fixed;
-			padding: 1rlh 2ch;
-			background-color: var(--bg);
-			transform: translateY(-50%);
-			top: 50%;
-			right: 0;
-			margin: 2ch;
+			padding: calc(1rlh - 1px) calc(2ch - 1px);
+			border: 1px solid var(--bg-secondary);
+			top: 0;
+			left: 0;
+			margin: 1lh 2ch;
 			max-height: 70svh;
 			width: 35ch;
-			z-index: 1;
 
 			&[open] {
 				overflow-y: scroll;

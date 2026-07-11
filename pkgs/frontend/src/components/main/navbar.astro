@@ -2,27 +2,26 @@
 import MenuIcon from "../icons/menu.svg";
 
 interface Props {
-	/** custom text for last breadcrumb segment */
-	label?: string;
+  /** custom text for last breadcrumb segment */
+  label?: string;
 }
 
 const links: { text: string; href: string; desc: string }[] = [
-	{ text: "/about", href: "/about/", desc: "who am i?" },
-	{ text: "/blog", href: "/blog/", desc: "i write too" },
-	{ text: "/projects", href: "/projects/", desc: "things i made" },
+  { text: "/about", href: "/about/", desc: "who am i?" },
+  { text: "/blog", href: "/blog/", desc: "i write too" },
+  { text: "/projects", href: "/projects/", desc: "things i made" },
 ];
 
 const { label } = Astro.props;
 const pathSegments = Astro.url.pathname.split("/").filter(Boolean);
 const breadcrumbs = pathSegments.map((text, i, orig) => ({
-	text,
-	href: `/${orig.slice(0, i + 1).join("/")}/`,
+  text,
+  href: `/${orig.slice(0, i + 1).join("/")}/`,
 }));
 
 if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
 ---
 
-<div class="spacer"></div>
 <header class="topheader">
   <nav id="label" aria-label="Breadcrumb">
     <a class="navlink" href="/" aria-label="Home">~</a>
@@ -104,15 +103,6 @@ if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
 </script>
 
 <style>
-  .spacer {
-    position: absolute;
-    top: 0;
-    height: calc(2rlh + 1lh);
-    width: 100%;
-    max-width: var(--max-width);
-    background-color: var(--bg);
-  }
-
   header {
     display: flex;
     justify-content: space-between;
@@ -122,7 +112,7 @@ if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
     top: 0;
     gap: 3ch;
     z-index: 2;
-    padding: 1rlh var(--side-padding);
+    padding: 1rlh 0;
     border-bottom: 1px solid var(--bg-secondary);
     background-color: var(--bg);
     transition: transform 0.2s;
@@ -185,9 +175,9 @@ if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
     justify-content: space-between;
     border: none;
     width: 100%;
-    max-width: 80ch;
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 var(--side-padding) 1lh;
+    padding: 0 var(--page-padding) 1lh;
 
     @media (prefers-reduced-motion: no-preference) {
       transition:

@@ -56,6 +56,7 @@ const title = Astro.props.title ?? "azrd";
 		<title>{title}</title>
 	</head>
 	<body>
+    <slot name="side" />
 		<slot name="header" />
 		<main>
 			<div id="page">
@@ -68,24 +69,21 @@ const title = Astro.props.title ?? "azrd";
 
 <style>
 	html {
-		background-color: var(--bg-secondary);
+		background-color: var(--bg);
 		font-family: var(--font-subset);
 		scrollbar-color: var(--fg) transparent;
 		overflow-y: scroll;
-
-		/* native mobile navbar buttons bg color */
-		@media (width <= 768px) {
-			background-color: var(--bg);
-		}
 	}
 
 	body {
+		anchor-name: --bda;
 		color: var(--fg-secondary);
 		scrollbar-gutter: stable both-edges;
 		display: flex;
 		flex-direction: column;
 		line-height: 1.5;
 		margin: 0 auto;
+		padding: 0 2ch;
 		max-width: var(--max-width);
 		min-height: 100svh;
 		text-wrap: pretty;
@@ -96,7 +94,7 @@ const title = Astro.props.title ?? "azrd";
 		background-color: var(--bg);
 		min-width: 0;
 		width: 100%;
-		padding: 0 var(--page-padding) 2rlh;
+		padding-bottom: 2lh;
 	}
 
 	main {

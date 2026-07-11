@@ -7,9 +7,10 @@
 		"be": "pnpm -F backend"
 	},
 	"dependencies": {
-		"wrangler": "^4.105.0"
+		"wrangler": "^4.110.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.5.2"
+		"@biomejs/biome": "2.5.2",
+		"typescript": "^6.0.3"
 	}
 }
