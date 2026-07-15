@@ -33,7 +33,7 @@ export const headingLinks = defineHastPlugin({
 						tagName: "span",
 						children: [],
 						properties: {
-							className: "icon",
+							className: ["icon"],
 						},
 					},
 				],

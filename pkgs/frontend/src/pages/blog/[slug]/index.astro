@@ -8,7 +8,7 @@ import Footer from "@components/main/footer.astro";
 import Navbar from "@components/main/navbar.astro";
 import type { GetStaticPaths } from "astro";
 
-import "../../styles/blog.css";
+import "@styles/blog.css";
 import { ISO } from "@utils/date";
 
 export const getStaticPaths = (async () => {
@@ -21,19 +21,25 @@ export const getStaticPaths = (async () => {
 	}));
 }) satisfies GetStaticPaths;
 
-const { Content, headings } = await render(Astro.props.post);
-const post = Astro.props.post.data;
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const { title, createdAt, updatedAt, bskyPostUri } = post.data;
+const ogImageUrl = new URL("og.png", Astro.url)
 ---
 
-<Layout title={post.title}>
+<Layout {title} {ogImageUrl}>
   <Navbar slot="header" label="post" />
 	<article>
 		<header>
-			<h1>{post.title}</h1>
+			<h1>{title}</h1>
 			<p id="info">
-				<span title={ISO(post.createdAt)}>Publ: <time>{ISO(post.createdAt, true)}</time></span>
-				{post.updatedAt &&
-					<span title={ISO(post.updatedAt)}>Upd: <time>{ISO(post.updatedAt, true)}</time></span>
+				<span title={ISO(createdAt)}>
+					Publ: <time>{ISO(createdAt, true)}</time>
+				</span>
+				{updatedAt &&
+					<span title={ISO(updatedAt)}>
+						Upd: <time>{ISO(updatedAt, true)}</time>
+					</span>
 				}
 			</p>
 			{
@@ -47,11 +53,11 @@ const post = Astro.props.post.data;
 		<hr />
 		</header>
 		<Content />
-		{post.bskyPostUri && (
+		{bskyPostUri && (
 		  <hr>
       <details>
         <summary>Comments</summary>
-        <BskyComments uri={post.bskyPostUri} />
+        <BskyComments uri={bskyPostUri} />
       </details>
 		)}
 	</article>
@@ -86,9 +92,9 @@ const post = Astro.props.post.data;
 				overflow-y: scroll;
 			}
 		}
-	}
 
-	:global(body:has(#toc:hover) .topheader) {
-		transform: none;
+		:global(body:has(#toc:hover) .topheader) {
+			transform: none;
+		}
 	}
 </style>

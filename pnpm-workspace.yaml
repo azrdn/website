@@ -13,4 +13,3 @@ minimumReleaseAgeExclude:
 
 overrides:
   "@astrojs/compiler-rs": "latest"
-  "satteri": "latest"
