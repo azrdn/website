@@ -1,8 +1,7 @@
 import { defineCollection } from "astro:content";
+import { cmdLoader } from "@utils/cmd.loader";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
-import { cmdLoader } from "@utils/cmd.loader";
-
 
 const blogSchema = z.object({
 	title: z.string().min(1, "Title cannot be empty"),

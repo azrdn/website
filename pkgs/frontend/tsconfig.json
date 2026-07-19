@@ -7,8 +7,8 @@
 			"@backend/*": ["../backend/src/*"],
 			"@components/*": ["./src/components/*"],
 			"@styles/*": ["./src/styles/*"],
-			"@utils/*": ["./src/utils/*"],
+			"@utils/*": ["./src/utils/*"]
 		},
-		"jsx": "preserve",
-	},
+		"jsx": "preserve"
+	}
 }

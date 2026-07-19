@@ -11,7 +11,7 @@ import plugins from "./src/utils/satteri.plugins";
 export default defineConfig({
 	adapter: cloudflare({
 		imageService: "passthrough",
-		prerenderEnvironment: "node"
+		prerenderEnvironment: "node",
 	}),
 	site: "https://azrd.dev",
 	integrations: [sitemap(), mdx()],
@@ -44,7 +44,7 @@ export default defineConfig({
 		},
 		css: {
 			transformer: "lightningcss",
-		}
+		},
 	},
 	markdown: {
 		processor: satteri({

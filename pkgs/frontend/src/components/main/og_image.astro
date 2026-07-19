@@ -2,12 +2,12 @@
 import { randomBytes } from "node:crypto";
 
 export interface Props {
-	title: string,
-	description: string
+	title: string;
+	description: string;
 }
 
 const { title, description } = Astro.props;
-const randomText = randomBytes(2000).toString('hex');
+const randomText = randomBytes(2000).toString("hex");
 ---
 
 <div class="container">

@@ -2,21 +2,21 @@
 import MenuIcon from "../icons/menu.svg";
 
 interface Props {
-  /** custom text for last breadcrumb segment */
-  label?: string;
+	/** custom text for last breadcrumb segment */
+	label?: string;
 }
 
 const links: { text: string; href: string; desc: string }[] = [
-  { text: "/about", href: "/about/", desc: "who am i?" },
-  { text: "/blog", href: "/blog/", desc: "i write too" },
-  { text: "/projects", href: "/projects/", desc: "things i made" },
+	{ text: "/about", href: "/about/", desc: "who am i?" },
+	{ text: "/blog", href: "/blog/", desc: "i write too" },
+	{ text: "/projects", href: "/projects/", desc: "things i made" },
 ];
 
 const { label } = Astro.props;
 const pathSegments = Astro.url.pathname.split("/").filter(Boolean);
 const breadcrumbs = pathSegments.map((text, i, orig) => ({
-  text,
-  href: `/${orig.slice(0, i + 1).join("/")}/`,
+	text,
+	href: `/${orig.slice(0, i + 1).join("/")}/`,
 }));
 
 if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
