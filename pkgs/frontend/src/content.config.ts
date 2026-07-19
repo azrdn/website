@@ -1,7 +1,8 @@
 import { defineCollection } from "astro:content";
-import { cmdLoader } from "@utils/cmd.loader";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { cmdLoader } from "@utils/cmd.loader";
+
 
 const blogSchema = z.object({
 	title: z.string().min(1, "Title cannot be empty"),
@@ -15,26 +16,32 @@ const blogSchema = z.object({
 
 export const collections = {
 	testBlog: defineCollection({
+		schema: blogSchema,
 		loader: glob({
 			pattern: "**/*.test.{md,mdx}",
 			base: "./src/content/posts",
 		}),
-		schema: blogSchema,
 	}),
 	blog: defineCollection({
-		loader: glob({ pattern: "**/*.{md,mdx}", base: "../posts" }),
 		schema: blogSchema,
+		loader: glob({
+			pattern: "**/*.{md,mdx}",
+			base: "../posts",
+		}),
 	}),
 	badges: defineCollection({
-		loader: glob({ pattern: "*.json", base: "./src/content/badges" }),
 		schema: ({ image }) =>
-			z
-				.object({
+			z.array(
+				z.object({
 					image: image(),
-					href: z.string().regex(/^(.*)\/([^/]*)$/),
+					href: z.string(),
 					alt: z.string(),
-				})
-				.array(),
+				}),
+			),
+		loader: glob({
+			pattern: "*.json",
+			base: "./src/content/badges",
+		}),
 	}),
 	gitInfo: defineCollection({
 		loader: cmdLoader([

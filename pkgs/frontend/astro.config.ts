@@ -9,7 +9,10 @@ import { satteri, satteriHeadingIdsPlugin } from "@astrojs/markdown-satteri";
 import plugins from "./src/utils/satteri.plugins";
 
 export default defineConfig({
-	adapter: cloudflare({ imageService: "passthrough", prerenderEnvironment: "node" }),
+	adapter: cloudflare({
+		imageService: "passthrough",
+		prerenderEnvironment: "node"
+	}),
 	site: "https://azrd.dev",
 	integrations: [sitemap(), mdx()],
 	server: { host: true },
@@ -39,6 +42,9 @@ export default defineConfig({
 				"astro/env/runtime",
 			],
 		},
+		css: {
+			transformer: "lightningcss",
+		}
 	},
 	markdown: {
 		processor: satteri({
