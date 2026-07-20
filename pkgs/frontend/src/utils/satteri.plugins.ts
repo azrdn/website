@@ -1,6 +1,6 @@
 import { defineHastPlugin } from "satteri";
 
-export const extLinks = defineHastPlugin({
+const extLinks = defineHastPlugin({
 	name: "external-links",
 	element: {
 		filter: ["a"],
@@ -12,7 +12,7 @@ export const extLinks = defineHastPlugin({
 	},
 });
 
-export const headingLinks = defineHastPlugin({
+const headingLinks = defineHastPlugin({
 	name: "heading-links",
 	element: {
 		filter: ["h1", "h2", "h3", "h4", "h5", "h6"],
@@ -42,4 +42,24 @@ export const headingLinks = defineHastPlugin({
 	},
 });
 
-export default [extLinks, headingLinks];
+const codeButtons = defineHastPlugin({
+	name: "code-buttons",
+	element: {
+		filter: ["pre"],
+		visit(node, ctx) {
+			const [child] = node.children;
+			if (child?.type !== "element") return;
+			if (child.tagName !== "code") return;
+			ctx.wrapNode(node, {
+				type: "element",
+				tagName: "div",
+				children: [],
+				properties: {
+					className: ["codeblock"],
+				},
+			});
+		},
+	},
+});
+
+export default [extLinks, headingLinks, codeButtons];
