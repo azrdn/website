@@ -9,21 +9,20 @@ export const cmdSchema = z.object({
 
 type CmdSchema = z.infer<typeof cmdSchema>;
 
-export const cmdLoader = (cmds: string[]) =>
+/**
+ * Build time loader so commands can be executed without constraints from
+ * environments that isn't fully compatible with node. (e.g workerd)
+ */
+export const cmdLoader = (cmds: { [K in string]: string }) =>
 	({
 		name: "cmdLoader",
 		schema: cmdSchema,
-
 		load: async ({ store, parseData }) => {
-			for (const [i, cmd] of cmds.entries()) {
-				const id = `${i}`;
+			for (const [id, cmd] of Object.entries(cmds)) {
 				const output = execSync(cmd).toString().trim();
 				const data = await parseData<CmdSchema>({
 					id,
-					data: {
-						cmd,
-						output,
-					},
+					data: { cmd, output },
 				});
 				store.set<CmdSchema>({ id, data });
 			}

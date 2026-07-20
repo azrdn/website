@@ -43,9 +43,9 @@ export const collections = {
 		}),
 	}),
 	gitInfo: defineCollection({
-		loader: cmdLoader([
-			"git rev-parse --short HEAD",
-			"git show -s --format=%ct HEAD",
-		]),
+		loader: cmdLoader({
+			revision: "git rev-parse --short HEAD",
+			lastChange: "git show -s --format=%ct HEAD",
+		}),
 	}),
 };

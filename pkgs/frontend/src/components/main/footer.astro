@@ -1,15 +1,13 @@
 ---
-import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
 import { ISO } from "@utils/date";
 import ThemeSwitcher from "./theme_switcher.astro";
 
-const commands = (await getCollection("gitInfo")).map((c) => c.data);
-const gitHash = commands[0]?.output ?? "badnews";
-const lastChangeEpoch = commands[1]?.output ?? "0";
+const lastChangeEpoch = (await getEntry("gitInfo", "lastChange"))?.data.output;
+const revision = (await getEntry("gitInfo", "revision"))?.data.output;
 
-const date = new Date(parseInt(lastChangeEpoch, 10) * 1000);
-const currentYear = new Date().getFullYear();
-const commitUrl = `${import.meta.env.REPO_URL}/commit/${gitHash}`;
+const date = new Date(parseInt(lastChangeEpoch ?? "0", 10) * 1000);
+const commitUrl = `${import.meta.env.REPO_URL}/commit/${revision}`;
 const statusUrl = `https://status.${Astro.site?.hostname}`;
 ---
 
@@ -24,7 +22,7 @@ const statusUrl = `https://status.${Astro.site?.hostname}`;
   <section class="bottom">
     <div class="left">
       <div class="copy">
-        <span id="cl">&copy;</span>2022-{currentYear}
+        <span id="cl">&copy;</span>2022-{new Date().getFullYear()}
         <a
           href="https://www.gnu.org/licenses/gpl-3.0.en.html"
           rel="external nofollow">GPLv3</a
@@ -38,7 +36,7 @@ const statusUrl = `https://status.${Astro.site?.hostname}`;
         <ThemeSwitcher id="theme-select" />
       </div>
       <div class="commit">
-        Version<a href={commitUrl} rel="external nofollow">{gitHash}</a>
+        Version<a href={commitUrl} rel="external nofollow">{revision ?? "dedbeef"}</a>
         <time datetime={ISO(date)} title={ISO(date)}>({ISO(date, true)})</time>
       </div>
     </div>
