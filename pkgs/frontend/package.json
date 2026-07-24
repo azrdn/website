@@ -16,7 +16,7 @@
 		"@astrojs/sitemap": "^3.7.3",
 		"astro": "7.0.9",
 		"bsky-comments": "^1.0.1",
-		"hono": "4.12.27",
+		"hono": "4.12.32",
 		"satteri": "^0.9.5",
 		"takumi-js": "^2.2.0"
 	},
