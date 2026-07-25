@@ -10,16 +10,15 @@
 		"types": "wrangler types"
 	},
 	"dependencies": {
-		"@hono/standard-validator": "^0.2.3",
+		"@hono/standard-validator": "^0.3.0",
 		"drizzle-orm": "1.0.0-rc.4",
-		"hono": "4.12.30",
+		"hono": "catalog:",
 		"postgres": "^3.4.9",
 		"zod": "^4.4.3"
 	},
 	"devDependencies": {
-		"@electric-sql/pglite-socket": "^0.2.6",
-		"@types/node": "^26.0.1",
-		"drizzle-kit": "1.0.0-rc.4",
-		"wrangler": "4.112.0"
+		"@electric-sql/pglite-socket": "^0.2.7",
+		"@types/node": "^26.1.1",
+		"drizzle-kit": "1.0.0-rc.4"
 	}
 }

@@ -8,10 +8,12 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - astro
-  - '@astrojs/*'
-  - '@napi-rs/wasm-runtime'
+  - "@astrojs/*"
+  - "@napi-rs/wasm-runtime"
+
+catalog:
+  hono: "^4.12.31"
 
 overrides:
+  wrangler: "4.114.0"
   "@astrojs/compiler-rs": "latest"
-  "wrangler": "4.112.0"
-  "hono": "4.12.30"
