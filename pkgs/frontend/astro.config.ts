@@ -4,9 +4,9 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
 import { cacheCloudflare } from "@astrojs/cloudflare/cache";
-import { satteri, satteriHeadingIdsPlugin } from "@astrojs/markdown-satteri";
+import { satteri } from "@astrojs/markdown-satteri";
 
-import plugins from "./src/utils/satteri.plugins";
+import { hastPlugins } from "./src/utils/satteri.plugins";
 
 export default defineConfig({
 	adapter: cloudflare({
@@ -42,13 +42,13 @@ export default defineConfig({
 				"astro/env/runtime",
 			],
 		},
-		css: {
-			transformer: "lightningcss",
-		},
 	},
 	markdown: {
 		processor: satteri({
-			hastPlugins: [satteriHeadingIdsPlugin(), ...plugins],
+			hastPlugins,
+			features: {
+				smartPunctuation: false,
+			},
 		}),
 		shikiConfig: {
 			defaultColor: false,

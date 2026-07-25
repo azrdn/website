@@ -46,9 +46,14 @@
 
 pre:has(code) {
 	position: relative;
-	padding: 0.75em 1em;
 	margin: 1lh 0;
-	scrollbar-width: thin;
+
+	code {
+		display: block;
+		scrollbar-width: thin;
+		padding: 0.75em 1em;
+		overflow-x: scroll;
+	}
 }
 
 table {
@@ -72,29 +77,56 @@ td {
 }
 
 :not(header *) {
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		a {
-			text-decoration: none;
-		}
+	&h1,
+	&h2,
+	&h3,
+	&h4,
+	&h5,
+	&h6 {
+		scroll-margin-top: calc(2rlh + 1em + 1em);
+		margin: 2.25em 0 1em;
 	}
+}
 
-	h1 .icon::before {
-		content: "#";
+@property --left-fade {
+	syntax: "<length>";
+	inherits: false;
+	initial-value: 0;
+}
+
+@property --right-fade {
+	syntax: "<length>";
+	inherits: false;
+	initial-value: 0;
+}
+
+@keyframes scrollfade-x {
+	0% {
+		--left-fade: 0;
+		--right-fade: 5ch;
 	}
-	h2 .icon::before {
-		content: "##";
+	15%,
+	100% {
+		--left-fade: 5ch;
 	}
-	h3,
-	h4,
-	h5,
-	h6 {
-		.icon::before {
-			content: "###";
-		}
+	85% {
+		--right-fade: 5ch;
 	}
+	100% {
+		--right-fade: 0;
+	}
+}
+
+pre:has(code) code,
+table {
+	overflow-x: scroll;
+	mask: linear-gradient(
+		to right,
+		#0000,
+		#ffff var(--left-fade) calc(100% - var(--right-fade)),
+		#0000
+	);
+	animation: scrollfade-x;
+	animation-timeline: --scrollfade-x;
+	scroll-timeline: --scrollfade-x x;
 }

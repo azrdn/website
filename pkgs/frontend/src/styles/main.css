@@ -33,6 +33,11 @@
 	color: var(--bg);
 }
 
+:focus-visible {
+	border-radius: 0;
+	outline: 2px solid var(--accent);
+}
+
 *,
 *::before,
 *::after {
@@ -102,18 +107,32 @@ h4,
 h5,
 h6 {
 	display: flex;
-	gap: 0 1ch;
-	font-size: unset;
-	scroll-margin-top: calc(2rlh + 1lh + 2em);
+	column-gap: 1ch;
+	font-family: var(--font-subset);
+	font-weight: 550;
 	color: var(--fg);
-	margin: 2em 0;
-	padding: 0;
+	margin: 1.5em 0;
+}
+
+h1 {
+	font-size: 1.3em;
+}
+
+h2 {
+	font-size: 1.1em;
+}
+
+h3,
+h4,
+h5,
+h6 {
+	font-size: 1em;
 }
 
 a {
 	color: var(--fg);
-	text-decoration: underline solid var(--bg-secondary) 1px;
-	text-underline-offset: 0.25rlh;
+	text-decoration: underline solid var(--bg-secondary) 2px;
+	text-underline-offset: 4px;
 	overflow-wrap: break-word;
 	scroll-margin-top: calc(2rlh + 1lh + 1em);
 
@@ -198,7 +217,6 @@ hr {
 
 pre,
 code {
-	border-radius: 4px;
 	font-family: inherit;
 	scrollbar-color: var(--fg-secondary) transparent;
 }
@@ -206,7 +224,7 @@ code {
 code:not(pre code) {
 	color: var(--fg);
 	background-color: color-mix(in srgb, var(--bg-secondary), transparent 50%);
-	padding: 0 1ch;
+	padding: 1px 1ch;
 }
 
 option::checkmark {

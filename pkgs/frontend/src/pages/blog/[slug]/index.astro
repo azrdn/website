@@ -66,6 +66,11 @@ const ogImageUrl = new URL("og.png", Astro.url);
 </Layout>
 
 <style>
+  h1 {
+    font-size: 1.5em;
+    margin: 1rlh 0;
+  }
+
 	#info {
 		display: flex;
 		flex-wrap: wrap;
@@ -77,11 +82,10 @@ const ogImageUrl = new URL("og.png", Astro.url);
 		}
 	}
 
-	@media (width >= 1700px) {
+	@media (width >= 1600px) {
 		#toc {
 			position: fixed;
-			padding: calc(1rlh - 1px) calc(2ch - 1px);
-			border: 1px solid var(--bg-secondary);
+			padding: 0 1ch;
 			top: 0;
 			left: 0;
 			margin: 1lh 2ch;

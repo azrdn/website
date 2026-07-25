@@ -5,6 +5,7 @@ import Layout from "@components/layout.astro";
 import Footer from "@components/main/footer.astro";
 import Marquee from "@components/main/marquee.astro";
 import Navbar from "@components/main/navbar.astro";
+import Tty from "@components/main/tty.astro";
 
 const testBlog = import.meta.env.DEV ? await getCollection("testBlog") : [];
 const blog = await getCollection("blog");
@@ -54,6 +55,8 @@ const recentPosts = collections
 			))}
 		</section>
 	)}
+	<hr>
+	<Tty />
 	<Footer slot="footer" />
 </Layout>
 

@@ -1,0 +1,105 @@
+---
+
+---
+
+<script>
+  const terminal = document.querySelector<HTMLTextAreaElement>(
+    "textarea[name=terminal]",
+  )!;
+
+  const prompt = "$ ";
+  let promptStart = 0;
+
+  function writePrompt() {
+    terminal.value += prompt;
+    promptStart = terminal.value.length;
+    terminal.setSelectionRange(promptStart, promptStart);
+    terminal.scrollTop = terminal.scrollHeight;
+  }
+
+  function runCommand() {
+    const [command] = terminal.value.slice(promptStart).trim().split(/\s+/);
+    switch (command) {
+      case "clear":
+        terminal.value = "";
+        break;
+      case "help":
+        terminal.value += "\nCommands: help, clear, whoami\n";
+        break;
+      case "whoami":
+        terminal.value += `\n${navigator.userAgent}\n`;
+        break;
+      case "":
+        terminal.value += "\n";
+        break;
+      default:
+        terminal.value += `\ncommand not found: ${command}\n`;
+    }
+    writePrompt();
+  }
+
+  terminal.addEventListener("beforeinput", () => {
+    if (terminal.selectionStart < promptStart) {
+      terminal.setSelectionRange(terminal.value.length, terminal.value.length);
+    }
+  });
+
+  terminal.addEventListener("click", () => {
+    if (terminal.selectionStart === terminal.selectionEnd) {
+      terminal.setSelectionRange(terminal.value.length, terminal.value.length);
+    }
+  });
+
+  terminal.addEventListener("keydown", (ev) => {
+    if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === "l") {
+      ev.preventDefault();
+      terminal.value = "";
+      return writePrompt();
+    }
+
+    if (ev.key === "Enter" && !ev.isComposing) {
+      ev.preventDefault();
+      return runCommand();
+    }
+
+    if (["ArrowUp", "ArrowDown"].includes(ev.key)) {
+      return ev.preventDefault();
+    }
+
+    if (ev.key === "Backspace" && terminal.selectionStart <= promptStart) {
+      return ev.preventDefault();
+    }
+  });
+
+  writePrompt();
+</script>
+
+<textarea
+  name="terminal"
+  aria-label="Terminal"
+  autocomplete="off"
+  spellcheck="false"
+  class="scroller"></textarea>
+
+<style>
+  textarea {
+    padding: calc(0.5em - 1px) calc(1ch - 1px);
+    color: var(--fg);
+    background-color: var(--bg);
+    caret-shape: underscore;
+    caret-color: var(--fg);
+    font: inherit;
+    line-height: 1.2;
+    width: 100%;
+    min-height: 10rlh;
+    border: 1px solid var(--bg-secondary);
+    outline: none;
+    resize: vertical;
+    word-break: break-all;
+    margin: 1em 0;
+
+    &::selection {
+     	background-color: var(--fg);
+    }
+  }
+</style>
