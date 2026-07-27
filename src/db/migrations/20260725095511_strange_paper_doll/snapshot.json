@@ -1,0 +1,97 @@
+{
+	"version": "8",
+	"dialect": "postgres",
+	"id": "aa0575cf-6e4b-49b0-bac6-b98609fbfd99",
+	"prevIds": ["00000000-0000-0000-0000-000000000000"],
+	"ddl": [
+		{
+			"isRlsEnabled": false,
+			"name": "guestbook",
+			"entityType": "tables",
+			"schema": "public"
+		},
+		{
+			"type": "integer",
+			"typeSchema": null,
+			"notNull": true,
+			"dimensions": 0,
+			"default": null,
+			"generated": null,
+			"identity": {
+				"type": "always",
+				"name": "guestbook_id_seq",
+				"increment": "1",
+				"startWith": "1",
+				"minValue": "1",
+				"maxValue": "2147483647",
+				"cache": 1,
+				"cycle": false
+			},
+			"name": "id",
+			"entityType": "columns",
+			"schema": "public",
+			"table": "guestbook"
+		},
+		{
+			"type": "text",
+			"typeSchema": null,
+			"notNull": true,
+			"dimensions": 0,
+			"default": null,
+			"generated": null,
+			"identity": null,
+			"name": "username",
+			"entityType": "columns",
+			"schema": "public",
+			"table": "guestbook"
+		},
+		{
+			"type": "text",
+			"typeSchema": null,
+			"notNull": false,
+			"dimensions": 0,
+			"default": null,
+			"generated": null,
+			"identity": null,
+			"name": "url",
+			"entityType": "columns",
+			"schema": "public",
+			"table": "guestbook"
+		},
+		{
+			"type": "text",
+			"typeSchema": null,
+			"notNull": true,
+			"dimensions": 0,
+			"default": null,
+			"generated": null,
+			"identity": null,
+			"name": "message",
+			"entityType": "columns",
+			"schema": "public",
+			"table": "guestbook"
+		},
+		{
+			"type": "integer",
+			"typeSchema": null,
+			"notNull": true,
+			"dimensions": 0,
+			"default": "extract(epoch from now())",
+			"generated": null,
+			"identity": null,
+			"name": "created_at",
+			"entityType": "columns",
+			"schema": "public",
+			"table": "guestbook"
+		},
+		{
+			"columns": ["id"],
+			"nameExplicit": false,
+			"name": "guestbook_pkey",
+			"schema": "public",
+			"table": "guestbook",
+			"entityType": "pks"
+		}
+	],
+	"renames": []
+}

@@ -1,6 +1,3 @@
-packages:
-  - "pkgs/*"
-
 allowBuilds:
   esbuild: true
   sharp: true
@@ -10,9 +7,6 @@ minimumReleaseAgeExclude:
   - astro
   - "@astrojs/*"
   - "@napi-rs/wasm-runtime"
-
-catalog:
-  hono: "^4.12.31"
 
 overrides:
   wrangler: "4.114.0"

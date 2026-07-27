@@ -1,16 +1,37 @@
 {
+	"name": "website",
+	"type": "module",
+	"private": true,
+	"version": "1.0.0",
 	"scripts": {
-		"dev": "pnpm -r --parallel \"/dev/\"",
-		"dev:be": "pnpm --parallel -F backend \"/(dev|dev:db)/\"",
-		"build": "pnpm -r --parallel \"/build/\"",
-		"fe": "pnpm -F frontend",
-		"be": "pnpm -F backend"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "2.5.2",
-		"typescript": "6.0.3"
+		"dev": "pnpm --parallel \"/^dev.*/\"",
+		"dev:fe": "astro dev",
+		"dev:db": "turso dev -f ./src/db/turso.db",
+		"dk": "drizzle-kit --config=./src/db/dev.config.ts",
+		"dk:prod": "drizzle-kit --config=./src/db/prod.config.ts",
+		"build": "astro build",
+		"preview": "astro preview",
+		"types": "astro sync",
+		"clean": "pnpm clean"
 	},
 	"dependencies": {
-		"wrangler": "catalog:"
+		"@astrojs/cloudflare": "14.1.4",
+		"@astrojs/markdown-satteri": "^0.3.4",
+		"@astrojs/mdx": "7.0.3",
+		"@astrojs/rss": "^4.0.19",
+		"@astrojs/sitemap": "^3.7.3",
+		"@libsql/client": "^0.17.4",
+		"astro": "7.1.3",
+		"bsky-comments": "^1.0.1",
+		"drizzle-orm": "1.0.0-rc.4",
+		"satteri": "^0.9.5",
+		"takumi-js": "^2.4.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.5",
+		"@types/node": "^26.1.1",
+		"drizzle-kit": "1.0.0-rc.4",
+		"typescript": "^6.0.3",
+		"wrangler": "4.114.0"
 	}
 }

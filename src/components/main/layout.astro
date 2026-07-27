@@ -1,0 +1,106 @@
+---
+import "@styles/main.css";
+import { Font } from "astro:assets";
+
+interface Props {
+	title?: string;
+	ogImageUrl?: string | URL;
+}
+
+const ogDesc = "A quiet place in the internet";
+const ogImage = Astro.props.ogImageUrl ?? new URL("og.png", Astro.url.origin);
+const title = Astro.props.title ?? "azrd";
+---
+
+<html lang="en" data-theme="system">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="keywords" content="personal,blog,azrd" />
+        <meta name="bingbot" content="noarchive" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={ogDesc} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={ogImage} />
+        <meta property="og:site_name" content={Astro.url.host} />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:image" name="image" content={ogImage} />
+        <meta property="og:title" name="title" content={title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" name="description" content={ogDesc} />
+        {
+            /*
+                Font is preloaded only in dev mode beceause only prod has http caching
+				which makes fonts flicker on every page load in dev.
+			*/
+			<Font cssVariable="--font-subset" preload={import.meta.env.DEV} />
+        }
+        {
+            /* Cross page view transitions has issues in dev mode */
+            !import.meta.env.DEV && <style>@view-transition { navigation: auto; }</style>
+        }
+        <link rel="canonical" href={Astro.url} />
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+        <link rel="expect" href="" />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="azrd"
+            href="/rss.xml"
+        />
+        <script is:inline>
+            const theme = localStorage.getItem("theme") ?? "system";
+            document.documentElement.dataset.theme = theme;
+        </script>
+        <title>{title}</title>
+    </head>
+    <body>
+        <slot name="side" />
+        <slot name="header" />
+        <main>
+            <div id="page">
+                <slot />
+            </div>
+        </main>
+        <slot name="footer" />
+    </body>
+</html>
+
+<style>
+    html {
+        font-family: var(--font-subset);
+        background-color: light-dark(var(--light-bg), var(--dark-bg));
+        scrollbar-color: light-dark(var(--light-fg), var(--dark-fg)) transparent;
+        overflow-y: scroll;
+    }
+
+    body {
+        color: light-dark(var(--light-fg-secondary), var(--dark-fg-secondary));
+        scrollbar-gutter: stable both-edges;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.5;
+        margin: 0 auto;
+        padding: 0 2ch;
+        max-width: var(--max-width);
+        min-height: 100svh;
+        text-wrap: pretty;
+        text-size-adjust: none;
+    }
+
+    #page {
+        background-color: light-dark(var(--light-bg), var(--dark-bg));
+        min-width: 0;
+        width: 100%;
+        padding-bottom: 2lh;
+    }
+
+    main {
+        display: flex;
+        flex-grow: 1;
+        z-index: 1;
+    }
+</style>

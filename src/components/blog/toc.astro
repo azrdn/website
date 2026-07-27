@@ -1,0 +1,127 @@
+---
+import type { MarkdownHeading } from "astro";
+import TocHeading from "./toc_heading.astro";
+
+interface Props {
+	headings: MarkdownHeading[];
+}
+
+export interface TocItem extends MarkdownHeading {
+	subheadings: TocItem[];
+}
+
+const buildToc = (headings: MarkdownHeading[]): TocItem[] => {
+	const toc: TocItem[] = [];
+	const parentH = new Map();
+	for (const h of headings) {
+		const heading = { ...h, subheadings: [] };
+		parentH.set(h.depth, heading);
+		if (h.depth === 1) toc.push(heading);
+		else parentH.get(h.depth - 1).subheadings.push(heading);
+	}
+	return toc;
+};
+
+const { headings } = Astro.props;
+const toc = buildToc(headings);
+---
+
+<nav>
+  <ul>
+    {toc.map((heading) => <TocHeading heading={heading} />)}
+  </ul>
+</nav>
+
+<script>
+  /* modified from https://codepen.io/bramus/pen/ExaEqMJ */
+  const headings = document.querySelectorAll(":is(h1,h2,h3,h4,h5,h6)[id]")
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      const id = entry.target.getAttribute("id");
+      if (entry.intersectionRatio > 0) {
+        const el = document.querySelector<HTMLAnchorElement>(
+          `nav li a[href="#${id}"]`,
+        );
+        if (el) el.parentElement?.classList.add("active");
+      } else {
+        const el = document.querySelector<HTMLAnchorElement>(
+          `nav li a[href="#${id}"]`,
+        );
+        if (el) el.parentElement?.classList.remove("active");
+      }
+    }
+  });
+  for (const h of headings) observer.observe(h);
+</script>
+
+{/* modified from hiiruki.moe/blob/main/src/components/blog/TOC.astro */}
+<style>
+  nav {
+    @media (prefers-reduced-motion: no-preference) {
+      li::before,
+      li::after {
+        transition: border-color 0.2s;
+      }
+      a {
+        transition: color 0.2s;
+      }
+    }
+
+    ul {
+      row-gap: 0;
+      margin: 0;
+    }
+
+    li {
+      position: relative;
+      &::marker {
+        content: "";
+      }
+
+      &:has(> a:hover) {
+        &::before,
+        &::after {
+          border-color: light-dark(var(--light-accent), var(--dark-accent));
+        }
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    li::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: calc(-1.5ch - 2px);
+      border-left: 2px solid light-dark(var(--light-bg-secondary), var(--dark-bg-secondary));
+      content: "";
+    }
+
+    li::after {
+      position: absolute;
+      top: 0.5lh;
+      left: calc(-1.5ch - 2px);
+      width: calc(1.5ch - 2px);
+      border-bottom: 2px solid light-dark(var(--light-bg-secondary), var(--dark-bg-secondary));
+      content: "";
+    }
+
+    li:last-child::before {
+      bottom: auto;
+      height: 0.5lh;
+    }
+
+    li.active {
+      & > :global(a) {
+        color: light-dark(var(--light-accent), var(--dark-accent));
+      }
+
+      &::before,
+      &::after {
+        border-color: light-dark(var(--light-accent), var(--dark-accent));
+      }
+    }
+  }
+</style>

@@ -1,0 +1,132 @@
+@layer blog {
+	.astro-code,
+	.astro-code span {
+		color: light-dark(var(--shiki-light), var(--shiki-dark));
+		background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.astro-code,
+		.astro-code span {
+			font-style: var(--shiki-dark-font-style);
+			font-weight: var(--shiki-dark-font-weight);
+			text-decoration: var(--shiki-dark-text-decoration);
+		}
+	}
+
+	@media (prefers-color-scheme: light) {
+		.astro-code,
+		.astro-code span {
+			font-style: var(--shiki-light-font-style);
+			font-weight: var(--shiki-light-font-weight);
+			text-decoration: var(--shiki-light-text-decoration);
+		}
+	}
+
+	[theme="dark"] {
+		.astro-code,
+		.astro-code span {
+			color: var(--shiki-dark);
+			background-color: var(--shiki-dark-bg);
+			font-style: var(--shiki-dark-font-style);
+			font-weight: var(--shiki-dark-font-weight);
+			text-decoration: var(--shiki-dark-text-decoration);
+		}
+	}
+
+	[theme="light"] {
+		.astro-code,
+		.astro-code span {
+			color: var(--shiki-light);
+			background-color: var(--shiki-light-bg);
+			font-style: var(--shiki-light-font-style);
+			font-weight: var(--shiki-light-font-weight);
+			text-decoration: var(--shiki-light-text-decoration);
+		}
+	}
+
+	pre:has(code) {
+		position: relative;
+		margin: 1lh 0;
+
+		code {
+			display: block;
+			scrollbar-width: thin;
+			padding: 0.75em 1em;
+			overflow-x: scroll;
+		}
+	}
+
+	table {
+		display: block;
+		overflow-y: auto;
+		border-collapse: collapse;
+	}
+
+	th {
+		text-align: start;
+		&[align="right"] {
+			text-align: end;
+		}
+	}
+
+	th,
+	td {
+		border: 1px solid
+			light-dark(var(--light-fg-secondary), var(--dark-fg-secondary));
+		padding: 0.5em calc(1ch - 1px);
+		vertical-align: top;
+	}
+
+	:is(h1, h2, h3, h4, h5, h6):not(header > *) {
+		scroll-margin-top: calc(2rlh + 1.5em + 1em);
+		margin: 2.5em 0 0.75em;
+	}
+
+	article > :nth-child(1 of h1, h2, h3, h4, h5, h6) {
+		margin-top: 0.75em;
+	}
+
+	@property --left-fade {
+		syntax: "<length>";
+		inherits: false;
+		initial-value: 0;
+	}
+
+	@property --right-fade {
+		syntax: "<length>";
+		inherits: false;
+		initial-value: 0;
+	}
+
+	@keyframes scrollfade-x {
+		0% {
+			--left-fade: 0;
+			--right-fade: 5ch;
+		}
+		15%,
+		100% {
+			--left-fade: 5ch;
+		}
+		85% {
+			--right-fade: 5ch;
+		}
+		100% {
+			--right-fade: 0;
+		}
+	}
+
+	pre:has(code) code,
+	table {
+		overflow-x: scroll;
+		mask: linear-gradient(
+			to right,
+			#0000,
+			#ffff var(--left-fade) calc(100% - var(--right-fade)),
+			#0000
+		);
+		animation: scrollfade-x;
+		animation-timeline: --scrollfade-x;
+		scroll-timeline: --scrollfade-x x;
+	}
+}

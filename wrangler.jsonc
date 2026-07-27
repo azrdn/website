@@ -1,0 +1,27 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "web",
+	"compatibility_date": "2026-06-30",
+	"assets": {
+		"directory": "./dist",
+		"not_found_handling": "404-page",
+		"run_worker_first": ["/guestbook*", "/_server-islands*"]
+	},
+	"placement": {
+		"mode": "smart"
+	},
+	"cache": {
+		"enabled": true
+	},
+	"dev": {
+		"port": 4321
+	},
+	"env": {
+		"dev": {},
+		"production": {
+			"secrets": {
+				"required": ["DATABASE_URL", "TURSO_AUTH_TOKEN"]
+			}
+		}
+	}
+}
