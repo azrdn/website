@@ -22,12 +22,7 @@
 	"dev": {
 		"port": 4321
 	},
-	"env": {
-		"dev": {},
-		"production": {
-			"secrets": {
-				"required": ["DATABASE_URL", "TURSO_AUTH_TOKEN"]
-			}
-		}
+	"secrets": {
+		"required": ["DATABASE_URL", "TURSO_AUTH_TOKEN"]
 	}
 }

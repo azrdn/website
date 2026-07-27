@@ -1,5 +1,5 @@
 import { defineAction } from "astro:actions";
-import { DATABASE_URL, TURSO_AUTH_TOKEN } from "astro:env/server";
+import { env } from "cloudflare:workers";
 import { z } from "astro/zod";
 import { count, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/libsql";
@@ -7,8 +7,8 @@ import { table } from "../db/schema";
 
 const db = drizzle({
 	connection: {
-		url: DATABASE_URL,
-		authToken: TURSO_AUTH_TOKEN,
+		url: env.DATABASE_URL,
+		authToken: env.TURSO_AUTH_TOKEN,
 	},
 });
 export const server = {
