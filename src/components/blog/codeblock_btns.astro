@@ -1,0 +1,47 @@
+---
+// derived from https://www.roboleary.net/2022/01/13/copy-code-to-clipboard-blog.html
+---
+
+<script>
+	const copyHandler = (ref: HTMLElement) => {
+		const code = ref.querySelector("code")!;
+		return async () => await navigator.clipboard.writeText(code.innerText);
+	}
+
+	const blocks = document.querySelectorAll<HTMLElement>(".codeblock");
+	for (const code of blocks) {
+		if (!navigator.clipboard) break;
+
+		const button = document.createElement("button");
+		button.innerText = "Copy";
+		button.addEventListener("click", copyHandler(code));
+		code.appendChild(button);
+	}
+</script>
+
+<style is:global>
+	.codeblock > button {
+		position: absolute;
+		inset: 0 0 auto auto;
+		transition: all .2s ease;
+		visibility: hidden;
+		opacity: 0;
+		
+		border: 1px solid light-dark(var(--light-bg-secondary), var(--dark-bg-secondary));
+		color: light-dark(var(--light-fg), var(--dark-fg));
+		background-color: light-dark(var(--light-bg), var(--dark-bg));
+
+		&:active {
+			border-color: light-dark(var(--light-accent), var(--dark-accent));
+			color: light-dark(var(--light-bg), var(--dark-bg));
+		}
+	}
+
+	.codeblock {
+		position: relative;
+		&:hover button {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+</style>

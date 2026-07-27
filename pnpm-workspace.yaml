@@ -1,5 +1,5 @@
 packages:
-  - "pkgs/*"
+  - .
 
 allowBuilds:
   esbuild: true
@@ -8,8 +8,5 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - astro
-  - '@astrojs/*'
-  - '@napi-rs/wasm-runtime'
-
-overrides:
-  "@astrojs/compiler-rs": "latest"
+  - "@astrojs/*"
+  - "@napi-rs/wasm-runtime"

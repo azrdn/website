@@ -1,0 +1,45 @@
+---
+import { actions as guestbook } from "astro:actions";
+import GBEntries from "@components/guestbook/entries.astro";
+import GBForm from "@components/guestbook/form.astro";
+import Footer from "@components/main/footer.astro";
+import Layout from "@components/main/layout.astro";
+import Navbar from "@components/main/navbar.astro";
+import { AstroError } from "astro/errors";
+import z from "astro/zod";
+
+export const prerender = false;
+const entriesPerPage = 10;
+const rawParam = parseInt(Astro.url.searchParams.get("page") ?? "1", 10);
+const paramSchema = z.number().positive();
+const { error: paramError, data: curPage } = paramSchema.safeParse(rawParam);
+if (paramError) throw new AstroError("Invalid page query parameter");
+
+const { data, error } = await Astro.callAction(guestbook.getEntryCount, null);
+if (error || !data[0]) throw new Error("Failed to fetch entry count");
+const count = data[0].count;
+
+const totalPages = Math.max(1, Math.ceil(count / entriesPerPage));
+if (curPage > totalPages) return Astro.redirect(`/404/`);
+
+Astro.cache.set({ maxAge: 1800, swr: 60, tags: ["guestbook"] });
+const result = Astro.getActionResult(guestbook.postEntry);
+if (result?.error) throw result.error;
+if (result && !result.error) {
+	Astro.cache.invalidate({ tags: ["guestbook"] });
+	return Astro.redirect(`/guestbook/`);
+}
+---
+
+<Layout>
+  <Navbar slot="header" />
+  {
+    curPage === 1 && (
+      <h1>Guestbook</h1>
+      <GBForm url={guestbook.postEntry} />
+      <hr>
+    )
+  }
+  <GBEntries navHref="/guestbook/" {curPage} {count} />
+  <Footer slot="footer" />
+</Layout>

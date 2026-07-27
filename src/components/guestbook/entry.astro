@@ -1,0 +1,61 @@
+---
+import { ISO } from "@utils/date";
+
+interface Props {
+	message: string;
+	username: string;
+	url?: string | null;
+	createdAt: number;
+}
+
+const { message, username, url, createdAt } = Astro.props;
+const rawDate = new Date(createdAt * 1000);
+const datetime = ISO(rawDate, true);
+---
+
+<article class="gb_entry box">
+  <div class="message">{message}</div>
+  <div class="entry_info">
+    {
+      url ? (
+        <a href={url} rel="external nofollow">
+          {username}
+        </a>
+      ) : (
+        <span>{username}</span>
+      )
+    }
+    <time {datetime} title={ISO(rawDate)}>
+      {datetime}
+    </time>
+  </div>
+</article>
+
+<style>
+  .gb_entry {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .message {
+    color: light-dark(var(--light-fg), var(--dark-fg));
+  }
+
+  .entry_info {
+    display: flex;
+    flex-direction: column;
+    gap: 0 2ch;
+
+    time,
+    a,
+    span {
+      text-align: right;
+    }
+
+    @media (min-width: 520px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+</style>
