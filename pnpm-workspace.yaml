@@ -12,6 +12,5 @@ minimumReleaseAgeExclude:
   - "@napi-rs/wasm-runtime"
 
 overrides:
-  wrangler: "4.114.0"
   typescript: "6.0.3"
-  "@astrojs/compiler-rs": "latest"
+  "@astrojs/compiler-rs": "0.3.1"
