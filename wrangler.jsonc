@@ -10,6 +10,12 @@
 	"placement": {
 		"mode": "smart"
 	},
+	"observability": {
+		"logs": {
+			"enabled": true,
+			"invocation_logs": true
+		}
+	},
 	"cache": {
 		"enabled": true
 	},
