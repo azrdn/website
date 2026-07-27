@@ -87,6 +87,12 @@
 		margin-top: 0.75em;
 	}
 
+	/* TODO: fix this later */
+	sup, sub {
+        vertical-align: unset;
+        font-size: inherit;
+	}
+
 	@property --left-fade {
 		syntax: "<length>";
 		inherits: false;
