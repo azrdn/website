@@ -10,7 +10,3 @@ minimumReleaseAgeExclude:
   - astro
   - "@astrojs/*"
   - "@napi-rs/wasm-runtime"
-
-overrides:
-  typescript: "6.0.3"
-  "@astrojs/compiler-rs": "0.3.1"

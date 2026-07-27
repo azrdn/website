@@ -4,10 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  typescript: 6.0.3
-  '@astrojs/compiler-rs': 0.3.1
-
 importers:
 
   .:
