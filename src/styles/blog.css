@@ -88,9 +88,10 @@
 	}
 
 	/* TODO: fix this later */
-	sup, sub {
-        vertical-align: unset;
-        font-size: inherit;
+	sup,
+	sub {
+		vertical-align: unset;
+		font-size: inherit;
 	}
 
 	@property --left-fade {
