@@ -10,4 +10,5 @@ minimumReleaseAgeExclude:
 
 overrides:
   wrangler: "4.114.0"
+  typescript: "6.0.3"
   "@astrojs/compiler-rs": "latest"

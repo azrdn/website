@@ -22,9 +22,13 @@ const count = data[0].count;
 const totalPages = Math.max(1, Math.ceil(count / entriesPerPage));
 if (curPage > totalPages) return Astro.redirect(`/404/`);
 
+Astro.cache.set({ maxAge: 1800, swr: 60, tags: ["guestbook"] });
 const result = Astro.getActionResult(guestbook.postEntry);
 if (result?.error) throw result.error;
-if (result && !result.error) return Astro.redirect(`/guestbook/`);
+if (result && !result.error) {
+	Astro.cache.invalidate({ tags: ["guestbook"] });
+	return Astro.redirect(`/guestbook/`);
+}
 ---
 
 <Layout>
