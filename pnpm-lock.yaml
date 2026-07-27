@@ -5,9 +5,8 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  wrangler: 4.114.0
   typescript: 6.0.3
-  '@astrojs/compiler-rs': latest
+  '@astrojs/compiler-rs': 0.3.1
 
 importers:
 
@@ -69,7 +68,7 @@ packages:
     resolution: {integrity: sha512-56Cqe2quwDJ9+3rn5GU2Lxl3xKRMH11rjCwOOo2iYGarhydN4TstWIkldbVA8TjgvnyATRi0vMm/LkvXSxaC2A==}
     peerDependencies:
       astro: ^7.0.0
-      wrangler: 4.114.0
+      wrangler: ^4.83.0
 
   '@astrojs/compiler-binding-darwin-arm64@0.3.1':
     resolution: {integrity: sha512-IEmEF2fUIlTHtpeE/isyEGVOB14cEyh/LZOFYt6wn3jNyVpdC8aR5OZ+RzFUR/f+8ZDM1LaMwZKvoA7eMyJeFw==}
@@ -325,7 +324,7 @@ packages:
     hasBin: true
     peerDependencies:
       vite: ^6.1.0 || ^7.0.0 || ^8.0.0
-      wrangler: 4.114.0
+      wrangler: ^4.114.0
 
   '@cloudflare/workerd-darwin-64@1.20260722.1':
     resolution: {integrity: sha512-vZOP8vIS3NwnuaO+gz0FZ7kIGeiO3bZmxV35Ph9zOXKSREhDFlH7wQ7mkCdhW3O4jnXsew+XT7b+DNEI2CcJGQ==}
