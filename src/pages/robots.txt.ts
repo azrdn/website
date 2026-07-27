@@ -1,7 +1,13 @@
-import contentSignal from "@components/content_signals.txt";
+import contentSignals from "@components/content_signals.txt?raw";
 import type { APIRoute } from "astro";
 
-export const GET: APIRoute = async ({ site }) => {
-	const sitemap = `Sitemap: ${new URL("sitemap-index.xml", site).href}\n`;
-	return new Response(`${contentSignal}\n${sitemap}`);
+const res = await fetch(
+	"https://raw.githubusercontent.com/ai-robots-txt/ai.robots.txt/refs/heads/main/robots.txt",
+	{ cache: "force-cache" },
+);
+const aiBots = await res.text();
+
+export const GET: APIRoute = async ({ url }) => {
+	const sitemap = `Sitemap: ${new URL("sitemap-index.xml", url).href}\n`;
+	return new Response(`${contentSignals}\n` + `${aiBots}\n` + `${sitemap}`);
 };
