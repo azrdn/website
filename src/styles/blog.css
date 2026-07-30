@@ -1,3 +1,5 @@
+@layer base, blog;
+
 @layer blog {
 	.astro-code,
 	.astro-code span {
@@ -80,10 +82,10 @@
 
 	:is(h1, h2, h3, h4, h5, h6):not(header > *) {
 		scroll-margin-top: calc(2rlh + 1.5em + 1em);
-		margin: 2.5em 0 0.75em;
+		margin: 2.25em 0 0.75em;
 	}
 
-	article > :nth-child(1 of h1, h2, h3, h4, h5, h6) {
+	header + :nth-child(1 of h1, h2, h3, h4, h5, h6) {
 		margin-top: 0.75em;
 	}
 
