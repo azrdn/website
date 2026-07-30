@@ -7,9 +7,7 @@ import { defineConfig, envField, fontProviders } from "astro/config";
 import { hastPlugins } from "./src/utils/satteri.plugins";
 
 export default defineConfig({
-	adapter: cloudflare({
-		prerenderEnvironment: "node",
-	}),
+	adapter: cloudflare({ imageService: "passthrough" }),
 	site: "https://azrd.dev",
 	integrations: [sitemap(), mdx()],
 	server: { host: true },

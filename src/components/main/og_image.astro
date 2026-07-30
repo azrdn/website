@@ -1,13 +1,12 @@
 ---
-import { randomBytes } from "node:crypto";
-
 export interface Props {
 	title: string;
 	description: string;
 }
 
 const { title, description } = Astro.props;
-const hexshade = randomBytes(2048).toString("hex");
+const randomBuffer = crypto.getRandomValues(new Uint8Array(2048));
+const hexshade = randomBuffer.toHex();
 ---
 
 <div class="container">

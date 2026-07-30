@@ -59,7 +59,7 @@ const interests = [
   </p>
   <div id="badges">
     {
-      badges?.data.map(({ image: { src }, href, alt }) => (
+      badges && badges.data.map(({ image: { src }, href, alt }) => (
         <a {href} rel="external nofollow">
           <img {src} {alt} loading="lazy" width="88" height="31" />
         </a>
