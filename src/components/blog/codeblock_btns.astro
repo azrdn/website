@@ -2,46 +2,54 @@
 // derived from https://www.roboleary.net/2022/01/13/copy-code-to-clipboard-blog.html
 ---
 
+<template id="copy-btn">
+    <button>Copy</button>
+</template>
+
 <script>
-	const copyHandler = (ref: HTMLElement) => {
-		const code = ref.querySelector("code")!;
-		return async () => await navigator.clipboard.writeText(code.innerText);
-	}
+    const template = document.querySelector<HTMLTemplateElement>("#copy-btn");
+    if (!template) throw new Error("Btn template not found");
+    const copyHandler = (ref: HTMLElement) => {
+        const code = ref.querySelector("code");
+        return () => navigator.clipboard.writeText(code?.innerText ?? "");
+    };
 
-	const blocks = document.querySelectorAll<HTMLElement>(".codeblock");
-	for (const code of blocks) {
-		if (!navigator.clipboard) break;
-
-		const button = document.createElement("button");
-		button.innerText = "Copy";
-		button.addEventListener("click", copyHandler(code));
-		code.appendChild(button);
-	}
+    for (const code of document.querySelectorAll<HTMLElement>(".codeblock")) {
+        if (!navigator.clipboard) break;
+        const fragment = template.content.cloneNode(true) as typeof template.content;
+        const button = fragment.querySelector<HTMLButtonElement>("button")!;
+        button.addEventListener("click", copyHandler(code));
+        code.appendChild(fragment);
+    }
 </script>
 
 <style is:global>
-	.codeblock > button {
-		position: absolute;
-		inset: 0 0 auto auto;
-		transition: all .2s ease;
-		visibility: hidden;
-		opacity: 0;
-		
-		border: 1px solid light-dark(var(--light-bg-secondary), var(--dark-bg-secondary));
-		color: light-dark(var(--light-fg), var(--dark-fg));
-		background-color: light-dark(var(--light-bg), var(--dark-bg));
+    .codeblock > button {
+        position: absolute;
+        inset: 0 0 auto auto;
+        transition: all 0.1s ease;
+        visibility: hidden;
+        opacity: 0;
 
-		&:active {
-			border-color: light-dark(var(--light-accent), var(--dark-accent));
-			color: light-dark(var(--light-bg), var(--dark-bg));
-		}
-	}
+        border: 1px solid
+            light-dark(var(--light-bg-secondary), var(--dark-bg-secondary));
+        color: light-dark(var(--light-fg), var(--dark-fg));
+        background-color: light-dark(var(--light-bg), var(--dark-bg));
 
-	.codeblock {
-		position: relative;
-		&:hover button {
-			visibility: visible;
-			opacity: 1;
-		}
-	}
+        &:active {
+            background-color: light-dark(
+                var(--light-accent),
+                var(--dark-accent)
+            );
+            color: light-dark(var(--dark-fg), var(--light-fg));
+        }
+    }
+
+    .codeblock {
+        position: relative;
+        &:hover button {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
 </style>

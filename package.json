@@ -6,13 +6,11 @@
 	"scripts": {
 		"dev": "pnpm --parallel \"/^dev.*/\"",
 		"dev:fe": "astro dev",
-		"dev:db": "turso dev -f ./src/db/turso.db",
-		"dk": "drizzle-kit --config=./src/db/dev.config.ts",
-		"dk:prod": "drizzle-kit --config=./src/db/prod.config.ts",
+		"dev:db": "pglite-server -d ./src/db/pglite",
+		"dk": "drizzle-kit --config=./src/db/drizzle.config.ts",
 		"build": "astro build",
 		"preview": "astro preview",
-		"types": "astro sync",
-		"clean": "pnpm clean"
+		"types": "astro sync"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "14.1.7",
@@ -20,15 +18,16 @@
 		"@astrojs/mdx": "7.0.5",
 		"@astrojs/rss": "^4.0.19",
 		"@astrojs/sitemap": "^3.7.3",
-		"@libsql/client": "^0.17.4",
 		"astro": "7.1.6",
 		"bsky-comments": "^1.0.1",
 		"drizzle-orm": "1.0.0-rc.4",
+		"postgres": "^3.4.9",
 		"satteri": "^0.9.5",
 		"takumi-js": "^2.5.3"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.6",
+		"@electric-sql/pglite-socket": "^0.2.7",
 		"@types/node": "^26.1.2",
 		"drizzle-kit": "1.0.0-rc.4",
 		"typescript": "6.0.3",

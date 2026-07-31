@@ -26,4 +26,4 @@ pnpm-debug.log*
 .wrangler/
 .vscode/
 .cache/
-turso.db*
+pglite/

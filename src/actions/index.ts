@@ -1,16 +1,11 @@
 import { defineAction } from "astro:actions";
-import { DATABASE_URL, TURSO_AUTH_TOKEN } from "astro:env/server";
+import { DATABASE_URL } from "astro:env/server";
 import { z } from "astro/zod";
 import { count, desc } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/libsql";
+import { drizzle } from "drizzle-orm/postgres-js";
 import { table } from "../db/schema";
 
-const db = drizzle({
-	connection: {
-		url: DATABASE_URL,
-		authToken: TURSO_AUTH_TOKEN,
-	},
-});
+// NOTE: remove manual client end call on non serverless platforms
 export const server = {
 	getEntries: defineAction({
 		input: z.object({
@@ -18,18 +13,22 @@ export const server = {
 			limit: z.number().optional(),
 		}),
 		handler: async (input) => {
+			const db = drizzle(DATABASE_URL);
 			const res = await db
 				.select()
 				.from(table)
 				.orderBy(desc(table.id))
 				.limit(input.limit ?? 10)
 				.offset(input.offset ?? 0);
+			await db.$client.end();
 			return res;
 		},
 	}),
 	getEntryCount: defineAction({
 		handler: async () => {
-			const res = await db.select({ count: count() }).from(table);
+			const db = drizzle(DATABASE_URL);
+			const res = await db.select({ rows: count() }).from(table);
+			await db.$client.end();
 			return res;
 		},
 	}),
@@ -48,10 +47,12 @@ export const server = {
 				.default(""),
 		}),
 		handler: async (input) => {
+			const db = drizzle(DATABASE_URL);
 			const res = await db
 				.insert(table)
 				.values(input)
 				.returning({ id: table.id });
+			await db.$client.end();
 			return res;
 		},
 	}),
