@@ -76,26 +76,7 @@ if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
 </header>
 
 <script>
-  const header = document.querySelector<HTMLElement>(".topheader")!;
   const mobileMenu = document.querySelector<HTMLElement>("#navbar-s")!;
-  const mq = window.matchMedia("(prefers-reduced-motion: no-preference)");
-  let lastScrollTop = 0;
-
-  if (mq.matches)
-    document.addEventListener(
-      "scroll",
-      () => {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const dir = scrollTop > lastScrollTop ? "down" : "up";
-        if (Math.abs(scrollTop - lastScrollTop) > 1) {
-          header.setAttribute("scroll-direction", dir);
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        mobileMenu.hidePopover();
-      },
-      { passive: true },
-    );
-
   const mbLinks = mobileMenu.querySelectorAll("a")!;
   for (const a of mbLinks) {
     a.addEventListener("click", () => mobileMenu.hidePopover());
@@ -133,10 +114,11 @@ if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
         color: light-dark(var(--light-fg-secondary), var(--dark-fg-secondary));
       }
     }
+  }
 
-    &[scroll-direction="down"] {
+  header:not(:focus-within) {
+    @container scroll-state(scrolled: bottom) {
       transform: translateY(-100%);
-      pointer-events: none;
     }
   }
 

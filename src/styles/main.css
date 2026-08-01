@@ -2,6 +2,7 @@
 
 @layer base {
 	:root {
+		container-type: scroll-state;
 		color-scheme: light dark;
 		font-size: clamp(1rem, 0.85rem + 0.5vw, 1.1rem);
 

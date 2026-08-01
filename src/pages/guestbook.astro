@@ -16,10 +16,9 @@ const { error: paramError, data: curPage } = paramSchema.safeParse(rawParam);
 if (paramError) throw new AstroError("Invalid page query parameter");
 
 const { data, error } = await Astro.callAction(guestbook.getEntryCount, null);
-if (error || !data[0]) throw new Error("Failed to fetch entry count");
-const count = data[0].count;
+if (error) throw new Error("Failed to fetch entry count");
 
-const totalPages = Math.max(1, Math.ceil(count / entriesPerPage));
+const totalPages = Math.max(1, Math.ceil(data / entriesPerPage));
 if (curPage > totalPages) return Astro.redirect(`/404/`);
 
 const result = Astro.getActionResult(guestbook.postEntry);
@@ -36,6 +35,6 @@ if (result && !result.error) return Astro.redirect(`/guestbook/`);
       <hr>
     )
   }
-  <GBEntries navHref="/guestbook/" {curPage} {count} />
+  <GBEntries server:defer navHref="/guestbook/" {curPage} count={data} />
   <Footer slot="footer" />
 </Layout>

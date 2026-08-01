@@ -29,7 +29,9 @@ export const server = {
 			const db = drizzle(DATABASE_URL);
 			const res = await db.select({ rows: count() }).from(table);
 			await db.$client.end();
-			return res;
+
+			if (!res[0]) throw new Error("No result");
+			return res[0].rows;
 		},
 	}),
 	postEntry: defineAction({
