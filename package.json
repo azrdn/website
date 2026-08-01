@@ -29,7 +29,7 @@
 		"@biomejs/biome": "^2.5.6",
 		"@electric-sql/pglite-socket": "^0.2.7",
 		"@types/node": "^26.1.2",
-		"drizzle-kit": "1.0.0-rc.4",
+		"drizzle-kit": "1.0.0-rc.4-ca0f029",
 		"typescript": "6.0.3",
 		"wrangler": "4.115.0"
 	}
