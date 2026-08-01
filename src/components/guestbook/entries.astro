@@ -1,45 +1,47 @@
 ---
-import { actions as guestbook } from "astro:actions";
+import { actions as gstBook } from "astro:actions";
 import GuestbookEntry from "@components/guestbook/entry.astro";
-import { AstroError } from "astro/errors";
 
 export const prerender = false;
 interface Props {
 	navHref: string;
-	count: number;
-	curPage: number;
+	page: number;
 }
 
 const entriesPerPage = 10;
-const { navHref, count, curPage } = Astro.props;
+const { navHref, page } = Astro.props;
+const { data, error } = await Astro.callAction(gstBook.getEntryCount, null);
+if (error) throw new Error("Failed to fetch entry count");
+const totalPages = Math.max(1, Math.ceil(data / entriesPerPage));
 
-const res = await Astro.callAction(guestbook.getEntries, {
-	offset: entriesPerPage * (curPage - 1),
+const res = await Astro.callAction(gstBook.getEntries, {
+	offset: entriesPerPage * (page - 1),
 	limit: entriesPerPage,
 });
-if (res.error) throw new AstroError("Failed to fetch guestbook data");
-
-const totalPages = Math.max(1, Math.ceil(count / entriesPerPage));
+if (res.error) throw new Error("Failed to fetch guestbook data");
 ---
 
 {
-  res.data.length > 0 && (
+  res.data.length > 0 ? (
     <div id="entries">
       {res.data.map((entry) => <GuestbookEntry {...entry} />)}
     </div>
-  )
+  ) : null /* TODO: add something */
 }
 <div class="pagination">
-  <p>Viewing page {curPage} out of {totalPages}</p>
+  {
+    /* TODO: add something */
+    <p>Viewing page {page} out of {totalPages}</p>
+  }
   <div class="pagelinks">
     {
-      curPage > 1 && (
-        <a href={`${navHref}?page=${curPage - 1}`}>Previous Page</a>
+      page > 1 && (
+        <a href={`${navHref}?page=${page - 1}`}>Previous Page</a>
       )
     }
     {
-      curPage < totalPages && (
-        <a href={`${navHref}?page=${curPage + 1}`}>Next Page</a>
+      page < totalPages && (
+        <a href={`${navHref}?page=${page + 1}`}>Next Page</a>
       )
     }
   </div>
