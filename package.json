@@ -23,7 +23,7 @@
 		"drizzle-orm": "1.0.0-rc.4",
 		"postgres": "^3.4.9",
 		"satteri": "^0.9.5",
-		"takumi-js": "^2.5.3"
+		"takumi-js": "^2.5.9"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.6",
