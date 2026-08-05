@@ -20,7 +20,7 @@
 		"@astrojs/sitemap": "^3.7.3",
 		"astro": "7.1.6",
 		"bsky-comments": "^1.0.1",
-		"drizzle-orm": "1.0.0-rc.4",
+		"drizzle-orm": "1.0.0-rc.4-fb12281",
 		"postgres": "^3.4.9",
 		"satteri": "^0.9.5",
 		"takumi-js": "^2.5.3"
