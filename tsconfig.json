@@ -8,6 +8,7 @@
 			"@styles/*": ["./src/styles/*"],
 			"@utils/*": ["./src/utils/*"]
 		},
-		"jsx": "preserve"
+		"jsx": "preserve",
+		"plugins": [{ "name": "@astrojs/ts-plugin" }]
 	}
 }
