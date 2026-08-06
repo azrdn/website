@@ -15,47 +15,47 @@ importers:
         specifier: 14.1.7
         version: 14.1.7(@types/node@26.1.2)(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.1.2)(jiti@2.7.0)(yaml@2.9.0))(esbuild@0.28.1)(jiti@2.7.0)(wrangler@4.115.0)(yaml@2.9.0)
       '@astrojs/markdown-satteri':
-        specifier: ^0.3.5
+        specifier: 0.3.5
         version: 0.3.5
       '@astrojs/mdx':
         specifier: 7.0.5
         version: 7.0.5(@astrojs/markdown-satteri@0.3.5)(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.1.2)(jiti@2.7.0)(yaml@2.9.0))
       '@astrojs/rss':
-        specifier: ^4.0.19
+        specifier: 4.0.19
         version: 4.0.19
       '@astrojs/sitemap':
-        specifier: ^3.7.3
+        specifier: 3.7.3
         version: 3.7.3
       astro:
         specifier: 7.1.6
         version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.1.2)(jiti@2.7.0)(yaml@2.9.0)
       bsky-comments:
-        specifier: ^1.0.1
+        specifier: 1.0.1
         version: 1.0.1
       drizzle-orm:
         specifier: 1.0.0-rc.4
         version: 1.0.0-rc.4(@electric-sql/pglite@0.5.4)(@libsql/client@0.17.4)(@neondatabase/serverless@1.1.0)(pg@8.22.0)(postgres@3.4.9)(zod@4.4.3)
       postgres:
-        specifier: ^3.4.9
+        specifier: 3.4.9
         version: 3.4.9
       satteri:
-        specifier: ^0.9.5
+        specifier: 0.9.5
         version: 0.9.5
       takumi-js:
-        specifier: ^2.5.3
+        specifier: 2.5.3
         version: 2.5.3
     devDependencies:
       '@astrojs/ts-plugin':
-        specifier: ^1.10.10
+        specifier: 1.10.10
         version: 1.10.10
       '@biomejs/biome':
-        specifier: ^2.5.6
+        specifier: 2.5.6
         version: 2.5.6
       '@electric-sql/pglite-socket':
-        specifier: ^0.2.7
+        specifier: 0.2.7
         version: 0.2.7(@electric-sql/pglite-age@0.0.5(@electric-sql/pglite@0.5.4))(@electric-sql/pglite-pg_hashids@0.0.5(@electric-sql/pglite@0.5.4))(@electric-sql/pglite-pg_ivm@0.0.5(@electric-sql/pglite@0.5.4))(@electric-sql/pglite-pg_textsearch@0.0.6(@electric-sql/pglite@0.5.4))(@electric-sql/pglite-pg_uuidv7@0.0.5(@electric-sql/pglite@0.5.4))(@electric-sql/pglite-pgtap@0.0.5(@electric-sql/pglite@0.5.4))(@electric-sql/pglite-pgvector@0.0.5(@electric-sql/pglite@0.5.4))(@electric-sql/pglite@0.5.4)
       '@types/node':
-        specifier: ^26.1.2
+        specifier: 26.1.2
         version: 26.1.2
       drizzle-kit:
         specifier: 1.0.0-rc.4

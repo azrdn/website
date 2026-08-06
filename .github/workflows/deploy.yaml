@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           submodules: true
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@v6.0.10
         with:
           version: 11.8.0
 
@@ -29,7 +29,7 @@ jobs:
 
       - name: Deploy to Cloudflare Workers
         id: cloudflare-frontend
-        uses: cloudflare/wrangler-action@v4
+        uses: cloudflare/wrangler-action@v4.0.0
         with:
           packageManager: pnpm
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
