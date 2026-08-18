@@ -4,7 +4,7 @@
 	"private": true,
 	"version": "1.0.0",
 	"engines": {
-		"node": ">=22.12.0"
+		"node": "v26.7.0"
 	},
 	"scripts": {
 		"dev": "pnpm --parallel \"/^dev.*/\"",
@@ -17,24 +17,24 @@
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "14.2.1",
-		"@astrojs/markdown-satteri": "^0.3.5",
+		"@astrojs/markdown-satteri": "0.3.5",
 		"@astrojs/mdx": "7.0.5",
-		"@astrojs/rss": "^4.0.19",
-		"@astrojs/sitemap": "^3.7.3",
+		"@astrojs/rss": "4.0.19",
+		"@astrojs/sitemap": "3.7.3",
 		"astro": "7.2.2",
-		"bsky-comments": "^1.0.1",
+		"bsky-comments": "1.0.1",
 		"drizzle-orm": "1.0.0-rc.4",
-		"postgres": "^3.4.9",
-		"satteri": "^0.9.5",
-		"takumi-js": "^2.9.2"
+		"postgres": "3.4.9",
+		"satteri": "0.9.5",
+		"takumi-js": "2.9.2"
 	},
 	"devDependencies": {
-		"@astrojs/ts-plugin": "^1.10.10",
-		"@biomejs/biome": "^2.5.7",
-		"@electric-sql/pglite-socket": "^0.2.8",
-		"@types/node": "^26.2.0",
+		"@astrojs/ts-plugin": "1.10.10",
+		"@biomejs/biome": "2.5.7",
+		"@electric-sql/pglite-socket": "0.2.8",
+		"@types/node": "26.2.0",
 		"drizzle-kit": "1.0.0-rc.4",
-		"typescript": "^6.0.3",
+		"typescript": "6.0.3",
 		"wrangler": "4.123.0"
 	}
 }
