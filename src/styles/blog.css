@@ -113,11 +113,11 @@
 			--left-fade: 0;
 			--right-fade: 5ch;
 		}
-		15%,
+		10%,
 		100% {
 			--left-fade: 5ch;
 		}
-		85% {
+		90% {
 			--right-fade: 5ch;
 		}
 		100% {

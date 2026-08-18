@@ -96,13 +96,12 @@ if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
     padding: 1rlh 0;
     border-bottom: 1px solid light-dark(var(--light-bg-secondary), var(--dark-bg-secondary));
     background-color: light-dark(var(--light-bg), var(--dark-bg));
-    transition: transform 0.2s;
+    transition: translate 0.2s;
 
     #label {
       display: flex;
       column-gap: 0.5ch;
       white-space: nowrap;
-      overflow: hidden;
       flex: 1;
       color: light-dark(var(--light-fg), var(--dark-fg));
 
@@ -118,7 +117,7 @@ if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
 
   header:not(:focus-within) {
     @container scroll-state(scrolled: bottom) {
-      transform: translateY(-100%);
+      translate: 0 -100%;
     }
   }
 
@@ -149,7 +148,7 @@ if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
 
   #navbar-s[popover] {
     opacity: 0;
-    transform: translateY(-1rlh);
+    translate: 0 -1rlh;
 
     top: calc(2rlh + 1lh);
     color: light-dark(var(--light-fg-secondary), var(--dark-fg-secondary));
@@ -164,19 +163,19 @@ if (!breadcrumbs.length && label) breadcrumbs.push({ text: label, href: "/" });
     @media (prefers-reduced-motion: no-preference) {
       transition:
         opacity 0.2s,
-        transform 0.2s,
+        translate 0.2s,
         display 0.2s allow-discrete;
     }
   }
 
   #navbar-s:popover-open {
     opacity: 1;
-    transform: none;
+    translate: none;
 
     @starting-style {
       & {
         opacity: 0;
-        transform: translateY(-1rlh);
+        translate: 0 -1rlh;
       }
     }
 

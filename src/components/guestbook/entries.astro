@@ -36,12 +36,12 @@ if (res.error) throw new Error("Failed to fetch guestbook data");
   <div class="pagelinks">
     {
       page > 1 && (
-        <a href={`${navHref}?page=${page - 1}`}>Previous Page</a>
+        <a class="prev" href={`${navHref}?page=${page - 1}`}>Previous</a>
       )
     }
     {
       page < totalPages && (
-        <a href={`${navHref}?page=${page + 1}`}>Next Page</a>
+        <a class="next" href={`${navHref}?page=${page + 1}`}>Next</a>
       )
     }
   </div>
@@ -55,13 +55,17 @@ if (res.error) throw new Error("Failed to fetch guestbook data");
   gap: 1em;
 }
 
-.pagination {
-  margin: 1lh 0;
-}
-
 .pagelinks {
   display: flex;
   gap: 1em;
-  justify-content: space-between;
 }
+
+.prev::before {
+  content: "← ";
+}
+
+.next::after {
+  content: " →";
+}
+
 </style>
