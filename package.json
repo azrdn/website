@@ -3,9 +3,6 @@
 	"type": "module",
 	"private": true,
 	"version": "1.0.0",
-	"engines": {
-		"node": "v26.7.0"
-	},
 	"scripts": {
 		"dev": "pnpm --parallel \"/^dev.*/\"",
 		"dev:fe": "astro dev",
@@ -16,25 +13,25 @@
 		"types": "astro sync"
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "14.2.1",
-		"@astrojs/markdown-satteri": "0.3.5",
-		"@astrojs/mdx": "7.0.5",
+		"@astrojs/cloudflare": "14.2.5",
+		"@astrojs/markdown-satteri": "0.3.8",
+		"@astrojs/mdx": "7.0.8",
 		"@astrojs/rss": "4.0.19",
 		"@astrojs/sitemap": "3.7.3",
-		"astro": "7.2.2",
+		"astro": "7.2.9",
 		"bsky-comments": "1.0.1",
 		"drizzle-orm": "1.0.0-rc.4",
 		"postgres": "3.4.9",
-		"satteri": "0.9.5",
-		"takumi-js": "2.9.2"
+		"satteri": "0.10.5",
+		"takumi-js": "2.12.0"
 	},
 	"devDependencies": {
-		"@astrojs/ts-plugin": "1.10.10",
+		"@astrojs/ts-plugin": "1.10.11",
 		"@biomejs/biome": "2.5.7",
-		"@electric-sql/pglite-socket": "0.2.8",
-		"@types/node": "26.2.0",
+		"@electric-sql/pglite-socket": "0.2.11",
+		"@types/node": "26.4.0",
 		"drizzle-kit": "1.0.0-rc.4",
 		"typescript": "6.0.3",
-		"wrangler": "4.123.0"
+		"wrangler": "4.127.0"
 	}
 }

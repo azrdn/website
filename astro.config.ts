@@ -33,7 +33,7 @@ export default defineConfig({
 				"astro/assets/services/noop",
 				"astro/env/runtime",
 				"astro/container",
-				"@astrojs/cloudflare/cache/provider",
+				"astro/app/manifest",
 				"takumi-js/response",
 				"drizzle-orm",
 				"drizzle-orm/pg-core",
