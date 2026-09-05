@@ -13,25 +13,25 @@
 		"types": "astro sync"
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "14.2.5",
-		"@astrojs/markdown-satteri": "0.3.8",
+		"@astrojs/cloudflare": "14.3.0",
+		"@astrojs/markdown-satteri": "0.4.0",
 		"@astrojs/mdx": "7.0.8",
 		"@astrojs/rss": "4.0.19",
-		"@astrojs/sitemap": "3.7.3",
-		"astro": "7.2.9",
+		"@astrojs/sitemap": "3.7.4",
+		"astro": "7.3.1",
 		"bsky-comments": "1.0.1",
-		"drizzle-orm": "1.0.0-rc.4",
+		"drizzle-orm": "1.0.0-rc.5-ab785fc",
 		"postgres": "3.4.9",
 		"satteri": "0.10.5",
-		"takumi-js": "2.12.0"
+		"takumi-js": "2.13.6"
 	},
 	"devDependencies": {
 		"@astrojs/ts-plugin": "1.10.11",
-		"@biomejs/biome": "2.5.7",
+		"@biomejs/biome": "2.5.12",
 		"@electric-sql/pglite-socket": "0.2.11",
-		"@types/node": "26.4.0",
-		"drizzle-kit": "1.0.0-rc.4",
+		"@types/node": "26.4.1",
+		"drizzle-kit": "1.0.0-rc.5-ab785fc",
 		"typescript": "6.0.3",
-		"wrangler": "4.127.0"
+		"wrangler": "4.129.0"
 	}
 }
