@@ -21,7 +21,7 @@
 		"astro": "7.2.9",
 		"bsky-comments": "1.0.1",
 		"drizzle-orm": "1.0.0-rc.4",
-		"postgres": "3.4.9",
+		"postgres": "4.0.0",
 		"satteri": "0.10.5",
 		"takumi-js": "2.12.0"
 	},
